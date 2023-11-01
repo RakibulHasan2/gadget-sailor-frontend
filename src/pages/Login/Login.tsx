@@ -4,15 +4,10 @@ import { FieldValues, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { FormValues } from "../../types/FormType";
 import toast from 'react-hot-toast';
+import { IUser } from "../../types/UserType";
 
 
-interface UserData {
-  name: string;
-  email: string;
-  phoneNumber: number;
-  password: string;
 
-}
 
 export default function Login() {
 
@@ -21,7 +16,7 @@ export default function Login() {
   const navigate = useNavigate();
 
   const handleLogin = async (data: FieldValues) => {
-    console.log(data);
+
 
 
     const allDatas = await fetch(' http://localhost:5000/api/v1/users')
@@ -29,12 +24,8 @@ export default function Login() {
 
     const result = results.data;
 
-    console.log(result);
-    const allData = result.filter((info: UserData) => info.email === data.email);
 
-    // console.log(allData);
-    // console.log(allData[0].name);
-    // console.log(data.password);
+    const allData = result.filter((info: IUser) => info.email === data.email);
 
     if (allData[0].password === data.password) {
       toast.success("Scuuessfully logged in")
