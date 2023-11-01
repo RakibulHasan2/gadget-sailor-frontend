@@ -1,23 +1,19 @@
-
-
 import { FieldValues, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { FormValues } from "../../types/FormType";
 import toast from 'react-hot-toast';
+import { IUser } from "../../types/UserType";
 
+// interface UserData {
+//   name: string;
+//   email: string;
+//   phoneNumber: number;
+//   password: string;
 
-interface UserData {
-  name: string;
-  email: string;
-  phoneNumber: number;
-  password: string;
-
-}
+// }
 
 export default function Login() {
-
-  const { register, handleSubmit, formState: { errors } } = useForm<FormValues>(); //formState: { errors }
-
+  const { register, handleSubmit, formState: { errors } } = useForm<FormValues>(); 
   const navigate = useNavigate();
 
   const handleLogin = async (data: FieldValues) => {
@@ -30,7 +26,7 @@ export default function Login() {
     const result = results.data;
 
     console.log(result);
-    const allData = result.filter((info: UserData) => info.email === data.email);
+    const allData = result.filter((info: IUser) => info.email === data.email);
 
     // console.log(allData);
     // console.log(allData[0].name);
