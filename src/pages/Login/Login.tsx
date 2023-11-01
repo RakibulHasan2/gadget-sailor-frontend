@@ -21,7 +21,7 @@ export default function Login() {
     const allData = result.filter((info: IUser) => info.email === data.email);
 
     if (allData[0].password === data.password) {
-      toast.success("Scuuessfully logged in")
+      toast.success("Successfully logged in")
       localStorage.setItem('userData', JSON.stringify(allData[0]));
       navigate('/home')
       console.log(allData);
