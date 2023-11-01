@@ -1,61 +1,71 @@
 import NavbarItem from "./NavbarItem";
 import logo from '../../../assets/images/368572024_642047007826578_1321780034725554955_n-removebg-preview.png'
-import { FcSearch } from 'react-icons/fc';
-import { FaUserAlt } from 'react-icons/fa';
-import { GiBoxUnpacking } from 'react-icons/gi';
-import { useState } from "react";
+import { useState, useEffect } from 'react';
 import '../../../styles/Navbar.css'
-
-
 export default function Navbar() {
-  const [isFocused, setIsFocused] = useState(false);
-  const [inputValue, setInputValue] = useState("");
+
+  const [expanded, setExpanded] = useState(true);
+
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const input: any = document.getElementById("myInput");
+
+    const handleFocus = () => {
+      setExpanded(false);
+    };
+
+    const handleBlur = () => {
+      if (!input.value) {
+        setExpanded(true);
+      }
+    };
+
+    input.addEventListener("focus", handleFocus);
+    input.addEventListener("blur", handleBlur);
+
+    return () => {
+      input.removeEventListener("focus", handleFocus);
+      input.removeEventListener("blur", handleBlur);
+    };
+  }, []);
+
+
   return (
     <div className="">
-      <div className="flex items-center justify-between p-2 shadow-lg bg-slate-200">
-        <div className="flex">
-          <div>
-            <img className="w-40 rounded-2xl" src={logo} alt="" />
-          </div>
-          <div className="flex items-center">
-            <div className="relative">
-              <input
-                type="text"
-                className={`h-10 border rounded-md bg-slate-50 ${isFocused || inputValue ? "w-96" : "w-56"
-                  } transition-width duration-500 ease-in-out pl-3`}
-                placeholder="Search item"
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                onFocus={() => setIsFocused(true)}
-                onBlur={() => setIsFocused(false)}
-              />
-
-            </div>
-            <button>
-              <FcSearch className="text-3xl font-bold"></FcSearch>
-            </button>
-          </div>
-        </div>
-
-        <div className="flex items-center">
-          <div className="mr-7">
-            <button className="flex">
-              <GiBoxUnpacking className="mt-2 text-3xl"></GiBoxUnpacking>
-              <div className="pl-1 text-left">
-              <p>Offers</p>
-              <small>Latest Offers</small>
+      <div className="shadow-md navbar bg-base-100">
+        <div className="navbar-start">
+          <div className="dropdown">
+            <label tabIndex={0} className="btn btn-ghost lg:hidden">
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+            </label>
+            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-80">
+              <div className="flex">
+                <input type="text" placeholder="Search Item" className="w-full max-w-xs input input-bordered" />
+                <button className="btn btn-ghost btn-circle">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                </button>
               </div>
-            </button>
-          </div>
-          <div className="mr-2 text-3xl">
-            <button className="mt-2 hover:text-gray-500" title="My Account"><FaUserAlt></FaUserAlt></button>
-          </div>
-          <div>
-            <button className="btn-build-pc">Build Pc</button>
-          </div>
 
+            </ul>
+          </div>
+          <a className="text-xl normal-case btn btn-ghost"><img src={logo} alt="" className="w-32" /></a>
         </div>
+        <div className="hidden navbar-center lg:flex">
 
+          <input
+            type="text"
+            placeholder="Looking for..."
+            className={`w-28 lg:w-96 input input-bordered expandable-input ${expanded ? "expanded" : ""
+              }`}
+            id="myInput"
+          />
+          <button className="btn btn-ghost btn-circle">
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+          </button>
+        </div>
+        <div className="navbar-end">
+          <a className="btn">Build PC</a>
+        </div>
       </div>
       {/* ..........................item area............................ */}
       <div className="">
