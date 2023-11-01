@@ -16,3 +16,15 @@
              color: #fff;
              text-decoration: none;
          }
+
+      
+.expandable-input {
+    width: 100%;
+    transition: width 0.6s;
+  }
+  
+  .expandable-input.expanded {
+    width: 100%;
+  }
+
+  
