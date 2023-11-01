@@ -4,20 +4,17 @@ import { FormValues } from "../../types/FormType";
 import toast from 'react-hot-toast';
 import { IUser } from "../../types/UserType";
 
-// interface UserData {
-//   name: string;
-//   email: string;
-//   phoneNumber: number;
-//   password: string;
 
-// }
+
+
+// ..... hello world
 
 export default function Login() {
   const { register, handleSubmit, formState: { errors } } = useForm<FormValues>(); 
   const navigate = useNavigate();
 
   const handleLogin = async (data: FieldValues) => {
-    console.log(data);
+
 
 
     const allDatas = await fetch(' http://localhost:5000/api/v1/users')
@@ -26,11 +23,9 @@ export default function Login() {
     const result = results.data;
 
     console.log(result);
-    const allData = result.filter((info: IUser) => info.email === data.email);
+    const allData = result.filter((info: UserData) => info.email === data.email);
 
-    // console.log(allData);
-    // console.log(allData[0].name);
-    // console.log(data.password);
+    const allData = result.filter((info: IUser) => info.email === data.email);
 
     if (allData[0].password === data.password) {
       toast.success("Scuuessfully logged in")
@@ -44,42 +39,42 @@ export default function Login() {
   }
 
   return (
-    <div className='lg:flex justify-center items-center'>
+    <div className='items-center justify-center lg:flex'>
       <div>
         <img className='w-96 h-1/3' src="https://clipart.world/wp-content/uploads/2020/06/guy-doing-homework-with-laptop-1.jpg" alt="" srcSet="" />
       </div>
       <div className='w-96 p-7'>
-        <h2 className='text-3xl text-sky-500 font-bold text-center'>Login</h2>
+        <h2 className='text-3xl font-bold text-center text-sky-500'>Login</h2>
         <form onSubmit={handleSubmit(handleLogin)}>
-          <div className="form-control w-full max-w-xs">
+          <div className="w-full max-w-xs form-control">
             <label className="label"> <span className="label-text">Email</span></label>
             <input type="text"
               {...register("email", {
                 required: "Email Address is required"
               })}
-              className="input input-bordered w-full max-w-xs" />
+              className="w-full max-w-xs input input-bordered" />
             {errors.email && <p className='text-red-600'>{errors.email?.message}</p>}
           </div>
-          <div className="form-control w-full max-w-xs">
+          <div className="w-full max-w-xs form-control">
             <label className="label"> <span className="label-text">Password</span></label>
             <input type="password"
               {...register("password", {
                 required: "Password is required",
                 minLength: { value: 6, message: 'Password must be 6 characters or longer' }
               })}
-              className="input input-bordered w-full max-w-xs" />
+              className="w-full max-w-xs input input-bordered" />
             {errors.password && <p className='text-red-600'>{errors.password?.message}</p>}
             <label className="label"> <span className="label-text">Forget Password?</span></label>
 
           </div>
-          <input className='btn bg-blue-600 w-full' value="Login" type="submit" />
+          <input className='w-full bg-blue-600 btn' value="Login" type="submit" />
           <div>
             {/* {loginError && <p className='text-red-600'>{loginError}</p>} */}
           </div>
         </form>
-        <p>New to Gadget Sailor <Link className='text-sky-500 font-bold' to="/signup">Create new Account</Link></p>
+        <p>New to Gadget Sailor <Link className='font-bold text-sky-500' to="/signup">Create new Account</Link></p>
         <div className="divider">OR</div>
-        {/* <button onClick={googleSignIn} className='btn btn-outline w-full'>Continue With Google <FcGoogle className='ml-3'></FcGoogle></button> */}
+        {/* <button onClick={googleSignIn} className='w-full btn btn-outline'>Continue With Google <FcGoogle className='ml-3'></FcGoogle></button> */}
       </div>
     </div>
   )
