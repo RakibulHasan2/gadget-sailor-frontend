@@ -4,17 +4,11 @@ import { FormValues } from "../../types/FormType";
 import toast from 'react-hot-toast';
 import { IUser } from "../../types/UserType";
 
-
-
-
-// ..... hello world
-
 export default function Login() {
   const { register, handleSubmit, formState: { errors } } = useForm<FormValues>(); 
   const navigate = useNavigate();
 
   const handleLogin = async (data: FieldValues) => {
-
 
 
     const allDatas = await fetch(' http://localhost:5000/api/v1/users')
@@ -23,7 +17,6 @@ export default function Login() {
     const result = results.data;
 
     console.log(result);
-    const allData = result.filter((info: UserData) => info.email === data.email);
 
     const allData = result.filter((info: IUser) => info.email === data.email);
 
