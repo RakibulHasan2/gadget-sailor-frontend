@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -7,8 +8,10 @@ export default {
   theme: {
     extend: {},
   },
+  plugins: [require('daisyui')],
 
-  // eslint-disable-next-line no-undef
-  plugins: [require("daisyui")],
+  daisyui: {
+    themes: ["wireframe"],
+  },
 }
 
