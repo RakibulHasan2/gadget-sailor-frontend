@@ -58,14 +58,14 @@ export default function SignUp() {
                     <form onSubmit={handleSubmit(handleSignUp)}>
                         <div className="flex gap-2 mb-4">
                             <div className="w-full max-w-xs form-control ">
-                                {/* <label className="label"> <span className="label-text">First Name</span></label> */}
+                       
                                 <input type="text" {...register("firstName", {
                                     required: "First Name is Required !"
                                 })} className="w-full max-w-xs bg-transparent rounded-3xl input input-bordered" placeholder="First name..." />
                                 {errors.firstName && <small className='mt-1 ml-2 text-red-500'>{errors.firstName?.message}</small>}
                             </div>
                             <div className="w-full max-w-xs form-control">
-                                {/* <label className="label"> <span className="label-text">Last Name</span></label> */}
+              
                                 <input type="text" {...register("lastName", {
                                     required: "Last Name is Required !"
                                 })} className="w-full max-w-xs bg-transparent rounded-3xl input input-bordered" placeholder="Last name..." />
@@ -73,29 +73,28 @@ export default function SignUp() {
                             </div>
                         </div>
                         <div className="w-full max-w-xs mb-4 form-control">
-                            {/* <label className="label"> <span className="label-text">Email</span></label> */}
+                       
                             <input type="email" {...register("email", {
                                 required: "Email is Required !"
-                            })} className="w-full max-w-xs bg-transparent rounded-3xl input input-bordered" placeholder="Email..." />
+                            })} className="w-full max-w-xs bg-transparent rounded-3xl input input-bordered" placeholder="✉ Email..." />
                             {errors.email && <small className='mt-1 ml-2 text-red-500'>{errors.email.message}</small>}
                         </div>
                         <div className="w-full max-w-xs mb-4 form-control">
-                            {/* <label className="label"> <span className="label-text">Phone Number</span></label> */}
+        
                             <input type="text" {...register("phoneNumber", {
                                 required: "Phone Number is Required !",
-                            })} className="w-full max-w-xs bg-transparent rounded-3xl input input-bordered" placeholder="Phone number..." />
+                            })} className="w-full max-w-xs bg-transparent rounded-3xl input input-bordered" placeholder="☏ Phone number..." />
                             {errors.phoneNumber && <small className='mt-1 ml-2 text-red-500'>{errors.phoneNumber.message}</small>}
                         </div>
                         <div className="w-full max-w-xs form-control">
-                            {/* <label className="label"> <span className="label-text">Password</span></label> */}
                             <input type="password" {...register("password", {
                                 required: "Password is Required !",
                                 minLength: { value: 6, message: "Password must be 6 characters long" },
                                 pattern: { value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/, message: 'Password must have uppercase, number and special characters' }
-                            })} className="w-full max-w-xs bg-transparent rounded-3xl input input-bordered" placeholder="Password..." />
+                            })} className="w-full max-w-xs bg-transparent rounded-3xl input input-bordered" placeholder="🗝 Password..." />
                             {errors.password && <small className='mt-1 ml-2 text-red-500'>{errors.password.message}</small>}
                         </div>
-                        <input className='w-full p-2 mt-4 mb-4 text-white bg-blue-400 btn rounded-3xl' value="Sign Up" type="submit" />
+                        <input className='w-full p-2 mt-4 mb-4 text-black bg-blue-400 btn rounded-3xl' value="Sign Up" type="submit" />
                         {/* {signUpError && <small className='text-red-600'>{signUpError}</small>} */}
                     </form>
                     <small className="font-black ml-11">Already have an account? <Link className='font-bold text-indigo-600' to="/login">Please Login</Link></small>
