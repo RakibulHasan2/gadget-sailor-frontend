@@ -24,67 +24,42 @@ export default function NavbarItem() {
 
 
     return (
-        <div className="flex pb-2 mt-2 mb-5 shadow-md">
-            <div className="w-full">
-                <ul className="flex justify-around">
-                    <li className="">
-                        <Link to="/home" className="">
-                            <button className="p-2 bg-gray-100 rounded--lg w-28 ">Home</button>
-                        </Link>
-                    </li>
-                    <li className="">
-                        <div onMouseEnter={itemsHidden} className={desktopHover}>
-                            <a href="/desktop" className="m-1 btn">Desktop</a>
-                            <ul className="z-10 p-2 border rounded-md shadow dropdown-content menu bg-base-100 w-52">
-                                <li onMouseEnter={itemsHidden} className="mt-1 border rounded-md"><a>Gaming PC</a></li>
-                                <li onMouseEnter={itemsHidden} className="mt-1 border rounded-md"><a>Laptop</a></li>
-                                <li onMouseEnter={itemsVisible} className="mt-1 border rounded-md dropdown dropdown-right">
-                                    <a>Brand PC <AiOutlineArrowRight className='ml-16'></AiOutlineArrowRight></a>
-                                    <ul className={items}>
-                                        <li><a>Asus</a></li>
-                                        <li><a>Dell</a></li>
-                                        <li><a>HP</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-
-
-                    </li>
-                    <li className="">
-
-                        <Link to="/laptop" className="">
-                            <button className="p-2 bg-gray-100 rounded--lg w-28">Laptop</button>
-                        </Link>
-                    </li>
-                    <li className="">
-                        <Link to="/components" className="">
-                            <button className="p-2 bg-gray-100 rounded--lg w-28">Components</button>
-                        </Link>
-                    </li>
-                    <li className="">
-                        <Link to="/monitor" className="">
-                            <button className="p-2 bg-gray-100 rounded--lg w-28">Monitor</button>
-                        </Link>
-                    </li>
-                    <li className="">
-                        <Link to="/ups" className="">
-                            <button className="p-2 bg-gray-100 rounded--lg w-28">Ups</button>
-                        </Link>
-                    </li>
-                    <li className="">
-                        <Link to="/accessories" className="">
-                            <button className="p-2 bg-gray-100 rounded--lg w-28">Accessories</button>
-                        </Link>
-                    </li>
-                    <li className="">
-                        <Link to="/desktop" className="">
-                            <button className="p-2 bg-gray-100 rounded--lg w-28">Gaming</button>
-                        </Link>
-                    </li>
-                </ul>
-            </div>
-
+        <div>
+            {
+                categories.map((category) =>
+                    <div className="dropdown">
+                        <button className="bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded ">
+                            {category}
+                        </button>
+                        <ul className="dropdown-content absolute hidden text-gray-700 pt-1">
+                            {
+                                data.filter((item) => item?.category_name === category)
+                                    .map((item) => item.sub_category_name)
+                                    .filter((subCategory, index, array) => subCategory && array.indexOf(subCategory) === index)
+                                    .map(subCategory =>
+                                        <Link to='/login'>
+                                            <li className="dropdown">
+                                                <a className='rounded-t bg-base-100 hover:bg-gray-400 block w-32 p-3'>{subCategory}</a>
+                                                <ul className='dropdown-content dropdown-right absolute hidden text-gray-700 bg-gray-200 p-5 ml-32 -mt-6'>
+                                                    <li>
+                                                        {
+                                                        data.filter((item) => item.category_name === category && item.sub_category_name === subCategory)
+                                                         .map((item) => item.brand_name)
+                                                         .filter((brand) => brand)
+                                                         .map((brands) => (
+                                                            <li key={brands}>{brands}</li>
+                                                        ))
+                                                        }
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </Link>
+                                    )
+                            }
+                        </ul>
+                    </div>
+                )
+            }
         </div>
     );
 }
