@@ -9,3 +9,9 @@ export type UserName = {
     password: string
  }
  
+ export interface Product {
+   category_name: string;
+   sub_category_name: string | null; // Use null or an appropriate type if it's optional
+   brand_name: string | null; // Use null or an appropriate type if it's optional
+ }
+ 

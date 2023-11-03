@@ -1,15 +1,7 @@
-
-
-
 import img1 from "../../assets/banner/Gadgets.webp"
 import img2 from "../../assets/banner/photo-1515940175183-6798529cb860.avif"
 
-
-
-
 const Banner = () => {
-
-
     return (
 
         <div>
