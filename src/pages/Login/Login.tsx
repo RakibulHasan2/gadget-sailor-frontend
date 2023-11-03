@@ -9,7 +9,7 @@ export default function Login() {
   const navigate = useNavigate();
   const handleLogin = async (data: FieldValues) => {
 
-  const allDatas = await fetch(' http://localhost:5000/api/v1/users')
+  const allDatas = await fetch('http://localhost:5000/api/v1/users')
   const results = await allDatas.json();
   const result = results.data;
 
