@@ -18,8 +18,8 @@ const Banner = () => {
 
     return (
 
-        <div className="hero min-h-screen max-w-screen" style={backgroundImageStyle}>
-            <div className=" bg-opacity-60"></div>
+        <div className="hero min-h-screen max-w-screen opacity-25" style={backgroundImageStyle}>
+
 
             <div className="hero-content text-center text-neutral-content lg:flex-col flex-col">
 
