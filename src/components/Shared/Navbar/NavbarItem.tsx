@@ -14,6 +14,9 @@ export default function NavbarItem() {
     const itemsVisible = () => {
         setItems("z-10 p-2 shadow dropdown-content menu bg-base-100 rounded-box w-52")
     }
+
+
+    
     return (
         <div className="flex pb-2 mt-2 mb-5 shadow-md">
             <div className="w-full">
@@ -38,7 +41,7 @@ export default function NavbarItem() {
                                     </ul>
                                 </li>
                             </ul>
-                        </div>
+                        </div> 
 
 
                     </li>

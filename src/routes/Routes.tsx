@@ -18,17 +18,17 @@ const routes = createBrowserRouter([
       {
         path: "/home",
         element: <Home />,
-      },
-      {
-        path: "/login",
-        element: <Login />,
-      },
-      {
-        path: "/signup",
-        element: <SignUp />,
       }
     ],
   },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/signup",
+    element: <SignUp />,
+  }
 ]);
 
 export default routes;
