@@ -32,7 +32,7 @@ export default function Navbar() {
 
   return (
     <div className="">
-      <div className="shadow-md navbar bg-base-100">
+      <div className="shadow-md navbar bg-base-100 mb-5">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">

@@ -25,12 +25,12 @@ export default function NavbarItem() {
     ];
     console.log(Brands)
     return (
-        <div className='border-2 flex justify-evenly'>
+        <div className='border-2 flex justify-evenly mb-10 h-16 items-center bg-slate-500'>
             {
              categories.map((category) =>
                     <div className="dropdown dropdown-hover">
                         <Link to='signup'>
-                            <a className="bg-gray-300  text-gray-700 font-semibold py-2 px-4 rounded ">
+                            <a className="bg-gray-300  text-gray-700 font-semibold px-8 py-3 rounded ">
                                 {category}
                             </a>
                         </Link>
@@ -45,8 +45,8 @@ export default function NavbarItem() {
                                                 <a className='rounded-t bg-base-100 hover:bg-gray-400 block w-32 p-3'>{subCategory}</a>
                                                 <ul className='dropdown-content dropdown-right absolute hidden text-gray-700 bg-gray-200 p-5 ml-32 -mt-6'>
                                                     <li>
-                                                        {
-                                                            data.filter((item) => item.category_name === category && item.sub_category_name === subCategory)
+                                                        { 
+                                                            data.filter((item) => item.category_name === category && item?.sub_category_name === subCategory)
                                                                 .map((item) => item.brand_name)
                                                                 .filter((brandName, index, array) => brandName && array.indexOf(brandName) === index)
                                                                 .map((brands) => (
