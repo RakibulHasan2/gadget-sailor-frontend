@@ -18,12 +18,12 @@ const Banner = () => {
 
     return (
 
-        <div className="hero min-h-screen max-w-screen opacity-25" style={backgroundImageStyle}>
+        <div className="hero min-h-screen max-w-screen " style={backgroundImageStyle}>
 
 
             <div className="hero-content text-center text-neutral-content lg:flex-col flex-col">
 
-                <div className="hero hidden lg:block   z-0  ">
+                <div className="hero hidden lg:block     ">
                     <div className="hero-content flex-col lg:flex-row-reverse">
                         <img src={img3} className="max-w-sm rounded-lg shadow-2xl" />
                         <img src={img2} className="max-w-sm rounded-lg shadow-2xl" />
@@ -32,7 +32,7 @@ const Banner = () => {
                 </div>
 
 
-                <div className="carousel max-w-lg min-h-28	position: relative lg:-top-20 z-10">
+                <div className="carousel max-w-lg min-h-28	position: relative lg:-top-20 ">
                     <div id="slide1" className="carousel-item relative w-full">
                         <img src={img6} className=" min-w-full max-h-60" />
                         <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
