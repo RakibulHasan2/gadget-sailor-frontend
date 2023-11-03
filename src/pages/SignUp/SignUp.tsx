@@ -38,56 +38,53 @@ export default function SignUp() {
     }
 
     return (
-        <div className='lg:flex justify-center items-center'>
-            <div>
-                <img className='w-96 h-1/3' src="https://clipart.world/wp-content/uploads/2020/06/guy-doing-homework-with-laptop-1.jpg" alt="" srcSet="" />
-            </div>
+        <div className='items-center justify-center lg:flex'>
             <div className='w-96 p-7'>
-                <h2 className='text-3xl text-center text-sky-500 font-bold mb-10'>Sign Up</h2>
+                {/* <h2 className='mb-10 text-3xl font-bold text-center text-sky-500'>Sign Up</h2> */}
                 <form onSubmit={handleSubmit(handleSignUp)}>
                     <div className="flex">
-                        <div className="form-control w-full max-w-xs ">
+                        <div className="w-full max-w-xs form-control ">
                             <label className="label"> <span className="label-text">First Name</span></label>
                             <input type="text" {...register("firstName", {
                                 required: "First Name is Required"
-                            })} className="input input-bordered w-full max-w-xs" />
+                            })} className="w-full max-w-xs input input-bordered" />
                             {errors.firstName && <p className='text-red-500'>{errors.firstName?.message}</p>}
                         </div>
-                        <div className="form-control w-full max-w-xs">
+                        <div className="w-full max-w-xs form-control">
                             <label className="label"> <span className="label-text">Last Name</span></label>
                             <input type="text" {...register("lastName", {
                                 required: "Last Name is Required"
-                            })} className="input input-bordered w-full max-w-xs" />
+                            })} className="w-full max-w-xs input input-bordered" />
                             {errors.lastName && <p className='text-red-500'>{errors.lastName?.message}</p>}
                         </div>
                     </div>
-                    <div className="form-control w-full max-w-xs">
+                    <div className="w-full max-w-xs form-control">
                         <label className="label"> <span className="label-text">Email</span></label>
                         <input type="email" {...register("email", {
                             required: "Email is Required"
-                        })} className="input input-bordered w-full max-w-xs" />
+                        })} className="w-full max-w-xs input input-bordered" />
                         {errors.email && <p className='text-red-500'>{errors.email.message}</p>}
                     </div>
-                    <div className="form-control w-full max-w-xs">
+                    <div className="w-full max-w-xs form-control">
                         <label className="label"> <span className="label-text">Phone Number</span></label>
                         <input type="text" {...register("phoneNumber", {
                             required: "Phone Number is required",
-                        })} className="input input-bordered w-full max-w-xs" />
+                        })} className="w-full max-w-xs input input-bordered" />
                         {errors.phoneNumber && <p className='text-red-500'>{errors.phoneNumber.message}</p>}
                     </div>
-                    <div className="form-control w-full max-w-xs">
+                    <div className="w-full max-w-xs form-control">
                         <label className="label"> <span className="label-text">Password</span></label>
                         <input type="password" {...register("password", {
                             required: "Password is required",
                             minLength: { value: 6, message: "Password must be 6 characters long" },
                             pattern: { value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/, message: 'Password must have uppercase, number and special characters' }
-                        })} className="input input-bordered w-full max-w-xs" />
+                        })} className="w-full max-w-xs input input-bordered" />
                         {errors.password && <p className='text-red-500'>{errors.password.message}</p>}
                     </div>
-                    <input className='btn p-2 mb-4 bg-blue-600 text-white w-full mt-4' value="Sign Up" type="submit" />
+                    <input className='w-full p-2 mt-4 mb-4 text-white bg-blue-600 btn' value="Sign Up" type="submit" />
                     {/* {signUpError && <p className='text-red-600'>{signUpError}</p>} */}
                 </form>
-                <p>Already have an account <Link className='text-sky-500 font-bold' to="/login">Please Login</Link></p>
+                <p>Already have an account <Link className='font-bold text-sky-500' to="/login">Please Login</Link></p>
             </div>
         </div>
     )
