@@ -31,7 +31,7 @@ export default function Navbar() {
 
 
   return (
-    <div className="">
+    <div className="max-w-screen">
       <div className="shadow-md navbar bg-base-100">
         <div className="navbar-start">
           <div className="dropdown">
