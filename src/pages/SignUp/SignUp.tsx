@@ -3,7 +3,8 @@ import { useForm, FieldValues } from 'react-hook-form';
 import { IUser } from './../../types/UserType';
 import toast from 'react-hot-toast';
 import { FormValues } from "../../types/FormType";
-
+import { FiArrowRight } from 'react-icons/fi';
+import '../../styles/Signup.css'
 export default function SignUp() {
     const { register, handleSubmit, formState: { errors } } = useForm<FormValues>();
     const navigate = useNavigate();
@@ -18,74 +19,88 @@ export default function SignUp() {
             phoneNumber: data.phoneNumber,
             password: data.password
         }
-            const response = await fetch('http://localhost:5000/api/v1/auth/signup', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(userData)
-            });
-            const user = await response.json();
+        const response = await fetch('http://localhost:5000/api/v1/auth/signup', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userData)
+        });
+        const user = await response.json();
 
-            if (user.statusCode === 200) {
-                toast.success(user.message)
-                navigate('/home')
-            } else {
-                toast.error(user.message)
-            }
-            console.log(user);
-        
+        if (user.statusCode === 200) {
+            toast.success(user.message)
+            navigate('/home')
+        } else {
+            toast.error(user.message)
+        }
+        console.log(user);
+
     }
 
     return (
-        <div className='items-center justify-center lg:flex'>
-            <div className='w-96 p-7'>
-                {/* <h2 className='mb-10 text-3xl font-bold text-center text-sky-500'>Sign Up</h2> */}
-                <form onSubmit={handleSubmit(handleSignUp)}>
-                    <div className="flex">
-                        <div className="w-full max-w-xs form-control ">
-                            <label className="label"> <span className="label-text">First Name</span></label>
-                            <input type="text" {...register("firstName", {
-                                required: "First Name is Required"
-                            })} className="w-full max-w-xs input input-bordered" />
-                            {errors.firstName && <p className='text-red-500'>{errors.firstName?.message}</p>}
+        <div className='items-center justify-center lg:flex background-image'>
+
+            <div className="flex justify-between shadow-2xl sign-up-container rounded-2xl">
+                <div className="text-white border rounded-2xl pc-image">
+                      <Link to="/home"><button className="flex items-center mt-2 ml-2 hover:text-gray-400">Go back <FiArrowRight></FiArrowRight></button></Link>  
+                    <div className="flex items-center justify-center h-80">
+                        <div className="text-center">
+                            <h1 className="mb-2 text-4xl font-extrabold">Sign Up</h1>
+                            <small>for land shsine ksjdh kdhbi sdfhsfi <br /> jjsfhi jshf kiafha jjhafha of ioaf9 oashf fha oafh</small>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div className='bg-transparent rounded-2xl w-96 p-7'>
+                    <form onSubmit={handleSubmit(handleSignUp)}>
+                        <div className="flex gap-2 mb-4">
+                            <div className="w-full max-w-xs form-control ">
+                       
+                                <input type="text" {...register("firstName", {
+                                    required: "First Name is Required !"
+                                })} className="w-full max-w-xs bg-transparent rounded-3xl input input-bordered" placeholder="First name..." />
+                                {errors.firstName && <small className='mt-1 ml-2 text-red-500'>{errors.firstName?.message}</small>}
+                            </div>
+                            <div className="w-full max-w-xs form-control">
+              
+                                <input type="text" {...register("lastName", {
+                                    required: "Last Name is Required !"
+                                })} className="w-full max-w-xs bg-transparent rounded-3xl input input-bordered" placeholder="Last name..." />
+                                {errors.lastName && <small className='mt-1 ml-2 text-red-500'>{errors.lastName?.message}</small>}
+                            </div>
+                        </div>
+                        <div className="w-full max-w-xs mb-4 form-control">
+                       
+                            <input type="email" {...register("email", {
+                                required: "Email is Required !"
+                            })} className="w-full max-w-xs bg-transparent rounded-3xl input input-bordered" placeholder="✉ Email..." />
+                            {errors.email && <small className='mt-1 ml-2 text-red-500'>{errors.email.message}</small>}
+                        </div>
+                        <div className="w-full max-w-xs mb-4 form-control">
+        
+                            <input type="text" {...register("phoneNumber", {
+                                required: "Phone Number is Required !",
+                            })} className="w-full max-w-xs bg-transparent rounded-3xl input input-bordered" placeholder="☏ Phone number..." />
+                            {errors.phoneNumber && <small className='mt-1 ml-2 text-red-500'>{errors.phoneNumber.message}</small>}
                         </div>
                         <div className="w-full max-w-xs form-control">
-                            <label className="label"> <span className="label-text">Last Name</span></label>
-                            <input type="text" {...register("lastName", {
-                                required: "Last Name is Required"
-                            })} className="w-full max-w-xs input input-bordered" />
-                            {errors.lastName && <p className='text-red-500'>{errors.lastName?.message}</p>}
+                            <input type="password" {...register("password", {
+                                required: "Password is Required !",
+                                minLength: { value: 6, message: "Password must be 6 characters long" },
+                                pattern: { value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/, message: 'Password must have uppercase, number and special characters' }
+                            })} className="w-full max-w-xs bg-transparent rounded-3xl input input-bordered" placeholder="🗝 Password..." />
+                            {errors.password && <small className='mt-1 ml-2 text-red-500'>{errors.password.message}</small>}
                         </div>
-                    </div>
-                    <div className="w-full max-w-xs form-control">
-                        <label className="label"> <span className="label-text">Email</span></label>
-                        <input type="email" {...register("email", {
-                            required: "Email is Required"
-                        })} className="w-full max-w-xs input input-bordered" />
-                        {errors.email && <p className='text-red-500'>{errors.email.message}</p>}
-                    </div>
-                    <div className="w-full max-w-xs form-control">
-                        <label className="label"> <span className="label-text">Phone Number</span></label>
-                        <input type="text" {...register("phoneNumber", {
-                            required: "Phone Number is required",
-                        })} className="w-full max-w-xs input input-bordered" />
-                        {errors.phoneNumber && <p className='text-red-500'>{errors.phoneNumber.message}</p>}
-                    </div>
-                    <div className="w-full max-w-xs form-control">
-                        <label className="label"> <span className="label-text">Password</span></label>
-                        <input type="password" {...register("password", {
-                            required: "Password is required",
-                            minLength: { value: 6, message: "Password must be 6 characters long" },
-                            pattern: { value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/, message: 'Password must have uppercase, number and special characters' }
-                        })} className="w-full max-w-xs input input-bordered" />
-                        {errors.password && <p className='text-red-500'>{errors.password.message}</p>}
-                    </div>
-                    <input className='w-full p-2 mt-4 mb-4 text-white bg-blue-600 btn' value="Sign Up" type="submit" />
-                    {/* {signUpError && <p className='text-red-600'>{signUpError}</p>} */}
-                </form>
-                <p>Already have an account <Link className='font-bold text-sky-500' to="/login">Please Login</Link></p>
+                        <input className='w-full p-2 mt-4 mb-4 text-black bg-blue-400 btn rounded-3xl' value="Sign Up" type="submit" />
+                        {/* {signUpError && <small className='text-red-600'>{signUpError}</small>} */}
+                    </form>
+                    <small className="font-black ml-11">Already have an account? <Link className='font-bold text-indigo-600' to="/login">Please Login</Link></small>
+                </div>
             </div>
+
         </div>
     )
 }
