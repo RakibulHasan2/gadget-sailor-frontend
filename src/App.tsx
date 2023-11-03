@@ -6,9 +6,9 @@ import routes from "./routes/Routes"
 function App() {
   return (
     <div>
-    <RouterProvider router={routes} />
-    <Toaster />
-  </div>
+      <RouterProvider router={routes} />
+      <Toaster />
+    </div>
   )
 }
 
