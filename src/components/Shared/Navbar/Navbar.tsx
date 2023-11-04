@@ -5,6 +5,7 @@ import { FaCartArrowDown, FaUserAlt } from 'react-icons/fa';
 import { MdBuild } from 'react-icons/md';
 import { GiElectric } from 'react-icons/gi';
 import { AiOutlineHeart } from 'react-icons/ai';
+import { BiLogIn } from 'react-icons/bi';
 import '../../../styles/Navbar.css'
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
@@ -103,7 +104,7 @@ export default function Navbar() {
                 <li><a>My Profile</a></li>
                 <li onClick={() => handleLogout()}><a>Log-out</a></li>
               </ul>
-            </div> :<Link to='/login'><button className="mr-4">Login</button></Link> 
+            </div> :<Link to='/login'><button className="flex p-2 mr-3 font-bold border rounded-lg">Login<BiLogIn className='text-2xl'></BiLogIn></button></Link> 
 
           }
           <a className="btn rounded-2xl"><MdBuild className='text-2xl'></MdBuild> Build PC </a>
