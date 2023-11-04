@@ -1,32 +1,16 @@
 import '../../../styles/Navbar.css'
 import useApiData from "../../../hooks/getAPIData";
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+
 
 
 export default function NavbarItem() {
     const { data, isLoading } = useApiData("http://localhost:5000/api/v1/allProducts")
-    const [SubCategory, setSubCategory] = useState("")
-    // Extract unique category,subcategory and brands name
-
-    const categories = [...new Set(data.map((item) => item.category_name))];
-
-    // console.log(categories)
-
+    const categories : string[] = [...new Set(data.map((item) => item.category_name))];
     if (isLoading) {
         return <div>Loading...</div>;
     }
-    console.log(SubCategory)
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const Brands = [
-        ...new Set(
-            data
-                .filter((item) => item.brand_name)
-                .map((item) => item.brand_name)
-        ),
-    ];
-    // console.log(Brands)
     return (
         <div className='flex items-center h-16 mb-10 border-2 justify-evenly bg-slate-500'>
             {
@@ -45,7 +29,7 @@ export default function NavbarItem() {
                                     .map(subCategory =>
                                         <Link to='/'>
                                             <li className="dropdown">
-                                                <a onMouseEnter={() => setSubCategory(subCategory)} className='block w-32 p-3 rounded-t bg-base-100 hover:bg-gray-400'>{subCategory}</a>
+                                                <a className='block w-32 p-3 rounded-t bg-base-100 hover:bg-gray-400'>{subCategory}</a>
                                                 <ul className='absolute hidden p-5 ml-32 -mt-6 text-gray-700 bg-gray-200 dropdown-content dropdown-right'>
                                                     <li>
                                                         {
