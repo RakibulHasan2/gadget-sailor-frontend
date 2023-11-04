@@ -107,8 +107,6 @@ export default function Navbar() {
             </div> :<Link to='/login'><button className="flex p-2 mr-4 border rounded-lg">Login<BiLogIn className='text-2xl'></BiLogIn></button></Link> 
 
           }
-
-
           <a className="btn rounded-2xl"><MdBuild className='text-2xl'></MdBuild> Build PC </a>
         </div>
       </div>
