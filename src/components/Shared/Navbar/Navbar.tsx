@@ -104,7 +104,7 @@ export default function Navbar() {
                 <li><a>My Profile</a></li>
                 <li onClick={() => handleLogout()}><a>Log-out</a></li>
               </ul>
-            </div> :<Link to='/login'><button className="flex p-2 mr-4 border rounded-lg">Login<BiLogIn className='text-2xl'></BiLogIn></button></Link> 
+            </div> :<Link to='/login'><button className="flex p-2 mr-3 font-bold border rounded-lg">Login<BiLogIn className='text-2xl'></BiLogIn></button></Link> 
 
           }
           <a className="btn rounded-2xl"><MdBuild className='text-2xl'></MdBuild> Build PC </a>
