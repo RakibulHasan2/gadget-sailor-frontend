@@ -42,7 +42,7 @@ export default function SignUp() {
         <div className='items-center justify-center lg:flex background-image'>
 
             <div className="flex justify-between shadow-2xl sign-up-container rounded-2xl">
-                <div className="text-white border rounded-2xl pc-image">
+                <div className="text-white rounded-2xl pc-image">
                       <Link to="/home"><button className="flex items-center mt-2 ml-2 hover:text-gray-400">Go back <FiArrowRight></FiArrowRight></button></Link>  
                     <div className="flex items-center justify-center h-80">
                         <div className="text-center">
