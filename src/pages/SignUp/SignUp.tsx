@@ -29,13 +29,13 @@ export default function SignUp() {
         const user = await response.json();
 
         if (user.statusCode === 200) {
+            sessionStorage.setItem('userData', JSON.stringify(userData));
             toast.success(user.message)
             navigate('/home')
         } else {
             toast.error(user.message)
         }
         console.log(user);
-
     }
 
     return (
