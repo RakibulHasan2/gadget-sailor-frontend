@@ -11,13 +11,14 @@ export default function NavbarItem() {
 
     const categories = [...new Set(data.map((item) => item.category_name))];
 
-    console.log(categories)
+    // console.log(categories)
 
     if (isLoading) {
         return <div>Loading...</div>;
     }
     console.log(SubCategory)
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const Brands = [
         ...new Set(
             data
@@ -25,7 +26,7 @@ export default function NavbarItem() {
                 .map((item) => item.brand_name)
         ),
     ];
-    console.log(Brands)
+    // console.log(Brands)
     return (
         <div className='flex items-center h-16 mb-10 border-2 justify-evenly bg-slate-500'>
             {
