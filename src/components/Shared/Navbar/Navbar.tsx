@@ -106,8 +106,6 @@ export default function Navbar() {
             </div> :<Link to='/login'><button className="mr-4">Login</button></Link> 
 
           }
-
-
           <a className="btn rounded-2xl"><MdBuild className='text-2xl'></MdBuild> Build PC </a>
         </div>
       </div>
