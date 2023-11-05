@@ -1,10 +1,14 @@
 import { FieldValues, useForm } from "react-hook-form";
 import { AddProductValues } from "../../types/ProductTypes";
 import useApiData from "../../hooks/getAPIData";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 
 const AddProduct = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<AddProductValues>();
+
+    const navigate = useNavigate();
 
     const { data, isLoading } = useApiData("http://localhost:5000/api/v1/allProducts")
 
@@ -41,8 +45,40 @@ const AddProduct = () => {
     }
 
     const handleAddProduct = async (data: FieldValues) => {
+        const productdata: AddProductValues = {
+            category_name: data.category_name,
+            sub_category_name: data.sub_category_name,
+            brand_name: data.brand_name,
+            product_name: data.product_name,
+            image: [data.image],
+            model: data.model,
+            description: data.description,
+            price: data.price,
+            product_code: data.product_code,
+            status: data.status,
+            reviews: [],
+            warranty: data.warranty,
+            others_info: data.others_info,
+        }
 
-        console.log(data);
+        console.log(productdata);
+        const response = await fetch('http://localhost:5000/api/v1/add-products', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(productdata)
+        });
+        const product = await response.json();
+        // console.log(product);
+
+        if (product.statusCode === 200) {
+
+            toast.success(product.message)
+            navigate('/home')
+        } else {
+            toast.error(product.message)
+        }
 
     }
 
@@ -55,7 +91,9 @@ const AddProduct = () => {
                 <form onSubmit={handleSubmit(handleAddProduct)}>
                     <div className="w-full max-w-xs form-control">
                         <label className="label"> <span className="label-text">Product category</span></label>
-                        <select className="select select-bordered  w-full max-w-xs" {...register("category_name")}>
+                        <select className="select select-bordered  w-full max-w-xs" {...register("category_name", {
+                            required: 'Required'
+                        })}>
                             {
                                 getOneCategory.map(d => (
                                     <option key={d} value={d}>{d}</option>
@@ -70,7 +108,9 @@ const AddProduct = () => {
                         <label className="label"> <span className="label-text">Brand Name</span></label>
 
 
-                        <select className="select select-bordered  w-full max-w-xs" {...register("sub_category_name")}>
+                        <select className="select select-bordered  w-full max-w-xs" {...register("sub_category_name", {
+                            required: 'Required'
+                        })}>
                             {
                                 getOneSubCategory.map(d => (
                                     <option key={d} value={d}>{d}</option>
@@ -88,7 +128,9 @@ const AddProduct = () => {
                     <div className="w-full max-w-xs form-control">
                         <label className="label"> <span className="label-text">Brand Name</span></label>
 
-                        <select className="select select-bordered  w-full max-w-xs" {...register("brand_name")}>
+                        <select className="select select-bordered  w-full max-w-xs" {...register("brand_name", {
+                            required: 'Required'
+                        })}>
                             {
                                 getOneBrand.map(d => (
                                     <option key={d} value={d}>{d}</option>
@@ -104,11 +146,23 @@ const AddProduct = () => {
 
                         <input type="text" placeholder="Product Name"
                             {...register("product_name", {
-
+                                required: 'Required'
                             })}
                             className="w-full max-w-xs input input-bordered" />
                         {errors.product_name && <p className='text-red-600'>{errors.product_name?.message}</p>}
                     </div>
+
+                    {/* Image */}
+
+                    <div className="form-control w-full max-w-xs">
+                        <label className="label"> <span className="label-text">Photo (photo Should be png/jpg format)</span></label>
+                        <input type="file" {...register("image", {
+                            required: 'Required'
+                        })} className="input input-bordered w-full max-w-xs" multiple />
+                        {errors.image && <p className='text-red-500'>{errors.image.message}</p>}
+                    </div>
+
+
 
                     {/* Model */}
                     <div className="w-full max-w-xs form-control">
@@ -135,6 +189,85 @@ const AddProduct = () => {
                             className="w-full max-w-xs input input-bordered" />
                         {errors.description && <p className='text-red-600'>{errors.description?.message}</p>}
                     </div>
+
+                    {/* Price */}
+                    <div className="w-full max-w-xs form-control">
+                        <label className="label"> <span className="label-text">Price</span></label>
+
+                        <input type="text"
+                            {...register("price", {
+
+                            })}
+                            className="w-full max-w-xs input input-bordered" />
+                        {errors.price && <p className='text-red-600'>{errors.price?.message}</p>}
+                    </div>
+
+
+                    {/* Product Code */}
+                    <div className="w-full max-w-xs form-control">
+                        <label className="label"> <span className="label-text">Product Code</span></label>
+
+                        <input type="text"
+                            {...register("product_code", {
+
+                            })}
+                            className="w-full max-w-xs input input-bordered" />
+                        {errors.product_code && <p className='text-red-600'>{errors.product_code?.message}</p>}
+                    </div>
+
+
+                    {/* Status */}
+                    <div className="w-full max-w-xs form-control">
+                        <label className="label"> <span className="label-text">Status</span></label>
+
+                        <input type="text"
+                            {...register("status", {
+
+                            })}
+                            className="w-full max-w-xs input input-bordered" />
+                        {errors.status && <p className='text-red-600'>{errors.status?.message}</p>}
+                    </div>
+
+
+                    {/* Reviews */}
+                    {/* <div className="w-full max-w-xs form-control">
+                        <label className="label"> <span className="label-text">Reviews</span></label>
+
+                        <input type="text" placeholder="Model"
+                            {...register("reviews", {
+
+                            })}
+                            className="w-full max-w-xs input input-bordered" />
+                        {errors.reviews && <p className='text-red-600'>{errors.reviews?.message}</p>}
+                    </div> */}
+
+
+                    {/* Wrranty */}
+                    <div className="w-full max-w-xs form-control">
+                        <label className="label"> <span className="label-text">Warranty</span></label>
+
+                        <input type="text"
+                            {...register("warranty", {
+
+                            })}
+                            className="w-full max-w-xs input input-bordered" />
+                        {errors.warranty && <p className='text-red-600'>{errors.warranty?.message}</p>}
+                    </div>
+
+
+
+                    {/* Others Info */}
+                    <div className="w-full max-w-xs form-control">
+                        <label className="label"> <span className="label-text">Others Info</span></label>
+
+                        <textarea type="text"
+                            {...register("others_info", {
+
+                            })}
+                            className="w-full max-w-xs input input-bordered" />
+                        {errors.others_info && <p className='text-red-600'>{errors.others_info?.message}</p>}
+                    </div>
+
 
 
                     <input className='w-full bg-blue-600 btn mt-4' value="Submit" type="submit" />
