@@ -16,7 +16,7 @@ export default function NavbarItem() {
             {
                 categories.map((category) =>
                     <div className="dropdown dropdown-hover">
-                        <Link to='signup'>
+                        <Link to={`/${category}`}>
                             <a className="px-8 py-3 font-semibold text-gray-700 bg-gray-300 rounded ">
                                 {category}
                             </a>
