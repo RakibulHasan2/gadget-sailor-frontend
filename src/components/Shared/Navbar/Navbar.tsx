@@ -1,7 +1,17 @@
 import NavbarItem from "./NavbarItem";
 import logo from '../../../assets/images/368572024_642047007826578_1321780034725554955_n-removebg-preview.png'
 import { useState, useEffect } from 'react';
+import { FaCartArrowDown, FaUserAlt } from 'react-icons/fa';
+import { MdBuild } from 'react-icons/md';
+import { GiElectric } from 'react-icons/gi';
+import { AiOutlineHeart } from 'react-icons/ai';
+import { BiLogIn } from 'react-icons/bi';
 import '../../../styles/Navbar.css'
+import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
+
+
+
 export default function Navbar() {
 
   const [expanded, setExpanded] = useState(true);
@@ -29,10 +39,21 @@ export default function Navbar() {
     };
   }, []);
 
+  const [users, setUsers] = useState(
+    sessionStorage.getItem('userData')
+  )
+  console.log(users)
+
+  const handleLogout = () => {
+    sessionStorage.removeItem('userData')
+    // window.location.reload() 
+    toast.success('logged out successfully')
+    setUsers(null)
+  }
 
   return (
     <div className="">
-      <div className="shadow-md navbar bg-base-100 mb-5">
+      <div className="mb-5 shadow-md navbar bg-base-100">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -64,7 +85,29 @@ export default function Navbar() {
           </button>
         </div>
         <div className="navbar-end">
-          <a className="btn">Build PC</a>
+          <div className="mr-4">
+            <button className="flex items-center font-bold"><small className="hover:text-gray-400">Hot Offer!</small> <GiElectric className='text-3xl font-extrabold icon'></GiElectric></button>
+          </div>
+          <div>
+            <button className="mr-5 text-2xl align-middle hover:text-gray-400" title="Cart"><FaCartArrowDown></FaCartArrowDown></button>
+          </div>
+          <div className="mr-5">
+
+            <button className="text-2xl align-middle hover:text-red-700" title="wishlist"><AiOutlineHeart></AiOutlineHeart></button>
+          </div>
+          {
+
+            users ? <div className="dropdown dropdown-end">
+              <label tabIndex={0} className="m-1"><button className="mt-2 mr-5 text-2xl font-bold text-center hover:text-gray-400"><FaUserAlt></FaUserAlt></button></label>
+              <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-lg w-52 border">
+
+                <li><a>My Profile</a></li>
+                <li onClick={() => handleLogout()}><a>Log-out</a></li>
+              </ul>
+            </div> :<Link to='/login'><button className="flex p-2 mr-3 font-bold border rounded-lg">Login<BiLogIn className='text-2xl'></BiLogIn></button></Link> 
+
+          }
+          <a className="btn rounded-2xl"><MdBuild className='text-2xl'></MdBuild> Build PC </a>
         </div>
       </div>
       {/* ..........................item area............................ */}

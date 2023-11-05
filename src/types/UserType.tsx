@@ -11,7 +11,7 @@ export type UserName = {
  
  export interface Product {
    category_name: string;
-   sub_category_name: string | null; // Use null or an appropriate type if it's optional
-   brand_name: string | null; // Use null or an appropriate type if it's optional
+   sub_category_name?: string; // Use null or an appropriate type if it's optional
+   brand_name: string; // Use null or an appropriate type if it's optional
  }
  
