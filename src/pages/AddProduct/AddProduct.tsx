@@ -45,12 +45,16 @@ const AddProduct = () => {
     }
 
     const handleAddProduct = async (data: FieldValues) => {
+        const imageFiles: string[] = Array.from(data.image)
+        const images = imageFiles.map((d: any) => d.name);
+        console.log(images)
+
         const productdata: AddProductValues = {
             category_name: data.category_name,
             sub_category_name: data.sub_category_name,
             brand_name: data.brand_name,
             product_name: data.product_name,
-            image: [data.image],
+            image: images,
             model: data.model,
             description: data.description,
             price: data.price,
@@ -62,6 +66,7 @@ const AddProduct = () => {
         }
 
         console.log(productdata);
+        console.log(imageFiles);
         const response = await fetch('http://localhost:5000/api/v1/add-products', {
             method: 'POST',
             headers: {
@@ -70,7 +75,7 @@ const AddProduct = () => {
             body: JSON.stringify(productdata)
         });
         const product = await response.json();
-        // console.log(product);
+        console.log(product);
 
         if (product.statusCode === 200) {
 
@@ -79,6 +84,7 @@ const AddProduct = () => {
         } else {
             toast.error(product.message)
         }
+
 
     }
 
