@@ -10,8 +10,10 @@ export default function Products() {
     const productsData = useLoaderData() as { data: IProduct[], message: string, statusCode: number, success: boolean };
     const products = productsData.data
 
+    // subcategories array
     const subCategories = [...new Set(products.map((product: IProduct) => product.sub_category_name))].filter((subcategory) => subcategory) as string[];
-    const brands: string[] = [...new Set(products.map((product: IProduct) => product.brand_name))];
+    //  brands array
+    const brands: string[] = [...new Set(products.map((product: IProduct) => product.brand_name))].filter((item) => item !== undefined);
 
     const handleSubcategoryChange = (subcategory: string) => {
         if (selectedSubcategories.includes(subcategory)) {
@@ -30,7 +32,7 @@ export default function Products() {
     };
 
 
-    // console.log(subCategories)
+    console.log(brands)
 
 
 
@@ -60,7 +62,7 @@ export default function Products() {
                 {/* brands checkbox */}
                 <div className="mt-10">
                     <h2 className="text-xl font-bold mb-4">Brands:</h2>
-                    <span className="">--------------------------------</span>
+                    <span className="">-------------------------------</span>
                     <div className="flex flex-col">
                         {brands.map((brand: string) => (
                             <label className="mt-2 text-lg" key={brand}>
