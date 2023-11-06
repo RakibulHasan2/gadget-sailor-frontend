@@ -27,6 +27,11 @@ const routes = createBrowserRouter([
         path: "/:categoryName",
         element: <Products />,
         loader: ({ params }) => fetch(`${baseUrl}/allProducts/${params.categoryName}`)
+      },
+      {
+        path: "/:id",
+        element: <h1>Product Page</h1>,
+        // loader: ({ params }) => fetch(`${baseUrl}/allProducts/${params.id}`)
       }
     ],
   },
