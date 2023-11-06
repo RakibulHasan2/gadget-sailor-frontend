@@ -4,7 +4,6 @@ import useApiData from "../../hooks/getAPIData";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
-
 const AddProduct = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<AddProductValues>();
 
@@ -47,6 +46,7 @@ const AddProduct = () => {
 
     const handleAddProduct = async (data: FieldValues) => {
         const imageFiles: string[] = Array.from(data.image)
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const images = imageFiles.map((d: any) => d.name);
         console.log(images)
 
@@ -112,7 +112,7 @@ const AddProduct = () => {
 
                     {/* Sub-Category */}
                     <div className="w-full max-w-xs form-control">
-                        <label className="label"> <span className="label-text">Brand Name</span></label>
+                        <label className="label"> <span className="label-text">Sub Category Name</span></label>
 
 
                         <select className="select select-bordered  w-full max-w-xs" {...register("sub_category_name", {
@@ -267,7 +267,7 @@ const AddProduct = () => {
                     <div className="w-full max-w-xs form-control">
                         <label className="label"> <span className="label-text">Others Info</span></label>
 
-                        <textarea type="text"
+                        <textarea
                             {...register("others_info", {
 
                             })}
