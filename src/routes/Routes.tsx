@@ -44,7 +44,7 @@ const routes = createBrowserRouter([
     element: <SignUp />,
   },
   {
-    path: "/addproduct",
+    path: "/addProduct",
     element: <AddProduct />,
   }
 ]);
