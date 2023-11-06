@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom';
 import '../../styles/ProductsCard.css'
 import { IProduct } from '../../types/ProductsType';
 
-export default function ProductsCard({ product } : IProduct) {
-    const { product_name, price, _id} = product;
 
+export default function ProductsCard({ product }: IProduct) {
+    const { product_name, price, _id } = product;
     // console.log(product.image[0])
 
     return (
