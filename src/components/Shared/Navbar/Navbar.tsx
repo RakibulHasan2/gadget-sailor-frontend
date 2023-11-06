@@ -10,12 +10,8 @@ import '../../../styles/Navbar.css'
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
-
-
 export default function Navbar() {
-
   const [expanded, setExpanded] = useState(true);
-
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const input: any = document.getElementById("myInput");
