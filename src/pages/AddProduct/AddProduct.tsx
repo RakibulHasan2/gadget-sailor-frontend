@@ -32,8 +32,9 @@ const AddProduct = () => {
     });
 
     const getOneCategory = Array.from(getCategory);
-    const getOneSubCategory = Array.from(getSubCategory);
-    const getOneBrand = Array.from(getBrand);
+    const getOneSubCategory = Array.from(getSubCategory).filter((item) => item !== undefined && item !== '');
+    const getOneBrand = Array.from(getBrand).filter((item) => item !== undefined);
+    console.log(getOneSubCategory)
 
 
     // console.log(getOneCategory);
