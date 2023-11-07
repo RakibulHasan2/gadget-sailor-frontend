@@ -33,8 +33,8 @@ console.log(d)
                                     .map(subCategory =>
                                         <Link to='/'>
                                             <li className="w-full dropdown">
-                                                <a className='block w-32 p-2 text-sm transition-all duration-300 ease-in-out rounded-md bg-base-100 hover:bg-gray-300 hover:text-gray-600'><span className='flex justify-between'>{subCategory}<span>⇢</span></span></a>
-                                                <ul className='absolute z-10 hidden ml-32 -mt-6 border shadow-sm dropdown-content dropdown-right'>
+                                                <a className='block p-2 text-sm transition-all duration-300 ease-in-out rounded-md w-36 bg-base-100 hover:bg-gray-300 hover:text-gray-600'><span className='flex justify-between'>{subCategory}<span>⇢</span></span></a>
+                                                <ul className='absolute z-10 hidden -mt-6 border shadow-sm ml-36 dropdown-content dropdown-right'>
                                                     <li>
                                                         {
                                                             data.filter((item) => item.category_name === category && item?.sub_category_name === subCategory)
