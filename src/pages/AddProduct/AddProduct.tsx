@@ -4,6 +4,8 @@ import useApiData from "../../hooks/getAPIData";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
+
+
 const AddProduct = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<AddProductValues>();
 
@@ -50,7 +52,7 @@ const AddProduct = () => {
         const images = imageFiles.map((d: any) => d.name);
         console.log(images)
 
-        const productdata: AddProductValues = {
+        const productData: AddProductValues = {
             category_name: data.category_name,
             sub_category_name: data.sub_category_name,
             brand_name: data.brand_name,
@@ -66,14 +68,15 @@ const AddProduct = () => {
             others_info: data.others_info,
         }
 
-        console.log(productdata);
+
+        console.log(productData);
         console.log(imageFiles);
         const response = await fetch('http://localhost:5000/api/v1/add-products', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(productdata)
+            body: JSON.stringify(productData)
         });
         const product = await response.json();
         console.log(product);
@@ -112,7 +115,7 @@ const AddProduct = () => {
 
                     {/* Sub-Category */}
                     <div className="w-full max-w-xs form-control">
-                        <label className="label"> <span className="label-text">Sub Category Name</span></label>
+                        <label className="label"> <span className="label-text">Brand Name</span></label>
 
 
                         <select className="select select-bordered  w-full max-w-xs" {...register("sub_category_name", {
@@ -208,45 +211,6 @@ const AddProduct = () => {
                             className="w-full max-w-xs input input-bordered" />
                         {errors.price && <p className='text-red-600'>{errors.price?.message}</p>}
                     </div>
-
-
-                    {/* Product Code */}
-                    <div className="w-full max-w-xs form-control">
-                        <label className="label"> <span className="label-text">Product Code</span></label>
-
-                        <input type="text"
-                            {...register("product_code", {
-
-                            })}
-                            className="w-full max-w-xs input input-bordered" />
-                        {errors.product_code && <p className='text-red-600'>{errors.product_code?.message}</p>}
-                    </div>
-
-
-                    {/* Status */}
-                    <div className="w-full max-w-xs form-control">
-                        <label className="label"> <span className="label-text">Status</span></label>
-
-                        <input type="text"
-                            {...register("status", {
-
-                            })}
-                            className="w-full max-w-xs input input-bordered" />
-                        {errors.status && <p className='text-red-600'>{errors.status?.message}</p>}
-                    </div>
-
-
-                    {/* Reviews */}
-                    {/* <div className="w-full max-w-xs form-control">
-                        <label className="label"> <span className="label-text">Reviews</span></label>
-
-                        <input type="text" placeholder="Model"
-                            {...register("reviews", {
-
-                            })}
-                            className="w-full max-w-xs input input-bordered" />
-                        {errors.reviews && <p className='text-red-600'>{errors.reviews?.message}</p>}
-                    </div> */}
 
 
                     {/* Wrranty */}
