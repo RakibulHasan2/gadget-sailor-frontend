@@ -8,11 +8,8 @@ import { useNavigate } from "react-router-dom";
 
 const AddProduct = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<AddProductValues>();
-
     const navigate = useNavigate();
-
     const { data, isLoading } = useApiData("http://localhost:5000/api/v1/allProducts")
-
 
     const getCategory: Set<string> = new Set()
     const getSubCategory: Set<string> = new Set()
