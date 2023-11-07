@@ -84,7 +84,7 @@ export default function Products() {
                     products.map((product: IProduct) =>
                         <ProductsCard
                             key={product._id}
-                            product={product} />
+                            product={product}/>
                     )
                 }
             </div>

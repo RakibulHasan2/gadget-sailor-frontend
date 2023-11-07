@@ -11,36 +11,39 @@ export default function NavbarItem() {
     if (isLoading) {
         return <div>Loading...</div>;
     }
+    const d = data.map((category) =>category.sub_category_name);
+console.log(d)
 
     return (
-        <div className='flex items-center h-16 mb-10 border-2 justify-evenly bg-slate-500 relative'>
+        <div className='flex justify-center h-16 '>
+            <div className='relative flex items-center w-4/5 h-16rounded-3xl justify-evenly'>
             {
                 categories.map((category) =>
-                    <div className="dropdown dropdown-hover relative">
+                    <div className="relative dropdown dropdown-hover">
                         <Link to={`/${category}`}>
-                            <a className="px-8 py-3 font-semibold text-gray-700 bg-gray-300 rounded ">
-                                {category}
+                            <a className="px-8 py-3 font-semibold rounded-full items-button">
+                              {category}
                             </a>
                         </Link>
-                        <ul className="z-10 absolute hidden pt-1 text-gray-700 dropdown-content">
+                        <ul className="absolute hidden dropdown-content z-[1] shadow bg-base-100 rounded-lg p-1 border">
                             {
                                 data.filter((item) => item?.category_name === category)
                                     .map((item) => item.sub_category_name)
                                     .filter((subCategory, index, array) => subCategory && array.indexOf(subCategory) === index)
                                     .map(subCategory =>
                                         <Link to='/'>
-                                            <li className="dropdown">
-                                                <a className='block w-32 p-3 rounded-t bg-base-100 hover:bg-gray-400'>{subCategory}</a>
-                                                <ul className='absolute hidden p-5 ml-32 -mt-6 text-gray-700 bg-gray-200 dropdown-content dropdown-right z-10'>
+                                            <li className="w-full dropdown">
+                                                <a className='block p-2 text-sm transition-all duration-300 ease-in-out rounded-md w-36 bg-base-100 hover:bg-gray-300 hover:text-gray-600'><span className='flex justify-between'>{subCategory}<span>⇢</span></span></a>
+                                                <ul className='absolute z-10 hidden -mt-6 border shadow-sm ml-36 dropdown-content dropdown-right'>
                                                     <li>
                                                         {
                                                             data.filter((item) => item.category_name === category && item?.sub_category_name === subCategory)
                                                                 .map((item) => item.brand_name)
                                                                 .filter((brandName, index, array) => brandName && array.indexOf(brandName) === index)
                                                                 .map((brands) => (
-                                                                    <li className='block w-32 p-3 rounded-t bg-base-100 hover:bg-gray-400' key={brands}>{brands}</li>
+                                                                    <li className='block w-32 p-2 text-sm transition-all duration-300 ease-in-out bg-base-100 hover:bg-gray-300 hover:text-gray-600' key={brands}>{brands}</li>
                                                                 ))
-                                                        } 
+                                                        }
                                                     </li>
                                                 </ul>
                                             </li>
@@ -52,5 +55,9 @@ export default function NavbarItem() {
                 )
             }
         </div>
+        </div>
+        
     );
 }
+
+

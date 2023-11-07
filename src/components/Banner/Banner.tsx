@@ -11,7 +11,6 @@ const Banner = () => {
   };
 
   return (
-
     <div className="hero min-h-screen max-w-screen " style={backgroundImageStyle}>
       <div className="hero-content text-center text-neutral-content lg:flex-col flex-col">
         <div className="hero hidden lg:block     ">
