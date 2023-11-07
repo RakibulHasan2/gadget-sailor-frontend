@@ -5,23 +5,24 @@ import { Link } from 'react-router-dom';
 
 
 export default function NavbarItem() {
-    const { data, isLoading } = useApiData("http://localhost:5000/api/v1/allProducts")
-    const categories : string[] = [...new Set(data.map((item) => item.category_name))];
+
+    const { data, isLoading } = useApiData("http://localhost:5000/api/v1/get-AllCategories")
+    
     if (isLoading) {
         return <div>Loading...</div>;
     }
+console.log(data)
 
     return (
-        <div className='flex items-center h-16 mb-10 border-2 justify-evenly bg-slate-500'>
+
+        <div className='flex items-center h-16 mb-10 shadow-xl justify-evenly bg-slate-100'>
             {
                 categories.map((category) =>
                     <div className="dropdown dropdown-hover">
                         <Link to='signup'>
-                            <a className="px-8 py-3 font-semibold text-gray-700 bg-gray-300 rounded ">
-                                {category}
-                            </a>
+                           {category}
                         </Link>
-                        <ul className="absolute hidden pt-1 text-gray-700 dropdown-content">
+                        <ul className="absolute hidden pt-1 text-red-700 dropdown-content">
                             {
                                 data.filter((item) => item?.category_name === category)
                                     .map((item) => item.sub_category_name)
@@ -39,7 +40,7 @@ export default function NavbarItem() {
                                                                 .map((brands) => (
                                                                     <li className='block w-32 p-3 rounded-t bg-base-100 hover:bg-gray-400' key={brands}>{brands}</li>
                                                                 ))
-                                                        } 
+                                                        }
                                                     </li>
                                                 </ul>
                                             </li>
@@ -53,3 +54,5 @@ export default function NavbarItem() {
         </div>
     );
 }
+
+
