@@ -4,6 +4,10 @@ import Home from './../pages/Home/Home';
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
 import MainLayout from "../layouts/MainLayout";
+import AddProduct from "../pages/AddProduct/AddProduct";
+import Products from "../pages/Products/Products";
+
+const baseUrl = "http://localhost:5000/api/v1";
 
 const routes = createBrowserRouter([
   {
@@ -18,6 +22,16 @@ const routes = createBrowserRouter([
       {
         path: "/home",
         element: <Home />,
+      },
+      {
+        path: "/:categoryName",
+        element: <Products />,
+        loader: ({ params }) => fetch(`${baseUrl}/allProducts/${params.categoryName}`)
+      },
+      {
+        path: "/:id",
+        element: <h1>Product Page</h1>,
+        // loader: ({ params }) => fetch(`${baseUrl}/allProducts/${params.id}`)
       }
     ],
   },
@@ -28,6 +42,10 @@ const routes = createBrowserRouter([
   {
     path: "/signup",
     element: <SignUp />,
+  },
+  {
+    path: "/addProduct",
+    element: <AddProduct />,
   }
 ]);
 

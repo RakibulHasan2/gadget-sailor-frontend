@@ -1,28 +1,29 @@
 import '../../../styles/Navbar.css'
 import useApiData from "../../../hooks/getAPIData";
 import { Link } from 'react-router-dom';
-
+import { IProduct } from '../../../types/ProductsType';
 
 
 export default function NavbarItem() {
+    const { data, isLoading } = useApiData("http://localhost:5000/api/v1/allProducts")
+    const categories : string[] = [...new Set(data.map((item: IProduct) => item.category_name))];
 
-    const { data, isLoading } = useApiData("http://localhost:5000/api/v1/get-AllCategories")
-    
     if (isLoading) {
         return <div>Loading...</div>;
     }
 console.log(data)
 
     return (
-
-        <div className='flex items-center h-16 mb-10 shadow-xl justify-evenly bg-slate-100'>
+        <div className='flex items-center h-16 mb-10 border-2 justify-evenly bg-slate-500 relative'>
             {
                 categories.map((category) =>
-                    <div className="dropdown dropdown-hover">
-                        <Link to='signup'>
-                           {category}
+                    <div className="dropdown dropdown-hover relative">
+                        <Link to={`/${category}`}>
+                            <a className="px-8 py-3 font-semibold text-gray-700 bg-gray-300 rounded ">
+                                {category}
+                            </a>
                         </Link>
-                        <ul className="absolute hidden pt-1 text-red-700 dropdown-content">
+                        <ul className="z-10 absolute hidden pt-1 text-gray-700 dropdown-content">
                             {
                                 data.filter((item) => item?.category_name === category)
                                     .map((item) => item.sub_category_name)
@@ -31,7 +32,7 @@ console.log(data)
                                         <Link to='/'>
                                             <li className="dropdown">
                                                 <a className='block w-32 p-3 rounded-t bg-base-100 hover:bg-gray-400'>{subCategory}</a>
-                                                <ul className='absolute hidden p-5 ml-32 -mt-6 text-gray-700 bg-gray-200 dropdown-content dropdown-right'>
+                                                <ul className='absolute hidden p-5 ml-32 -mt-6 text-gray-700 bg-gray-200 dropdown-content dropdown-right z-10'>
                                                     <li>
                                                         {
                                                             data.filter((item) => item.category_name === category && item?.sub_category_name === subCategory)
