@@ -24,17 +24,16 @@ export default function NavbarItem() {
                     categories.map((category) =>
                         <div className="relative dropdown dropdown-hover">
                             <Link to={`/${category}`}>
-                                <a className="px-8 py-3 font-semibold rounded-lg items-button">
+                                <p className="px-8 py-3 font-semibold rounded-lg items-button">
                                     {category}
-                                </a>
+                                </p>
                             </Link>
                             <ul className="absolute hidden dropdown-content z-[1] shadow bg-base-100  p-1 border rounded-lg">
                                 {
                                     data.filter((item) => item?.category_name === category)
                                         .map((item) => item.sub_category_name)
                                         .filter((subCategory, index, array) => subCategory && array.indexOf(subCategory) === index)
-                                        .map(subCategory =>
-                                            <Link to='/'>
+                                        .map(subCategory =>                                
                                                 <li className="w-full dropdown">
                                                     <Link to={`/${category}/${subCategory}`} className='block p-2 text-sm transition-all duration-300 ease-in-out rounded-md w-36 bg-base-100 hover:bg-gray-300 hover:text-gray-600'><span className='flex justify-between'>{subCategory}<span>⇢</span></span></Link>
                                                     <ul className='absolute z-10 hidden -mt-6 border shadow-sm ml-36 dropdown-content dropdown-right'>
@@ -44,13 +43,14 @@ export default function NavbarItem() {
                                                                     .map((item) => item.brand_name)
                                                                     .filter((brandName, index, array) => brandName && array.indexOf(brandName) === index)
                                                                     .map((brands) => (
-                                                                        <li className='block w-32 p-2 text-sm transition-all duration-300 ease-in-out bg-base-100 hover:bg-gray-300 hover:text-gray-600' key={brands}>{brands}</li>
+                                                                        <Link to={`/${category}/${subCategory}/${brands}`} >
+                                                                            <li className='block w-32 p-2 text-sm transition-all duration-300 ease-in-out bg-base-100 hover:bg-gray-300 hover:text-gray-600' key={brands}>{brands}</li>
+                                                                        </Link>
                                                                     ))
                                                             }
                                                         </li>
                                                     </ul>
                                                 </li>
-                                            </Link>
                                         )
                                 }
                             </ul>

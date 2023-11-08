@@ -11,7 +11,7 @@ export default function ProductsCard({ product }: IProduct) {
             <figure className="px-10 pt-10">
                 <img src="https://globalexpressbd.com/wp-content/uploads/2021/10/i7-11700k-gaming-pc-500x500-1.jpg" alt="Shoes" className="rounded-xl" />
             </figure>
-            <Link to={`/${_id}`}>
+            <Link to={`/product/${_id}`}>
                 <div className="card-body items-center text-center">
                     <p>{product_name}</p>
                     <div className="card-actions">
