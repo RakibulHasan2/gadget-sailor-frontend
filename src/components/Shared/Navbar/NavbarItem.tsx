@@ -21,8 +21,8 @@ console.log(d)
                 categories.map((category) =>
                     <div className="relative dropdown dropdown-hover">
                         <Link to={`/${category}`}>
-                            <a className="px-8 py-3 font-semibold rounded-full items-button">
-                              {category}
+                            <a className="px-8 py-3 font-semibold rounded-full">
+                              {category}⇢
                             </a>
                         </Link>
                         <ul className="absolute hidden dropdown-content z-[1] shadow bg-base-100 rounded-lg p-1 border">
