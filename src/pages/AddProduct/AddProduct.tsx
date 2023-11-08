@@ -2,7 +2,7 @@ import { FieldValues, useForm } from "react-hook-form";
 import { AddProductValues } from "../../types/ProductTypes";
 import useApiData from "../../hooks/getAPIData";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 
@@ -44,7 +44,12 @@ const AddProduct = () => {
         return <p>Loading...</p>;
     }
 
-
+    const openModal = () => {
+        const modal = document.getElementById('my_modal_3') as HTMLDialogElement | null;
+        if (modal) {
+            modal.showModal();
+        }
+    };
 
     const handleAddProduct = async (data: FieldValues) => {
         const imageFiles: FileList = data.image;
@@ -150,6 +155,25 @@ const AddProduct = () => {
                         </select>
                         {errors.category_name && <p className='text-red-600'>{errors.category_name?.message}</p>}
                     </div>
+                    <small className="ml-10 font-black mb-4">Want to add a new category?
+                        <>
+                            <button className="text-blue-500" onClick={openModal}>
+                                Add
+                            </button>
+                            <dialog id="my_modal_3" className="modal">
+                                <div className="modal-box">
+                                    <form method="dialog">
+                                        {/* if there is a button in form, it will close the modal */}
+                                        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                                            ✕
+                                        </button>
+                                    </form>
+                                    <h3 className="font-bold text-lg">Hello!</h3>
+
+                                </div>
+                            </dialog>
+                        </>
+                    </small>
 
                     {/* Sub-Category */}
                     <div className="w-full max-w-xs form-control">
@@ -166,10 +190,9 @@ const AddProduct = () => {
                             }
                         </select>
 
-
-
                         {errors.sub_category_name && <p className='text-red-600'>{errors.sub_category_name?.message}</p>}
                     </div>
+                    <small className="ml-10 font-black mb-4">Want to add a new Sub-category? <Link className='font-bold text-indigo-600' to="/">Add</Link></small>
 
                     {/* Brand Name */}
 
@@ -187,6 +210,9 @@ const AddProduct = () => {
                         </select>
                         {errors.brand_name && <p className='text-red-600'>{errors.brand_name?.message}</p>}
                     </div>
+                    <small className="ml-10 font-black mb-4">Want to add a new Brand? <Link className='font-bold text-indigo-600' to="/">Add</Link></small>
+
+
                     {/* Product Name */}
 
                     <div className="w-full max-w-xs form-control">
@@ -287,7 +313,7 @@ const AddProduct = () => {
 
 
             </div>
-        </div>
+        </div >
     );
 };
 
