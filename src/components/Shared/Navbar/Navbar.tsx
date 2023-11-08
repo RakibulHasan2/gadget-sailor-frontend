@@ -38,7 +38,7 @@ export default function Navbar() {
   const [users, setUsers] = useState(
     sessionStorage.getItem('userData')
   )
-  console.log(users)
+  // console.log(users)
 
   const handleLogout = () => {
     sessionStorage.removeItem('userData')
