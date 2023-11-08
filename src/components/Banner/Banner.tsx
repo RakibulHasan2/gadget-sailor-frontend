@@ -1,29 +1,29 @@
 
-import img4 from "../../assets/banner/img8.avif"
-import img5 from "../../assets/banner/img3.avif"
-import img6 from "../../assets/pc/pc-photo.png"
+import img1 from "../../assets/pc/pc1.jpg"
+import img2 from "../../assets/pc/pc2.jpg"
+import img3 from "../../assets/pc/view-computer-monitor-with-gradient-display.jpg"
 
 const Banner = () => {
 
 
   return (
-<div className="w-full h-screen carousel">
+<div className="w-full carousel">
   <div id="slide1" className="relative w-full h-screen carousel-item">
-    <img src={img4} className="w-full h-full" />
+    <img src={img1} className="w-full h-full" />
     <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
       <a href="#slide3" className="btn btn-circle">❮</a> 
       <a href="#slide2" className="btn btn-circle">❯</a>
     </div>
   </div> 
   <div id="slide2" className="relative w-full carousel-item">
-    <img src={img5}className="w-full" />
+    <img src={img2}className="w-full" />
     <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
       <a href="#slide1" className="btn btn-circle">❮</a> 
       <a href="#slide3" className="btn btn-circle">❯</a>
     </div>
   </div> 
   <div id="slide3" className="relative w-full carousel-item">
-    <img src={img6} className="w-full" />
+    <img src={img3} className="w-full" />
     <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
       <a href="#slide2" className="btn btn-circle">❮</a> 
       <a href="#slide1" className="btn btn-circle">❯</a>
