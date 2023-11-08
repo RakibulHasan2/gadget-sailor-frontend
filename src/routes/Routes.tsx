@@ -6,6 +6,7 @@ import SignUp from "../pages/SignUp/SignUp";
 import MainLayout from "../layouts/MainLayout";
 import AddProduct from "../pages/AddProduct/AddProduct";
 import Products from "../pages/Products/Products";
+import SingleProductPage from "../pages/Products/SingleProductPage";
 
 const baseUrl = "http://localhost:5000/api/v1";
 
@@ -35,8 +36,8 @@ const routes = createBrowserRouter([
       },
       {
         path: "/:id",
-        element: <h1>Product Page</h1>,
-        // loader: ({ params }) => fetch(`${baseUrl}/allProducts/${params.id}`)
+        element: <SingleProductPage/>,
+        loader: ({ params }) => fetch(`${baseUrl}/allProducts/${params.id}`)
       }
     ],
   },

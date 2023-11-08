@@ -14,8 +14,8 @@ export default function NavbarItem() {
         </div>;
     }
 
-    const d = data.map((category) => category.sub_category_name);
-    console.log(d)
+    // const d = data.map((category) => category.sub_category_name);
+    // console.log(d)
 
     return (
         <div className='flex justify-center h-16 '>
