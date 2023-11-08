@@ -1,15 +1,50 @@
+import { FieldValues, useForm } from "react-hook-form";
+import { AddProductValues } from "../../types/ProductTypes";
+import useApiData from "../../hooks/getAPIData";
 
 const UpdateProduct = () => {
-    const { register, handleUpdate, formState: { errors } } = useForm<AddProductValues>();
+    const { register, handleSubmit, formState: { errors } } = useForm<AddProductValues>();
+
+
+    const { data, isLoading } = useApiData("http://localhost:5000/api/v1/allProducts")
+
+    const getCategory: Set<string> = new Set()
+    const getSubCategory: Set<string> = new Set()
+    const getBrand: Set<string> = new Set()
+
+    data.forEach(d => {
+        if (!getCategory.has(d.category_name)) {
+            getCategory.add(d.category_name);
+
+        }
+        if (!getSubCategory.has(d.sub_category_name)) {
+            getSubCategory.add(d.sub_category_name);
+        }
+        if (!getBrand.has(d.brand_name)) {
+            // console.log(d.brand_name);
+            getBrand.add(d.brand_name);
+        }
+    });
+
+    const getOneCategory = Array.from(getCategory);
+    const getOneSubCategory = Array.from(getSubCategory).filter((item) => item !== undefined && item !== '');
+    const getOneBrand = Array.from(getBrand).filter((item) => item !== undefined);
+
+    if (isLoading) {
+        return <p>Loading...</p>;
+    }
+
 
     const handleUpdateProduct = async (data: FieldValues) => {
-
+        console.log(data)
     }
+
+
     return (
         <div>
             <div className='w-96 p-7'>
                 <h2 className='text-3xl font-bold text-center text-sky-500'>Add a New Product</h2>
-                <form onSubmit={handleUpdate(handleUpdateProduct)}>
+                <form onSubmit={handleSubmit(handleUpdateProduct)}>
                     <div className="w-full max-w-xs form-control">
                         <label className="label"> <span className="label-text">Product category</span></label>
                         <select className="select select-bordered  w-full max-w-xs" {...register("category_name", {
