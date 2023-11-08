@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 const AddProduct = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<AddProductValues>();
-
+    const imageHosKey = '1a6c0e11cdde66ffb8f933ec4079f59e';
     const navigate = useNavigate();
 
     const { data, isLoading } = useApiData("http://localhost:5000/api/v1/allProducts")
@@ -35,9 +35,9 @@ const AddProduct = () => {
     const getOneCategory = Array.from(getCategory);
     const getOneSubCategory = Array.from(getSubCategory).filter((item) => item !== undefined && item !== '');
     const getOneBrand = Array.from(getBrand).filter((item) => item !== undefined);
-    console.log(getOneSubCategory)
 
 
+    // console.log(getOneSubCategory)
     // console.log(getOneCategory);
     // console.log(getOneSubCategory);
     // console.log(getOneBrand)
@@ -47,17 +47,51 @@ const AddProduct = () => {
     }
 
     const handleAddProduct = async (data: FieldValues) => {
-        const imageFiles: string[] = Array.from(data.image)
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const images = imageFiles.map((d: any) => d.name);
-        console.log(images)
+        const imageFiles: FileList = data.image;
+        console.log(imageFiles)
+
+
+        //POST image on imagebb for hosting
+        const uploadPromises = Array.from(imageFiles).map(async (image) => {
+
+            console.log(image)
+            try {
+                const formData = new FormData();
+                console.log(formData)
+                formData.set('image', image);
+                console.log(formData)
+
+                const imageResponse = await fetch(`https://api.imgbb.com/1/upload?key=${imageHosKey}`, {
+
+                    method: 'POST',
+
+                    body: formData,
+                })
+                console.log(imageResponse)
+                if (imageResponse.ok) {
+                    const result = await imageResponse.json();
+                    return result.data.url;
+                } else {
+                    throw new Error('Image upload failed');
+                }
+            } catch (error) {
+                console.error('Error uploading image:', error);
+                return null;
+            }
+
+        })
+
+        console.log(uploadPromises)
+        const uploadedImageUrls = await Promise.all(uploadPromises);
+        console.log(uploadedImageUrls)
+
 
         const productData: AddProductValues = {
             category_name: data.category_name,
             sub_category_name: data.sub_category_name,
             brand_name: data.brand_name,
             product_name: data.product_name,
-            image: images,
+            image: uploadedImageUrls,
             model: data.model,
             description: data.description,
             price: data.price,
@@ -71,6 +105,8 @@ const AddProduct = () => {
 
         console.log(productData);
         console.log(imageFiles);
+
+        //Create a new product
         const response = await fetch('http://localhost:5000/api/v1/add-products', {
             method: 'POST',
             headers: {
@@ -91,6 +127,8 @@ const AddProduct = () => {
 
 
     }
+
+
 
 
 
@@ -166,9 +204,9 @@ const AddProduct = () => {
 
                     <div className="form-control w-full max-w-xs">
                         <label className="label"> <span className="label-text">Photo (photo Should be png/jpg format)</span></label>
-                        <input type="file" {...register("image", {
+                        <input type="file" multiple {...register("image", {
                             required: 'Required'
-                        })} className="input input-bordered w-full max-w-xs" multiple />
+                        })} className="input input-bordered w-full max-w-xs" />
                         {errors.image && <p className='text-red-500'>{errors.image.message}</p>}
                     </div>
 
