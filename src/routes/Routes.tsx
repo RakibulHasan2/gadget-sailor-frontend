@@ -36,9 +36,14 @@ const routes = createBrowserRouter([
         loader: ({ params }) => fetch(`${baseUrl}/allProducts/${params.categoryName}/${params.subCategoryName}`)
       },
       {
-        path: "/:id",
+        path: "/:categoryName/:subCategoryName/:brandName",
+        element: <Products />,
+        loader: ({ params }) => fetch(`${baseUrl}/allProducts/${params.subCategoryName}/${params.brandName}`)
+      },
+      {
+        path: "/product/:id",
         element: <SingleProductPage/>,
-        loader: ({ params }) => fetch(`${baseUrl}/allProducts/${params.id}`)
+        loader: async ({ params }) =>await fetch(`${baseUrl}/allProducts/${params.id}`)
       }
     ],
   },
