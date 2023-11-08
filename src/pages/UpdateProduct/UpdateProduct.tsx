@@ -161,7 +161,7 @@ const UpdateProduct = () => {
 
                     {/* Sub-Category */}
                     <div className="w-full max-w-xs form-control">
-                        <label className="label"> <span className="label-text">Brand Name</span></label>
+                        <label className="label"> <span className="label-text">Subcategory name</span></label>
 
 
                         <select className="select select-bordered  w-full max-w-xs" {...register("sub_category_name", {
