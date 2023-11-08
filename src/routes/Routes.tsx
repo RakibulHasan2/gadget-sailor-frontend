@@ -7,6 +7,7 @@ import MainLayout from "../layouts/MainLayout";
 import AddProduct from "../pages/AddProduct/AddProduct";
 import Products from "../pages/Products/Products";
 import SingleProductPage from "../pages/Products/SingleProductPage";
+import UpdateProduct from "../pages/UpdateProduct/UpdateProduct";
 
 const baseUrl = "http://localhost:5000/api/v1";
 
@@ -52,6 +53,10 @@ const routes = createBrowserRouter([
   {
     path: "/addProduct",
     element: <AddProduct />,
+  },
+  {
+    path: "/updateProduct",
+    element: <UpdateProduct />,
   }
 ]);
 

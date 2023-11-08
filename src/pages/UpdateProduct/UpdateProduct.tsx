@@ -1,140 +1,15 @@
-import { FieldValues, useForm } from "react-hook-form";
-import { AddProductValues } from "../../types/ProductTypes";
-import useApiData from "../../hooks/getAPIData";
-import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
 
+const UpdateProduct = () => {
+    const { register, handleUpdate, formState: { errors } } = useForm<AddProductValues>();
 
-
-const AddProduct = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm<AddProductValues>();
-    const imageHosKey = '1a6c0e11cdde66ffb8f933ec4079f59e';
-    const navigate = useNavigate();
-    const { data, isLoading } = useApiData("http://localhost:5000/api/v1/allProducts")
-
-    const getCategory: Set<string> = new Set()
-    const getSubCategory: Set<string> = new Set()
-    const getBrand: Set<string> = new Set()
-
-    data.forEach(d => {
-        if (!getCategory.has(d.category_name)) {
-            getCategory.add(d.category_name);
-
-        }
-        if (!getSubCategory.has(d.sub_category_name)) {
-            getSubCategory.add(d.sub_category_name);
-        }
-        if (!getBrand.has(d.brand_name)) {
-            // console.log(d.brand_name);
-            getBrand.add(d.brand_name);
-        }
-    });
-
-    const getOneCategory = Array.from(getCategory);
-    const getOneSubCategory = Array.from(getSubCategory).filter((item) => item !== undefined && item !== '');
-    const getOneBrand = Array.from(getBrand).filter((item) => item !== undefined);
-
-
-    // console.log(getOneSubCategory)
-    // console.log(getOneCategory);
-    // console.log(getOneSubCategory);
-    // console.log(getOneBrand)
-
-    if (isLoading) {
-        return <p>Loading...</p>;
-    }
-
-    const handleAddProduct = async (data: FieldValues) => {
-        const imageFiles: FileList = data.image;
-        console.log(imageFiles)
-
-
-        //POST image on imagebb for hosting
-        const uploadPromises = Array.from(imageFiles).map(async (image) => {
-
-            console.log(image)
-            try {
-                const formData = new FormData();
-                console.log(formData)
-                formData.set('image', image);
-                console.log(formData)
-
-                const imageResponse = await fetch(`https://api.imgbb.com/1/upload?key=${imageHosKey}`, {
-
-                    method: 'POST',
-
-                    body: formData,
-                })
-                console.log(imageResponse)
-                if (imageResponse.ok) {
-                    const result = await imageResponse.json();
-                    return result.data.url;
-                } else {
-                    throw new Error('Image upload failed');
-                }
-            } catch (error) {
-                console.error('Error uploading image:', error);
-                return null;
-            }
-
-        })
-
-        console.log(uploadPromises)
-        const uploadedImageUrls = await Promise.all(uploadPromises);
-        console.log(uploadedImageUrls)
-
-
-        const productData: AddProductValues = {
-            category_name: data.category_name,
-            sub_category_name: data.sub_category_name,
-            brand_name: data.brand_name,
-            product_name: data.product_name,
-            image: uploadedImageUrls,
-            model: data.model,
-            description: data.description,
-            price: data.price,
-            product_code: data.product_code,
-            status: data.status,
-            reviews: [],
-            warranty: data.warranty,
-            others_info: data.others_info,
-        }
-
-
-        console.log(productData);
-        console.log(imageFiles);
-
-        //Create a new product
-        const response = await fetch('http://localhost:5000/api/v1/add-products', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(productData)
-        });
-        const product = await response.json();
-        console.log(product);
-
-        if (product.statusCode === 200) {
-
-            toast.success(product.message)
-            navigate('/home')
-        } else {
-            toast.error(product.message)
-        }
-
+    const handleUpdateProduct = async (data: FieldValues) => {
 
     }
-
-
-
-
-
     return (
         <div>
             <div className='w-96 p-7'>
                 <h2 className='text-3xl font-bold text-center text-sky-500'>Add a New Product</h2>
-                <form onSubmit={handleSubmit(handleAddProduct)}>
+                <form onSubmit={handleUpdate(handleUpdateProduct)}>
                     <div className="w-full max-w-xs form-control">
                         <label className="label"> <span className="label-text">Product category</span></label>
                         <select className="select select-bordered  w-full max-w-xs" {...register("category_name", {
@@ -277,7 +152,7 @@ const AddProduct = () => {
 
 
 
-                    <input className='w-full bg-blue-600 btn mt-4' value="Submit" type="submit" />
+                    <input className='w-full bg-blue-600 btn mt-4' value="Update" type="submit" />
                     <div>
 
                     </div>
@@ -289,4 +164,4 @@ const AddProduct = () => {
     );
 };
 
-export default AddProduct;
+export default UpdateProduct;
