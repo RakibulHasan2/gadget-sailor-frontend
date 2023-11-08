@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 
 const UpdateProduct = () => {
-    const { register, handleSubmit, setValue, formState: { errors } } = useForm<AddProductValues>();
+    const { register, handleSubmit, formState: { errors } } = useForm<AddProductValues>();
 
     const imageHosKey = '1a6c0e11cdde66ffb8f933ec4079f59e';
     const navigate = useNavigate();
@@ -45,10 +45,11 @@ const UpdateProduct = () => {
 
 
     const handleUpdateProduct = async (data: FieldValues) => {
-        const allDatas = await fetch('http://localhost:5000/api/v1/allProducts/654b31846c343b528babb7ed')
-        const results = await allDatas.json();
-        const result = results.data;
-        console.log(result)
+
+        // const allDatas = await fetch('http://localhost:5000/api/v1/allProducts/654b983ac1713b132cbc698f')
+        // const results = await allDatas.json();
+        // const result = results.data;
+        // console.log(result)
 
         // useEffect(() => {
         //     // Set initial form values when the component mounts
@@ -116,7 +117,7 @@ const UpdateProduct = () => {
         console.log(productData);
         console.log(imageFiles);
 
-        const response = await fetch('http://localhost:5000/api/v1/allProducts/654b31846c343b528babb7ed', {
+        const response = await fetch('http://localhost:5000/api/v1/allProducts/654b983ac1713b132cbc698f', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
