@@ -34,6 +34,7 @@ export default function Products() {
 
     return (
         <div className="flex justify-center gap-4">
+            {/* side bard filtering section */}
             <div className="w-52 h-full">
                 {/* sub category checkbox */}
                 {subCategories.length > 1 &&
@@ -77,7 +78,7 @@ export default function Products() {
             {/* products card */}
             <div className="grid grid-cols-4 gap-2">
                 {
-                    products.map((product: IProduct) =>
+                    products?.map((product: IProduct) =>
                         <ProductsCard
                             key={product._id}
                             product={product}/>
