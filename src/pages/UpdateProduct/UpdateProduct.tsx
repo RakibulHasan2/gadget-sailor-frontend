@@ -3,12 +3,13 @@ import { AddProductValues } from "../../types/ProductTypes";
 import useApiData from "../../hooks/getAPIData";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from 'react';
 
 
 
 
 const UpdateProduct = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm<AddProductValues>();
+    const { register, handleSubmit, setValue, formState: { errors } } = useForm<AddProductValues>();
 
     const imageHosKey = '1a6c0e11cdde66ffb8f933ec4079f59e';
     const navigate = useNavigate();
@@ -44,82 +45,95 @@ const UpdateProduct = () => {
 
 
     const handleUpdateProduct = async (data: FieldValues) => {
+        const allDatas = await fetch('http://localhost:5000/api/v1/allProducts/654b31846c343b528babb7ed')
+        const results = await allDatas.json();
+        const result = results.data;
+        console.log(result)
+
+        // useEffect(() => {
+        //     // Set initial form values when the component mounts
+        //     Object.keys(result).forEach((key) => {
+        //         setValue(key as keyof AddProductValues, result[key as keyof AddProductValues]);
+        //     });
+        // }, [result, setValue]);
+
 
         const imageFiles: FileList = data.image;
         console.log(imageFiles)
         console.log(data)
 
         //POST image on imagebb for hosting
-        const uploadPromises = Array.from(imageFiles).map(async (image) => {
+        // const uploadPromises = Array.from(imageFiles).map(async (image) => {
 
-            console.log(image)
-            try {
-                const formData = new FormData();
-                console.log(formData)
-                formData.set('image', image);
-                console.log(formData)
+        //     console.log(image)
+        //     try {
+        //         const formData = new FormData();
+        //         console.log(formData)
+        //         formData.set('image', image);
+        //         console.log(formData)
 
-                const imageResponse = await fetch(`https://api.imgbb.com/1/upload?key=${imageHosKey}`, {
+        //         const imageResponse = await fetch(`https://api.imgbb.com/1/upload?key=${imageHosKey}`, {
 
-                    method: 'POST',
+        //             method: 'POST',
 
-                    body: formData,
-                })
-                console.log(imageResponse)
-                if (imageResponse.ok) {
-                    const result = await imageResponse.json();
-                    return result.data.url;
-                } else {
-                    throw new Error('Image upload failed');
-                }
-            } catch (error) {
-                console.error('Error uploading image:', error);
-                return null;
-            }
+        //             body: formData,
+        //         })
+        //         console.log(imageResponse)
+        //         if (imageResponse.ok) {
+        //             const result = await imageResponse.json();
+        //             return result.data.url;
+        //         } else {
+        //             throw new Error('Image upload failed');
+        //         }
+        //     } catch (error) {
+        //         console.error('Error uploading image:', error);
+        //         return null;
+        //     }
 
-        })
+        // })
 
-        console.log(uploadPromises)
-        const uploadedImageUrls = await Promise.all(uploadPromises);
-        console.log(uploadedImageUrls)
+        // console.log(uploadPromises)
+        // const uploadedImageUrls = await Promise.all(uploadPromises);
+        // console.log(uploadedImageUrls)
 
 
-        const productData: AddProductValues = {
-            category_name: data.category_name,
-            sub_category_name: data.sub_category_name,
-            brand_name: data.brand_name,
-            product_name: data.product_name,
-            image: uploadedImageUrls,
-            model: data.model,
-            description: data.description,
-            price: data.price,
-            product_code: data.product_code,
-            status: data.status,
-            reviews: [],
-            warranty: data.warranty,
-            others_info: data.others_info,
-        }
+        // const productData: AddProductValues = {
+        //     category_name: data.category_name,
+        //     sub_category_name: data.sub_category_name,
+        //     brand_name: data.brand_name,
+        //     product_name: data.product_name,
+        //     image: uploadedImageUrls,
+        //     model: data.model,
+        //     description: data.description,
+        //     price: data.price,
+        //     product_code: data.product_code,
+        //     status: data.status,
+        //     reviews: [],
+        //     warranty: data.warranty,
+        //     others_info: data.others_info,
+        // }
 
-        console.log(productData);
-        console.log(imageFiles);
+        // console.log(productData);
+        // console.log(imageFiles);
 
-        const response = await fetch('http://localhost:5000/api/v1/allProducts/654b31846c343b528babb7ed', {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(productData)
-        });
-        const product = await response.json();
-        console.log(product);
+        // const response = await fetch('http://localhost:5000/api/v1/allProducts/654b31846c343b528babb7ed', {
+        //     method: 'PUT',
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify(productData)
+        // });
+        // const product = await response.json();
+        // console.log(product);
 
-        if (product.statusCode === 200) {
+        // if (product.statusCode === 200) {
 
-            toast.success(product.message)
-            navigate('/home')
-        } else {
-            toast.error(product.message)
-        }
+        //     toast.success(product.message)
+
+        //     navigate('/home')
+        // } else {
+        //     toast.error(product.message)
+        // }
 
 
     }

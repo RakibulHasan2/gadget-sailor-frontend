@@ -44,6 +44,8 @@ const AddProduct = () => {
         return <p>Loading...</p>;
     }
 
+
+
     const handleAddProduct = async (data: FieldValues) => {
         const imageFiles: FileList = data.image;
         console.log(imageFiles)
