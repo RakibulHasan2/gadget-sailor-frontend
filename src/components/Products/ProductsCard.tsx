@@ -6,7 +6,6 @@ import { IProduct } from '../../types/ProductsType';
 export default function ProductsCard({ product }: IProduct) {
     const { product_name, price, _id } = product;
     // console.log(product.image[0])
-
     return (
         <div className="card w-72 h-96 bg-base-100 shadow-2xl">
             <figure className="px-10 pt-10">

@@ -10,9 +10,7 @@ const AddProduct = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<AddProductValues>();
     const imageHosKey = '1a6c0e11cdde66ffb8f933ec4079f59e';
     const navigate = useNavigate();
-
     const { data, isLoading } = useApiData("http://localhost:5000/api/v1/allProducts")
-
 
     const getCategory: Set<string> = new Set()
     const getSubCategory: Set<string> = new Set()

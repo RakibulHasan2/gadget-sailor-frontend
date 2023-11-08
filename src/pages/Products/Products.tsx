@@ -14,7 +14,8 @@ export default function Products() {
     const subCategories = [...new Set(products.map((product: IProduct) => product.sub_category_name))].filter((subcategory) => subcategory) as string[];
     //  brands array
     const brands: string[] = [...new Set(products.map((product: IProduct) => product.brand_name))].filter((item) => item !== undefined);
-
+    // 
+    
     const handleSubcategoryChange = (subcategory: string) => {
         if (selectedSubcategories.includes(subcategory)) {
             setSelectedSubcategories(selectedSubcategories.filter((item) => item !== subcategory));
@@ -31,16 +32,11 @@ export default function Products() {
         }
     };
 
-
-    console.log(brands)
-
-
-
     return (
         <div className="flex justify-center gap-4">
             <div className="w-52 h-full">
                 {/* sub category checkbox */}
-                {subCategories.length > 0 &&
+                {subCategories.length > 1 &&
                     <div>
                         <h2 className="text-xl font-bold mb-4">Subcategories:</h2>
                         <span className="">-------------------------------</span>
@@ -84,7 +80,7 @@ export default function Products() {
                     products.map((product: IProduct) =>
                         <ProductsCard
                             key={product._id}
-                            product={product} />
+                            product={product}/>
                     )
                 }
             </div>
