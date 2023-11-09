@@ -23,14 +23,16 @@ export default function SingleProductPage() {
   // const productKeys = Object.keys(singleProductData);
 
   return (
-    <div className="container mx-auto my-8 border">
-      <div className="lg:flex justify-center">
+    <div className="container border mx-auto my-8">
+      <div className="lg:flex justify-center items-center">
+        {/* image slider */}
         <div className="">
           {
             image?.map(img => <img src={img}></img>)
           }
         </div>
-        <div className="w-2/4 lg:ms-12 lg:p-5 ">
+        {/* product basic info */}
+        <div className="border w-2/4 lg:ms-12 lg:p-5">
           <h1 className="text-2xl text-blue-900 font-bold lg:mt-10">{product_name}</h1>
           <div className="flex justify-evenly lg:mt-5">
             <p className="bg-slate-100 p-2 text-gray-600 rounded">Price: <span className="font-bold text-black">{price}৳</span></p>
@@ -49,14 +51,20 @@ export default function SingleProductPage() {
             <div className="flex lg:mr-10">
               <button className="text-4xl border px-6" onClick={increment}>+</button>
               <p className="text-xl border px-6 py-3">{count}</p>
-              <button className="text-4xl border px-6"  onClick={decrement}>-</button>
+              <button className="text-4xl border px-6" onClick={decrement}>-</button>
             </div>
             <button className="btn px-14 bg-blue-900 text-white hover:text-black rounded-xl">Buy Now</button>
           </div>
         </div>
       </div>
-
-
+      {/*----- specification section ------*/}
+      <div className="border mt-10 bg-slate-400 w-3/5 lg:ml-36">
+        <p className="text-3xl font-bold">Specification</p>
+        <div className="mb-6">
+          <h2 className="text-lg font-bold text-blue-900 bg-green-100 mt-5">Warranty Information</h2>
+          <p className="mt-3">Warranty: <span>{warranty} Limited Warranty</span></p>
+        </div>
+      </div>
     </div>
   )
 }
