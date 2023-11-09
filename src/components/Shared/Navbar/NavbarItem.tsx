@@ -1,8 +1,7 @@
 import '../../../styles/Navbar.css'
 import useApiData from "../../../hooks/getAPIData";
 import { Link } from 'react-router-dom';
-import { IProduct } from '../../../types/ProductsType';
-
+import { IProduct } from '../../../types/ProductsType'
 
 export default function NavbarItem() {
     const { data, isLoading } = useApiData("http://localhost:5000/api/v1/allProducts")
