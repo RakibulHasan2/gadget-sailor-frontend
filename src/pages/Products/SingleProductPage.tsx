@@ -8,8 +8,9 @@ export default function SingleProductPage() {
   let [count, setCount] = useState(0);
   const singleProduct = useLoaderData() as IProduct;
   const singleProductData = singleProduct.data;
-  const { __v, _id, category_name, sub_category_name, product_name, price, status, product_code, brand_name, image, model, warranty, ...otherProperties } = singleProductData;
 
+  const { __v, _id, category_name, sub_category_name, product_name, price, status, product_code, brand_name, image, model, warranty, ...otherProperties } = singleProductData;
+  
   console.log(singleProductData)
 
   const increment = () => {
