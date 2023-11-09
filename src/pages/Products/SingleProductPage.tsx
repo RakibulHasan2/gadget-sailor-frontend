@@ -6,7 +6,7 @@ export default function SingleProductPage() {
   let [count, setCount] = useState(0);
   const singleProduct = useLoaderData() as IProduct;
   const singleProductData = singleProduct.data;
-  const { product_name, price, status, product_code, brand_name, image, model, warranty, ...otherProperties } = singleProductData;
+  const { __v, _id, category_name, sub_category_name, product_name, price, status, product_code, brand_name, image, model, warranty, ...otherProperties } = singleProductData;
 
   console.log(singleProductData)
 
@@ -58,22 +58,26 @@ export default function SingleProductPage() {
         </div>
       </div>
       {/*----- specification section ------*/}
-      <div className="border mt-10 bg-slate-400 w-3/5 lg:ml-36">
+      <div className="mt-10 w-3/5 lg:ml-36 p-6 shadow-xl">
         <p className="text-3xl font-bold">Specification</p>
-        <div className="mb-6">
-          <h2 className="text-lg font-bold text-blue-900 bg-green-100 mt-5">Warranty Information</h2>
-          <p className="mt-3">Warranty: <span>{warranty} Limited Warranty</span></p>
+        <div className="lg:ml-5">
+          {/* basic information */}
+          <div className="mb-6">
+            <h2 className="text-lg font-bold text-blue-900 bg-green-100 mt-5 p-2">Basic Information</h2>
+            {Object.keys(otherProperties).map((key) => (
+              <div key={key} className="flex justify-between items-center border-b border-gray-700 py-3">
+                <p className="text-gray-600">{key}</p>
+                <p className="w-2/3">{otherProperties[key]}</p>
+              </div>
+            ))}
+          </div>
+          {/* warranty information */}
+          <div className="mb-6">
+            <h2 className="text-lg font-bold text-blue-900 bg-green-100 mt-5 p-2">Warranty Information</h2>
+            <p className="mt-3 border-b border-gray-700 py-3">Warranty <span className="lg:ml-44">{warranty} Limited Warranty</span></p>
+          </div>
         </div>
       </div>
     </div>
   )
 }
-{/* Other Properties Section */ }
-{/* <div>
-        <h2 className="text-xl font-bold mb-2">Other Properties</h2>
-        <ul className="list-disc pl-6">
-          {Object.keys(otherProperties).map((key) => (
-            <li key={key}>{key}: {otherProperties[key]}</li>
-          ))}
-        </ul>
-      </div> */}

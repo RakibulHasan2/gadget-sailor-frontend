@@ -14,5 +14,6 @@ export interface IProduct {
   status: string;
   reviews: string[];
   warranty: string;
+  __v: string;
   others_info: string[];
 }
