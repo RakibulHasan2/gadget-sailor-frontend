@@ -17,13 +17,13 @@ export default function NavbarItem() {
     // console.log(d)
 
     return (
-        <div className='flex justify-center h-16 '>
+        <div className='flex justify-center h-16 border shadow-lg shadow-blue-900/50'>
             <div className='relative flex items-center w-4/5 h-16 rounded-3xl justify-evenly'>
                 {
                     categories.map((category) =>
                         <div className="relative dropdown dropdown-hover">
                             <Link to={`/${category}`}>
-                                <p className="px-8 py-3 font-semibold rounded-lg items-button">
+                                <p className="px-8 py-3 font-semibold rounded-lg items-button hover:bg-blue-800 hover:text-white">
                                     {category}
                                 </p>
                             </Link>
@@ -34,7 +34,7 @@ export default function NavbarItem() {
                                         .filter((subCategory, index, array) => subCategory && array.indexOf(subCategory) === index)
                                         .map(subCategory =>                                
                                                 <li className="w-full dropdown">
-                                                    <Link to={`/${category}/${subCategory}`} className='block p-2 text-sm transition-all duration-300 ease-in-out rounded-md w-36 bg-base-100 hover:bg-gray-300 hover:text-gray-600'><span className='flex justify-between'>{subCategory}<span>⇢</span></span></Link>
+                                                    <Link to={`/${category}/${subCategory}`} className='block p-2 text-sm transition-all duration-300 ease-in-out rounded-md w-36 bg-base-100 hover:bg-blue-800 hover:text-white'><span className='flex justify-between'>{subCategory}<span>⇢</span></span></Link>
                                                     <ul className='absolute z-10 hidden -mt-6 border shadow-sm ml-36 dropdown-content dropdown-right'>
                                                         <li>
                                                             {
@@ -43,7 +43,7 @@ export default function NavbarItem() {
                                                                     .filter((brandName, index, array) => brandName && array.indexOf(brandName) === index)
                                                                     .map((brands) => (
                                                                         <Link to={`/${category}/${subCategory}/${brands}`} >
-                                                                            <li className='block w-32 p-2 text-sm transition-all duration-300 ease-in-out bg-base-100 hover:bg-gray-300 hover:text-gray-600' key={brands}>{brands}</li>
+                                                                            <li className='block w-32 p-2 text-sm transition-all duration-300 ease-in-out bg-base-100 hover:bg-blue-800 hover:text-white' key={brands}>{brands}</li>
                                                                         </Link>
                                                                     ))
                                                             }

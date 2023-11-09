@@ -1,5 +1,4 @@
 import NavbarItem from "./NavbarItem";
-import logo from '../../../assets/images/368572024_642047007826578_1321780034725554955_n-removebg-preview.png'
 import { useState, useEffect } from 'react';
 import { FaCartArrowDown, FaUserAlt } from 'react-icons/fa';
 import { MdBuild } from 'react-icons/md';
@@ -49,7 +48,7 @@ export default function Navbar() {
 
   return (
     <div className="">
-      <div className="mb-3 shadow-sm navbar">
+      <div className=" shadow-sm navbar nav-bg p-5">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -65,7 +64,7 @@ export default function Navbar() {
 
             </ul>
           </div>
-          <a className="text-xl normal-case btn btn-ghost"><img src={logo} alt="" className="w-32" /></a>
+          <a className="text-2xl normal-case btn btn-ghost">Gadget Sailor</a>
         </div>
         <div className="hidden navbar-center lg:flex">
 
@@ -107,7 +106,7 @@ export default function Navbar() {
         </div>
       </div>
       {/* ..........................item area............................ */}
-      <div className="">
+      <div className="navbar-item">
         <NavbarItem></NavbarItem>
       </div>
 
