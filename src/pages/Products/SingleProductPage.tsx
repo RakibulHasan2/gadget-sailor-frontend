@@ -1,6 +1,8 @@
 import { useLoaderData } from "react-router-dom";
 import { IProduct } from "../../types/ProductsType";
 import { useState } from "react";
+import ImageSlider from "../../components/ImageSlider/ImageSlider";
+
 
 export default function SingleProductPage() {
   let [count, setCount] = useState(0);
@@ -23,16 +25,17 @@ export default function SingleProductPage() {
   // const productKeys = Object.keys(singleProductData);
 
   return (
-    <div className="container border mx-auto my-8">
+    <div className="container mx-auto my-8">
       <div className="lg:flex justify-center items-center">
         {/* image slider */}
         <div className="">
-          {
+          {/* {
             image?.map(img => <img src={img}></img>)
-          }
+          } */}
+            <ImageSlider images={image}/>
         </div>
         {/* product basic info */}
-        <div className="border w-2/4 lg:ms-12 lg:p-5">
+        <div className="w-2/4 lg:ms-12 lg:p-5">
           <h1 className="text-2xl text-blue-900 font-bold lg:mt-10">{product_name}</h1>
           <div className="flex justify-evenly lg:mt-5">
             <p className="bg-slate-100 p-2 text-gray-600 rounded">Price: <span className="font-bold text-black">{price}৳</span></p>
@@ -49,9 +52,9 @@ export default function SingleProductPage() {
           {/* buy now button */}
           <div className="mt-10 flex">
             <div className="flex lg:mr-10">
-              <button className="text-4xl border px-6" onClick={increment}>+</button>
-              <p className="text-xl border px-6 py-3">{count}</p>
               <button className="text-4xl border px-6" onClick={decrement}>-</button>
+              <p className="text-xl border px-6 py-3">{count}</p>
+              <button className="text-4xl border px-6" onClick={increment}>+</button>
             </div>
             <button className="btn px-14 bg-blue-900 text-white hover:text-black rounded-xl">Buy Now</button>
           </div>
