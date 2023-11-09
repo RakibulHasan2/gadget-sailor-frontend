@@ -1,64 +1,68 @@
-         .btn-build-pc {
-             background-image: linear-gradient(to right, #77A1D3 0%, #79CBCA 51%, #77A1D3 100%);
-             margin: 10px;
-             padding: 8px 30px;
-             text-align: center;
-             transition: 0.5s;
-             background-size: 200% auto;
-             color: white;
-             box-shadow: 0 0 20px #eee;
-             border-radius: 10px;
-             display: block;
-         }
+.nav-bg{
+  background-color: rgb(5, 28, 77);
+ /* background: linear-gradient(to right, rgba(26, 92, 131, 0.905), rgb(62, 161, 227)); */
+ color: white;
+}
+.navbar-item{
+  background-color: #ffffff;
+  /* box-shadow: 0px 5px 0px 0px #4b6b93; */
+}
+.btn-build-pc {
+  background-image: linear-gradient(to right, #77A1D3 0%, #79CBCA 51%, #77A1D3 100%);
+  margin: 10px;
+  padding: 8px 30px;
+  text-align: center;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+  display: block;
+}
 
-         .btn-build-pc:hover {
-             background-position: right center;
-             color: #fff;
-             text-decoration: none;
-         }
+.btn-build-pc:hover {
+  background-position: right center;
+  color: #fff;
+  text-decoration: none;
+}
 
-      
+
 .expandable-input {
-    width: 100%;
-    transition: width 0.6s;
-  }
-  
-  .expandable-input.expanded {
-    width: 100%;
-  }
+  width: 100%;
+  transition: width 0.6s;
+}
 
-  .dropdown:hover > .dropdown-content {
-    display: block;  
-  }
-  
-  .icon {
-    font-size: 48px;
-    text-align: center;
-    animation: flicker 1s infinite alternate;
+.expandable-input.expanded {
+  width: 100%;
+}
+
+.dropdown:hover>.dropdown-content {
+  display: block;
+}
+
+.icon {
+  font-size: 48px;
+  text-align: center;
+  animation: flicker 1s infinite alternate;
 }
 
 @keyframes flicker {
-    0% {
-        color: rgb(241, 241, 11);
-        opacity: 1;
-    }
-    100% {
-      color: black;
-        opacity: 0.7; /* Adjust opacity as needed */
-    }
+  0% {
+    color: rgb(241, 241, 11);
+    opacity: 1;
+  }
+
+  100% {
+    color: black;
+    opacity: 0.7;
+    /* Adjust opacity as needed */
+  }
 }
-*
-.items-button {
-  background-color: white;
-  color: #333;
-  padding: 15px 30px; /* Increased padding for a larger button */
+
+* .items-button {
+  color: #323030;
+  padding: 15px 30px;
+  /* Increased padding for a larger button */
   border: none;
-  box-shadow:
-      -5px 5px 10px rgba(255, 255, 255, 0.7), /* Upper left and left side white shadow */
-      5px 5px 10px rgba(0, 0, 0, 0.2); /* Bottom right and right side dark shadow */
   cursor: pointer;
 }
-
-
-
-
