@@ -5,17 +5,33 @@ import toast from 'react-hot-toast';
 import { IUser } from "../../types/UserType";
 import { FiArrowRight } from 'react-icons/fi';
 import '../../styles/Signup.css'
+import { useState } from 'react';
+// import useToken from "../../hooks/useToken";
 export default function Login() {
   const { register, handleSubmit, formState: { errors } } = useForm<FormValues>();
-  const navigate = useNavigate();
-  const handleLogin = async (data: FieldValues) => {
+  const [loginUserEmail, setLoginUserEmail] = useState('');
+  // const [token] = useToken(loginUserEmail)
 
+  // const from = location.state?.from?.pathname || '/';
+
+  const navigate = useNavigate();
+
+  // if (token) {
+  //   // navigate(from, { replace: true });
+  //   navigate('/home')
+  // }
+
+  const handleLogin = async (data: FieldValues) => {
     const allDatas = await fetch('http://localhost:5000/api/v1/users')
     const results = await allDatas.json();
     const result = results.data;
 
     const allData = result.filter((info: IUser) => info.email === data.email);
     // console.log(allData);
+    console.log(data.email);
+    setLoginUserEmail(data.email);
+    console.log(loginUserEmail);
+
     if (allData.length === 0) {
       toast.error("Invalid Email")
     }
@@ -47,7 +63,7 @@ export default function Login() {
             <div className="w-full max-w-xs mb-4 form-control">
               <input type="email" {...register("email", {
                 required: "Email is Required !"
-              })} className="w-full max-w-xs bg-transparent rounded-3xl input input-bordered" placeholder="✉ Email..."/>
+              })} className="w-full max-w-xs bg-transparent rounded-3xl input input-bordered" placeholder="✉ Email..." />
               {errors.email && <small className='mt-1 ml-2 text-red-500'>{errors.email.message}</small>}
             </div>
             <div className="w-full max-w-xs mb-3 form-control">
