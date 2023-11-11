@@ -5,45 +5,20 @@ import toast from 'react-hot-toast';
 import { IUser } from "../../types/UserType";
 import { FiArrowRight } from 'react-icons/fi';
 import '../../styles/Signup.css'
-import { useEffect, useState } from 'react';
+// import {  useEffect, useState } from 'react';
 // import { useToken } from './../../hooks/useToken';
-import { validateUserToken } from './../../hooks/validateToken';
-
+// import { validateUserToken } from './../../hooks/validateToken';
 
 export default function Login() {
   const { register, handleSubmit, formState: { errors } } = useForm<FormValues>();
-  const [loginUserEmail, setLoginUserEmail] = useState('');
-  const [token, setToken] = useState(false);
+  // const [loginUserEmail, setLoginUserEmail] = useState('');
   const navigate = useNavigate();
-  useEffect(() => {
-    const userData = JSON.parse(sessionStorage.getItem('userData'));
-    const identifyToken = validateUserToken(userData?.email)
-    console.log("before----",identifyToken)
-    console.log('user Data', userData.email)
-    if (identifyToken){
-      console.log(identifyToken)
-      setToken("after",identifyToken);
-      navigate('/home')
-    }
-    // if (token) {
-    //   // navigate(from, { replace: true });
-     
-    // }
-  }, [])
-
   // const token = useToken(loginUserEmail)
-  // console.log("tokenn",token)
-  // const from = location.state?.from?.pathname || '/';
-  
-  // if (token) {
-  //   // navigate(from, { replace: true });
-  //   // navigate('/home')
-  // }
+
 
   const handleLogin = async (data: FieldValues) => {
-
-    // setLoginUserEmail('rakibulhasan99445@gmail.com');
-    console.log("tokenn", token)
+    // setLoginUserEmail('rakibulhasan99445@gmail.com')
+    // console.log("token", token)
 
     const allDatas = await fetch('http://localhost:5000/api/v1/users')
     const results = await allDatas.json();
@@ -51,17 +26,13 @@ export default function Login() {
 
     const allData = result.filter((info: IUser) => info.email === data.email);
 
-    // console.log("DATA EMAIL--",data.email)
-    // setLoginUserEmail(data.email);
-    // console.log("Login EMAIL---",loginUserEmail)
-
     if (allData.length === 0) {
       toast.error("Invalid Email")
     }
     if (allData[0].password === data.password) {
       toast.success("Successfully logged in")
       sessionStorage.setItem('userData', JSON.stringify(allData[0]));
-      validateUserToken(data.email)
+      // validateUserToken(data.email)
       navigate('/home')
     }
     else {
