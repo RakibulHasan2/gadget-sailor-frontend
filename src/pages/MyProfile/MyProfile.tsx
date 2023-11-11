@@ -213,7 +213,7 @@ export default function MyProfile() {
 
         </div>
 
-        <input className="w-full mt-4 bg-blue-600 btn" value="Update" type="submit" />
+        <input className="w-40 mt-4 bg-blue-600 btn" value="Update" type="submit" />
         <div></div>
       </form>
     </div>
