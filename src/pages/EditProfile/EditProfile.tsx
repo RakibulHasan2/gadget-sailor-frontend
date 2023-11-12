@@ -12,94 +12,104 @@ export default function EditProfile() {
   const imageHostKey = '29473dd4ab78ebc95009722bc0558d38';
   console.log(imageHostKey)
 
+  // const handleAddImage = async (data: FieldValues) => {
+  //   console.log(data)
+
+  //   const image = data.image[0];
+  //   const fromData = new FormData();
+  //   fromData.append('image', image);
+
+  //   const url = `https://api.imgbb.com/1/upload?&key=${imageHostKey}`
+  //   console.log(url)
+  //   fetch(url, {
+  //     method: 'POST',
+  //     body: fromData
+  //   })
+  //     .then(res => res.json())
+  //     .then(async imgData => {
+  //       if (imgData.success) {
+
+
+  //         console.log(imgData.data.url)
+
+
+  //         const upload: IUpdateUsers = {
+
+  //           image: imgData.data.url
+
+  //         }
+
+
+  //         const response = await fetch(`http://localhost:5000/api/v1/users/${user._id}`, {
+  //           method: 'PUT',
+  //           headers: {
+  //             'Content-Type': 'application/json',
+  //           },
+  //           body: JSON.stringify(upload),
+  //         });
+
+  //         const myProfileImage = await response.json();
+  //         if (myProfileImage.statusCode === 200) {
+
+  //           toast.success("successfully uploaded")
+  //         } else {
+  //           toast.error("failed to upload")
+  //         }
+
+  //       }
+  //     })
+  // }
+
   const handleAddImage = async (data: FieldValues) => {
-    console.log(data)
-
+    console.log(data);
+  
     const image = data.image[0];
-    const fromData = new FormData();
-    fromData.append('image', image);
-
-    const url = `https://api.imgbb.com/1/upload?&key=${imageHostKey}`
-    console.log(url)
-    fetch(url, {
-      method: 'POST',
-      body: fromData
-    })
-      .then(res => res.json())
-      .then(async imgData => {
-        if (imgData.success) {
-
-
-          console.log(imgData.data.url)
-
-
-          const upload: IUpdateUsers = {
-
-            image: imgData.data.url
-
-          }
-
-
-          const response = await fetch(`http://localhost:5000/api/v1/users/${user._id}`, {
-            method: 'PUT',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(upload),
-          });
-
-          const myProfileImage = await response.json();
-          if (myProfileImage.statusCode === 200) {
-
-            toast.success("successfully uploaded")
-          } else {
-            toast.error("failed to upload")
-          }
-
+    const formData = new FormData();
+    formData.append('image', image);
+  
+    const url = `https://api.imgbb.com/1/upload?&key=${imageHostKey}`;
+    console.log(url);
+  
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        body: formData,
+      });
+  
+      const imgData = await response.json();
+  
+      if (imgData.success) {
+        console.log(imgData.data.url);
+  
+        const upload: IUpdateUsers = {
+          image: imgData.data.url,
+        };
+  
+        const updateResponse = await fetch(`http://localhost:5000/api/v1/users/${user._id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(upload),
+        });
+  
+        const myProfileImage = await updateResponse.json();
+  
+        if (myProfileImage.statusCode === 200) {
+          const updatedUserData = { ...user, image: imgData.data.url };
+          sessionStorage.setItem('userData', JSON.stringify(updatedUserData));
+  
+          toast.success('Successfully uploaded');
+        } else {
+          toast.error('Failed to upload');
         }
-      })
-  }
+      }
+    } catch (error) {
+      console.error('Error uploading image:', error);
+    }
+  };
+  
 
-
-
-  // const handleUpdateProfile = async (data: FieldValues) => {
-
-
-  //   const userprofileData: IUpdateUsers = {
-  //     name: {
-  //       firstName: data.name.firstName,
-  //       lastName: data.name.lastName,
-  //     },
-  //     email: data.email,
-  //     password: data.password,
-  //     phoneNumber: data.phoneNumber,
-  //     present_address: data.present_address,
-  //     permanent_address: data.permanent_address,
-  //     post_code: data.post_code,
-  //     city: data.city,
-  //     division: data.division,
-
-  //   };
-
-  //   console.log(userprofileData)
-
-  //   const response = await fetch(`http://localhost:5000/api/v1/users/${user._id}`, {
-  //     method: 'PUT',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify(userprofileData),
-  //   });
-
-  //   const myProfile = await response.json();
-  //   if (myProfile.statusCode === 200) {
-
-  //     toast.success('updated profile successfully')
-  //   } else {
-  //     toast.error('error updating profile')
-  //   }
-
-  // };
 
   const handleUpdateProfile = async (data: FieldValues) => {
     const userprofileData: IUpdateUsers = {

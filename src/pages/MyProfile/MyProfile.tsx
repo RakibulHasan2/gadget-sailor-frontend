@@ -38,17 +38,21 @@ export default function MyProfile() {
 
                     <button onClick={openModal} className='flex items-center p-1 mr-3 rounded-lg hover:text-white hover:bg-blue-700'>Edit <AiTwotoneEdit></AiTwotoneEdit></button>
 
-                    <dialog id="my_modal_3" className="modal" open={isModalOpen} onClose={closeModal}>
+                    <dialog id="my_modal_2" className="modal" open={isModalOpen} onClose={closeModal}>
                         <div className="modal-box">
-                            <form method="dialog">
-                              
-                                <button onClick={closeModal} className="absolute btn btn-sm btn-circle btn-ghost right-2 top-2">✕</button>
-                            </form>
-                            <div>
-                                <EditProfile></EditProfile>
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <h1 className="text-2xl font-bold">Edit Profile</h1>
+                                </div>
+                                <div className="modal-body">
+                                    <EditProfile />
+                                </div>
                             </div>
-                            <p className="py-4">Press ESC key or click on ✕ button to close</p>
+                            <p className="py-4">Press ESC key or click outside to close</p>
                         </div>
+                        <form method="dialog" className="modal-backdrop">
+                            <button>close</button>
+                        </form>
                     </dialog>
 
                 </div>
