@@ -2,7 +2,7 @@ import { FieldValues, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { FormValues } from "../../types/FormType";
 import toast from 'react-hot-toast';
-import { IUser } from "../../types/UserType";
+// import { IUser } from "../../types/UserType";
 import { FiArrowRight } from 'react-icons/fi';
 import '../../styles/Signup.css'
 // import {  useEffect, useState } from 'react';
@@ -15,28 +15,21 @@ export default function Login() {
   const navigate = useNavigate();
   // const token = useToken(loginUserEmail)
 
-
   const handleLogin = async (data: FieldValues) => {
-    // setLoginUserEmail('rakibulhasan99445@gmail.com')
-    // console.log("token", token)
-
-    const allDatas = await fetch('http://localhost:5000/api/v1/users')
-    const results = await allDatas.json();
-    const result = results.data;
-
-    const allData = result.filter((info: IUser) => info.email === data.email);
-
-    if (allData.length === 0) {
-      toast.error("Invalid Email")
-    }
-    if (allData[0].password === data.password) {
-      toast.success("Successfully logged in")
-      sessionStorage.setItem('userData', JSON.stringify(allData[0]));
-      // validateUserToken(data.email)
-      navigate('/home')
-    }
-    else {
-      toast.error("Wrong Password")
+    const response = await fetch('http://localhost:5000/api/v1/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    if (response.ok) {
+      const user = await response.json();
+      toast.success('Successfully logged in');
+      sessionStorage.setItem('userData', JSON.stringify(user));
+      navigate('/home');
+    } else {
+      toast.error('Invalid Email or Password');
     }
   }
 
