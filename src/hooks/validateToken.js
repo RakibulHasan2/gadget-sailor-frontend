@@ -1,4 +1,3 @@
-
 export const validateUserToken = (email) => {
     if (email) {
         fetch(`http://localhost:5000/api/v1/jwt?email=${email}`)
