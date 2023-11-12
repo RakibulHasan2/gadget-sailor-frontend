@@ -1,16 +1,29 @@
+import React from 'react';
 import { BsPersonBadge } from 'react-icons/bs';
-import { AiTwotoneEdit } from 'react-icons/ai';
-import { Link } from 'react-router-dom';
+import {AiTwotoneEdit} from 'react-icons/ai';
+
+// import { Link } from 'react-router-dom';
 
 export default function MyProfile() {
 
     const userData = sessionStorage.getItem('userData');
     const user = JSON.parse(userData as string);
     console.log(user.division)
+    const [isModalOpen, setIsModalOpen] = React.useState(false);
+
+    // Function to open the modal
+    const openModal = () => {
+      setIsModalOpen(true);
+    };
+  
+    // Function to close the modal
+    const closeModal = () => {
+      setIsModalOpen(false);
+    };
     return (
         <div className="flex justify-center">
-          
-              <div className="w-2/3 mb-10">
+
+            <div className="w-2/3 mb-10">
                 <div className="">
                     <img src="https://scontent.fdac15-1.fna.fbcdn.net/v/t1.15752-9/370247270_326392490024066_3245730488107685687_n.png?_nc_cat=111&ccb=1-7&_nc_sid=8cd0a2&_nc_ohc=jjfLxEf9c-wAX8uJ8CW&_nc_ht=scontent.fdac15-1.fna&oh=03_AdSEHe3YQtLqsj9QkZfJRxB5-29DYsTHWlDdtBImSdZBoQ&oe=6577E9E3" alt="" className="w-full rounded-lg h-52" />
                 </div>
@@ -21,7 +34,25 @@ export default function MyProfile() {
                 </div>
                 <div className="flex items-center justify-between mt-14">
                     <h1 className='flex items-center ml-2 text-3xl font-bold'><BsPersonBadge></BsPersonBadge>  {user?.name.firstName} {user?.name.lastName}</h1>
-                  <Link to='/edit-profile'><button className='flex items-center p-1 mr-3 rounded-lg hover:text-white hover:bg-blue-700'>Edit <AiTwotoneEdit></AiTwotoneEdit></button></Link> 
+                   
+                    <button onClick={openModal} className='flex items-center p-1 mr-3 rounded-lg hover:text-white hover:bg-blue-700'>Edit <AiTwotoneEdit></AiTwotoneEdit></button>
+                  
+                    
+                  
+
+                        <dialog id="my_modal_4" className="modal" open={isModalOpen} onClose={closeModal}>
+                            <div className="w-11/12 max-w-5xl modal-box">
+                                <h3 className="text-lg font-bold">Hello!</h3>
+                                <p className="py-4">Click the button below to close</p>
+                                <p>valoto</p>
+                                <div className="modal-action">
+                                    <form method="dialog">
+                                        <button className="btn" onClick={closeModal}>Close</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </dialog>
+                        
                 </div>
                 <div className='mt-5'>
                     <div className='p-3 font-bold bg-blue-100 rounded-lg'>
