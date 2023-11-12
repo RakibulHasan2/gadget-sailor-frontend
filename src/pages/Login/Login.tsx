@@ -2,30 +2,34 @@ import { FieldValues, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { FormValues } from "../../types/FormType";
 import toast from 'react-hot-toast';
-import { IUser } from "../../types/UserType";
+// import { IUser } from "../../types/UserType";
 import { FiArrowRight } from 'react-icons/fi';
 import '../../styles/Signup.css'
+// import {  useEffect, useState } from 'react';
+// import { useToken } from './../../hooks/useToken';
+// import { validateUserToken } from './../../hooks/validateToken';
+
 export default function Login() {
   const { register, handleSubmit, formState: { errors } } = useForm<FormValues>();
+  // const [loginUserEmail, setLoginUserEmail] = useState('');
   const navigate = useNavigate();
+  // const token = useToken(loginUserEmail)
+
   const handleLogin = async (data: FieldValues) => {
-
-    const allDatas = await fetch('http://localhost:5000/api/v1/users')
-    const results = await allDatas.json();
-    const result = results.data;
-
-    const allData = result.filter((info: IUser) => info.email === data.email);
-    // console.log(allData);
-    if (allData.length === 0) {
-      toast.error("Invalid Email")
-    }
-    if (allData[0].password === data.password) {
-      toast.success("Successfully logged in")
-      sessionStorage.setItem('userData', JSON.stringify(allData[0]));
-      navigate('/home')
-    }
-    else {
-      toast.error("Wrong Password")
+    const response = await fetch('http://localhost:5000/api/v1/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    if (response.ok) {
+      const user = await response.json();
+      toast.success('Successfully logged in');
+      sessionStorage.setItem('userData', JSON.stringify(user));
+      navigate('/home');
+    } else {
+      toast.error('Invalid Email or Password');
     }
   }
 
@@ -47,7 +51,7 @@ export default function Login() {
             <div className="w-full max-w-xs mb-4 form-control">
               <input type="email" {...register("email", {
                 required: "Email is Required !"
-              })} className="w-full max-w-xs bg-transparent rounded-3xl input input-bordered" placeholder="✉ Email..."/>
+              })} className="w-full max-w-xs bg-transparent rounded-3xl input input-bordered" placeholder="✉ Email..." />
               {errors.email && <small className='mt-1 ml-2 text-red-500'>{errors.email.message}</small>}
             </div>
             <div className="w-full max-w-xs mb-3 form-control">

@@ -107,7 +107,7 @@ export default function Navbar() {
         </div>
       </div>
       {/* ..........................item area............................ */}
-      <div className="navbar-item">
+      <div className="navbar-item mb-10">
         <NavbarItem></NavbarItem>
       </div>
 
