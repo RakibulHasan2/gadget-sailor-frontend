@@ -8,7 +8,8 @@ import AddProduct from "../pages/AddProduct/AddProduct";
 import Products from "../pages/Products/Products";
 import SingleProductPage from "../pages/Products/SingleProductPage";
 import UpdateProduct from "../pages/UpdateProduct/UpdateProduct";
-import MyProfile from "../pages/MyProfile/MyProfile";
+import EditProfile from './../pages/EditProfile/EditProfile';
+import MyProfile from './../pages/MyProfile/MyProfile';
 
 const baseUrl = "http://localhost:5000/api/v1";
 
@@ -65,8 +66,12 @@ const routes = createBrowserRouter([
     element: <UpdateProduct />,
   },
   {
+    path: "/edit-profile",
+    element: <EditProfile />,
+  },
+  {
     path: "/my-profile",
-    element: <MyProfile />,
+    element: <MyProfile/>,
   },
 ]);
 
