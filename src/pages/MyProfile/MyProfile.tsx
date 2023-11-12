@@ -1,6 +1,6 @@
 import React from 'react';
 import { BsPersonBadge } from 'react-icons/bs';
-import {AiTwotoneEdit} from 'react-icons/ai';
+import { AiTwotoneEdit } from 'react-icons/ai';
 import EditProfile from '../EditProfile/EditProfile';
 
 // import { Link } from 'react-router-dom';
@@ -14,12 +14,12 @@ export default function MyProfile() {
 
     // Function to open the modal
     const openModal = () => {
-      setIsModalOpen(true);
+        setIsModalOpen(true);
     };
-  
+
     // Function to close the modal
     const closeModal = () => {
-      setIsModalOpen(false);
+        setIsModalOpen(false);
     };
     return (
         <div className="flex justify-center">
@@ -35,23 +35,22 @@ export default function MyProfile() {
                 </div>
                 <div className="flex items-center justify-between mt-14">
                     <h1 className='flex items-center ml-2 text-3xl font-bold'><BsPersonBadge></BsPersonBadge>  {user?.name.firstName} {user?.name.lastName}</h1>
-                   
+
                     <button onClick={openModal} className='flex items-center p-1 mr-3 rounded-lg hover:text-white hover:bg-blue-700'>Edit <AiTwotoneEdit></AiTwotoneEdit></button>
 
-                        <dialog id="my_modal_4" className="modal" open={isModalOpen} onClose={closeModal}>
-                            <div className="w-11/12 max-w-5xl modal-box">
-                                <h3 className="text-lg font-bold">Hello!</h3>
-                                <p className="py-4">Click the button below to close</p>
-                                <p>valoto</p>
+                    <dialog id="my_modal_3" className="modal" open={isModalOpen} onClose={closeModal}>
+                        <div className="modal-box">
+                            <form method="dialog">
+                              
+                                <button onClick={closeModal} className="absolute btn btn-sm btn-circle btn-ghost right-2 top-2">✕</button>
+                            </form>
+                            <div>
                                 <EditProfile></EditProfile>
-                                <div className="modal-action">
-                                    <form method="dialog">
-                                        <button className="btn" onClick={closeModal}>Close</button>
-                                    </form>
-                                </div>
                             </div>
-                        </dialog>
-                        
+                            <p className="py-4">Press ESC key or click on ✕ button to close</p>
+                        </div>
+                    </dialog>
+
                 </div>
                 <div className='mt-5'>
                     <div className='p-3 font-bold bg-blue-100 rounded-lg'>
