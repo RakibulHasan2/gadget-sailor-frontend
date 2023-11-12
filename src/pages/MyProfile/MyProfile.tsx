@@ -1,221 +1,78 @@
+import React from 'react';
+import { BsPersonBadge } from 'react-icons/bs';
+import { AiTwotoneEdit } from 'react-icons/ai';
+import EditProfile from '../EditProfile/EditProfile';
 
-import { FieldValues, useForm } from "react-hook-form";
-import { IUpdateUsers } from "../../types/MyProfileType";
-import toast from "react-hot-toast";
+// import { Link } from 'react-router-dom';
 
 export default function MyProfile() {
-  const { register, handleSubmit } = useForm<IUpdateUsers>();
-  const userData = sessionStorage.getItem('userData');
-  const user = JSON.parse(userData as string);
 
+    const userData = sessionStorage.getItem('userData');
+    const user = JSON.parse(userData as string);
+    console.log(user.division)
+    const [isModalOpen, setIsModalOpen] = React.useState(false);
 
-  const imageHostKey = '29473dd4ab78ebc95009722bc0558d38';
-  console.log(imageHostKey)
-
-  const handleAddImage = async (data: FieldValues) => {
-    console.log(data)
-
-    const image = data.image[0];
-    const fromData = new FormData();
-    fromData.append('image', image);
-
-    const url = `https://api.imgbb.com/1/upload?&key=${imageHostKey}`
-    console.log(url)
-    fetch(url, {
-      method: 'POST',
-      body: fromData
-    })
-      .then(res => res.json())
-      .then(async imgData => {
-        if (imgData.success) {
-
-
-          console.log(imgData.data.url)
-
-
-          const upload: IUpdateUsers = {
-
-            image: imgData.data.url
-
-          }
-
-
-          const response = await fetch(`http://localhost:5000/api/v1/users/${user._id}`, {
-            method: 'PUT',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(upload),
-          });
-
-          const myProfileImage = await response.json();
-          if (myProfileImage.statusCode === 200) {
-
-            toast.success("successfully uploaded")
-          } else {
-            toast.error("failed to upload")
-          }
-
-        }
-      })
-  }
-
-
-
-  const handleUpdateProfile = async (data: FieldValues) => {
-
-
-    const userprofileData: IUpdateUsers = {
-      name: {
-        firstName: data.name.firstName,
-        lastName: data.name.lastName,
-      },
-      email: data.email,
-      password: data.password,
-      phoneNumber: data.phoneNumber,
-      image: data.image,
-      present_address: data.present_address,
-      permanent_address: data.permanent_address,
-      post_code: data.post_code,
-      city: data.city,
-      division: data.division,
-
+    // Function to open the modal
+    const openModal = () => {
+        setIsModalOpen(true);
     };
 
-    console.log(userprofileData)
+    // Function to close the modal
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+    return (
+        <div className="flex justify-center">
 
-    const response = await fetch(`http://localhost:5000/api/v1/users/${user._id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(userprofileData),
-    });
+            <div className="w-2/3 mb-10">
+                <div className="">
+                    <img src="https://scontent.fdac15-1.fna.fbcdn.net/v/t1.15752-9/370247270_326392490024066_3245730488107685687_n.png?_nc_cat=111&ccb=1-7&_nc_sid=8cd0a2&_nc_ohc=jjfLxEf9c-wAX8uJ8CW&_nc_ht=scontent.fdac15-1.fna&oh=03_AdSEHe3YQtLqsj9QkZfJRxB5-29DYsTHWlDdtBImSdZBoQ&oe=6577E9E3" alt="" className="w-full rounded-lg h-52" />
+                </div>
+                <div className="absolute ml-10 top-40 avatar online">
+                    <div className="w-24 rounded-full ring ring-info ring-offset-base-100 ring-offset-2">
+                        <img src={user.image} />
+                    </div>
+                </div>
+                <div className="flex items-center justify-between mt-14">
+                    <h1 className='flex items-center ml-2 text-3xl font-bold'><BsPersonBadge></BsPersonBadge>  {user?.name.firstName} {user?.name.lastName}</h1>
 
-    const myProfile = await response.json();
-    if (myProfile.statusCode === 200) {
+                    <button onClick={openModal} className='flex items-center p-1 mr-3 rounded-lg hover:text-white hover:bg-blue-700'>Edit <AiTwotoneEdit></AiTwotoneEdit></button>
 
-      toast.success(myProfile.message)
-    } else {
-      toast.error(myProfile.message)
-    }
+                    <dialog id="my_modal_3" className="modal" open={isModalOpen} onClose={closeModal}>
+                        <div className="modal-box">
+                            <form method="dialog">
+                              
+                                <button onClick={closeModal} className="absolute btn btn-sm btn-circle btn-ghost right-2 top-2">✕</button>
+                            </form>
+                            <div>
+                                <EditProfile></EditProfile>
+                            </div>
+                            <p className="py-4">Press ESC key or click on ✕ button to close</p>
+                        </div>
+                    </dialog>
 
-  };
-
-  return (
-    <div>
-
-
-      <form onSubmit={handleSubmit(handleAddImage)}>
-
-        <div className="w-full max-w-xs form-control">
-          <label className="label"> <span className="label-text">Photo (photo Should be png/jpg format)</span></label>
-          <input type="file" multiple {...register("image", {
-          })} className="w-full max-w-xs input input-bordered" />
+                </div>
+                <div className='mt-5'>
+                    <div className='p-3 font-bold bg-blue-100 rounded-lg'>
+                        <h1>Basic Information----------------------------------------------------------</h1>
+                    </div>
+                    <div className='p-2 mt-2'>
+                        <h1 className='mt-3 font-bold border-b-4'>Name : {user?.name.firstName} {user?.name.lastName}</h1>
+                        <h1 className='mt-3 font-bold border-b-4'>Email  : {user?.email}</h1>
+                        <h1 className='mt-3 font-bold border-b-4'>Phone  : {user?.phoneNumber}</h1>
+                    </div>
+                    <div className='p-3 mt-5 font-bold bg-blue-100 rounded-lg'>
+                        <h1>Address------------------------------------------------------------------</h1>
+                    </div>
+                    <div className='p-2 mt-2'>
+                        <h1 className='mt-3 font-bold border-b-4'>Division : {user?.division}</h1>
+                        <h1 className='mt-3 font-bold border-b-4'>Post Code  : {user?.post_code}</h1>
+                        <h1 className='mt-3 font-bold border-b-4'>City : {user?.city}</h1>
+                        <h1 className='mt-3 font-bold border-b-4'>Present Address : {user?.present_address}</h1>
+                        <h1 className='mt-3 font-bold border-b-4'>Permanent Address : {user?.permanent_address}</h1>
+                    </div>
+                </div>
+            </div>
         </div>
-        <input className="mt-4 bg-blue-600 w-28 btn" value="Update" type="submit" />
-      </form>
-
-
-
-      <form onSubmit={handleSubmit(handleUpdateProfile)}>
-        <div className="w-full max-w-xs form-control">
-          <label className="label"> <span className="label-text">First Name</span></label>
-          <input
-            type="text"
-            placeholder="First Name"
-            {...register("name.firstName", {})}
-            className="w-full max-w-xs input input-bordered"
-            defaultValue={user.name.firstName}
-          />
-        </div>
-        <div className="w-full max-w-xs form-control">
-          <label className="label"> <span className="label-text">Last Name</span></label>
-
-          <input
-            type="text"
-            placeholder="Last Name"
-            {...register("name.lastName", {})}
-            className="w-full max-w-xs input input-bordered"
-            defaultValue={user.name.lastName}
-          />
-
-        </div>
-        <div className="w-full max-w-xs form-control">
-          <label className="label"> <span className="label-text">Email</span></label>
-
-          <input type="email" placeholder="email"
-            {...register("email", {
-            })}
-            className="w-full max-w-xs input input-bordered" defaultValue={user.email} />
-        </div>
-        <div className="w-full max-w-xs form-control">
-          <label className="label"> <span className="label-text">Password</span></label>
-
-          <input type="text" placeholder="password"
-            {...register("password", {
-            })}
-            className="w-full max-w-xs input input-bordered" defaultValue={user.password} />
-
-        </div>
-        <div className="w-full max-w-xs form-control">
-          <label className="label"> <span className="label-text">phoneNumber</span></label>
-
-          <input type="text" placeholder="phoneNumber"
-            {...register("phoneNumber", {
-            })}
-            className="w-full max-w-xs input input-bordered" defaultValue={user.phoneNumber} />
-
-        </div>
-        <div className="w-full max-w-xs form-control">
-          <label className="label"> <span className="label-text">present_address</span></label>
-
-          <input type="text" placeholder="present address"
-            {...register("present_address", {
-            })}
-            className="w-full max-w-xs input input-bordered" />
-
-        </div>
-        <div className="w-full max-w-xs form-control">
-          <label className="label"> <span className="label-text">permanent address</span></label>
-
-          <input type="text" placeholder="permanent address"
-            {...register("permanent_address", {
-            })}
-            className="w-full max-w-xs input input-bordered" />
-
-        </div>
-        <div className="w-full max-w-xs form-control">
-          <label className="label"> <span className="label-text">post code</span></label>
-
-          <input type="text" placeholder="post code"
-            {...register("post_code", {
-            })}
-            className="w-full max-w-xs input input-bordered" />
-
-        </div>
-        <div className="w-full max-w-xs form-control">
-          <label className="label"> <span className="label-text">Division</span></label>
-
-          <input type="text" placeholder="division"
-            {...register("division", {
-            })}
-            className="w-full max-w-xs input input-bordered" />
-
-        </div>
-        <div className="w-full max-w-xs form-control">
-          <label className="label"> <span className="label-text">city</span></label>
-
-          <input type="text" placeholder="city"
-            {...register("city", {
-            })}
-            className="w-full max-w-xs input input-bordered" />
-
-        </div>
-
-        <input className="w-40 mt-4 bg-blue-600 btn" value="Update" type="submit" />
-        <div></div>
-      </form>
-    </div>
-  );
+    )
 }

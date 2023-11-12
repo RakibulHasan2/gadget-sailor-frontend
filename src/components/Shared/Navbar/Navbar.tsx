@@ -97,6 +97,7 @@ export default function Navbar() {
               <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-lg w-52 border text-black">
 
                <Link to='/my-profile'><li><a>My Profile</a></li></Link> 
+               
                 <li onClick={() => handleLogout()}><a>Log-out</a></li>
               </ul>
             </div> :<Link to='/login'><button className="flex p-2 mr-3 font-bold border rounded-lg">Login<BiLogIn className='text-2xl'></BiLogIn></button></Link> 
