@@ -2,6 +2,7 @@ import React from 'react';
 import { BsPersonBadge } from 'react-icons/bs';
 import { AiTwotoneEdit } from 'react-icons/ai';
 import EditProfile from '../EditProfile/EditProfile';
+import { FaUserEdit } from 'react-icons/fa';
 
 // import { Link } from 'react-router-dom';
 
@@ -38,22 +39,26 @@ export default function MyProfile() {
 
                     <button onClick={openModal} className='flex items-center p-1 mr-3 rounded-lg hover:text-white hover:bg-blue-700'>Edit <AiTwotoneEdit></AiTwotoneEdit></button>
 
-                    <dialog id="my_modal_2" className="modal" open={isModalOpen} onClose={closeModal}>
-                        <div className="modal-box">
+                    <dialog id="my_modal_4" className="modal" open={isModalOpen} onClose={closeModal}>
+                        <div className="w-11/12 max-w-5xl modal-box rounded-3xl">
                             <div className="modal-content">
-                                <div className="modal-header">
-                                    <h1 className="text-2xl font-bold">Edit Profile</h1>
+                                <div className="flex justify-center mb-2 border-b-8 modal-header">
+                                    <div className=''>
+                                        <FaUserEdit className="ml-5 text-6xl"></FaUserEdit>
+                                        <h1 className="font-bold">Edit Profile</h1>
+                                    </div>
+
                                 </div>
                                 <div className="modal-body">
                                     <EditProfile />
                                 </div>
                             </div>
-                            <p className="py-4">Press ESC key or click outside to close</p>
                         </div>
                         <form method="dialog" className="modal-backdrop">
                             <button>close</button>
                         </form>
                     </dialog>
+
 
                 </div>
                 <div className='mt-5'>
