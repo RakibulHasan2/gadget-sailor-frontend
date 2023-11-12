@@ -37,7 +37,7 @@ export default function Navbar() {
   const [users, setUsers] = useState(
     sessionStorage.getItem('userData')
   )
-  // console.log(users)
+
 
   const handleLogout = () => {
     sessionStorage.removeItem('userData')
@@ -48,7 +48,7 @@ export default function Navbar() {
 
   return (
     <div className="">
-      <div className=" shadow-sm navbar nav-bg p-5">
+      <div className="p-5 shadow-sm navbar nav-bg">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -64,7 +64,7 @@ export default function Navbar() {
 
             </ul>
           </div>
-          <a className="text-2xl normal-case btn btn-ghost">Gadget Sailor</a>
+         <Link to='/'><a className="text-2xl normal-case btn btn-ghost">Gadget Sailor</a></Link> 
         </div>
         <div className="hidden navbar-center lg:flex">
 
@@ -81,7 +81,7 @@ export default function Navbar() {
         </div>
         <div className="navbar-end">
           <div className="mr-4">
-            <button className="flex items-center font-bold"><small className="hover:text-gray-400">Hot Offer!</small> <GiElectric className='text-3xl font-extrabold icon'></GiElectric></button>
+            <button className="flex items-center font-bold"><small className="hover:text-gray-400">Hot Offer!</small> <GiElectric className='text-3xl font-extrabol icon'></GiElectric></button>
           </div>
           <div>
             <button className="mr-5 text-2xl align-middle hover:text-gray-400" title="Cart"><FaCartArrowDown></FaCartArrowDown></button>
@@ -94,15 +94,15 @@ export default function Navbar() {
 
             users ? <div className="dropdown dropdown-end">
               <label tabIndex={0} className="m-1"><button className="mt-2 mr-5 text-2xl font-bold text-center hover:text-gray-400"><FaUserAlt></FaUserAlt></button></label>
-              <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-lg w-52 border">
+              <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-lg w-52 border text-black">
 
-                <li><a>My Profile</a></li>
+               <Link to='/my-profile'><li><a>My Profile</a></li></Link> 
                 <li onClick={() => handleLogout()}><a>Log-out</a></li>
               </ul>
             </div> :<Link to='/login'><button className="flex p-2 mr-3 font-bold border rounded-lg">Login<BiLogIn className='text-2xl'></BiLogIn></button></Link> 
 
           }
-          <a className="btn rounded-2xl"><MdBuild className='text-2xl'></MdBuild> Build PC </a>
+          <a className="text-white btn rounded-2xl glow-on-hover"><MdBuild className='text-2xl'></MdBuild> Build PC </a>
         </div>
       </div>
       {/* ..........................item area............................ */}

@@ -46,19 +46,6 @@ const UpdateProduct = () => {
 
     const handleUpdateProduct = async (data: FieldValues) => {
 
-        // const allDatas = await fetch('http://localhost:5000/api/v1/allProducts/654b983ac1713b132cbc698f')
-        // const results = await allDatas.json();
-        // const result = results.data;
-        // console.log(result)
-
-        // useEffect(() => {
-        //     // Set initial form values when the component mounts
-        //     Object.keys(result).forEach((key) => {
-        //         setValue(key as keyof AddProductValues, result[key as keyof AddProductValues]);
-        //     });
-        // }, [result, setValue]);
-
-
         const imageFiles: FileList = data.image;
         console.log(imageFiles)
         console.log(data)
@@ -147,7 +134,7 @@ const UpdateProduct = () => {
                 <form onSubmit={handleSubmit(handleUpdateProduct)}>
                     <div className="w-full max-w-xs form-control">
                         <label className="label"> <span className="label-text">Product category</span></label>
-                        <select className="select select-bordered  w-full max-w-xs" {...register("category_name", {
+                        <select className="w-full max-w-xs select select-bordered" {...register("category_name", {
                             required: 'Required'
                         })}>
                             {
@@ -164,7 +151,7 @@ const UpdateProduct = () => {
                         <label className="label"> <span className="label-text">Subcategory name</span></label>
 
 
-                        <select className="select select-bordered  w-full max-w-xs" {...register("sub_category_name", {
+                        <select className="w-full max-w-xs select select-bordered" {...register("sub_category_name", {
                             required: 'Required'
                         })}>
                             {
@@ -184,7 +171,7 @@ const UpdateProduct = () => {
                     <div className="w-full max-w-xs form-control">
                         <label className="label"> <span className="label-text">Brand Name</span></label>
 
-                        <select className="select select-bordered  w-full max-w-xs" {...register("brand_name", {
+                        <select className="w-full max-w-xs select select-bordered" {...register("brand_name", {
                             required: 'Required'
                         })}>
                             {
@@ -210,11 +197,11 @@ const UpdateProduct = () => {
 
                     {/* Image */}
 
-                    <div className="form-control w-full max-w-xs">
+                    <div className="w-full max-w-xs form-control">
                         <label className="label"> <span className="label-text">Photo (photo Should be png/jpg format)</span></label>
                         <input type="file" multiple {...register("image", {
                             required: 'Required'
-                        })} className="input input-bordered w-full max-w-xs" />
+                        })} className="w-full max-w-xs input input-bordered" />
                         {errors.image && <p className='text-red-500'>{errors.image.message}</p>}
                     </div>
 
@@ -287,7 +274,7 @@ const UpdateProduct = () => {
 
 
 
-                    <input className='w-full bg-blue-600 btn mt-4' value="Update" type="submit" />
+                    <input className='w-full mt-4 bg-blue-600 btn' value="Update" type="submit" />
                     <div>
 
                     </div>
