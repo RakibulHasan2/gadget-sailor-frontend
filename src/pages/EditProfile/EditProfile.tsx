@@ -52,7 +52,7 @@ export default function EditProfile() {
         if (myProfileImage.statusCode === 200) {
           const updatedUserData = { ...user, image: imgData.data.url };
           sessionStorage.setItem('userData', JSON.stringify(updatedUserData));
-
+          alert("its take a while, please wait...");
           toast.success('Successfully uploaded');
         } else {
           toast.error('Failed to upload');
@@ -233,7 +233,7 @@ export default function EditProfile() {
           })} className="w-full max-w-xs input input-bordered rounded-3xl" />
         </div>
         <div className="mt-9">
-           <input className="text-white bg-blue-600  hover:text-black btn rounded-3xl" value="Upload" type="submit" />
+           <input className="text-white bg-blue-600 hover:text-black btn rounded-3xl" value="Upload" type="submit" />
         </div>
        
       </form>

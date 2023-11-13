@@ -2,7 +2,7 @@ import React from 'react';
 import { BsPersonBadge } from 'react-icons/bs';
 import { AiTwotoneEdit } from 'react-icons/ai';
 import EditProfile from '../EditProfile/EditProfile';
-import { FaUserEdit } from 'react-icons/fa';
+import { FaUserCircle, FaUserEdit } from 'react-icons/fa';
 
 // import { Link } from 'react-router-dom';
 
@@ -10,7 +10,7 @@ export default function MyProfile() {
 
     const userData = sessionStorage.getItem('userData');
     const user = JSON.parse(userData as string);
-    console.log(user.division)
+    console.log(user.image)
     const [isModalOpen, setIsModalOpen] = React.useState(false);
 
     // Function to open the modal
@@ -29,11 +29,17 @@ export default function MyProfile() {
                 <div className="">
                     <img src="https://scontent.fdac15-1.fna.fbcdn.net/v/t1.15752-9/370247270_326392490024066_3245730488107685687_n.png?_nc_cat=111&ccb=1-7&_nc_sid=8cd0a2&_nc_ohc=jjfLxEf9c-wAX8uJ8CW&_nc_ht=scontent.fdac15-1.fna&oh=03_AdSEHe3YQtLqsj9QkZfJRxB5-29DYsTHWlDdtBImSdZBoQ&oe=6577E9E3" alt="" className="w-full rounded-lg h-52" />
                 </div>
-                <div className="absolute ml-10 top-40 avatar online">
+               {user.image !== undefined ? <div className="absolute ml-10 top-40 avatar online">
                     <div className="w-24 rounded-full ring ring-info ring-offset-base-100 ring-offset-2">
-                        <img src={user.image} />
+                     <img src={user.image} />
                     </div>
-                </div>
+                </div>:
+                <div className="absolute ml-10 top-40 avatar online">
+                    <div className='bg-white rounded-full text-8xl ring ring-info'>
+                     <FaUserCircle></FaUserCircle>
+                    </div>
+                </div>}
+
                 <div className="flex items-center justify-between mt-14">
                     <h1 className='flex items-center ml-2 text-3xl font-bold'><BsPersonBadge></BsPersonBadge>  {user?.name.firstName} {user?.name.lastName}</h1>
 
@@ -70,6 +76,8 @@ export default function MyProfile() {
                         <h1 className='mt-3 font-bold border-b-4'>Email  : {user?.email}</h1>
                         <h1 className='mt-3 font-bold border-b-4'>Phone  : {user?.phoneNumber}</h1>
                     </div>
+
+                   { user?.division && user?.city && user?.present_address !== undefined ?<>
                     <div className='p-3 mt-5 font-bold bg-blue-100 rounded-lg'>
                         <h1>Address------------------------------------------------------------------</h1>
                     </div>
@@ -79,7 +87,12 @@ export default function MyProfile() {
                         <h1 className='mt-3 font-bold border-b-4'>City : {user?.city}</h1>
                         <h1 className='mt-3 font-bold border-b-4'>Present Address : {user?.present_address}</h1>
                         <h1 className='mt-3 font-bold border-b-4'>Permanent Address : {user?.permanent_address}</h1>
-                    </div>
+                    </div></> : 
+                    <div className='flex justify-center mt-5'>
+                              <h1 className='p-2 bg-red-400 rounded-lg'>ⓘ For more Info please Edit your profile</h1>  
+                        </div>}
+
+
                 </div>
             </div>
         </div>
