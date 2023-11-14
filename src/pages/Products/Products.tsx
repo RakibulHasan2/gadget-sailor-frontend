@@ -34,17 +34,17 @@ export default function Products() {
     };
 
     return (
-        <div className="flex justify-center gap-4">
+        <div className="flex justify-center gap-4 p-5">
             {/* side bard filtering section */}
-            <div className="w-52 h-full">
+            <div className="w-48 h-full ">
                 {/* sub category checkbox */}
                 {subCategories.length > 1 &&
-                    <div>
-                        <h2 className="text-xl font-bold mb-4">Subcategories:</h2>
-                        <span className="">-------------------------------</span>
+                    <div className="w-48 p-2 text-white bg-blue-800 rounded-lg">
+                        <h2 className="mb-4 text-xl font-bold">Subcategories:</h2>
+                        <span className="">--------</span>
                         <div className="flex flex-col">
                             {subCategories.map((subcategory: string) => (
-                                <label className="mt-2 text-lg" key={subcategory}>
+                                <label className="mt-2 text-sm" key={subcategory}>
                                     <input
                                         type="checkbox"
                                         value={subcategory}
@@ -59,12 +59,12 @@ export default function Products() {
                 }
                 {/* brands checkbox */}
                 {brands.length > 0 ?
-                    <div className="mt-10">
-                        <h2 className="text-xl font-bold mb-4">Brands:</h2>
-                        <span className="">-------------------------------</span>
+                    <div className="w-48 p-2 mt-10 text-white bg-blue-800 border rounded-lg">
+                        <h2 className="mb-4 text-xl font-bold">Brands:</h2>
+                        <span className="">-------</span>
                         <div className="flex flex-col">
                             {brands.map((brand: string) => (
-                                <label className="mt-2 text-lg" key={brand}>
+                                <label className="mt-2 text-sm" key={brand}>
                                     <input
                                         type="checkbox"
                                         value={brand}
@@ -80,7 +80,7 @@ export default function Products() {
                 }
             </div>
             {/* products card */}
-            <div className="grid grid-cols-4 gap-2">
+            <div className="grid grid-cols-4 gap-2 p-2">
                 {
                     products?.map((product: IProduct) =>
                         <ProductsCard
