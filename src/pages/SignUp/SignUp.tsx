@@ -5,10 +5,18 @@ import toast from 'react-hot-toast';
 import { FormValues } from "../../types/FormType";
 import { FiArrowRight } from 'react-icons/fi';
 import '../../styles/Signup.css'
+import { useState } from 'react';
+import { useToken } from "../../hooks/useToken";
 export default function SignUp() {
     const { register, handleSubmit, formState: { errors } } = useForm<FormValues>();
+    const [createUserEmail, setCreateUserEmail] = useState('');
+    const [token] = useToken(createUserEmail)
     const navigate = useNavigate();
 
+    if (token) {
+        navigate('/')
+    }
+    
     const handleSignUp = async (data: FieldValues) => {
         const userData: IUser = {
             name: {
@@ -19,31 +27,27 @@ export default function SignUp() {
             phoneNumber: data.phoneNumber,
             password: data.password
         }
-        const response = await fetch('http://localhost:5000/api/v1/auth/signup', {
+        await fetch('http://localhost:5000/api/v1/auth/signup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(userData)
-        });
-        const user = await response.json();
-
-        if (user.statusCode === 200) {
-            sessionStorage.setItem('userData', JSON.stringify(userData));
-            toast.success(user.message)
-            navigate('/home')
-        } else {
-            toast.error(user.message)
-        }
-        console.log(user);
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log('save user', data.data)
+                setCreateUserEmail(data.data.email)
+                toast.success('Successfully logged in');
+                sessionStorage.setItem('userData', JSON.stringify(data.data));
+            })
     }
-
     return (
         <div className='items-center justify-center lg:flex background-image'>
 
             <div className="flex justify-between shadow-2xl sign-up-container rounded-2xl">
                 <div className="text-white rounded-2xl pc-image">
-                      <Link to="/home"><button className="flex items-center mt-2 ml-2 hover:text-gray-400">Go back <FiArrowRight></FiArrowRight></button></Link>  
+                    <Link to="/home"><button className="flex items-center mt-2 ml-2 hover:text-gray-400">Go back <FiArrowRight></FiArrowRight></button></Link>
                     <div className="flex items-center justify-center h-80">
                         <div className="text-center">
                             <h1 className="mb-2 text-4xl font-extrabold">Sign Up</h1>
@@ -58,14 +62,14 @@ export default function SignUp() {
                     <form onSubmit={handleSubmit(handleSignUp)}>
                         <div className="flex gap-2 mb-4">
                             <div className="w-full max-w-xs form-control ">
-                       
+
                                 <input type="text" {...register("firstName", {
                                     required: "First Name is Required !"
                                 })} className="w-full max-w-xs bg-transparent rounded-3xl input input-bordered" placeholder="First name..." />
                                 {errors.firstName && <small className='mt-1 ml-2 text-red-500'>{errors.firstName?.message}</small>}
                             </div>
                             <div className="w-full max-w-xs form-control">
-              
+
                                 <input type="text" {...register("lastName", {
                                     required: "Last Name is Required !"
                                 })} className="w-full max-w-xs bg-transparent rounded-3xl input input-bordered" placeholder="Last name..." />
@@ -73,14 +77,14 @@ export default function SignUp() {
                             </div>
                         </div>
                         <div className="w-full max-w-xs mb-4 form-control">
-                       
+
                             <input type="email" {...register("email", {
                                 required: "Email is Required !"
                             })} className="w-full max-w-xs bg-transparent rounded-3xl input input-bordered" placeholder="✉ Email..." />
                             {errors.email && <small className='mt-1 ml-2 text-red-500'>{errors.email.message}</small>}
                         </div>
                         <div className="w-full max-w-xs mb-4 form-control">
-        
+
                             <input type="text" {...register("phoneNumber", {
                                 required: "Phone Number is Required !",
                             })} className="w-full max-w-xs bg-transparent rounded-3xl input input-bordered" placeholder="☏ Phone number..." />
