@@ -1,0 +1,7 @@
+.background-my-profile{
+    width: 100%;
+    height: 100%;
+    background-image:url('../assets/background-img/1.jpg');
+    background-size: cover;
+    background-position: center;
+}

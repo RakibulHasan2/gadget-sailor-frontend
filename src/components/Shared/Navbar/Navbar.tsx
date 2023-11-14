@@ -1,6 +1,6 @@
 import NavbarItem from "./NavbarItem";
 import { useState, useEffect } from 'react';
-import { FaCartArrowDown, FaUserAlt } from 'react-icons/fa';
+import { FaCartArrowDown} from 'react-icons/fa';
 import { MdBuild } from 'react-icons/md';
 import { GiElectric } from 'react-icons/gi';
 import { AiOutlineHeart } from 'react-icons/ai';
@@ -10,6 +10,8 @@ import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
 export default function Navbar() {
+  const userData = sessionStorage.getItem('userData');
+  const user = JSON.parse(userData as string);
   const [expanded, setExpanded] = useState(true);
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -64,16 +66,17 @@ export default function Navbar() {
 
             </ul>
           </div>
-         <Link to='/'><a className="text-2xl normal-case btn btn-ghost">Gadget Sailor</a></Link> 
+          <Link to='/'><a className="text-2xl normal-case btn btn-ghost">Gadget Sailor</a></Link>
         </div>
         <div className="hidden navbar-center lg:flex">
 
           <input
             type="text"
             placeholder="Looking for..."
-            className={`w-28 lg:w-96 input input-bordered expandable-input ${expanded ? "expanded" : ""
+            className={`w-28 lg:w-96 input input-bordered expandable-input text-black ${expanded ? "expanded" : ""
               }`}
             id="myInput"
+
           />
           <button className="btn btn-ghost btn-circle">
             <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
@@ -93,21 +96,26 @@ export default function Navbar() {
           {
 
             users ? <div className="dropdown dropdown-end">
-              <label tabIndex={0} className="m-1"><button className="mt-2 mr-5 text-2xl font-bold text-center hover:text-gray-400"><FaUserAlt></FaUserAlt></button></label>
+              <label tabIndex={0} className="m-1"><button className="mt-2 mr-5 text-2xl font-bold text-center hover:text-gray-400">
+                <div className="avatar online">
+                <div className="w-10 rounded-full hover:ring hover:ring-info">
+                  <img src={user?.image} />
+                </div>
+              </div></button></label>
               <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-lg w-52 border text-black">
 
-               <Link to='/my-profile'><li><a>My Profile</a></li></Link> 
-               
-                <li onClick={() => handleLogout()}><a>Log-out</a></li>
+                <Link to='/my-profile'><li><a className=" hover:bg-blue-800 hover:text-white">My Profile</a></li></Link>
+
+                <li onClick={() => handleLogout()}><a className=" hover:bg-red-600 hover:text-white">Log-out</a></li>
               </ul>
-            </div> :<Link to='/login'><button className="flex p-2 mr-3 font-bold border rounded-lg">Login<BiLogIn className='text-2xl'></BiLogIn></button></Link> 
+            </div> : <Link to='/login'><button className="flex p-2 mr-3 font-bold border rounded-lg">Login<BiLogIn className='text-2xl'></BiLogIn></button></Link>
 
           }
           <a className="text-white btn rounded-2xl glow-on-hover"><MdBuild className='text-2xl'></MdBuild> Build PC </a>
         </div>
       </div>
       {/* ..........................item area............................ */}
-      <div className="navbar-item mb-10">
+      <div className="mb-10 navbar-item">
         <NavbarItem></NavbarItem>
       </div>
 

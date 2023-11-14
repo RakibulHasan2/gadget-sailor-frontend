@@ -3,7 +3,7 @@ import { BsPersonBadge } from 'react-icons/bs';
 import { AiTwotoneEdit } from 'react-icons/ai';
 import EditProfile from '../EditProfile/EditProfile';
 import { FaUserCircle, FaUserEdit } from 'react-icons/fa';
-
+import '../../styles/MyProfile.css'
 // import { Link } from 'react-router-dom';
 
 export default function MyProfile() {
@@ -23,7 +23,7 @@ export default function MyProfile() {
         setIsModalOpen(false);
     };
     return (
-        <div className="flex justify-center">
+        <div className="flex justify-center background-my-profile">
 
             <div className="w-2/3 mb-10">
                 <div className="">
@@ -68,8 +68,8 @@ export default function MyProfile() {
 
                 </div>
                 <div className='mt-5'>
-                    <div className='p-3 font-bold bg-blue-100 rounded-lg'>
-                        <h1>Basic Information----------------------------------------------------------</h1>
+                    <div className='p-3 font-bold text-white bg-blue-600 rounded-lg'>
+                        <h1>Basic Information </h1>
                     </div>
                     <div className='p-2 mt-2'>
                         <h1 className='mt-3 font-bold border-b-4'>Name : {user?.name.firstName} {user?.name.lastName}</h1>
@@ -78,8 +78,8 @@ export default function MyProfile() {
                     </div>
 
                    { user?.division && user?.city && user?.present_address !== undefined ?<>
-                    <div className='p-3 mt-5 font-bold bg-blue-100 rounded-lg'>
-                        <h1>Address------------------------------------------------------------------</h1>
+                    <div className='p-3 mt-5 font-bold text-white bg-blue-600 rounded-lg'>
+                        <h1>Address</h1>
                     </div>
                     <div className='p-2 mt-2'>
                         <h1 className='mt-3 font-bold border-b-4'>Division : {user?.division}</h1>
