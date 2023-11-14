@@ -5,32 +5,36 @@ import toast from 'react-hot-toast';
 // import { IUser } from "../../types/UserType";
 import { FiArrowRight } from 'react-icons/fi';
 import '../../styles/Signup.css'
-// import {  useEffect, useState } from 'react';
-// import { useToken } from './../../hooks/useToken';
+import { useState } from 'react';
+import { useToken } from './../../hooks/useToken';
 // import { validateUserToken } from './../../hooks/validateToken';
 
 export default function Login() {
   const { register, handleSubmit, formState: { errors } } = useForm<FormValues>();
-  // const [loginUserEmail, setLoginUserEmail] = useState('');
+  const [loginUserEmail, setLoginUserEmail] = useState('');
+  const [token] = useToken(loginUserEmail)
+  console.log(token)
   const navigate = useNavigate();
-  // const token = useToken(loginUserEmail)
 
+  if(token){
+    navigate('/')
+  }
+  
   const handleLogin = async (data: FieldValues) => {
-    const response = await fetch('http://localhost:5000/api/v1/auth/login', {
+  fetch('http://localhost:5000/api/v1/auth/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
     })
-    if (response.ok) {
-      const user = await response.json();
-      toast.success('Successfully logged in');
-      sessionStorage.setItem('userData', JSON.stringify(user));
-      navigate('/home');
-    } else {
-      toast.error('Invalid Email or Password');
-    }
+    .then(res => res.json())
+    .then(data => {
+        console.log('save user',data)
+        setLoginUserEmail(data.email)
+        toast.success('Successfully logged in');
+        sessionStorage.setItem('userData', JSON.stringify(data));
+    })
   }
 
   return (
