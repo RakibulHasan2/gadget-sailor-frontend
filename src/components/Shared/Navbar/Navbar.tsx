@@ -41,6 +41,7 @@ export default function Navbar() {
 
   const handleLogout = () => {
     sessionStorage.removeItem('userData')
+    sessionStorage.removeItem('accessToken')
     // window.location.reload() 
     toast.success('logged out successfully')
     setUsers(null)
