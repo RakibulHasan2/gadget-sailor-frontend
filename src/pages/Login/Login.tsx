@@ -2,25 +2,23 @@ import { FieldValues, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { FormValues } from "../../types/FormType";
 import toast from 'react-hot-toast';
-// import { IUser } from "../../types/UserType";
 import { FiArrowRight } from 'react-icons/fi';
 import '../../styles/Signup.css'
 import { useState } from 'react';
 import { useToken } from './../../hooks/useToken';
-// import { validateUserToken } from './../../hooks/validateToken';
 
 export default function Login() {
   const { register, handleSubmit, formState: { errors } } = useForm<FormValues>();
   const [loginUserEmail, setLoginUserEmail] = useState('');
   const [token] = useToken(loginUserEmail)
-  console.log(token)
   const navigate = useNavigate();
 
   if(token){
     navigate('/')
   }
-  
+
   const handleLogin = async (data: FieldValues) => {
+
   fetch('http://localhost:5000/api/v1/auth/login', {
       method: 'POST',
       headers: {
@@ -35,6 +33,7 @@ export default function Login() {
         toast.success('Successfully logged in');
         sessionStorage.setItem('userData', JSON.stringify(data));
     })
+
   }
 
   return (
