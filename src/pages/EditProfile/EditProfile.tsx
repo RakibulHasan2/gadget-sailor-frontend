@@ -2,10 +2,10 @@
 import { FieldValues, useForm } from "react-hook-form";
 import { IUpdateUsers } from "../../types/MyProfileType";
 import toast from "react-hot-toast";
-import {FcAddImage} from 'react-icons/fc';
+import { FcAddImage } from 'react-icons/fc';
 
 export default function EditProfile() {
-  const { register, handleSubmit } = useForm<IUpdateUsers>();
+  const { register, handleSubmit, formState: { errors } } = useForm<IUpdateUsers>();
   const userData = sessionStorage.getItem('userData');
   const user = JSON.parse(userData as string);
 
@@ -218,6 +218,7 @@ export default function EditProfile() {
 
 
       </form>
+
       <div className="flex justify-center mb-2 border-b-8 modal-header">
         <div className=''>
           <FcAddImage className="ml-5 text-6xl"></FcAddImage>
@@ -225,18 +226,23 @@ export default function EditProfile() {
         </div>
 
       </div>
-      <form onSubmit={handleSubmit(handleAddImage)} className="flex justify-around mb-10">
+      <div>
+        <form onSubmit={handleSubmit(handleAddImage)} className="flex justify-around mb-10">
 
-        <div className="w-full max-w-xs form-control">
-          <label className="label"> <span className="label-text">Photo (photo Should be png/jpg format)</span></label>
-          <input type="file" multiple {...register("image", {
-          })} className="w-full max-w-xs input input-bordered rounded-3xl" />
-        </div>
-        <div className="mt-9">
-           <input className="text-white bg-blue-600 hover:text-black btn rounded-3xl" value="Upload" type="submit" />
-        </div>
-       
-      </form>
+          <div className="w-full max-w-xs form-control">
+            <label className="label"> <span className="label-text">Photo (photo Should be png/jpg format)</span></label>
+            <input type="file" multiple {...register("image", {
+              
+            })} className="w-full max-w-xs input input-bordered rounded-3xl" />
+            {errors.image && <p className='text-red-500'>please select image file</p>}
+          </div>
+          <div className="mt-9">
+            <input className="text-white bg-blue-600 hover:text-black btn rounded-3xl" value="Upload" type="submit" />
+          </div>
+
+        </form>
+      </div>
+
     </div>
   );
 }
