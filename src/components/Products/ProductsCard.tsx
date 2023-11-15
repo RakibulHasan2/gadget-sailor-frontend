@@ -9,8 +9,7 @@ export default function ProductsCard({ product }: IProduct) {
    
     return (
         <div>
-
-            <div className="relative w-full overflow-hidden transition-all duration-300 border border-transparent shadow-md card bg-base-100 hover:border-blue-400 hover:shadow-customBlue card-heigth">
+            <div className="relative w-full overflow-hidden transition-all duration-300 border border-transparent shadow-md card bg-base-100 hover:border-blue-400 hover:shadow-customBlue card-height rounded-xl">
                 <figure className="px-10 pt-10 transition-transform transform hover:scale-110">
                     <img src="https://globalexpressbd.com/wp-content/uploads/2021/10/i7-11700k-gaming-pc-500x500-1.jpg" alt="Shoes" className="rounded-xl" />
                 </figure>
