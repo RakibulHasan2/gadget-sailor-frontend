@@ -3,14 +3,55 @@ import { AddProductValues } from "../../types/ProductTypes";
 import useApiData from "../../hooks/getAPIData";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
+import React from "react";
 
 
+
+interface ICategory {
+    _id: string;
+    category_name?: string;
+    sub_category_name?: string;
+    createdAt: string;
+    updatedAt: string;
+    __v: number;
+    id: string;
+}
+interface ICategoryResponse {
+    statusCode: number;
+    success: boolean;
+    message: string;
+    data: ICategory[];
+}
 
 const AddProduct = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<AddProductValues>();
     const imageHosKey = '1a6c0e11cdde66ffb8f933ec4079f59e';
     const navigate = useNavigate();
     const { data, isLoading } = useApiData("http://localhost:5000/api/v1/allProducts")
+
+    // get categories
+    const [categoryData, setCategoryData] = React.useState<ICategory[]>([]);
+
+    React.useEffect(() => {
+        fetch('http://localhost:5000/api/v1/get-AllCategories')
+            .then(res => res.json())
+            .then((data: ICategoryResponse) => {
+                console.log(data.data)
+                setCategoryData(data.data);
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    }, []);
+
+    console.log(categoryData)
+
+
+
+
+
+
+
 
     const getCategory: Set<string> = new Set()
     const getSubCategory: Set<string> = new Set()
@@ -30,8 +71,8 @@ const AddProduct = () => {
         }
     });
 
-    const getOneCategory = Array.from(getCategory);
-    const getOneSubCategory = Array.from(getSubCategory).filter((item) => item !== undefined && item !== '');
+    //const getOneCategory = Array.from(getCategory);
+    // const getOneSubCategory = Array.from(getSubCategory).filter((item) => item !== undefined && item !== '');
     const getOneBrand = Array.from(getBrand).filter((item) => item !== undefined);
 
 
@@ -142,14 +183,15 @@ const AddProduct = () => {
             <div className='w-96 p-7'>
                 <h2 className='text-3xl font-bold text-center text-sky-500'>Add a New Product</h2>
                 <form onSubmit={handleSubmit(handleAddProduct)}>
+
                     <div className="w-full max-w-xs form-control">
                         <label className="label"> <span className="label-text">Product category</span></label>
                         <select className="select select-bordered  w-full max-w-xs" {...register("category_name", {
                             required: 'Required'
                         })}>
                             {
-                                getOneCategory.map(d => (
-                                    <option key={d} value={d}>{d}</option>
+                                categoryData.map(d => (
+                                    <option key={d.id} value={d.category_name}>{d.category_name}</option>
                                 ))
                             }
                         </select>
@@ -184,8 +226,8 @@ const AddProduct = () => {
                             required: 'Required'
                         })}>
                             {
-                                getOneSubCategory.map(d => (
-                                    <option key={d} value={d}>{d}</option>
+                                subCategoryData.map(d => (
+                                    <option key={d.id} value={d.sub_category_name}>{d.sub_category_name}</option>
                                 ))
                             }
                         </select>
