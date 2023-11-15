@@ -4,6 +4,7 @@ import useApiData from "../../hooks/getAPIData";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import React from "react";
+import AddCategory from "../../components/AddCategory/AddCategory";
 
 
 
@@ -29,14 +30,14 @@ const AddProduct = () => {
     const navigate = useNavigate();
     const { data, isLoading } = useApiData("http://localhost:5000/api/v1/allProducts")
 
-    // get categories
+    // get categories----------------
     const [categoryData, setCategoryData] = React.useState<ICategory[]>([]);
 
     React.useEffect(() => {
         fetch('http://localhost:5000/api/v1/get-AllCategories')
             .then(res => res.json())
             .then((data: ICategoryResponse) => {
-                console.log(data.data)
+                // console.log(data.data)
                 setCategoryData(data.data);
             })
             .catch(error => {
@@ -44,10 +45,10 @@ const AddProduct = () => {
             });
     }, []);
 
-    console.log(categoryData)
+    // console.log(categoryData)
 
 
-    //get sub category
+    //get sub category-----------------
 
     const [subCategoryData, setSubCategoryData] = React.useState<ICategory[]>([]);
 
@@ -55,7 +56,7 @@ const AddProduct = () => {
         fetch('http://localhost:5000/api/v1/get-subCategories')
             .then(res => res.json())
             .then((data: ICategoryResponse) => {
-                console.log(data.data)
+                // console.log(data.data)
                 setSubCategoryData(data.data);
             })
             .catch(error => {
@@ -63,7 +64,7 @@ const AddProduct = () => {
             });
     }, []);
 
-    console.log(subCategoryData)
+    // console.log(subCategoryData)
 
 
 
@@ -102,7 +103,7 @@ const AddProduct = () => {
     }
 
     const openModal = () => {
-        const modal = document.getElementById('my_modal_3') as HTMLDialogElement | null;
+        const modal = document.getElementById('modal') as HTMLDialogElement | null;
         if (modal) {
             modal.showModal();
         }
@@ -191,7 +192,9 @@ const AddProduct = () => {
     }
 
 
-
+    // const handleAddCategory = async (data: FieldValues) => {
+    //     console.log(data)
+    // }
 
 
     return (
@@ -215,18 +218,29 @@ const AddProduct = () => {
                     </div>
                     <small className="ml-10 font-black mb-4">Want to add a new category?
                         <>
-                            <button className="text-blue-500" onClick={openModal}>
+                            <a className="text-blue-500 cursor-pointer" onClick={openModal}>
                                 Add
-                            </button>
-                            <dialog id="my_modal_3" className="modal">
+                            </a>
+                            <dialog id="modal" className="modal">
                                 <div className="modal-box">
                                     <form method="dialog">
-                                        {/* if there is a button in form, it will close the modal */}
+
                                         <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
                                             ✕
                                         </button>
                                     </form>
                                     <h3 className="font-bold text-lg">Hello!</h3>
+                                    {/* <form onSubmit={handleSubmit(handleAddCategory)}>
+                                        <div className="w-full max-w-xs form-control">
+                                            <label className="label"> <span className="label-text">Category Name</span></label>
+
+                                            <input type="text" placeholder="Product Name"
+                                                {...register("category_name")}
+                                                className="w-full max-w-xs input input-bordered" />
+                                            {errors.category_name && <p className='text-red-600'>{errors.category_name?.message}</p>}
+                                        </div>
+                                    </form> */}
+                                    <AddCategory></AddCategory>
 
                                 </div>
                             </dialog>
