@@ -13,26 +13,31 @@ export default function Login() {
   const [token] = useToken(loginUserEmail)
   const navigate = useNavigate();
 
-  if(token){
+  if (token) {
     navigate('/')
   }
 
   const handleLogin = async (data: FieldValues) => {
 
-  fetch('http://localhost:5000/api/v1/auth/login', {
+    fetch('http://localhost:5000/api/v1/auth/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
     })
-    .then(res => res.json())
-    .then(data => {
-        console.log('save user',data)
-        setLoginUserEmail(data.email)
-        toast.success('Successfully logged in');
-        sessionStorage.setItem('userData', JSON.stringify(data));
-    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.email) {
+          console.log('save user', data)
+          setLoginUserEmail(data.email)
+          toast.success('Successfully logged in');
+          sessionStorage.setItem('userData', JSON.stringify(data));
+        }
+        else{
+          toast.error(data.message)
+        }
+      })
 
   }
 
