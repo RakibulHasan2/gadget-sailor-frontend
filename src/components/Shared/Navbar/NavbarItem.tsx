@@ -2,8 +2,9 @@ import '../../../styles/Navbar.css'
 import useApiData from "../../../hooks/getAPIData";
 import { Link } from 'react-router-dom';
 import { IProduct } from '../../../types/ProductsType'
-
 export default function NavbarItem() {
+
+    // const [brand, setBrand] = useState('');
     const { data, isLoading } = useApiData("http://localhost:5000/api/v1/allProducts")
     const categories: string[] = [...new Set(data.map((item: IProduct) => item.category_name))];
 
@@ -12,26 +13,29 @@ export default function NavbarItem() {
             <div className="loading loading-spinner text-info"></div>
         </div>;
     }
-
+    // const selectCategory = (category: string) =>{
+    //     selectCategory(category);
+    // }
 
 
     return (
-        <div className='flex justify-center h-16 border shadow-lg shadow-blue-900/50'>
-            <div className='relative flex items-center w-4/5 h-16 rounded-3xl justify-evenly'>
-                {
-                    categories.map((category) =>
-                        <div className="relative dropdown dropdown-hover">
-                            <Link to={`/${category}`}>
-                                <p className="px-8 py-3 font-semibold rounded-lg items-button hover:bg-blue-800 hover:text-white">
-                                    {category}
-                                </p>
-                            </Link>
-                            <ul className="absolute hidden dropdown-content z-[1] shadow bg-base-100  p-1 border rounded-lg">
-                                {
-                                    data.filter((item) => item?.category_name === category)
-                                        .map((item) => item.sub_category_name)
-                                        .filter((subCategory, index, array) => subCategory && array.indexOf(subCategory) === index)
-                                        .map(subCategory =>                                
+        <div>
+            <div className='flex justify-center h-16 border shadow-lg shadow-blue-900/50'>
+                <div className='relative flex items-center w-4/5 h-16 rounded-3xl justify-evenly'>
+                    {
+                        categories.map((category) =>
+                            <div className="relative dropdown dropdown-hover">
+                                <Link to={`/${category}`}>
+                                    <p className="px-8 py-3 font-semibold rounded-lg items-button hover:bg-blue-800 hover:text-white">
+                                        {category}
+                                    </p>
+                                </Link>
+                                <ul className="absolute hidden dropdown-content z-[1] shadow bg-base-100  p-1 border rounded-lg">
+                                    {
+                                        data.filter((item) => item?.category_name === category)
+                                            .map((item) => item.sub_category_name)
+                                            .filter((subCategory, index, array) => subCategory && array.indexOf(subCategory) === index)
+                                            .map(subCategory =>
                                                 <li className="w-full dropdown">
                                                     <Link to={`/${category}/${subCategory}`} className='block p-2 text-sm transition-all duration-300 ease-in-out rounded-md w-36 bg-base-100 hover:bg-blue-800 hover:text-white'><span className='flex justify-between'>{subCategory}<span>⇢</span></span></Link>
                                                     <ul className='absolute z-10 hidden -mt-6 border shadow-sm ml-36 dropdown-content dropdown-right'>
@@ -49,15 +53,15 @@ export default function NavbarItem() {
                                                         </li>
                                                     </ul>
                                                 </li>
-                                        )
-                                }
-                            </ul>
-                        </div>
-                    )
-                }
+                                            )
+                                    }
+                                </ul>
+                            </div>
+                        )
+                    }
+                </div>
             </div>
         </div>
-
     );
 }
 
