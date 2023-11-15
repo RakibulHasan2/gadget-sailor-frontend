@@ -6,8 +6,6 @@ import { Link, useNavigate } from "react-router-dom";
 import React from "react";
 import AddCategory from "../../components/AddCategory/AddCategory";
 import { ICategory, ICategoryResponse } from "../../types/CategoryType";
-import { FaCartArrowDown } from "react-icons/fa";
-
 import { BiSolidDashboard } from "react-icons/bi";
 
 
@@ -213,7 +211,7 @@ const AddProduct = () => {
             <div className='p-3 bg-blue-500 w-60 rounded-xl'>
                 <h1 className='flex items-center justify-center mb-10 text-3xl text-white border-b-2'><BiSolidDashboard />Dashboard</h1>
                 <div>
-                    <button className="flex items-center justify-center w-full h-10 mb-5 font-bold btn-one gap-x-2" onClick={openCategoryModal}><FaCartArrowDown /> Add New Category</button>
+                    <button className="flex items-center justify-center w-full h-10 mb-5 font-bold btn-one gap-x-2" onClick={openCategoryModal}> Add New Category</button>
 
 
                     <button className="flex items-center justify-center w-full h-10 mb-5 font-bold btn-one gap-x-2" onClick={openSubCategoryModal}> Add New Sub-category</button>
@@ -242,7 +240,20 @@ const AddProduct = () => {
 
                     {/* add sub-category */}
 
+                    <dialog id="subCategoryModal" className="modal">
+                        <div className="modal-box">
+                            <form method="dialog">
 
+                                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                                    ✕
+                                </button>
+                            </form>
+                            <h3 className="font-bold text-lg">Add your new  Sub-category here</h3>
+
+
+
+                        </div>
+                    </dialog>
 
 
                 </div>
