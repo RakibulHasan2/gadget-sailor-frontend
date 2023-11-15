@@ -1,6 +1,6 @@
 import { useState } from 'react';
-
-const ImageSlider = ({images}) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const ImageSlider = ({images}:any) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const nextImage = () => {
