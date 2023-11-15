@@ -7,7 +7,6 @@ import { MdHome } from "react-icons/md";
 import ProductSideBar from "../../components/Products/ProductSideBar";
 
 export default function Products() {
-
     const productsData = useLoaderData() as useLoaderDataType;
     const products = Array.isArray(productsData.data) ? productsData.data : [];
 
