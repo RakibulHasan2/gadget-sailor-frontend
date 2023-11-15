@@ -5,10 +5,12 @@ import ImageSlider from "../../components/ImageSlider/ImageSlider";
 
 
 export default function SingleProductPage() {
+  // eslint-disable-next-line prefer-const
   let [count, setCount] = useState(0);
   const singleProduct = useLoaderData() as IProduct;
   const singleProductData = singleProduct.data;
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { __v, _id, category_name, sub_category_name, product_name, price, status, product_code, brand_name, image, model, warranty, ...otherProperties } = singleProductData;
   
   console.log(singleProductData)
