@@ -47,7 +47,23 @@ const AddProduct = () => {
     console.log(categoryData)
 
 
+    //get sub category
 
+    const [subCategoryData, setSubCategoryData] = React.useState<ICategory[]>([]);
+
+    React.useEffect(() => {
+        fetch('http://localhost:5000/api/v1/get-subCategories')
+            .then(res => res.json())
+            .then((data: ICategoryResponse) => {
+                console.log(data.data)
+                setSubCategoryData(data.data);
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    }, []);
+
+    console.log(subCategoryData)
 
 
 
