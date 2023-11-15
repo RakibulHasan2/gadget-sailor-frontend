@@ -7,6 +7,8 @@ import React from "react";
 import AddCategory from "../../components/AddCategory/AddCategory";
 import { ICategory, ICategoryResponse } from "../../types/CategoryType";
 import { BiSolidDashboard } from "react-icons/bi";
+import AddSubCategory from "../../components/AddSubCategory/AddSubCategory";
+
 
 
 
@@ -248,8 +250,8 @@ const AddProduct = () => {
                                     ✕
                                 </button>
                             </form>
-                            <h3 className="font-bold text-lg">Add your new  Sub-category here</h3>
-
+                            <h3 className="font-bold text-lg">Add your new Sub-category here</h3>
+                            <AddSubCategory></AddSubCategory>
 
 
                         </div>
@@ -278,11 +280,7 @@ const AddProduct = () => {
                             </select>
                             {errors.category_name && <p className='text-red-600'>{errors.category_name?.message}</p>}
                         </div>
-                        <small className="ml-10 font-black mb-4">Want to add a new category?
 
-
-
-                        </small>
 
                         {/* Sub-Category */}
                         <div className="w-full max-w-xs form-control">
