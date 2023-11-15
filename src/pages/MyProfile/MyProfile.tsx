@@ -82,7 +82,7 @@ export default function MyProfile() {
 
 
                     <div className="flex items-center justify-between mt-14">
-                        <h1 className='flex items-center ml-2 text-3xl font-bold'><BsPersonBadge></BsPersonBadge>  {user?.name.firstName} {user?.name.lastName}</h1>
+                        <h1 className='flex items-center ml-2 text-3xl font-bold'><BsPersonBadge></BsPersonBadge>  {user?.name?.firstName} {user?.name?.lastName}</h1>
                         {/* --------------------------------------edit profile modal-------------------------------------- */}
                         <dialog id="my_modal_4" className="modal" open={isUserModalOpen} onClose={closeUserModal}>
                             <div className="w-11/12 max-w-5xl modal-box rounded-3xl">

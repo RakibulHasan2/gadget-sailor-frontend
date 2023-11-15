@@ -49,8 +49,8 @@ const UploadImage = () => {
         if (myProfileImage.statusCode === 200) {
           const updatedUserData = { ...user, image: imgData.data.url };
           sessionStorage.setItem('userData', JSON.stringify(updatedUserData));
-
           toast.success('Successfully uploaded');
+          location.reload();
         } else {
           toast.error('Failed to upload');
         }
