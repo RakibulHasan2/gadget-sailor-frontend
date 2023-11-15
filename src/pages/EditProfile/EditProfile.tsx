@@ -2,113 +2,11 @@
 import { FieldValues, useForm } from "react-hook-form";
 import { IUpdateUsers } from "../../types/MyProfileType";
 import toast from "react-hot-toast";
-import { FcEditImage } from 'react-icons/fc';
 
 export default function EditProfile() {
   const { register, handleSubmit } = useForm<IUpdateUsers>();
   const userData = sessionStorage.getItem('userData');
   const user = JSON.parse(userData as string);
-
-
-  const imageHostKey = '29473dd4ab78ebc95009722bc0558d38';
-  console.log(imageHostKey)
-
-  // const handleAddImage = async (data: FieldValues) => {
-  //   console.log(data)
-
-  //   const image = data.image[0];
-  //   const fromData = new FormData();
-  //   fromData.append('image', image);
-
-  //   const url = `https://api.imgbb.com/1/upload?&key=${imageHostKey}`
-  //   console.log(url)
-  //   fetch(url, {
-  //     method: 'POST',
-  //     body: fromData
-  //   })
-  //     .then(res => res.json())
-  //     .then(async imgData => {
-  //       if (imgData.success) {
-
-
-  //         console.log(imgData.data.url)
-
-
-  //         const upload: IUpdateUsers = {
-
-  //           image: imgData.data.url
-
-  //         }
-
-
-  //         const response = await fetch(`http://localhost:5000/api/v1/users/${user._id}`, {
-  //           method: 'PUT',
-  //           headers: {
-  //             'Content-Type': 'application/json',
-  //           },
-  //           body: JSON.stringify(upload),
-  //         });
-
-  //         const myProfileImage = await response.json();
-  //         if (myProfileImage.statusCode === 200) {
-
-  //           toast.success("successfully uploaded")
-  //         } else {
-  //           toast.error("failed to upload")
-  //         }
-
-  //       }
-  //     })
-  // }
-  const handleAddImage = async (data: FieldValues) => {
-    console.log(data);
-
-    const image = data.image[0];
-    const formData = new FormData();
-    formData.append('image', image);
-
-    const url = `https://api.imgbb.com/1/upload?&key=${imageHostKey}`;
-    console.log(url);
-
-    try {
-      const response = await fetch(url, {
-        method: 'POST',
-        body: formData,
-      });
-
-      const imgData = await response.json();
-
-      if (imgData.success) {
-        console.log(imgData.data.url);
-
-        const upload: IUpdateUsers = {
-          image: imgData.data.url,
-        };
-
-        const updateResponse = await fetch(`http://localhost:5000/api/v1/users/${user._id}`, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(upload),
-        });
-
-        const myProfileImage = await updateResponse.json();
-
-        if (myProfileImage.statusCode === 200) {
-          const updatedUserData = { ...user, image: imgData.data.url };
-          sessionStorage.setItem('userData', JSON.stringify(updatedUserData));
-
-          toast.success('Successfully uploaded');
-        } else {
-          toast.error('Failed to upload');
-        }
-      }
-    } catch (error) {
-      console.error('Error uploading image:', error);
-    }
-  };
-
 
   const handleUpdateProfile = async (data: FieldValues) => {
     const userprofileData: IUpdateUsers = {
@@ -117,7 +15,6 @@ export default function EditProfile() {
         lastName: data.name.lastName,
       },
       email: data.email,
-      password: data.password,
       phoneNumber: data.phoneNumber,
       present_address: data.present_address,
       permanent_address: data.permanent_address,
@@ -145,6 +42,7 @@ export default function EditProfile() {
         sessionStorage.setItem('userData', updatedUserData);
 
         toast.success('Updated profile successfully');
+        location.reload();
       } else {
         toast.error('Error updating profile');
       }
@@ -190,15 +88,6 @@ export default function EditProfile() {
                 className="w-full max-w-xs input input-bordered rounded-3xl" defaultValue={user.email} disabled />
             </div>
             <div className="w-full max-w-xs form-control">
-              <label className="label"> <span className="label-text">Password</span></label>
-
-              <input type="text" placeholder="password"
-                {...register("password", {
-                })}
-                className="w-full max-w-xs input input-bordered rounded-3xl" defaultValue={user?.password} />
-
-            </div>
-            <div className="w-full max-w-xs form-control">
               <label className="label"> <span className="label-text">phoneNumber</span></label>
 
               <input type="text" placeholder="phoneNumber"
@@ -207,8 +96,6 @@ export default function EditProfile() {
                 className="w-full max-w-xs input input-bordered rounded-3xl" defaultValue={user?.phoneNumber} />
 
             </div>
-          </div>
-          <div className="w-full">
             <div className="w-full max-w-xs form-control">
               <label className="label"> <span className="label-text">present_address</span></label>
 
@@ -218,6 +105,9 @@ export default function EditProfile() {
                 className="w-full max-w-xs input input-bordered rounded-3xl" defaultValue={user?.present_address} />
 
             </div>
+          </div>
+          <div className="w-full">
+
             <div className="w-full max-w-xs form-control">
               <label className="label"> <span className="label-text">permanent address</span></label>
 
@@ -259,32 +149,7 @@ export default function EditProfile() {
         <input className="w-40 mt-4 text-white bg-blue-600 hover:text-black btn rounded-3xl" value="Update" type="submit" />
 
       </form>
-      <div>
-
-        <div className="flex justify-center mb-2 border-b-8">
-          <div className=''>
-            <FcEditImage className="ml-5 text-6xl"> </FcEditImage>
-            <h1 className="font-bold">Edit Profile</h1>
-          </div>
-
-        </div>
-      </div>
-      <div>
-        <form onSubmit={handleSubmit(handleAddImage)} className="flex justify-around mb-10">
-
-          <div className="w-full max-w-xs form-control">
-            <label className="label"> <span className="label-text">Photo (photo Should be png/jpg format)</span></label>
-            <input type="file" multiple {...register("image", {
-
-            })} className="w-full max-w-xs input input-bordered rounded-3xl" />
-            {/* {errors.image && <p className='text-red-500'>please select image file</p>} */}
-          </div>
-          <div className="mt-9">
-            <input className="text-white bg-blue-600 hover:text-black btn rounded-3xl" value="Upload" type="submit" />
-          </div>
-
-        </form>
-      </div>
+      
     </div>
   );
 }

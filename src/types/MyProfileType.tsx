@@ -15,4 +15,5 @@ export type User = {
     post_code?: string;
     city?: string;
     division?: string;
+    confirmPassword?: string;
   };
