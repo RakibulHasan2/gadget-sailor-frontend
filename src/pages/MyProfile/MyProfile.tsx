@@ -89,7 +89,7 @@ export default function MyProfile() {
                                 <div className="modal-content">
                                     <div className="flex justify-center mb-2 border-b-8 modal-header">
                                         <div className=''>
-                                            <FaUserEdit className="ml-5 text-6xl"></FaUserEdit>
+                                            <FaUserEdit className="ml-5 text-6xl text-blue-800"></FaUserEdit>
                                             <h1 className="font-bold">Edit Profile</h1>
                                         </div>
 
