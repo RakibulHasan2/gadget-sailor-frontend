@@ -1,6 +1,6 @@
 import NavbarItem from "./NavbarItem";
 import { useState, useEffect } from 'react';
-import { FaCartArrowDown, FaUserCircle} from 'react-icons/fa';
+import { FaCartArrowDown, FaUserCircle } from 'react-icons/fa';
 import { MdBuild } from 'react-icons/md';
 import { GiElectric } from 'react-icons/gi';
 import { AiOutlineHeart } from 'react-icons/ai';
@@ -8,6 +8,7 @@ import { BiLogIn } from 'react-icons/bi';
 import '../../../styles/Navbar.css'
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+
 
 export default function Navbar() {
   const userData = sessionStorage.getItem('userData');
@@ -67,7 +68,9 @@ export default function Navbar() {
 
             </ul>
           </div>
-          <Link to='/'><a className="text-2xl normal-case btn btn-ghost">Gadget Sailor</a></Link>
+          <Link to='/'>
+            <p className="text-2xl text-white">Gadget Sailor</p>
+          </Link>
         </div>
         <div className="hidden navbar-center lg:flex">
 
@@ -100,13 +103,13 @@ export default function Navbar() {
               <label tabIndex={0} className="m-1"><button className="mt-2 mr-5 text-2xl font-bold text-center hover:text-gray-400">
                 <div className="avatar online">
 
-               {user?.image !== undefined ? <div className="w-10 rounded-full hover:ring hover:ring-info">
-                  <img src={user?.image} />
-                </div>: <div className="text-4xl rounded-full hover:ring hover:ring-info">
+                  {user?.image !== undefined ? <div className="w-10 rounded-full hover:ring hover:ring-info">
+                    <img src={user?.image} />
+                  </div> : <div className="text-4xl rounded-full hover:ring hover:ring-info">
                     <FaUserCircle></FaUserCircle>
-                </div>}
+                  </div>}
 
-              </div></button></label>
+                </div></button></label>
               <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-lg w-52 border text-black">
                 <Link to='/my-profile'><li><a className=" hover:bg-blue-800 hover:text-white">My Profile</a></li></Link>
                 <li onClick={() => handleLogout()}><a className=" hover:bg-red-600 hover:text-white">Log-out</a></li>
