@@ -1,6 +1,7 @@
 import { FieldValues, useForm } from "react-hook-form";
 import { ICategory } from "../../types/CategoryType";
 import useApiData from "../../hooks/getAPIData";
+import toast from "react-hot-toast";
 
 const AddSubCategory = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<ICategory>();
@@ -20,6 +21,25 @@ const AddSubCategory = () => {
 
         }
         console.log(subCategoryData);
+
+        const response = await fetch('http://localhost:5000/api/v1/add_subCategory', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(subCategoryData)
+        });
+        const product = await response.json();
+        console.log(product);
+
+        if (product.statusCode === 200) {
+
+            toast.success(product.message)
+            location.reload();
+
+        } else {
+            toast.error(product.message)
+        }
 
     }
 
