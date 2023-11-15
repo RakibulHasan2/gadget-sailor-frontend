@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useLoaderData, useParams } from "react-router-dom";
+import { Link, useLoaderData, useParams } from "react-router-dom";
 import ProductsCard from "../../components/Products/ProductsCard";
 import { IProduct } from "../../types/ProductsType";
 import { useState } from 'react'
@@ -39,18 +39,24 @@ export default function Products() {
             {/* selected product route */}
             <div className="flex justify-center shadow-lg  mb-10">
                 <div className="flex p-5 w-9/12 lg:ml-10 items-center ">
-                    <MdHome />
-                    <p className="ml-4 hover:border-b-2 hover:border-gray-600">{useParams().categoryName}</p>
+                    <Link to='/home'><MdHome /></Link>
+                    <Link to={`/${useParams().categoryName}`}>
+                        <p className="ml-4 hover:text-blue-900 hover:font-bold">{useParams().categoryName}</p>
+                    </Link>
                     {useParams().subCategoryName &&
                         <>
                             <span className="ms-2 mr-2">/</span>
-                            <p className="hover:border-b-2 hover:border-gray-600">{useParams()?.subCategoryName}</p>
+                            <Link to={`/${useParams().categoryName}/${useParams().subCategoryName}`}>
+                                <p className="hover:text-blue-900 hover:font-bold">{useParams()?.subCategoryName}</p>
+                            </Link>
                         </>
                     }
                     {useParams().brandName &&
                         <>
                             <span className="ms-2 mr-2">/</span>
-                            <p className="hover:border-b-2 hover:border-gray-600">{useParams()?.brandName}</p>
+                            <Link to={`/${useParams().categoryName}/${useParams().subCategoryName}/${useParams().brandName}`}>
+                                <p className="hover:text-blue-900 hover:font-bold">{useParams()?.brandName}</p>
+                            </Link>
                         </>
                     }
                 </div>
