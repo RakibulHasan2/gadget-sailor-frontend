@@ -1,6 +1,6 @@
 import NavbarItem from "./NavbarItem";
 import { useState, useEffect } from 'react';
-import { FaCartArrowDown} from 'react-icons/fa';
+import { FaCartArrowDown, FaUserCircle} from 'react-icons/fa';
 import { MdBuild } from 'react-icons/md';
 import { GiElectric } from 'react-icons/gi';
 import { AiOutlineHeart } from 'react-icons/ai';
@@ -99,9 +99,13 @@ export default function Navbar() {
             users ? <div className="dropdown dropdown-end">
               <label tabIndex={0} className="m-1"><button className="mt-2 mr-5 text-2xl font-bold text-center hover:text-gray-400">
                 <div className="avatar online">
-                <div className="w-10 rounded-full hover:ring hover:ring-info">
+
+               {user?.image !== undefined ? <div className="w-10 rounded-full hover:ring hover:ring-info">
                   <img src={user?.image} />
-                </div>
+                </div>: <div className="text-4xl rounded-full hover:ring hover:ring-info">
+                    <FaUserCircle></FaUserCircle>
+                </div>}
+
               </div></button></label>
               <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-lg w-52 border text-black">
                 <Link to='/my-profile'><li><a className=" hover:bg-blue-800 hover:text-white">My Profile</a></li></Link>
