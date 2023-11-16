@@ -1,13 +1,14 @@
 import React from 'react';
 import { BsPersonBadge } from 'react-icons/bs';
 import { AiOutlineHeart } from 'react-icons/ai';
-import EditProfile from '../EditProfile/EditProfile';
+import EditProfile from '../../components/EditProfile/EditProfile';
 import { FaCartArrowDown, FaHome, FaImage, FaUserCircle, FaUserEdit, FaUserLock } from 'react-icons/fa';
 import '../../styles/MyProfile.css'
 import { BiSolidDashboard } from "react-icons/bi"
 import { Link } from 'react-router-dom';
-import UploadImage from '../EditProfile/UploadImage';
-import ChnagePassword from '../EditProfile/ChnagePassword';
+import UploadImage from '../../components/EditProfile/UploadImage';
+import ChangePassword from '../../components/EditProfile/ChangePassword';
+
 export default function MyProfile() {
 
     const userData = sessionStorage.getItem('userData');
@@ -58,16 +59,12 @@ export default function MyProfile() {
                     <Link to='/home'><button className="flex items-center justify-center w-full h-10 mb-5 font-bold btn-one gap-x-2"><FaHome />
                         Back Home</button></Link>
                 </div>
-
             </div>
-
             <div className="w-2/3 ml-20">
-
                 <div className="mb-10 ">
                     <div className="">
                         <img src="https://scontent.fdac15-1.fna.fbcdn.net/v/t1.15752-9/370247270_326392490024066_3245730488107685687_n.png?_nc_cat=111&ccb=1-7&_nc_sid=8cd0a2&_nc_ohc=jjfLxEf9c-wAX8uJ8CW&_nc_ht=scontent.fdac15-1.fna&oh=03_AdSEHe3YQtLqsj9QkZfJRxB5-29DYsTHWlDdtBImSdZBoQ&oe=6577E9E3" alt="" className="w-full rounded-lg h-52" />
                     </div>
-
                     {user.image !== undefined ? <div className="absolute ml-10 top-40 avatar online">
                         <div className="w-24 rounded-full ring ring-info ring-offset-base-100 ring-offset-2">
                             <img src={user.image} />
@@ -78,9 +75,6 @@ export default function MyProfile() {
                                 <FaUserCircle></FaUserCircle>
                             </div>
                         </div>}
-
-
-
                     <div className="flex items-center justify-between mt-14">
                         <h1 className='flex items-center ml-2 text-3xl font-bold'><BsPersonBadge></BsPersonBadge>  {user?.name?.firstName} {user?.name?.lastName}</h1>
                         {/* --------------------------------------edit profile modal-------------------------------------- */}
@@ -103,7 +97,7 @@ export default function MyProfile() {
                                 <button>close</button>
                             </form>
                         </dialog>
- {/* ---------------------------------------image modal------------------------------------------- */}
+                        {/* ---------------------------------------image modal------------------------------------------- */}
                         <dialog id="my_modal_2" className=" modal" open={isImageModalOpen} onClose={closeImageModal}>
                             <div className="modal-box rounded-2xl">
                                 <div>
@@ -114,11 +108,11 @@ export default function MyProfile() {
                                 <button>close</button>
                             </form>
                         </dialog>
- {/* ---------------------------------------password change modal-------------------------------------- */}
+                        {/* ---------------------------------------password change modal-------------------------------------- */}
                         <dialog id="my_modal_2" className=" modal" open={isPasswordModalOpen} onClose={closePasswordModal}>
                             <div className="modal-box rounded-2xl">
                                 <div>
-                                    <ChnagePassword></ChnagePassword>
+                                    <ChangePassword></ChangePassword>
                                 </div>
                             </div>
                             <form method="dialog" className="modal-backdrop">
@@ -126,7 +120,6 @@ export default function MyProfile() {
                             </form>
                         </dialog>
                     </div>
-
                     <div className='mt-5'>
                         <div className='p-3 font-bold text-white bg-blue-600 rounded-lg'>
                             <h1>Basic Information</h1>

@@ -9,6 +9,7 @@ import Products from "../pages/Products/Products";
 import SingleProductPage from "../pages/Products/SingleProductPage";
 import UpdateProduct from "../pages/UpdateProduct/UpdateProduct";
 import MyProfile from './../pages/MyProfile/MyProfile';
+import DashBoardLayout from "../layouts/DashBoardLayout";
 
 const baseUrl = "http://localhost:5000/api/v1";
 
@@ -43,10 +44,21 @@ const routes = createBrowserRouter([
       },
       {
         path: "/product/:id",
-        element: <SingleProductPage/>,
-        loader: async ({ params }) =>await fetch(`${baseUrl}/allProducts/${params.id}`)
+        element: <SingleProductPage />,
+        loader: async ({ params }) => await fetch(`${baseUrl}/allProducts/${params.id}`)
       }
     ],
+  },
+  {
+    path: '/dashboard',
+    element: <DashBoardLayout />,
+    errorElement: <ErrorPage></ErrorPage>,
+    children: [
+      {
+        path: "/dashboard/my-profile",
+        element: <MyProfile />,
+      },
+    ]
   },
   {
     path: "/login",
@@ -64,10 +76,10 @@ const routes = createBrowserRouter([
     path: "/updateProduct",
     element: <UpdateProduct />,
   },
-  {
-    path: "/my-profile",
-    element: <MyProfile/>,
-  },
+  // {
+  //   path: "/my-profile",
+  //   element: <MyProfile/>,
+  // },
 ]);
 
 export default routes;
