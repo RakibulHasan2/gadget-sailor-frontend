@@ -5,9 +5,6 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 // import { useEffect } from 'react';
 
-
-
-
 const UpdateProduct = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<AddProductValues>();
 
