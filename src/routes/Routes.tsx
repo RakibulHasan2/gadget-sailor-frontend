@@ -9,7 +9,6 @@ import Products from "../pages/Products/Products";
 import SingleProductPage from "../pages/Products/SingleProductPage";
 import UpdateProduct from "../pages/UpdateProduct/UpdateProduct";
 import MyProfile from './../pages/MyProfile/MyProfile';
-import DashBoardLayout from "../layouts/DashBoardLayout";
 
 const baseUrl = "http://localhost:5000/api/v1";
 
@@ -50,25 +49,6 @@ const routes = createBrowserRouter([
     ],
   },
   {
-    path: '/dashboard',
-    element: <DashBoardLayout />,
-    errorElement: <ErrorPage></ErrorPage>,
-    children: [
-      {
-        path: "/dashboard/my-profile",
-        element: <MyProfile />,
-      },
-      {
-        path: "/dashboard/addProduct",
-        element: <AddProduct />,
-      },
-      {
-        path: "/dashboard/updateProduct",
-        element: <UpdateProduct />,
-      },
-    ]
-  },
-  {
     path: "/login",
     element: <Login />,
   },
@@ -80,14 +60,14 @@ const routes = createBrowserRouter([
     path: "/addProduct",
     element: <AddProduct />,
   },
-  // {
-  //   path: "/updateProduct",
-  //   element: <UpdateProduct />,
-  // },
-  // {
-  //   path: "/my-profile",
-  //   element: <MyProfile/>,
-  // },
+  {
+    path: "/updateProduct",
+    element: <UpdateProduct />,
+  },
+  {
+    path: "/my-profile",
+    element: <MyProfile />,
+  },
 ]);
 
 export default routes;

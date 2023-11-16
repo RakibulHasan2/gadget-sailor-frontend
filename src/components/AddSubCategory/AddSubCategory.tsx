@@ -5,7 +5,6 @@ import toast from "react-hot-toast";
 
 const AddSubCategory = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<ICategory>();
-
     const { data, isLoading } = useApiData("http://localhost:5000/api/v1/get-AllCategories")
 
     // console.log(data)
