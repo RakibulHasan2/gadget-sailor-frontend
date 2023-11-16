@@ -41,9 +41,9 @@ export default function MyProfile() {
 
 
     return (
-        <div className='flex pl-3 background-my-profile'>
+        <div className='flex background-my-profile'>
             {/* Dashboard side bar */}
-            <div className='p-3 bg-blue-500 w-60 rounded-xl'>
+            <div className='p-5 bg-blue-900 w-60'>
                 <h1 className='flex items-center justify-center mb-10 text-3xl text-white border-b-2'><BiSolidDashboard />Dashboard</h1>
                 <div>
                     <button className="flex items-center justify-center w-full h-10 mb-5 font-bold btn-one gap-x-2"><FaCartArrowDown /> My Order</button>
