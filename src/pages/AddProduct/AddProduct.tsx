@@ -56,11 +56,12 @@ const AddProduct = () => {
             });
     }, []);
 
+    console.log(subCategoryData)
+
+    // const category = useLoaderData() as ICategoryResponse;
+    // console.log(category);
+    // setSubCategoryData(category.data);
     // console.log(subCategoryData)
-
-
-
-
 
     // const getCategory: Set<string> = new Set()
     // const getSubCategory: Set<string> = new Set()

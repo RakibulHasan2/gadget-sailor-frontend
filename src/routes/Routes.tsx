@@ -76,10 +76,10 @@ const routes = createBrowserRouter([
     path: "/signup",
     element: <SignUp />,
   },
-  // {
-  //   path: "/addProduct",
-  //   element: <AddProduct />,
-  // },
+  {
+    path: "/addProduct",
+    element: <AddProduct />,
+  },
   // {
   //   path: "/updateProduct",
   //   element: <UpdateProduct />,
