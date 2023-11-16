@@ -2,18 +2,26 @@ import { useLoaderData } from "react-router-dom";
 import { IProduct } from "../../types/ProductsType";
 import { useState } from "react";
 import ImageSlider from "../../components/ImageSlider/ImageSlider";
+import React from 'react';
+import { IoMdCheckmarkCircle } from "react-icons/io";
+//modal info
+//name
+//price
+//quantity
 
+//shopping cart
+//name, image, price, quantity, delete, unit price, total price,model
 
 export default function SingleProductPage() {
   // eslint-disable-next-line prefer-const
-  let [count, setCount] = useState(0);
+  let [count, setCount] = useState(1);
   const singleProduct = useLoaderData() as IProduct;
   const singleProductData = singleProduct.data;
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { __v, _id, category_name, sub_category_name, product_name, price, status, product_code, brand_name, image, model, warranty, ...otherProperties } = singleProductData;
-  
-  console.log(singleProductData)
+
+  // console.log(singleProductData)
 
   const increment = () => {
     count++;
@@ -21,21 +29,44 @@ export default function SingleProductPage() {
   }
 
   const decrement = () => {
-    count--;
-    setCount(count);
+    if (count >= 1) {
+      setCount(count);
+      count--;
+    }
+  }
+  // -------------------for cart modal-------------------------------
+  const [isCartModalOpen, setIsCartModalOpen] = React.useState(false);
+  const openImageModal = () => {
+    setIsCartModalOpen(true);
+  };
+  const closeCartModal = () => {
+    setIsCartModalOpen(false);
+  };
+
+  const CartDetails = () => {
+    const totalPrice = count * price;
+    const cartData = {
+      product_name: product_name,
+      image: image[0],
+      unit_price: price,
+      total_price: totalPrice,
+      quantity: count,
+      model: model
+    }
+    console.log(cartData)
   }
 
-  // const productKeys = Object.keys(singleProductData);
+  const handleClick = () => {
+    openImageModal();
+    CartDetails();
+  };
 
   return (
     <div className="container mx-auto my-8">
       <div className="lg:flex justify-center items-center">
         {/* image slider */}
         <div className="">
-          {/* {
-            image?.map(img => <img src={img}></img>)
-          } */}
-            <ImageSlider images={image}/>
+          <ImageSlider images={image} />
         </div>
         {/* product basic info */}
         <div className="w-2/4 lg:ms-12 lg:p-5">
@@ -59,7 +90,7 @@ export default function SingleProductPage() {
               <p className="text-xl border px-6 py-3">{count}</p>
               <button className="text-4xl border px-6" onClick={increment}>+</button>
             </div>
-            <button className="btn px-14 bg-blue-900 text-white hover:text-black rounded-xl">Buy Now</button>
+            <button onClick={handleClick} className="btn px-14 bg-blue-900 text-white hover:text-black rounded-xl">Buy Now</button>
           </div>
         </div>
       </div>
@@ -82,6 +113,30 @@ export default function SingleProductPage() {
             <h2 className="text-lg font-bold text-blue-900 bg-green-100 mt-5 p-2">Warranty Information</h2>
             <p className="mt-3 border-b border-gray-700 py-3">Warranty <span className="lg:ml-44">{warranty} Limited Warranty</span></p>
           </div>
+          {/* cart modal */}
+          <dialog id="my_modal_2" className="modal" open={isCartModalOpen} onClose={closeCartModal}>
+            <div className="modal-box rounded-2xl w-1/2" >
+              <div className="">
+                <div className="">
+                  <div>
+                    <IoMdCheckmarkCircle className="text-2xl text-green-600 mb-3"></IoMdCheckmarkCircle>
+                    You have added <span className="text-blue-900 font-bold">{product_name}</span> to your shopping cart!
+                  </div>
+                  <div className="mt-4">
+                    Cart quantity :
+                    Cart Total :
+                  </div>
+                </div>
+                <div className="mt-5">
+                  <button className="btn mr-4 rounded-2xl bg-blue-800 text-white">View Cart</button>
+                  <button className="btn mr-4 rounded-2xl bg-blue-800 text-white">Confirm Order</button>
+                </div>
+              </div>
+            </div>
+            <form method="dialog" className="modal-backdrop">
+              <button>close</button>
+            </form>
+          </dialog>
         </div>
       </div>
     </div>
