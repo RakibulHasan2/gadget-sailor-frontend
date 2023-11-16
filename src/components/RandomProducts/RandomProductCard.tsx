@@ -2,7 +2,7 @@ import { IProduct } from "../../types/ProductsType";
 
 
 const RandomProductCard = ({ data }: IProduct) => {
-    console.log(data)
+    // console.log(data)
     return (
         <div>
             {data.product_name}
