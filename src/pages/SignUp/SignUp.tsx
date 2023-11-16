@@ -16,7 +16,7 @@ export default function SignUp() {
     if (token) {
         navigate('/')
     }
-    
+
     const handleSignUp = async (data: FieldValues) => {
         const userData: IUser = {
             name: {
@@ -27,20 +27,24 @@ export default function SignUp() {
             phoneNumber: data.phoneNumber,
             password: data.password
         }
-        await fetch('http://localhost:5000/api/v1/auth/signup', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(userData)
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log('save user', data.data)
-                setCreateUserEmail(data.data.email)
-                toast.success('Successfully logged in');
-                sessionStorage.setItem('userData', JSON.stringify(data.data));
+        try {
+            await fetch('http://localhost:5000/api/v1/auth/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userData)
             })
+                .then(res => res.json())
+                .then(data => {
+                    console.log('save user', data.data)
+                    setCreateUserEmail(data.data.email)
+                    toast.success('Successfully logged in');
+                    sessionStorage.setItem('userData', JSON.stringify(data.data));
+                })
+        }catch(e){
+            console.log(e)
+        }
     }
     return (
         <div className='items-center justify-center lg:flex background-image'>
