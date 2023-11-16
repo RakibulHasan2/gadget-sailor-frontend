@@ -27,24 +27,26 @@ export default function SignUp() {
             phoneNumber: data.phoneNumber,
             password: data.password
         }
-        try {
-            await fetch('http://localhost:5000/api/v1/auth/signup', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(userData)
-            })
-                .then(res => res.json())
-                .then(data => {
-                    console.log('save user', data.data)
+
+        await fetch('http://localhost:5000/api/v1/auth/signup', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userData)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.data) {
+                    console.log('save user', data)
                     setCreateUserEmail(data.data.email)
-                    toast.success('Successfully logged in');
+                    toast.success(data.message);
                     sessionStorage.setItem('userData', JSON.stringify(data.data));
-                })
-        }catch(e){
-            console.log(e)
-        }
+                } else {
+                    toast.error(data.message)
+                }
+            })
+
     }
     return (
         <div className='items-center justify-center lg:flex background-image'>
