@@ -42,6 +42,7 @@ export default function MyProfile() {
 
     return (
         <div className='flex pl-3 background-my-profile'>
+            {/* Dashboard side bar */}
             <div className='p-3 bg-blue-500 w-60 rounded-xl'>
                 <h1 className='flex items-center justify-center mb-10 text-3xl text-white border-b-2'><BiSolidDashboard />Dashboard</h1>
                 <div>
@@ -60,6 +61,7 @@ export default function MyProfile() {
                         Back Home</button></Link>
                 </div>
             </div>
+            {/* my profile Information */}
             <div className="w-2/3 ml-20">
                 <div className="mb-10 ">
                     <div className="">

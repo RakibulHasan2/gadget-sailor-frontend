@@ -58,6 +58,14 @@ const routes = createBrowserRouter([
         path: "/dashboard/my-profile",
         element: <MyProfile />,
       },
+      {
+        path: "/dashboard/addProduct",
+        element: <AddProduct />,
+      },
+      {
+        path: "/dashboard/updateProduct",
+        element: <UpdateProduct />,
+      },
     ]
   },
   {
@@ -68,14 +76,14 @@ const routes = createBrowserRouter([
     path: "/signup",
     element: <SignUp />,
   },
-  {
-    path: "/addProduct",
-    element: <AddProduct />,
-  },
-  {
-    path: "/updateProduct",
-    element: <UpdateProduct />,
-  },
+  // {
+  //   path: "/addProduct",
+  //   element: <AddProduct />,
+  // },
+  // {
+  //   path: "/updateProduct",
+  //   element: <UpdateProduct />,
+  // },
   // {
   //   path: "/my-profile",
   //   element: <MyProfile/>,
