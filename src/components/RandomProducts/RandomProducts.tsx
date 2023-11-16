@@ -17,26 +17,29 @@ const RandomProducts = () => {
 
     let page = 1;
     let count = 0;
+    // let number = 1;
 
     const setPage = (num: number) => {
         page = num;
+        console.log(page)
     }
     const setCount = (num2: number) => {
         count = num2;
     }
     const pages = Math.ceil(data.length / 4);
-    console.log(pages)
+    //console.log(pages)
 
     const randomDatas = [...data].sort(() => Math.random() - 0.5);
-    console.log(randomDatas.length)
+    //console.log(randomDatas.length)
 
     const limitData = randomDatas.slice(count * 4, page * 4)
 
-    {
-        [...Array(pages).keys()].map((number) => (
-            console.log(number)
-        ))
-    }
+    // {
+    //     [...Array(pages).keys()].map((num) => (
+    //         console.log(num)
+
+    //     ))
+    // }
 
     return (
         <div>
@@ -49,7 +52,7 @@ const RandomProducts = () => {
                     ))
                 }
             </div>
-            {/* <div className="btn-group flex justify-center pagination">
+            <div className="btn-group flex justify-center pagination">
                 {[...Array(pages).keys()].map((number) => (
                     <button
                         key={number}
@@ -62,14 +65,18 @@ const RandomProducts = () => {
                         {number + 1}
                     </button>
                 ))}
-            </div> */}
-
-            <div className="join">
-                <button className="join-item btn">«</button>
-
-                <button className="join-item btn">Page 22</button>
-                <button className="join-item btn">»</button>
             </div>
+
+            {/* <div className="join">
+                <button className={page === number - 1 ? "join-item btn" : "btn"} onClick={() => {
+                    setPage(number - 1); setCount(number)
+                }}>«</button>
+
+                <button className="join-item btn">{number}</button>
+                <button className={page === number + 1 ? "join-item btn" : "btn"} onClick={() => {
+                    setPage(number + 1); setCount(number)
+                }}>»</button>
+            </div> */}
         </div>
     );
 };
