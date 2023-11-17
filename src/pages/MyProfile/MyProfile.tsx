@@ -8,11 +8,11 @@ import { BiSolidDashboard } from "react-icons/bi"
 import { Link } from 'react-router-dom';
 import UploadImage from '../../components/EditProfile/UploadImage';
 import ChangePassword from '../../components/EditProfile/ChangePassword';
+import { userData } from '../../hooks/getUserData';
 
 export default function MyProfile() {
 
-    const userData = sessionStorage.getItem('userData');
-    const user = JSON.parse(userData as string);
+   const user = userData()
     console.log(user.division)
     // ------------------for editprodile-----------------
     const [isUserModalOpen, setIsUserModalOpen] = React.useState(false);
