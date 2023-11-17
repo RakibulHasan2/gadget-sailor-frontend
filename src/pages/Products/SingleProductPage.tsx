@@ -1,20 +1,10 @@
+import React from 'react';
 import { useLoaderData } from "react-router-dom";
 import { IProduct } from "../../types/ProductsType";
 import { useState } from "react";
 import ImageSlider from "../../components/ImageSlider/ImageSlider";
-import React from 'react';
-import { IoMdCheckmarkCircle } from "react-icons/io";
-import { FaCartFlatbedSuitcase } from "react-icons/fa6";
-import { MdOutlineProductionQuantityLimits } from "react-icons/md";
-import { FaShoppingBag, FaShoppingCart } from "react-icons/fa";
+import CartModal from '../../components/Products/CartModal';
 
-//modal info
-//name
-//price
-//quantity
-
-//shopping cart
-//name, image, price, quantity, delete, unit price, total price,model
 
 export default function SingleProductPage() {
   // eslint-disable-next-line prefer-const
@@ -38,7 +28,7 @@ export default function SingleProductPage() {
       count--;
     }
   }
-  // -------------------for cart modal-------------------------------
+  // for cart modal
   const [isCartModalOpen, setIsCartModalOpen] = React.useState(false);
   const openImageModal = () => {
     setIsCartModalOpen(true);
@@ -46,9 +36,10 @@ export default function SingleProductPage() {
   const closeCartModal = () => {
     setIsCartModalOpen(false);
   };
-  const total = count * price
+
+  const totalPrice = count * price;
+
   const CartDetails = () => {
-    const totalPrice = count * price;
     const cartData = {
       product_name: product_name,
       image: image[0],
@@ -59,8 +50,6 @@ export default function SingleProductPage() {
     }
     console.log(cartData)
   }
-
-
 
   const handleClick = () => {
     openImageModal();
@@ -81,7 +70,10 @@ export default function SingleProductPage() {
             <p className="p-2 text-gray-600 rounded bg-slate-100">Price: <span className="font-bold text-black">{price}৳</span></p>
             <p className="p-2 text-gray-600 rounded bg-slate-100">Status: <span className="font-bold text-black">{status}</span></p>
             <p className="p-2 text-gray-600 rounded bg-slate-100">Product Code: <span className="font-bold text-black">{product_code}</span></p>
-            <p className="p-2 text-gray-600 rounded bg-slate-100">Brand Name: <span className="font-bold text-black"> {brand_name ? brand_name : <>-</>}</span></p>
+            {
+              brand_name &&
+              <p className="p-2 text-gray-600 rounded bg-slate-100">Brand Name: <span className="font-bold text-black"> {brand_name}</span></p>
+            }
           </div>
           {/* key features */}
           <div className="lg:mt-10">
@@ -120,33 +112,13 @@ export default function SingleProductPage() {
             <p className="py-3 mt-3 border-b border-gray-700">Warranty <span className="lg:ml-44">{warranty} Limited Warranty</span></p>
           </div>
           {/* cart modal */}
-          <dialog id="my_modal_2" className="modal" open={isCartModalOpen} onClose={closeCartModal}>
-            <div className="w-1/2 modal-box rounded-2xl" >
-              <div className="">
-                <div className="">
-                  <div>
-                    <span className="flex justify-center animate-bounce">
-                      <IoMdCheckmarkCircle className="mb-3 text-green-600 text-7xl"></IoMdCheckmarkCircle>
-                    </span>
-
-                    You have added <span className="font-bold text-blue-900">{product_name}</span> to your shopping cart!
-                  </div>
-                  <div className="flex p-3 mt-4 text-lg text-white bg-blue-900 border justify-evenly rounded-xl">
-                    <span className="flex items-center gap-x-2"><MdOutlineProductionQuantityLimits />Cart quantity:<span className="font-bold ">{count}</span></span>
-                    <span className="border-r-2"></span>
-                    <span className="flex items-center gap-x-2"><FaCartFlatbedSuitcase />Cart Total:<span className="ml-2 font-bold">{total}</span> ৳</span>
-                  </div>
-                </div>
-                <div className="flex justify-around mt-5">
-                  <button className='flex items-center justify-center p-2 text-lg text-blue-700 bg-gray-100 rounded-md gap-x-3 w-44 hover:bg-blue-700 hover:text-white'><FaShoppingCart></FaShoppingCart>View Cart</button>
-                  <button className='flex items-center justify-center p-2 text-lg text-blue-700 bg-gray-100 rounded-md gap-x-3 w-44 hover:bg-blue-700 hover:text-white'><FaShoppingBag />Confirm Order</button>
-                </div>
-              </div>
-            </div>
-            <form method="dialog" className="modal-backdrop">
-              <button>close</button>
-            </form>
-          </dialog>
+          <CartModal
+            closeCartModal={closeCartModal}
+            isCartModalOpen={isCartModalOpen}
+            product_name={product_name}
+            count={count}
+            total={totalPrice}
+          ></CartModal>
         </div>
       </div>
     </div>
