@@ -125,7 +125,6 @@ export default function SingleProductPage() {
               <div className="">
                 <div className="">
                   <div>
-                    {/* <span className="flex justify-center"><IoMdCheckmarkCircle className="mb-3 text-5xl text-green-600"></IoMdCheckmarkCircle></span> */}
                     <span className="flex justify-center animate-bounce">
                       <IoMdCheckmarkCircle className="mb-3 text-green-600 text-7xl"></IoMdCheckmarkCircle>
                     </span>
