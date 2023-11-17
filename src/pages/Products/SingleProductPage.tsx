@@ -4,6 +4,10 @@ import { useState } from "react";
 import ImageSlider from "../../components/ImageSlider/ImageSlider";
 import React from 'react';
 import { IoMdCheckmarkCircle } from "react-icons/io";
+import { FaCartFlatbedSuitcase } from "react-icons/fa6";
+import { MdOutlineProductionQuantityLimits } from "react-icons/md";
+import { FaShoppingBag, FaShoppingCart } from "react-icons/fa";
+
 //modal info
 //name
 //price
@@ -42,7 +46,7 @@ export default function SingleProductPage() {
   const closeCartModal = () => {
     setIsCartModalOpen(false);
   };
-
+  const total = count * price
   const CartDetails = () => {
     const totalPrice = count * price;
     const cartData = {
@@ -56,6 +60,8 @@ export default function SingleProductPage() {
     console.log(cartData)
   }
 
+
+
   const handleClick = () => {
     openImageModal();
     CartDetails();
@@ -63,46 +69,46 @@ export default function SingleProductPage() {
 
   return (
     <div className="container mx-auto my-8">
-      <div className="lg:flex justify-center items-center">
+      <div className="items-center justify-center lg:flex">
         {/* image slider */}
         <div className="">
           <ImageSlider images={image} />
         </div>
         {/* product basic info */}
         <div className="w-2/4 lg:ms-12 lg:p-5">
-          <h1 className="text-2xl text-blue-900 font-bold lg:mt-10">{product_name}</h1>
+          <h1 className="text-2xl font-bold text-blue-900 lg:mt-10">{product_name}</h1>
           <div className="flex justify-evenly lg:mt-5">
-            <p className="bg-slate-100 p-2 text-gray-600 rounded">Price: <span className="font-bold text-black">{price}৳</span></p>
-            <p className="bg-slate-100 p-2 text-gray-600 rounded">Status: <span className="font-bold text-black">{status}</span></p>
-            <p className="bg-slate-100 p-2 text-gray-600 rounded">Product Code: <span className="font-bold text-black">{product_code}</span></p>
-            <p className="bg-slate-100 p-2 text-gray-600 rounded">Brand Name: <span className="font-bold text-black"> {brand_name}</span></p>
+            <p className="p-2 text-gray-600 rounded bg-slate-100">Price: <span className="font-bold text-black">{price}৳</span></p>
+            <p className="p-2 text-gray-600 rounded bg-slate-100">Status: <span className="font-bold text-black">{status}</span></p>
+            <p className="p-2 text-gray-600 rounded bg-slate-100">Product Code: <span className="font-bold text-black">{product_code}</span></p>
+            <p className="p-2 text-gray-600 rounded bg-slate-100">Brand Name: <span className="font-bold text-black"> {brand_name ? brand_name : <>-</>}</span></p>
           </div>
           {/* key features */}
           <div className="lg:mt-10">
-            <p className="text-xl lg:mb-7 font-bold">Key Features</p>
+            <p className="text-xl font-bold lg:mb-7">Key Features</p>
             <p>Model: {model}</p>
             <p>Warranty: {warranty}</p>
           </div>
           {/* buy now button */}
-          <div className="mt-10 flex">
+          <div className="flex mt-10">
             <div className="flex lg:mr-10">
-              <button className="text-4xl border px-6" onClick={decrement}>-</button>
-              <p className="text-xl border px-6 py-3">{count}</p>
-              <button className="text-4xl border px-6" onClick={increment}>+</button>
+              <button className="px-6 text-4xl border" onClick={decrement}>-</button>
+              <p className="px-6 py-3 text-xl border">{count}</p>
+              <button className="px-6 text-4xl border" onClick={increment}>+</button>
             </div>
-            <button onClick={handleClick} className="btn px-14 bg-blue-900 text-white hover:text-black rounded-xl">Buy Now</button>
+            <button onClick={handleClick} className="text-white bg-blue-900 btn px-14 hover:text-black rounded-xl">Buy Now</button>
           </div>
         </div>
       </div>
       {/*----- specification section ------*/}
-      <div className="mt-10 w-3/5 lg:ml-36 p-6 shadow-xl">
+      <div className="w-3/5 p-6 mt-10 shadow-xl lg:ml-36">
         <p className="text-3xl font-bold">Specification</p>
         <div className="lg:ml-5">
           {/* basic information */}
           <div className="mb-6">
-            <h2 className="text-lg font-bold text-blue-900 bg-green-100 mt-5 p-2">Basic Information</h2>
+            <h2 className="p-2 mt-5 text-lg font-bold text-blue-900 bg-green-100">Basic Information</h2>
             {Object.keys(otherProperties).map((key) => (
-              <div key={key} className="flex justify-between items-center border-b border-gray-700 py-3">
+              <div key={key} className="flex items-center justify-between py-3 border-b border-gray-700">
                 <p className="text-gray-600">{key}</p>
                 <p className="w-2/3">{otherProperties[key]}</p>
               </div>
@@ -110,26 +116,30 @@ export default function SingleProductPage() {
           </div>
           {/* warranty information */}
           <div className="mb-6">
-            <h2 className="text-lg font-bold text-blue-900 bg-green-100 mt-5 p-2">Warranty Information</h2>
-            <p className="mt-3 border-b border-gray-700 py-3">Warranty <span className="lg:ml-44">{warranty} Limited Warranty</span></p>
+            <h2 className="p-2 mt-5 text-lg font-bold text-blue-900 bg-green-100">Warranty Information</h2>
+            <p className="py-3 mt-3 border-b border-gray-700">Warranty <span className="lg:ml-44">{warranty} Limited Warranty</span></p>
           </div>
           {/* cart modal */}
           <dialog id="my_modal_2" className="modal" open={isCartModalOpen} onClose={closeCartModal}>
-            <div className="modal-box rounded-2xl w-1/2" >
+            <div className="w-1/2 modal-box rounded-2xl" >
               <div className="">
                 <div className="">
                   <div>
-                    <IoMdCheckmarkCircle className="text-2xl text-green-600 mb-3"></IoMdCheckmarkCircle>
-                    You have added <span className="text-blue-900 font-bold">{product_name}</span> to your shopping cart!
+                    <span className="flex justify-center animate-bounce">
+                      <IoMdCheckmarkCircle className="mb-3 text-green-600 text-7xl"></IoMdCheckmarkCircle>
+                    </span>
+
+                    You have added <span className="font-bold text-blue-900">{product_name}</span> to your shopping cart!
                   </div>
-                  <div className="mt-4">
-                    Cart quantity :
-                    Cart Total :
+                  <div className="flex p-3 mt-4 text-lg text-white bg-blue-900 border justify-evenly rounded-xl">
+                    <span className="flex items-center gap-x-2"><MdOutlineProductionQuantityLimits />Cart quantity:<span className="font-bold ">{count}</span></span>
+                    <span className="border-r-2"></span>
+                    <span className="flex items-center gap-x-2"><FaCartFlatbedSuitcase />Cart Total:<span className="ml-2 font-bold">{total}</span> ৳</span>
                   </div>
                 </div>
-                <div className="mt-5">
-                  <button className="btn mr-4 rounded-2xl bg-blue-800 text-white">View Cart</button>
-                  <button className="btn mr-4 rounded-2xl bg-blue-800 text-white">Confirm Order</button>
+                <div className="flex justify-around mt-5">
+                  <button className='flex items-center justify-center p-2 text-lg text-blue-700 bg-gray-100 rounded-md gap-x-3 w-44 hover:bg-blue-700 hover:text-white'><FaShoppingCart></FaShoppingCart>View Cart</button>
+                  <button className='flex items-center justify-center p-2 text-lg text-blue-700 bg-gray-100 rounded-md gap-x-3 w-44 hover:bg-blue-700 hover:text-white'><FaShoppingBag />Confirm Order</button>
                 </div>
               </div>
             </div>
