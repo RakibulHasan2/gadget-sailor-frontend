@@ -10,6 +10,7 @@ import SingleProductPage from "../pages/Products/SingleProductPage";
 import UpdateProduct from "../pages/UpdateProduct/UpdateProduct";
 import MyProfile from './../pages/MyProfile/MyProfile';
 import MyOrder from "../pages/MyOrder/MyOrder";
+import PrivateRoute from "./PrivateRoute";
 
 const baseUrl = "http://localhost:5000/api/v1";
 
@@ -59,7 +60,7 @@ const routes = createBrowserRouter([
   },
   {
     path: "/addProduct",
-    element: <AddProduct />,
+    element: <PrivateRoute><AddProduct /></PrivateRoute>,
   },
   {
     path: "/updateProduct",
