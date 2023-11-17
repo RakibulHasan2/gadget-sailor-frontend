@@ -5,7 +5,7 @@ import { FaCartPlus } from 'react-icons/fa';
 
 
 export default function ProductsCard({ product }: IProduct) {
-    const { product_name, price, _id } = product;
+    const { product_name, price, _id} = product;
    
     return (
         <div>
