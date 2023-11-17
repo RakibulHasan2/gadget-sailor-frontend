@@ -6,7 +6,8 @@ import RandomProductCard from "./RandomProductCard";
 
 export default function RandomProducts() {
     const [page, setPage] = useState(0);
-    const [size, setSize] = useState(8)
+    const [size, setSize] = useState(8);
+    const [count, setCount] = useState(0)
 
     const { data, isLoading } = useApiData("http://localhost:5000/api/v1/allProducts")
     if (isLoading) {
@@ -28,7 +29,7 @@ export default function RandomProducts() {
 
 
     console.log(data)
-    const count = 0;
+
 
     const pages = Math.ceil(data.length / size);
     //console.log(pages)
@@ -56,12 +57,13 @@ export default function RandomProducts() {
                 }
             </div>
             <div className="btn-group flex justify-center pagination">
+                <p>Page no:{page}</p>
                 {[...Array(pages).keys()].map((number) => (
                     <button
                         key={number}
                         onClick={() => {
                             setPage(number + 1);
-
+                            setCount(number)
                         }}
                         className={page === number + 1 ? "btn btn-primary" : "btn"}
                     >
