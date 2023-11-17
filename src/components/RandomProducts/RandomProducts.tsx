@@ -1,9 +1,12 @@
-import React from "react";
+import { useState } from "react";
 import useApiData from "../../hooks/getAPIData";
 import RandomProductCard from "./RandomProductCard";
 
 
-const RandomProducts = () => {
+
+export default function RandomProducts() {
+    const [page, setPage] = useState(0);
+    const [size, setSize] = useState(8)
 
     const { data, isLoading } = useApiData("http://localhost:5000/api/v1/allProducts")
     if (isLoading) {
@@ -15,31 +18,31 @@ const RandomProducts = () => {
 
     // const [count, setCount] = React.useState<number>(0);
 
-    let page = 1;
-    let count = 0;
-    // let number = 1;
 
-    const setPage = (num: number) => {
-        page = num;
-        console.log(page)
-    }
-    const setCount = (num2: number) => {
-        count = num2;
-    }
-    const pages = Math.ceil(data.length / 4);
+
+
+
+
+
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+
+
+    console.log(data)
+    const count = 0;
+
+    const pages = Math.ceil(data.length / size);
     //console.log(pages)
 
     const randomDatas = [...data].sort(() => Math.random() - 0.5);
     //console.log(randomDatas.length)
 
-    const limitData = randomDatas.slice(count * 4, page * 4)
+    const limitData = randomDatas.slice(count * size, page * size)
+    console.log(limitData)
 
-    // {
-    //     [...Array(pages).keys()].map((num) => (
-    //         console.log(num)
-
-    //     ))
-    // }
+    // const number: number[] = [...Array(pages).keys()];
+    // number.map(num => {
+    //     console.log(num)
+    // })
 
     return (
         <div>
@@ -58,7 +61,7 @@ const RandomProducts = () => {
                         key={number}
                         onClick={() => {
                             setPage(number + 1);
-                            setCount(number);
+
                         }}
                         className={page === number + 1 ? "btn btn-primary" : "btn"}
                     >
@@ -77,8 +80,16 @@ const RandomProducts = () => {
                     setPage(number + 1); setCount(number)
                 }}>»</button>
             </div> */}
+
+            {/* <div>
+                <div className="join">
+                    <button className="join-item btn">«</button>
+                    <button className="join-item btn">Page 22</button>
+                    <button className="join-item btn">»</button>
+                </div>
+            </div> */}
         </div>
     );
-};
+}
 
-export default RandomProducts;
+//export default RandomProducts;
