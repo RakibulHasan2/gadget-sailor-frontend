@@ -2,10 +2,11 @@ import { FcEditImage } from 'react-icons/fc';
 import { IUpdateUsers } from '../../types/MyProfileType';
 import { FieldValues, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { userData } from '../../hooks/getUserData';
 const UploadImage = () => {
     const { register, handleSubmit,formState: { errors } } = useForm<IUpdateUsers>();
-    const userData = sessionStorage.getItem('userData');
-    const user = JSON.parse(userData as string);
+ 
+    const user = userData()
   
   
     const imageHostKey = '29473dd4ab78ebc95009722bc0558d38';
