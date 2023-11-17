@@ -47,7 +47,11 @@ const routes = createBrowserRouter([
         path: "/product/:id",
         element: <SingleProductPage />,
         loader: async ({ params }) => await fetch(`${baseUrl}/allProducts/${params.id}`)
-      }
+      },
+      {
+        path: "/my-order",
+        element: <MyOrder />,
+      },
     ],
   },
   {
@@ -68,12 +72,9 @@ const routes = createBrowserRouter([
   },
   {
     path: "/my-profile",
-    element: <MyProfile/>,
+    element: <MyProfile />,
   },
-  {
-    path: "/my-order",
-    element: <MyOrder/>,
-  },
+
 ]);
 
 export default routes;
