@@ -4,6 +4,10 @@ import { useState } from "react";
 import ImageSlider from "../../components/ImageSlider/ImageSlider";
 import React from 'react';
 import { IoMdCheckmarkCircle } from "react-icons/io";
+import { FaCartFlatbedSuitcase } from "react-icons/fa6";
+import { MdOutlineProductionQuantityLimits } from "react-icons/md";
+import { FaShoppingBag, FaShoppingCart } from "react-icons/fa";
+
 //modal info
 //name
 //price
@@ -42,7 +46,7 @@ export default function SingleProductPage() {
   const closeCartModal = () => {
     setIsCartModalOpen(false);
   };
-
+  const total = count * price
   const CartDetails = () => {
     const totalPrice = count * price;
     const cartData = {
@@ -55,6 +59,8 @@ export default function SingleProductPage() {
     }
     console.log(cartData)
   }
+
+
 
   const handleClick = () => {
     openImageModal();
@@ -75,7 +81,7 @@ export default function SingleProductPage() {
             <p className="p-2 text-gray-600 rounded bg-slate-100">Price: <span className="font-bold text-black">{price}৳</span></p>
             <p className="p-2 text-gray-600 rounded bg-slate-100">Status: <span className="font-bold text-black">{status}</span></p>
             <p className="p-2 text-gray-600 rounded bg-slate-100">Product Code: <span className="font-bold text-black">{product_code}</span></p>
-            <p className="p-2 text-gray-600 rounded bg-slate-100">Brand Name: <span className="font-bold text-black"> {brand_name?brand_name:<>-</>}</span></p>
+            <p className="p-2 text-gray-600 rounded bg-slate-100">Brand Name: <span className="font-bold text-black"> {brand_name ? brand_name : <>-</>}</span></p>
           </div>
           {/* key features */}
           <div className="lg:mt-10">
@@ -119,17 +125,22 @@ export default function SingleProductPage() {
               <div className="">
                 <div className="">
                   <div>
-                    <IoMdCheckmarkCircle className="mb-3 text-2xl text-green-600"></IoMdCheckmarkCircle>
+                    {/* <span className="flex justify-center"><IoMdCheckmarkCircle className="mb-3 text-5xl text-green-600"></IoMdCheckmarkCircle></span> */}
+                    <span className="flex justify-center animate-bounce">
+                      <IoMdCheckmarkCircle className="mb-3 text-green-600 text-7xl"></IoMdCheckmarkCircle>
+                    </span>
+
                     You have added <span className="font-bold text-blue-900">{product_name}</span> to your shopping cart!
                   </div>
-                  <div className="mt-4">
-                    Cart quantity :
-                    Cart Total :
+                  <div className="flex p-3 mt-4 text-lg text-white bg-blue-900 border justify-evenly rounded-xl">
+                    <span className="flex items-center gap-x-2"><MdOutlineProductionQuantityLimits />Cart quantity:<span className="font-bold ">{count}</span></span>
+                    <span className="border-r-2"></span>
+                    <span className="flex items-center gap-x-2"><FaCartFlatbedSuitcase />Cart Total:<span className="ml-2 font-bold">{total}</span> ৳</span>
                   </div>
                 </div>
-                <div className="mt-5">
-                  <button className="mr-4 text-white bg-blue-800 btn rounded-2xl">View Cart</button>
-                  <button className="mr-4 text-white bg-blue-800 btn rounded-2xl">Confirm Order</button>
+                <div className="flex justify-around mt-5">
+                  <button className='flex items-center justify-center p-2 text-lg text-blue-700 bg-gray-100 rounded-md gap-x-3 w-44 hover:bg-blue-700 hover:text-white'><FaShoppingCart></FaShoppingCart>View Cart</button>
+                  <button className='flex items-center justify-center p-2 text-lg text-blue-700 bg-gray-100 rounded-md gap-x-3 w-44 hover:bg-blue-700 hover:text-white'><FaShoppingBag />Confirm Order</button>
                 </div>
               </div>
             </div>

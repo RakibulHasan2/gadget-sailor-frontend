@@ -10,4 +10,26 @@
 .signle-product-card{
     width: 450px;
     height:400px;
+
 }
+
+
+@keyframes bounceWithShadow {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    40% {
+      transform: translateY(-15px);
+      box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    }
+    60% {
+      transform: translateY(-10px);
+      box-shadow: 0 6px 9px rgba(0, 0, 0, 0.15);
+    }
+  }
+  
+  .animate-bounce-with-shadow {
+    animation: bounceWithShadow 2s infinite;
+  }
+  
