@@ -2,11 +2,11 @@
 import { FieldValues, useForm } from "react-hook-form";
 import { IUpdateUsers } from "../../types/MyProfileType";
 import toast from "react-hot-toast";
+import { userData } from "../../hooks/getUserData";
 
 export default function EditProfile() {
   const { register, handleSubmit } = useForm<IUpdateUsers>();
-  const userData = sessionStorage.getItem('userData');
-  const user = JSON.parse(userData as string);
+  const user = userData()
 
   const handleUpdateProfile = async (data: FieldValues) => {
     const userprofileData: IUpdateUsers = {

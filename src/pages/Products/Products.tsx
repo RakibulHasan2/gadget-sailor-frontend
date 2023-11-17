@@ -12,25 +12,32 @@ export default function Products() {
     return (
         <div>
             {/* selected product route */}
-            <div className="flex justify-center shadow-lg  mb-10">
-                <div className="flex p-5 w-9/12 lg:ml-10 items-center ">
+            <div className="flex justify-center mb-10 shadow-lg">
+                <div className="flex items-center w-9/12 p-5 lg:ml-10 ">
                     <Link to='/home'><MdHome /></Link>
-                    <Link to={`/${useParams().categoryName}`}>
-                        <p className="ml-4 hover:text-blue-900 hover:font-bold">{useParams().categoryName}</p>
-                    </Link>
+                    {
+                        useParams().categoryName &&
+                        <>
+                            <span className="mr-2 ms-2">/</span>
+                            <Link to={`/${useParams().categoryName}`}>
+
+                                <p className="ml-4 font-bold hover:text-blue-600 ">{useParams().categoryName}</p>
+                            </Link>
+                        </>
+                    }
                     {useParams().subCategoryName &&
                         <>
-                            <span className="ms-2 mr-2">/</span>
+                            <span className="mr-2 ms-2">/</span>
                             <Link to={`/${useParams().categoryName}/${useParams().subCategoryName}`}>
-                                <p className="hover:text-blue-900 hover:font-bold">{useParams()?.subCategoryName}</p>
+                                <p className="font-bold hover:text-blue-600">{useParams()?.subCategoryName}</p>
                             </Link>
                         </>
                     }
                     {useParams().brandName &&
                         <>
-                            <span className="ms-2 mr-2">/</span>
+                            <span className="mr-2 ms-2">/</span>
                             <Link to={`/${useParams().categoryName}/${useParams().subCategoryName}/${useParams().brandName}`}>
-                                <p className="hover:text-blue-900 hover:font-bold">{useParams()?.brandName}</p>
+                                <p className="font-bold hover:text-blue-600 ">{useParams()?.brandName}</p>
                             </Link>
                         </>
                     }

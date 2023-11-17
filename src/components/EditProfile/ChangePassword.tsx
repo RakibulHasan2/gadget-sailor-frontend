@@ -4,12 +4,12 @@ import { FaEye, FaUserLock } from "react-icons/fa";
 import { IUpdateUsers } from "../../types/MyProfileType";
 import toast from "react-hot-toast";
 import { useState } from "react";
+import { userData } from "../../hooks/getUserData";
 
 const ChangePassword = () => {
     const { register, handleSubmit, getValues, formState: { errors } } = useForm<IUpdateUsers>();
 
-    const userData = sessionStorage.getItem('userData');
-    const user = JSON.parse(userData as string);
+    const user = userData()
 
     const [hideCurrent, setHideCurrent] = useState(true);
     const [hideNew, setHideNew] = useState(true);
