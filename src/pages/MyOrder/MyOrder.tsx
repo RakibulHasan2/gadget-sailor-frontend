@@ -1,8 +1,19 @@
+import toast from "react-hot-toast";
 import useApiData from "../../hooks/getAPIData";
 import '../../styles/MyOrder.css'
 
 export default function MyOrder() {
   const { data } = useApiData("http://localhost:5000/api/v1/getCart");
+  const handleDeleteCart = (id: string) => {
+    fetch(`http://localhost:5000/api/v1/getCart/${id}`, {
+      method: 'DELETE',
+    })
+    .then(response => {
+      if (response.ok) {
+        toast.success("Item Deleted");
+      }
+    })
+  }
   return (
     <div className="flex justify-center mt-10 mb-10">
       <div className=" w-9/12 lg:p-10 shadow-2xl">
@@ -27,11 +38,11 @@ export default function MyOrder() {
                 data.map((item, index) =>
                   <tr>
                     <th>{index + 1}</th>
-                    <td><img className="w-16 h-16" src={item.image} alt="" /></td>
+                    <td><img className="w-16" src={item.image} alt="" /></td>
                     <td>{item.product_name}</td>
                     <td>{item.model}</td>
                     <td>{item.quantity}</td>
-                    <th><button className='text-2xl text-blue-900'>x</button></th>
+                    <th><button onClick={() => handleDeleteCart(item._id)} className='text-2xl text-blue-900'>x</button></th>
                     <td>{item.unit_price}৳</td>
                     <td>{item.total_price}৳	</td>
                   </tr>
