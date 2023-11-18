@@ -86,7 +86,7 @@ export default function Navbar() {
         </div>
         <div className="navbar-end">
           <div className="mr-4">
-            <button className="flex items-center font-bold"><small className="hover:text-gray-400">Hot Offer!</small> <GiElectric className='text-3xl font-extrabol icon'></GiElectric></button>
+           <Link to='/hot-offer'><button className="flex items-center font-bold"><small className="hover:text-gray-400">Hot Offer!</small> <GiElectric className='text-3xl font-extrabol icon'></GiElectric></button></Link> 
           </div>
           <div>
             <button className="mr-5 text-2xl align-middle hover:text-gray-400" title="Cart"><FaCartArrowDown></FaCartArrowDown></button>
