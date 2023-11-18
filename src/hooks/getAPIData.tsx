@@ -1,8 +1,9 @@
 // useApiData.ts
 import { useEffect, useState } from 'react';
 import { IProduct } from '../types/ProductsType';
+import { ICartDetails } from '../types/CartModalType';
 
-type ApiData = IProduct; 
+type ApiData = IProduct | ICartDetails; 
 
 const useApiData = (apiUrl: string) => {
   const [data, setData] = useState<ApiData[]>([]);
