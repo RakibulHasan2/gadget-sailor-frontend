@@ -9,11 +9,12 @@ const RandomProductCard = ({ data }: IProduct) => {
             <figure className="px-10 pt-10 w-full h-40">
                 <img src={data.image[0]} className="rounded-xl" />
             </figure>
-            <h2 className="card-title">{data.product_name}</h2>
-            <div className="card-body items-center text-center">
+            <h2 className="card-title mt-2">{data.product_name}</h2>
+            <div className="card-body items-center text-center grid grid-cols-1 gap-4 content-end">
 
 
-                <div className="card-actions ">
+                <div className="card-actions flex-col">
+                    <p className="mb-0">Price: {data.price}</p>
                     <button className="btn btn-primary">Buy Now</button>
                 </div>
             </div>
