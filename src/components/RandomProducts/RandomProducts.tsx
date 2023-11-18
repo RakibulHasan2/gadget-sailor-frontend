@@ -1,6 +1,7 @@
 import { useState } from "react";
 import useApiData from "../../hooks/getAPIData";
 import RandomProductCard from "./RandomProductCard";
+import "./RandomProductCard.css"
 
 
 
@@ -14,16 +15,11 @@ const RandomProducts = () => {
         return <p>Loading...</p>;
     }
 
-
-
-    //console.log(data)
-
-
     const pages = Math.ceil(data.length / size);
     console.log(page)
 
     const randomDatas = [...data].sort(() => Math.random() - 0.5);
-    //console.log(randomDatas.length)
+
 
     const limitData = randomDatas.slice(count * size, page * size)
     console.log(limitData)
@@ -31,7 +27,7 @@ const RandomProducts = () => {
 
     return (
         <div>
-            <div>
+            <div className="container">
                 {
                     limitData.map(i => (
                         <RandomProductCard
