@@ -127,7 +127,7 @@ const UpdateProduct = () => {
     return (
         <div>
             <div className='w-96 p-7'>
-                <h2 className='text-3xl font-bold text-center text-sky-500'>Add a New Product</h2>
+                <h2 className='text-3xl font-bold text-center text-sky-500'>Update Product:</h2>
                 <form onSubmit={handleSubmit(handleUpdateProduct)}>
                     <div className="w-full max-w-xs form-control">
                         <label className="label"> <span className="label-text">Product category</span></label>

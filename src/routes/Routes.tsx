@@ -31,7 +31,7 @@ const routes = createBrowserRouter([
       },
       {
         path: "/hot-offer",
-        element: <HotOfferPage/>,
+        element: <HotOfferPage />,
       },
       {
         path: "/:categoryName",
