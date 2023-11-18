@@ -5,7 +5,7 @@ import RandomProductCard from "./RandomProductCard";
 
 
 const RandomProducts = () => {
-    const [page, setPage] = useState(0);
+    const [page, setPage] = useState(1);
 
     const [count, setCount] = useState(0)
     const size = 8;
@@ -16,7 +16,7 @@ const RandomProducts = () => {
 
 
 
-    console.log(data)
+    //console.log(data)
 
 
     const pages = Math.ceil(data.length / size);
@@ -26,6 +26,7 @@ const RandomProducts = () => {
     //console.log(randomDatas.length)
 
     const limitData = randomDatas.slice(count * size, page * size)
+    console.log(limitData)
     console.log(limitData)
 
     return (
