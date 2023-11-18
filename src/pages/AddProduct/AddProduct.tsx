@@ -56,11 +56,12 @@ const AddProduct = () => {
             });
     }, []);
 
+    console.log(subCategoryData)
+
+    // const category = useLoaderData() as ICategoryResponse;
+    // console.log(category);
+    // setSubCategoryData(category.data);
     // console.log(subCategoryData)
-
-
-
-
 
     // const getCategory: Set<string> = new Set()
     // const getSubCategory: Set<string> = new Set()
@@ -317,7 +318,6 @@ const AddProduct = () => {
                             </select>
                             {errors.brand_name && <p className='text-red-600'>{errors.brand_name?.message}</p>}
                         </div>
-                        <small className="ml-10 font-black mb-4">Want to add a new Brand? <Link className='font-bold text-indigo-600' to="/">Add</Link></small>
 
 
                         {/* Product Name */}
