@@ -11,6 +11,7 @@ import UpdateProduct from "../pages/UpdateProduct/UpdateProduct";
 import MyProfile from './../pages/MyProfile/MyProfile';
 import MyOrder from "../pages/MyOrder/MyOrder";
 import PrivateRoute from "./PrivateRoute";
+import HotOfferPage from './../pages/HotOfferPage/HotOfferPage';
 
 const baseUrl = "http://localhost:5000/api/v1";
 
@@ -27,6 +28,10 @@ const routes = createBrowserRouter([
       {
         path: "/home",
         element: <Home />,
+      },
+      {
+        path: "/hot-offer",
+        element: <HotOfferPage/>,
       },
       {
         path: "/:categoryName",
