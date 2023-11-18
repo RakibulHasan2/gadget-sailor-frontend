@@ -1,7 +1,7 @@
 import { useState } from "react";
 import useApiData from "../../hooks/getAPIData";
 import RandomProductCard from "./RandomProductCard";
-import "./RandomProductCard.css"
+
 
 
 
@@ -27,7 +27,7 @@ const RandomProducts = () => {
 
     return (
         <div>
-            <div className="container">
+            <div className="grid lg:grid-cols-4 lg:gap-x-4 lg:gap-y-8 lg:grid-rows-2">
                 {
                     limitData.map(i => (
                         <RandomProductCard
