@@ -1,17 +1,20 @@
 import { IProduct } from "../../types/ProductsType";
-import "./RandomProductCard.css"
+
 
 
 const RandomProductCard = ({ data }: IProduct) => {
     // console.log(data)
     return (
-        <div className="card">
-            <div className="image">
-                <img src={data.image[0]} alt="/#" />
-            </div>
-            <div className="content">
-                <h3>{data.category_name}</h3>
-                <p>{ }</p>
+        <div className="card w-72 bg-base-100 shadow-xl  ">
+            <figure className="px-10 pt-10 w-full h-40">
+                <img src={data.image[0]} className="rounded-xl" />
+            </figure>
+            <div className="card-body items-center text-center">
+                <h2 className="card-title">Shoes!</h2>
+
+                <div className="card-actions ">
+                    <button className="btn btn-primary">Buy Now</button>
+                </div>
             </div>
         </div>
     );
