@@ -6,7 +6,6 @@ import ImageSlider from "../../components/ImageSlider/ImageSlider";
 import CartModal from '../../components/Products/CartModal';
 import { userData } from '../../hooks/getUserData';
 
-
 export default function SingleProductPage() {
   // eslint-disable-next-line prefer-const
   let [count, setCount] = useState(1);

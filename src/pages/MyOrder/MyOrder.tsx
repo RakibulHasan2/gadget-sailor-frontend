@@ -4,15 +4,16 @@ import '../../styles/MyOrder.css'
 
 export default function MyOrder() {
   const { data } = useApiData("http://localhost:5000/api/v1/getCart");
+
   const handleDeleteCart = (id: string) => {
     fetch(`http://localhost:5000/api/v1/getCart/${id}`, {
       method: 'DELETE',
     })
-    .then(response => {
-      if (response.ok) {
-        toast.success("Item Deleted");
-      }
-    })
+      .then(response => {
+        if (response.ok) {
+          toast.success("Item Deleted");
+        }
+      })
   }
   return (
     <div className="flex justify-center mt-10 mb-10">
@@ -36,9 +37,14 @@ export default function MyOrder() {
             <tbody className="row-info">
               {
                 data.map((item, index) =>
+                // row
                   <tr>
                     <th>{index + 1}</th>
-                    <td><img className="w-16" src={item.image} alt="" /></td>
+                    <td> {item.image && typeof item.image === 'string' ? (
+                      <img className="w-16" src={item.image} alt="" />
+                    ) : (
+                      <span>No Image</span>
+                    )}</td>
                     <td>{item.product_name}</td>
                     <td>{item.model}</td>
                     <td>{item.quantity}</td>
