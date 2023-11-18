@@ -3,6 +3,7 @@ import { FaCartFlatbedSuitcase } from "react-icons/fa6";
 import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 import { FaShoppingBag, FaShoppingCart } from "react-icons/fa";
 import { ICartModal } from "../../types/CartModalType";
+import { Link } from "react-router-dom";
 
 export default function CartModal({ isCartModalOpen, closeCartModal, product_name, count, total }: ICartModal) {
     return (
@@ -24,7 +25,9 @@ export default function CartModal({ isCartModalOpen, closeCartModal, product_nam
                         </div>
                     </div>
                     <div className="flex justify-around mt-5">
-                        <button className='flex items-center justify-center p-2 text-lg text-blue-700 bg-gray-100 rounded-md gap-x-3 w-44 hover:bg-blue-700 hover:text-white'><FaShoppingCart></FaShoppingCart>View Cart</button>
+                        <Link to='/my-order'>
+                            <button className='flex items-center justify-center p-2 text-lg text-blue-700 bg-gray-100 rounded-md gap-x-3 w-44 hover:bg-blue-700 hover:text-white'><FaShoppingCart></FaShoppingCart>View Cart</button>
+                        </Link>
                         <button className='flex items-center justify-center p-2 text-lg text-blue-700 bg-gray-100 rounded-md gap-x-3 w-44 hover:bg-blue-700 hover:text-white'><FaShoppingBag />Confirm Order</button>
                     </div>
                 </div>
