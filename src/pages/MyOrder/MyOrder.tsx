@@ -1,6 +1,5 @@
-import toast from "react-hot-toast";
 import useApiData from "../../hooks/getAPIData";
-import '../../styles/MyOrder.css'
+import '../../styles/MyOrder.css';
 
 export default function MyOrder() {
   const { data } = useApiData("http://localhost:5000/api/v1/getCart");
@@ -11,7 +10,7 @@ export default function MyOrder() {
     })
       .then(response => {
         if (response.ok) {
-          toast.success("Item Deleted");
+          window.location.reload();
         }
       })
   }
@@ -37,7 +36,7 @@ export default function MyOrder() {
             <tbody className="row-info">
               {
                 data.map((item, index) =>
-                // row
+                  // row
                   <tr>
                     <th>{index + 1}</th>
                     <td> {item.image && typeof item.image === 'string' ? (
