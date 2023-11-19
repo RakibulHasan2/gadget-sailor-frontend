@@ -5,13 +5,16 @@ import { IProduct } from "../../types/ProductsType";
 import useApiData from "../../hooks/getAPIData";
 
 
-const UpdateModal = ({ singleData }: IProduct) => {
+const UpdateModal = ({ singleData }: IProduct,) => {
     const { register, handleSubmit, formState: { errors } } = useForm<AddProductValues>();
-
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { __v, _id, category_name, sub_category_name, product_name, price, status, product_code, brand_name, image, model, warranty, ...otherProperties } = singleData;
     const { data, isLoading } = useApiData("http://localhost:5000/api/v1/allProducts")
     if (isLoading) {
         return <p>Loading...</p>;
     }
+
+
     console.log(singleData)
     console.log(singleData.product_name)
     //console.log(data)
@@ -38,6 +41,7 @@ const UpdateModal = ({ singleData }: IProduct) => {
     const getOneSubCategory = Array.from(getSubCategory).filter((item) => item !== undefined && item !== '');
     const getOneBrand = Array.from(getBrand).filter((item) => item !== undefined);
 
+
     const handleUpdateProduct = async (data: FieldValues) => {
         console.log(data)
     }
@@ -55,9 +59,7 @@ const UpdateModal = ({ singleData }: IProduct) => {
 
                         <div className="w-full max-w-xs form-control">
                             <label className="label"> <span className="label-text">Product category</span></label>
-                            <select className="w-full max-w-xs select select-bordered" defaultValue={singleData.category_name} {...register("category_name", {
-                                required: 'Required'
-                            })} >
+                            <select className="w-full max-w-xs select select-bordered" placeholder={singleData.category_name} {...register("category_name",)} >
 
                                 {
                                     getOneCategory.map(d => (
@@ -76,9 +78,7 @@ const UpdateModal = ({ singleData }: IProduct) => {
                             <label className="label"> <span className="label-text">Subcategory name</span></label>
 
 
-                            <select className="w-full max-w-xs select select-bordered" {...register("sub_category_name", {
-                                required: 'Required'
-                            })}>
+                            <select className="w-full max-w-xs select select-bordered" {...register("sub_category_name",)}>
                                 {
                                     getOneSubCategory.map(d => (
                                         <option key={d} value={d}>{d}</option>
@@ -96,9 +96,7 @@ const UpdateModal = ({ singleData }: IProduct) => {
                         <div className="w-full max-w-xs form-control">
                             <label className="label"> <span className="label-text">Brand Name</span></label>
 
-                            <select className="w-full max-w-xs select select-bordered" {...register("brand_name", {
-                                required: 'Required'
-                            })}>
+                            <select defaultValue={singleData?.brand_name} className="w-full max-w-xs select select-bordered" {...register("brand_name",)}>
                                 {
                                     getOneBrand.map(d => (
                                         <option key={d} value={d}>{d}</option>
@@ -107,6 +105,8 @@ const UpdateModal = ({ singleData }: IProduct) => {
                             </select>
                             {errors.brand_name && <p className='text-red-600'>{errors.brand_name?.message}</p>}
                         </div>
+
+
                         {/* Product Name */}
 
                         <div className="w-full max-w-xs form-control">
@@ -173,19 +173,21 @@ const UpdateModal = ({ singleData }: IProduct) => {
                             {errors.warranty && <p className='text-red-600'>{errors.warranty?.message}</p>}
                         </div>
 
+                        {Object.entries(otherProperties).map(([key, value]) => (
+
+                            <div className="w-full max-w-xs form-control">
+                                <label className="label"> <span className="label-text">{key}</span></label>
+
+                                <input defaultValue={value as string | number | readonly string[] | undefined} type="text"
+
+                                    className="w-full max-w-xs input input-bordered" />
+
+                            </div>
+                        ))}
 
 
-                        {/* Others Info */}
-                        <div className="w-full max-w-xs form-control">
-                            <label className="label"> <span className="label-text">Others Info</span></label>
 
-                            <textarea
-                                {...register("others_info", {
 
-                                })}
-                                className="w-full max-w-xs input input-bordered" />
-                            {errors.others_info && <p className='text-red-600'>{errors.others_info?.message}</p>}
-                        </div>
 
 
 

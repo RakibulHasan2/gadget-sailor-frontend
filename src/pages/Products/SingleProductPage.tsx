@@ -128,7 +128,7 @@ export default function SingleProductPage() {
               </form>
               <h3 className="font-bold text-2xl text-center">{product_name} </h3>
               <UpdateModal
-                singleData={singleProductData} _id={''} category_name={''} sub_category_name={''} brand_name={''} product_name={''} image={[]} model={''} description={''} price={0} product_code={0} status={''} reviews={[]} warranty={''} __v={''} others_info={[]}              ></UpdateModal>
+                singleData={singleProductData} otherProperties={otherProperties} _id={''} category_name={''} sub_category_name={''} brand_name={''} product_name={''} image={[]} model={''} description={''} price={0} product_code={0} status={''} reviews={[]} warranty={''} __v={''} others_info={[]}              ></UpdateModal>
 
 
             </div>
