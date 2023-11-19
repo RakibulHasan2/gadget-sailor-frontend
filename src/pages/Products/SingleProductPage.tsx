@@ -5,6 +5,7 @@ import { useState } from "react";
 import ImageSlider from "../../components/ImageSlider/ImageSlider";
 import CartModal from '../../components/Products/CartModal';
 import { userData } from '../../hooks/getUserData';
+import { AiFillEdit } from "react-icons/ai";
 
 export default function SingleProductPage() {
   // eslint-disable-next-line prefer-const
@@ -103,7 +104,10 @@ export default function SingleProductPage() {
       </div>
       {/*----- specification section ------*/}
       <div className="w-3/5 p-6 mt-10 shadow-xl lg:ml-36">
-        <p className="text-3xl font-bold">Specification</p>
+        <div className='flex items-end justify-between'>
+          <p className="text-3xl font-bold">Specification</p>
+          <button className='flex items-center'><AiFillEdit />Edit</button>
+        </div>
         <div className="lg:ml-5">
           {/* basic information */}
           <div className="mb-6">

@@ -15,7 +15,7 @@ const RandomProductCard = ({ data }: IProduct) => {
 
                 <div className="card-actions flex-col">
                     <p className="mb-0">Price: {data.price}</p>
-                    <button className="btn btn-outline btn-info">Buy Now</button>
+                    <button className="btn btn-outline bg-blue-300">Buy Now</button>
                 </div>
             </div>
         </div>
