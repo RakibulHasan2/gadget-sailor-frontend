@@ -18,17 +18,16 @@ export default function MyOrder() {
         filteredCartItems[key].total_price += item.total_price;
       }
     });
-
     return Object.values(filteredCartItems);
   };
 
   // Consolidate the cart data
-  const consolidatedData = filteredCartItems(data);
+  const filteredData= filteredCartItems(data);
  
   // Function to calculate total price
   const calculateTotalPrice = () => {
     let totalPrice = 0;
-    consolidatedData.forEach((item) => {
+    filteredData.forEach((item) => {
       totalPrice += item.total_price;
     });
     return totalPrice.toFixed(2);
@@ -44,6 +43,7 @@ export default function MyOrder() {
         }
       })
   }
+
   return (
     <div className="flex justify-center mt-10 mb-10">
       <div className=" w-9/12 lg:p-10 shadow-2xl">
@@ -65,7 +65,7 @@ export default function MyOrder() {
             </thead>
             <tbody className="row-info">
               {
-                consolidatedData.map((item, index) =>
+                filteredData.map((item, index) =>
                   // row
                   <tr>
                     <th>{index + 1}</th>
