@@ -1,7 +1,7 @@
 import { FaTimes } from "react-icons/fa";
 import CartIcon from "./CartIcon";
 import { useState } from 'react';
-import useApiData, { ApiData } from "../../hooks/getAPIData";
+import useApiData from "../../hooks/getAPIData";
 import { MdDelete } from "react-icons/md";
 
 export default function ShoppingCartSideBar() {
@@ -12,25 +12,6 @@ export default function ShoppingCartSideBar() {
     };
 
     const { data } = useApiData("http://localhost:5000/api/v1/getCart");
-
-    // Function to consolidate and merge similar items
-    const filteredCartItems = (cartItems: ApiData[]) => {
-        const filteredCartItems = {};
-        cartItems.forEach((item) => {
-            const key = `${item.product_name}`;
-            if (!filteredCartItems[key]) {
-                filteredCartItems[key] = { ...item };
-            } else {
-                // Update quantity and total_price for existing item
-                filteredCartItems[key].quantity += item.quantity;
-                filteredCartItems[key].total_price += item.total_price;
-            }
-        });
-
-        return Object.values(filteredCartItems);
-    };
-    // Consolidate the cart data
-    const filteredData = filteredCartItems(data);
 
     const handleDeleteCart = (id: string) => {
         fetch(`http://localhost:5000/api/v1/getCart/${id}`, {
@@ -46,7 +27,7 @@ export default function ShoppingCartSideBar() {
     // Function to calculate total price
     const calculateTotalPrice = () => {
         let totalPrice = 0;
-        filteredData.forEach((item) => {
+        data.forEach((item) => {
             totalPrice += item.total_price;
         });
         return totalPrice.toFixed(2);
@@ -78,10 +59,10 @@ export default function ShoppingCartSideBar() {
                     </div>
                     <div>
                         {
-                            filteredData.length > 0 ?
+                            data.length > 0 ?
                                 <>
                                     {
-                                        filteredData.map((data) =>
+                                        data.map((data) =>
                                             <div className="mt-3 border-b-2 flex justify-between items-center p-3">
                                                 <div>
                                                     <img className="w-12" src={data.image} alt="" />
