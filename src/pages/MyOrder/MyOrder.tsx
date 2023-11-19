@@ -2,7 +2,40 @@ import useApiData from "../../hooks/getAPIData";
 import '../../styles/MyOrder.css';
 
 export default function MyOrder() {
+
   const { data } = useApiData("http://localhost:5000/api/v1/getCart");
+
+  // Function to consolidate and merge similar items
+  const filteredCartItems = (cartItems) => {
+    const filteredCartItems = {};
+
+    cartItems.forEach((item) => {
+      const key = `${item.product_name}-${item.model}`;
+
+      if (!filteredCartItems[key]) {
+        filteredCartItems[key] = { ...item }; // Copy the item for new key
+      } else {
+        // Update quantity and total_price for existing item
+        filteredCartItems[key].quantity += item.quantity;
+        filteredCartItems[key].total_price += item.total_price;
+      }
+    });
+
+    return Object.values(filteredCartItems);
+  };
+
+  // Consolidate the cart data
+  const consolidatedData = filteredCartItems(data);
+  console.log(consolidatedData)
+
+  // Function to calculate total price
+  const calculateTotalPrice = () => {
+    let totalPrice = 0;
+    consolidatedData.forEach((item) => {
+      totalPrice += item.total_price;
+    });
+    return totalPrice;
+  };
 
   const handleDeleteCart = (id: string) => {
     fetch(`http://localhost:5000/api/v1/getCart/${id}`, {
@@ -35,7 +68,7 @@ export default function MyOrder() {
             </thead>
             <tbody className="row-info">
               {
-                data.map((item, index) =>
+                consolidatedData.map((item, index) =>
                   // row
                   <tr>
                     <th>{index + 1}</th>
@@ -55,6 +88,12 @@ export default function MyOrder() {
               }
             </tbody>
           </table>
+          <div className="flex justify-end">
+            <div>
+              <p className="text-lg font-bold mb-4">Total: {calculateTotalPrice()}৳</p>
+              <button className="border p-3 rounded-lg bg-blue-900 text-white hover:bg-sky-700">Confirm Order</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
