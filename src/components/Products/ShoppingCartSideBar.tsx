@@ -1,10 +1,11 @@
+import { FaTimes } from "react-icons/fa";
 import CartIcon from "./CartIcon";
 import { useState } from 'react';
 
 export default function ShoppingCartSideBar() {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState<boolean>(false);
 
-    const toggleCart = () => {
+    const toggleCart :() => void = () => {
         setIsOpen(!isOpen);
     };
 
@@ -27,11 +28,15 @@ export default function ShoppingCartSideBar() {
                         overflowY: 'scroll',
                     }}
                 >
-                    {/* Component to display cart items */}
-                    <h1>hello</h1>
+                    <div className="flex border p-5 justify-between" style={{ backgroundColor: 'rgb(5, 28, 77)' }}>
+                        <h1 className="text-white font-bold">Your Cart</h1>
+                        {/* Close button */}
+                        <button className="text-white text-xl" onClick={toggleCart} ><FaTimes /></button>
+                    </div>
+                    <div>
 
-                    {/* Close button */}
-                    <button onClick={toggleCart}>X</button>
+
+                    </div>
                 </div>
             )}
         </div>
