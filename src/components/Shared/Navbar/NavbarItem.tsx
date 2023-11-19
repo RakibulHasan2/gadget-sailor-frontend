@@ -13,11 +13,7 @@ export default function NavbarItem() {
             <div className="loading loading-spinner text-info"></div>
         </div>;
     }
-    // const selectCategory = (category: string) =>{
-    //     selectCategory(category);
-    // }
-
-
+ 
     return (
         <div>
             <div className='flex justify-center h-16 border shadow-lg shadow-blue-900/50'>
