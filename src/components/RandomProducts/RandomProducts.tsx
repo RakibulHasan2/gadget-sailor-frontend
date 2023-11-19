@@ -26,7 +26,7 @@ const RandomProducts = () => {
     console.log(limitData)
 
     return (
-        <div>
+        <div className="bg-blue-100 py-6">
             <div className="lg:grid lg:grid-cols-4 lg:gap-x-2 lg:gap-y-8 lg:grid-rows-2 mb-7 flex-col justify-items-center">
                 {
                     limitData.map(i => (

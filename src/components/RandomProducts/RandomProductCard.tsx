@@ -5,7 +5,7 @@ import { IProduct } from "../../types/ProductsType";
 const RandomProductCard = ({ data }: IProduct) => {
     // console.log(data)
     return (
-        <div className="card w-72 bg-base-100 shadow-xl rounded-md shadow-slate-400 items-center text-center border hover:border-blue-400 " >
+        <div className="card w-72 bg-base-100 shadow-xl rounded-md shadow-slate-400 items-center text-center border hover:border-blue-400" >
             <figure className="px-10 pt-10 w-full h-40">
                 <img src={data.image[0]} className="rounded-xl" />
             </figure>
@@ -15,7 +15,7 @@ const RandomProductCard = ({ data }: IProduct) => {
 
                 <div className="card-actions flex-col">
                     <p className="mb-0">Price: {data.price}</p>
-                    <button className="btn btn-primary">Buy Now</button>
+                    <button className="btn btn-outline btn-info">Buy Now</button>
                 </div>
             </div>
         </div>
