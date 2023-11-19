@@ -3,9 +3,8 @@
 .background-my-profile {
   width: 100%;
   min-height: 100vh;
-  background: linear-gradient(to top, #52a9e4, #ffffff); /* Adjust the colors as needed */
+  background: linear-gradient(to top, #ffffff, #7bb7df); /* Adjust the colors as needed */
 }
-
 
 
   .btn-one {
