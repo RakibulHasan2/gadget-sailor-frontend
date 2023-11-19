@@ -13,7 +13,9 @@ const UpdateModal = ({ singleData }: IProduct) => {
         return <p>Loading...</p>;
     }
     console.log(singleData)
-    console.log(data)
+    console.log(singleData.product_name)
+    //console.log(data)
+
     const getCategory: Set<string> = new Set()
     const getSubCategory: Set<string> = new Set()
     const getBrand: Set<string> = new Set()
@@ -48,11 +50,14 @@ const UpdateModal = ({ singleData }: IProduct) => {
                 <div className='w-96 p-7'>
                     <h2 className='text-3xl font-bold text-center text-sky-500'>Update Product:</h2>
                     <form className="flex flex-wrap" onSubmit={handleSubmit(handleUpdateProduct)}>
+
+                        {/* category */}
+
                         <div className="w-full max-w-xs form-control">
                             <label className="label"> <span className="label-text">Product category</span></label>
-                            <select className="w-full max-w-xs select select-bordered" {...register("category_name", {
+                            <select className="w-full max-w-xs select select-bordered" defaultValue={singleData.category_name} {...register("category_name", {
                                 required: 'Required'
-                            })}>
+                            })} >
 
                                 {
                                     getOneCategory.map(d => (
@@ -63,6 +68,8 @@ const UpdateModal = ({ singleData }: IProduct) => {
                             </select>
                             {errors.category_name && <p className='text-red-600'>{errors.category_name?.message}</p>}
                         </div>
+
+
 
                         {/* Sub-Category */}
                         <div className="w-full max-w-xs form-control">
@@ -105,31 +112,21 @@ const UpdateModal = ({ singleData }: IProduct) => {
                         <div className="w-full max-w-xs form-control">
                             <label className="label"> <span className="label-text">Product Name</span></label>
 
-                            <input type="text" placeholder="Product Name"
+                            <input type="text"
+                                defaultValue={singleData?.product_name || ''}
                                 {...register("product_name", {
                                     required: 'Required'
                                 })}
                                 className="w-full max-w-xs input input-bordered" />
-                            {errors.product_name && <p className='text-red-600'>{errors.product_name?.message}</p>}
+
                         </div>
-
-                        {/* Image */}
-
-                        <div className="w-full max-w-xs form-control">
-                            <label className="label"> <span className="label-text">Photo (photo Should be png/jpg format)</span></label>
-                            <input type="file" multiple {...register("image", {
-                                required: 'Required'
-                            })} className="w-full max-w-xs input input-bordered" />
-                            {errors.image && <p className='text-red-500'>{errors.image.message}</p>}
-                        </div>
-
 
 
                         {/* Model */}
                         <div className="w-full max-w-xs form-control">
                             <label className="label"> <span className="label-text">Model</span></label>
 
-                            <input type="text" placeholder="Model"
+                            <input defaultValue={singleData?.model} type="text"
                                 {...register("model", {
 
                                 })}
@@ -143,7 +140,7 @@ const UpdateModal = ({ singleData }: IProduct) => {
                         <div className="w-full max-w-xs form-control">
                             <label className="label"> <span className="label-text">Product Description</span></label>
 
-                            <textarea placeholder="Descriptions"
+                            <textarea defaultValue={singleData?.description} placeholder="Descriptions"
                                 {...register("description", {
 
                                 })}
@@ -155,7 +152,7 @@ const UpdateModal = ({ singleData }: IProduct) => {
                         <div className="w-full max-w-xs form-control">
                             <label className="label"> <span className="label-text">Price</span></label>
 
-                            <input type="text"
+                            <input defaultValue={singleData?.price} type="text"
                                 {...register("price", {
 
                                 })}
@@ -168,7 +165,7 @@ const UpdateModal = ({ singleData }: IProduct) => {
                         <div className="w-full max-w-xs form-control">
                             <label className="label"> <span className="label-text">Warranty</span></label>
 
-                            <input type="text"
+                            <input defaultValue={singleData?.warranty} type="text"
                                 {...register("warranty", {
 
                                 })}

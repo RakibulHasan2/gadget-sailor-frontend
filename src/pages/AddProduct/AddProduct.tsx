@@ -285,7 +285,7 @@ const AddProduct = () => {
 
                         {/* Sub-Category */}
                         <div className="w-full max-w-xs form-control">
-                            <label className="label"> <span className="label-text">Brand Name</span></label>
+                            <label className="label"> <span className="label-text">Sub-category</span></label>
 
 
                             <select className="select select-bordered  w-full max-w-xs" {...register("sub_category_name", {
@@ -300,7 +300,6 @@ const AddProduct = () => {
 
                             {errors.sub_category_name && <p className='text-red-600'>{errors.sub_category_name?.message}</p>}
                         </div>
-                        <small className="ml-10 font-black mb-4">Want to add a new Sub-category? <Link className='font-bold text-indigo-600' to="/">Add</Link></small>
 
                         {/* Brand Name */}
 
