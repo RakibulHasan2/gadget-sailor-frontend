@@ -1,6 +1,5 @@
 import useApiData, { ApiData } from "../../hooks/getAPIData";
 import '../../styles/MyOrder.css';
-import { ICartDetails } from "../../types/CartModalType";
 
 export default function MyOrder() {
 
@@ -25,8 +24,7 @@ export default function MyOrder() {
 
   // Consolidate the cart data
   const consolidatedData = filteredCartItems(data);
-  console.log(consolidatedData)
-
+ 
   // Function to calculate total price
   const calculateTotalPrice = () => {
     let totalPrice = 0;
