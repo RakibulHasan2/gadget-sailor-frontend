@@ -2,29 +2,8 @@ import useApiData from "../../hooks/getAPIData";
 import '../../styles/MyOrder.css';
 
 export default function MyOrder() {
-
   const { data } = useApiData("http://localhost:5000/api/v1/getCart");
 
-  // // Function to consolidate and merge similar items
-  // const filteredCartItems = (cartItems : ApiData[]) => {
-  //   const filteredCartItems = {};
-  //   cartItems.forEach((item) => {
-  //     const key = `${item.product_name}`;
-  //     if (!filteredCartItems[key]) {
-  //       filteredCartItems[key] = { ...item };
-  //     } else {
-  //       // Update quantity and total_price for existing item
-  //       filteredCartItems[key].quantity += item.quantity;
-  //       filteredCartItems[key].total_price += item.total_price;
-  //     }
-  //   });
-  //   return Object.values(filteredCartItems);
-  // };
-
-  // // Consolidate the cart data
-  // const filteredData= filteredCartItems(data);
- 
-  // Function to calculate total price
   const calculateTotalPrice = () => {
     let totalPrice = 0;
     data.forEach((item) => {
