@@ -1,7 +1,7 @@
 import { useState } from "react";
 import useApiData from "../../hooks/getAPIData";
 import RandomProductCard from "./RandomProductCard";
-
+import '../../styles/Loader.css'
 
 
 
@@ -12,7 +12,7 @@ const RandomProducts = () => {
     const size = 8;
     const { data, isLoading } = useApiData("http://localhost:5000/api/v1/allProducts")
     if (isLoading) {
-        return <p>Loading...</p>;
+        return <div className="flex justify-center p-10"><span className="loader"></span></div>;
     }
 
     const pages = Math.ceil(data.length / size);
@@ -26,8 +26,8 @@ const RandomProducts = () => {
     console.log(limitData)
 
     return (
-        <div className="bg-blue-100 py-6">
-            <div className="lg:grid lg:grid-cols-4 lg:gap-x-2 lg:gap-y-8 lg:grid-rows-2 mb-7 flex-col justify-items-center">
+        <div className="mt-28">
+            <div className="flex-col p-4 lg:grid lg:grid-cols-4 lg:gap-x-2 lg:gap-y-8 lg:grid-rows-2 mb-7 justify-items-center">
                 {
                     limitData.map(i => (
                         <RandomProductCard
@@ -37,7 +37,7 @@ const RandomProducts = () => {
                 }
             </div>
 
-            <div className="btn-group flex justify-center pagination ">
+            <div className="flex justify-center btn-group pagination ">
                 {
                     [...Array(pages).keys()].map(number => <button
                         key={number}
