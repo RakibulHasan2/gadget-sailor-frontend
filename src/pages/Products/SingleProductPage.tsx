@@ -11,7 +11,7 @@ export default function SingleProductPage() {
   let [count, setCount] = useState(1);
   const singleProduct = useLoaderData() as IProduct;
   const singleProductData = singleProduct.data;
-  const user = userData()
+ ...
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { __v, _id, category_name, sub_category_name, product_name, price, status, product_code, brand_name, image, model, warranty, ...otherProperties } = singleProductData;
