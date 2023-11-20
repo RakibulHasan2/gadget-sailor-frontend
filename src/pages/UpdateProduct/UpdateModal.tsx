@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 
 
 
-const UpdateModal = ({ singleData }: IProduct,) => {
+const UpdateModal = ({ singleData, closeModal }: IProduct,) => {
     const { register, handleSubmit, formState: { errors } } = useForm<UpdateProductValues>();
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -88,7 +88,9 @@ const UpdateModal = ({ singleData }: IProduct,) => {
         if (product.statusCode === 200) {
 
             toast.success(product.message)
+            closeModal();
             location.reload();
+
 
         } else {
             toast.error(product.message)

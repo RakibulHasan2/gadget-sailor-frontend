@@ -8,6 +8,7 @@ import { userData } from '../../hooks/getUserData';
 import { AiFillEdit } from "react-icons/ai";
 import UpdateModal from '../UpdateProduct/UpdateModal';
 import useApiData from '../../hooks/getAPIData';
+import UpdateImage from '../UpdateProduct/UpdateImage';
 
 
 export default function SingleProductPage() {
@@ -81,6 +82,12 @@ export default function SingleProductPage() {
       modal.showModal();
     }
   };
+  const closeModal = () => {
+    const modal = document.getElementById('editModal') as HTMLDialogElement | null;
+    if (modal) {
+      modal.close();
+    }
+  };
 
   //for edit image modal
   const openEditImage = () => {
@@ -107,8 +114,8 @@ export default function SingleProductPage() {
                   ✕
                 </button>
               </form>
-              <h3 className="font-bold text-2xl text-center">image modal </h3>
 
+              <UpdateImage></UpdateImage>
             </div>
           </dialog>
 
@@ -167,7 +174,8 @@ export default function SingleProductPage() {
               </form>
               <h3 className="font-bold text-2xl text-center">{product_name} </h3>
               <UpdateModal
-                singleData={singleProductData} otherProperties={otherProperties} _id={''} category_name={''} sub_category_name={''} brand_name={''} product_name={''} image={[]} model={''} description={''} price={0} product_code={0} status={''} reviews={[]} warranty={''} __v={''} others_info={[]}              ></UpdateModal>
+                singleData={singleProductData}
+                closeModal={closeModal} otherProperties={otherProperties} _id={''} category_name={''} sub_category_name={''} brand_name={''} product_name={''} image={[]} model={''} description={''} price={0} product_code={0} status={''} reviews={[]} warranty={''} __v={''} others_info={[]}              ></UpdateModal>
 
 
             </div>
