@@ -8,7 +8,7 @@ import { BiLogIn } from 'react-icons/bi';
 import '../../../styles/Navbar.css'
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
-
+import logo from '../../../assets/logo/Screenshot_2023-11-15_122159-trsfansformed-remdfosfafvebg-preview_waifu2x_art_noise1_scale.png';
 
 export default function Navbar() {
   const userData = sessionStorage.getItem('userData');
@@ -67,7 +67,8 @@ export default function Navbar() {
             </ul>
           </div>
           <Link to='/'>
-            <p className="text-2xl text-white">Gadget Sailor</p>
+            {/* <p className="text-2xl text-white">Gadget Sailor</p> */}
+            <img className="w-40" src={logo} alt="" />
           </Link>
         </div>
         <div className="hidden navbar-center lg:flex">
