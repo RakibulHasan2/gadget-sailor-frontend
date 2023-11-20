@@ -5,13 +5,13 @@ import useApiData from "../../hooks/getAPIData";
 import { MdDelete } from "react-icons/md";
 
 export default function ShoppingCartSideBar() {
+    const { data, refetch } = useApiData("http://localhost:5000/api/v1/getCart");
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const toggleCart: () => void = () => {
+        refetch();
         setIsOpen(!isOpen);
     };
-
-    const { data } = useApiData("http://localhost:5000/api/v1/getCart");
 
     const handleDeleteCart = (id: string) => {
         fetch(`http://localhost:5000/api/v1/getCart/${id}`, {
@@ -19,7 +19,7 @@ export default function ShoppingCartSideBar() {
         })
             .then(response => {
                 if (response.ok) {
-                    window.location.reload();
+                    refetch();
                 }
             })
     }

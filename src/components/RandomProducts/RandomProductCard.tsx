@@ -43,7 +43,7 @@ const RandomProductCard = ({ data }: IProduct) => {
         CartDetails();
     };
     return (
-        
+
         // <div className="items-center text-center border rounded-md card w-72 bg-base-100 shadow-slate-400 hover:border-blue-400 " >
         //     <figure className="w-full h-full px-10 pt-10">
         //         <img src={data.image[0]} className="rounded-xl" />
@@ -59,10 +59,10 @@ const RandomProductCard = ({ data }: IProduct) => {
         //     </div>
         // </div>
         <div>
-        <div className="relative w-full overflow-hidden transition-all duration-300 border border-transparent shadow-md card bg-base-100 hover:border-blue-400 hover:shadow-customBlue card-height rounded-xl">
-            <figure className="h-full px-10 pt-10 transition-transform transform hover:scale-110">
-                <img src={data?.image[0]} alt="" className="rounded-xl" />
-            </figure>
+            <div className="relative w-full overflow-hidden transition-all duration-300 border border-transparent shadow-md card bg-base-100 hover:border-blue-400 hover:shadow-customBlue card-height rounded-xl">
+                <figure className="h-full px-10 pt-10 transition-transform transform hover:scale-110">
+                    <img src={data?.image[0]} alt="" className="rounded-xl" />
+                </figure>
 
             <div className="items-center text-center card-body">
                 <Link to={`/product/${data?._id}`}>
@@ -83,10 +83,10 @@ const RandomProductCard = ({ data }: IProduct) => {
                     ></CartModal>
             </div>
 
+            </div>
+
+
         </div>
-
-
-    </div>
     );
 };
 

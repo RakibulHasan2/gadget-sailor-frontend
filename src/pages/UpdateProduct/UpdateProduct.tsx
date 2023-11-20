@@ -101,7 +101,7 @@ const UpdateProduct = () => {
         console.log(productData);
         console.log(imageFiles);
 
-        const response = await fetch('http://localhost:5000/api/v1/allProducts/654b983ac1713b132cbc698f', {
+        const response = await fetch('http://localhost:5000/api/v1/allProducts/655a31e871f85ecb16565765', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'

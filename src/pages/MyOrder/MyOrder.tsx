@@ -2,7 +2,7 @@ import useApiData from "../../hooks/getAPIData";
 import '../../styles/MyOrder.css';
 
 export default function MyOrder() {
-  const { data } = useApiData("http://localhost:5000/api/v1/getCart");
+  const { data, refetch  } = useApiData("http://localhost:5000/api/v1/getCart");
 
   const calculateTotalPrice = () => {
     let totalPrice = 0;
@@ -18,7 +18,7 @@ export default function MyOrder() {
     })
       .then(response => {
         if (response.ok) {
-          window.location.reload();
+          refetch();
         }
       })
   }
