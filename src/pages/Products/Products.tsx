@@ -7,8 +7,6 @@ import { MdHome } from "react-icons/md";
 import { useState } from "react";
 import gif from '../../assets/images/no-data.gif';
 
-
-
 export default function Products() {
     const productsData = useLoaderData() as useLoaderDataType;
     const products = Array.isArray(productsData.data) ? productsData.data : [];
