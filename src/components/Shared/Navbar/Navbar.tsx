@@ -67,19 +67,16 @@ export default function Navbar() {
             </ul>
           </div>
           <Link to='/'>
-            {/* <p className="text-2xl text-white">Gadget Sailor</p> */}
             <img className="w-40" src={logo} alt="" />
           </Link>
         </div>
         <div className="hidden navbar-center lg:flex">
-
           <input
             type="text"
             placeholder="Looking for..."
             className={`w-28 lg:w-96 input input-bordered expandable-input text-black ${expanded ? "expanded" : ""
               }`}
             id="myInput"
-
           />
           <button className="btn btn-ghost btn-circle">
             <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
@@ -99,7 +96,6 @@ export default function Navbar() {
             <button className="text-2xl align-middle hover:text-red-700" title="wishlist"><AiOutlineHeart></AiOutlineHeart></button>
           </div>
           {
-
             users ? <div className="dropdown dropdown-end">
               <label tabIndex={0} className="m-1"><button className="mt-2 mr-5 text-2xl font-bold text-center hover:text-gray-400">
                 <div className="avatar online">
@@ -116,7 +112,6 @@ export default function Navbar() {
                 <li onClick={() => handleLogout()}><a className=" hover:bg-red-600 hover:text-white">Log-out</a></li>
               </ul>
             </div> : <Link to='/login'><button className="flex p-2 mr-3 font-bold border rounded-lg">Login<BiLogIn className='text-2xl'></BiLogIn></button></Link>
-
           }
           <a className="text-white btn rounded-2xl glow-on-hover"><MdBuild className='text-2xl'></MdBuild> Build PC </a>
         </div>
