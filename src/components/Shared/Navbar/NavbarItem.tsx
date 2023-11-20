@@ -2,6 +2,7 @@ import '../../../styles/Navbar.css'
 import useApiData from "../../../hooks/getAPIData";
 import { Link } from 'react-router-dom';
 import { IProduct } from '../../../types/ProductsType'
+import '../../../styles/Loader.css'
 export default function NavbarItem() {
 
     // const [brand, setBrand] = useState('');
@@ -9,9 +10,7 @@ export default function NavbarItem() {
     const categories: string[] = [...new Set(data.map((item: IProduct) => item.category_name))];
 
     if (isLoading) {
-        return <div className="flex items-center justify-center">
-            <div className="loading loading-spinner text-info"></div>
-        </div>;
+        return <div className="flex justify-center mt-2"><span className="loader"></span></div>;
     }
  
     return (

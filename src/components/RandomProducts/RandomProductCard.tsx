@@ -1,11 +1,47 @@
 import { FaCartPlus } from "react-icons/fa";
 import { IProduct } from "../../types/ProductsType";
 import { Link } from "react-router-dom";
+import React from "react";
+import { userData } from "../../hooks/getUserData";
+import CartModal from "../Products/CartModal";
 
 
 
 const RandomProductCard = ({ data }: IProduct) => {
-    // console.log(data)
+    const { product_name, price, image,model } = data;
+    const user = userData()
+    const CartDetails = async () => {
+        const cartData = {
+            product_name: product_name,
+            image: image[0],
+            unit_price: price,
+            total_price: price,
+            quantity: 1,
+            model: model,
+            email: user.email
+        }
+        fetch('http://localhost:5000/api/v1/addCart', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(cartData),
+        })
+
+    }
+    // for cart modal
+    const [isCartModalOpen, setIsCartModalOpen] = React.useState(false);
+    const openImageModal = () => {
+        setIsCartModalOpen(true);
+    };
+    const closeCartModal = () => {
+        setIsCartModalOpen(false);
+    };
+
+    const handleClick = () => {
+        openImageModal();
+        CartDetails();
+    };
     return (
         
         // <div className="items-center text-center border rounded-md card w-72 bg-base-100 shadow-slate-400 hover:border-blue-400 " >
@@ -36,8 +72,15 @@ const RandomProductCard = ({ data }: IProduct) => {
                     <p className="font-bold text-yellow-700">{data?.price}৳</p>
                 </div>
                 <div>
-                    <button className='flex items-center justify-center p-2 text-lg text-blue-700 bg-gray-100 rounded-md gap-x-3 w-44 hover:bg-blue-700 hover:text-white'><FaCartPlus></FaCartPlus> Buy now</button>
+                    <button onClick={handleClick} className='flex items-center justify-center p-2 text-lg text-blue-700 bg-gray-100 rounded-md gap-x-3 w-44 hover:bg-blue-700 hover:text-white'><FaCartPlus></FaCartPlus> Buy now</button>
                 </div>
+                <CartModal
+                        closeCartModal={closeCartModal}
+                        isCartModalOpen={isCartModalOpen}
+                        product_name={product_name}
+                        count={1}
+                        total={price}
+                    ></CartModal>
             </div>
 
         </div>
