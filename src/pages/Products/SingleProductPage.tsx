@@ -65,7 +65,7 @@ export default function SingleProductPage() {
     if (response.ok) {
       // Call refetch to update cart data after adding the item
       refetch();
-    } 
+    }
 
   }
   const handleClick = () => {

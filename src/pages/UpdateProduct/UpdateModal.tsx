@@ -8,7 +8,7 @@ import useApiData from "../../hooks/getAPIData";
 const UpdateModal = ({ singleData }: IProduct,) => {
     const { register, handleSubmit, formState: { errors } } = useForm<AddProductValues>();
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { __v, _id, category_name, sub_category_name, product_name, price, status, product_code, brand_name, image, model, warranty, ...otherProperties } = singleData;
+    const { __v, _id, category_name, sub_category_name, product_name, price, status, product_code, description, brand_name, image, model, warranty, ...otherProperties } = singleData;
     const { data, isLoading } = useApiData("http://localhost:5000/api/v1/allProducts")
     if (isLoading) {
         return <p>Loading...</p>;
@@ -183,9 +183,11 @@ const UpdateModal = ({ singleData }: IProduct,) => {
                                         <label className="label"> <span className="label-text">{key}</span></label>
 
                                         <input defaultValue={value as string | number | readonly string[] | undefined} type="text"
+                                            {...register(`others_info.${key}`, {
 
+                                            })}
                                             className="w-full max-w-xs input input-bordered" />
-
+                                        {errors.others_info && <p className='text-red-600'>{errors.others_info?.message}</p>}
                                     </div>
                                 ))}
                             </div>
