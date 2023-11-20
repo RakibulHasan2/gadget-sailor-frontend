@@ -9,6 +9,7 @@ import { AiFillEdit } from "react-icons/ai";
 import UpdateModal from '../UpdateProduct/UpdateModal';
 import useApiData from '../../hooks/getAPIData';
 
+
 export default function SingleProductPage() {
   // eslint-disable-next-line prefer-const
   let [count, setCount] = useState(1);
@@ -73,8 +74,17 @@ export default function SingleProductPage() {
     CartDetails();
   };
 
+  // for edit all data modal
   const openEditModal = () => {
     const modal = document.getElementById('editModal') as HTMLDialogElement | null;
+    if (modal) {
+      modal.showModal();
+    }
+  };
+
+  //for edit image modal
+  const openEditImage = () => {
+    const modal = document.getElementById('editImage') as HTMLDialogElement | null;
     if (modal) {
       modal.showModal();
     }
@@ -86,7 +96,30 @@ export default function SingleProductPage() {
         {/* image slider */}
         <div className="">
           <ImageSlider images={image} />
+          <button onClick={openEditImage} className='flex items-center'><AiFillEdit />Edit Image</button>
+
+          {/* modal for edit image */}
+          <dialog id="editImage" className="modal">
+            <div className="modal-box ">
+              <form method="dialog">
+
+                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                  ✕
+                </button>
+              </form>
+              <h3 className="font-bold text-2xl text-center">image modal </h3>
+
+            </div>
+          </dialog>
+
         </div>
+
+
+
+
+
+
+
         {/* product basic info */}
         <div className="w-2/4 lg:ms-12 lg:p-5">
           <h1 className="text-2xl font-bold text-blue-900 lg:mt-10">{product_name}</h1>
