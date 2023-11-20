@@ -1,5 +1,5 @@
 import { FieldValues, useForm } from "react-hook-form";
-import { AddProductValues } from "../../types/ProductTypes";
+import { UpdateProductValues } from "../../types/ProductTypes";
 import { IProduct } from "../../types/ProductsType";
 
 import useApiData from "../../hooks/getAPIData";
@@ -44,6 +44,21 @@ const UpdateModal = ({ singleData }: IProduct,) => {
 
     const handleUpdateProduct = async (data: FieldValues) => {
         console.log(data)
+        const productData: UpdateProductValues = {
+            category_name: data.category_name,
+            sub_category_name: data.sub_category_name,
+            brand_name: data.brand_name,
+            product_name: data.product_name,
+            model: data.model,
+            description: data.description,
+            price: data.price,
+            product_code: data.product_code,
+            status: data.status,
+            reviews: [],
+            warranty: data.warranty,
+            others_info: data.others_info,
+        }
+        console.log(productData)
     }
     return (
         <div>
