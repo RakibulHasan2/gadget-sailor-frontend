@@ -1,11 +1,14 @@
 import { FieldValues, useForm } from "react-hook-form";
 import { UpdateProductValues } from "../../types/ProductTypes";
 import { FcEditImage } from "react-icons/fc";
+import { IProduct } from "../../types/ProductsType";
 
 
-const UpdateImage = () => {
+const UpdateImage = ({ singleData }: IProduct) => {
     const { register, handleSubmit, formState: { errors } } = useForm<UpdateProductValues>();
     const imageHosKey = '1a6c0e11cdde66ffb8f933ec4079f59e';
+
+    const { _id, image } = singleData
 
     const handleUpdateImage = async (data: FieldValues) => {
         console.log(data);
@@ -45,6 +48,13 @@ const UpdateImage = () => {
         console.log(uploadPromises)
         const uploadedImageUrls = await Promise.all(uploadPromises);
         console.log(uploadedImageUrls)
+
+
+        const imageData: UpdateProductValues = {
+            image: uploadedImageUrls,
+        }
+        console.log(imageData)
+
 
     }
     return (

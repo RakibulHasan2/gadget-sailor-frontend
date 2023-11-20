@@ -115,7 +115,9 @@ export default function SingleProductPage() {
                 </button>
               </form>
 
-              <UpdateImage></UpdateImage>
+              <UpdateImage
+                singleData={singleProductData}
+              ></UpdateImage>
             </div>
           </dialog>
 
