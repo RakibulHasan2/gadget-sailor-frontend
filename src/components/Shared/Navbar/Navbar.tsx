@@ -67,7 +67,6 @@ export default function Navbar() {
             </ul>
           </div>
           <Link to='/'>
-            {/* <p className="text-2xl text-white">Gadget Sailor</p> */}
             <img className="w-40" src={logo} alt="" />
           </Link>
         </div>
@@ -99,7 +98,6 @@ export default function Navbar() {
             <button className="text-2xl align-middle hover:text-red-700" title="wishlist"><AiOutlineHeart></AiOutlineHeart></button>
           </div>
           {
-
             users ? <div className="dropdown dropdown-end">
               <label tabIndex={0} className="m-1"><button className="mt-2 mr-5 text-2xl font-bold text-center hover:text-gray-400">
                 <div className="avatar online">
@@ -116,7 +114,6 @@ export default function Navbar() {
                 <li onClick={() => handleLogout()}><a className=" hover:bg-red-600 hover:text-white">Log-out</a></li>
               </ul>
             </div> : <Link to='/login'><button className="flex p-2 mr-3 font-bold border rounded-lg">Login<BiLogIn className='text-2xl'></BiLogIn></button></Link>
-
           }
           <a className="text-white btn rounded-2xl glow-on-hover"><MdBuild className='text-2xl'></MdBuild> Build PC </a>
         </div>
