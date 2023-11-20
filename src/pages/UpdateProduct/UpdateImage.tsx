@@ -2,13 +2,14 @@ import { FieldValues, useForm } from "react-hook-form";
 import { UpdateProductValues } from "../../types/ProductTypes";
 import { FcEditImage } from "react-icons/fc";
 import { IProduct } from "../../types/ProductsType";
+import toast from "react-hot-toast";
 
 
 const UpdateImage = ({ singleData }: IProduct) => {
     const { register, handleSubmit, formState: { errors } } = useForm<UpdateProductValues>();
     const imageHosKey = '1a6c0e11cdde66ffb8f933ec4079f59e';
 
-    const { _id, image } = singleData
+    const { _id } = singleData
 
     const handleUpdateImage = async (data: FieldValues) => {
         console.log(data);
@@ -54,6 +55,26 @@ const UpdateImage = ({ singleData }: IProduct) => {
             image: uploadedImageUrls,
         }
         console.log(imageData)
+
+
+        const response = await fetch(`http://localhost:5000/api/v1/allProducts/${_id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(imageData)
+        });
+        const product = await response.json();
+        console.log(product);
+
+        if (product.statusCode === 200) {
+
+            toast.success(product.message)
+
+            location.reload()
+        } else {
+            toast.error(product.message)
+        }
 
 
     }
