@@ -3,6 +3,7 @@ import { UpdateProductValues } from "../../types/ProductTypes";
 import { IProduct } from "../../types/ProductsType";
 
 import useApiData from "../../hooks/getAPIData";
+import toast from "react-hot-toast";
 
 
 const UpdateModal = ({ singleData }: IProduct,) => {
@@ -13,7 +14,7 @@ const UpdateModal = ({ singleData }: IProduct,) => {
     if (isLoading) {
         return <p>Loading...</p>;
     }
-
+    console.log(_id)
 
     //console.log(singleData)
     //console.log(singleData.product_name)
@@ -44,6 +45,16 @@ const UpdateModal = ({ singleData }: IProduct,) => {
 
     const handleUpdateProduct = async (data: FieldValues) => {
         console.log(data)
+
+        //     const obj: object = {
+
+        //        {
+        //         Object.keys(otherProperties).map((key) => (
+        //             `${key}`: `${data.key}`,
+        //         ))
+        //     }
+        // }
+
         const productData: UpdateProductValues = {
             category_name: data.category_name,
             sub_category_name: data.sub_category_name,
@@ -56,9 +67,13 @@ const UpdateModal = ({ singleData }: IProduct,) => {
             status: data.status,
 
             warranty: data.warranty,
-            others_info: data.others_info,
+            ...Object.fromEntries(
+                Object.keys(otherProperties).map((key) => [key, data.others_info[key]])
+            )
+            // others_info: { ...otherProperties, ...data.other_info }
         }
         console.log(productData)
+
     }
     return (
         <div>
@@ -206,6 +221,8 @@ const UpdateModal = ({ singleData }: IProduct,) => {
 
 
                             <div className="w-full">
+
+
                                 {/* Product Code*/}
                                 <div className="w-full max-w-xs form-control">
                                     <label className="label"> <span className="label-text">Product Code</span></label>
