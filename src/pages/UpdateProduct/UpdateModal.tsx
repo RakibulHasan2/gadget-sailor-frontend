@@ -6,8 +6,10 @@ import useApiData from "../../hooks/getAPIData";
 import toast from "react-hot-toast";
 
 
+
 const UpdateModal = ({ singleData }: IProduct,) => {
     const { register, handleSubmit, formState: { errors } } = useForm<UpdateProductValues>();
+
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { __v, _id, category_name, sub_category_name, product_name, price, status, product_code, description, reviews, brand_name, image, model, warranty, ...otherProperties } = singleData;
     const { data, isLoading } = useApiData("http://localhost:5000/api/v1/allProducts")
@@ -86,8 +88,8 @@ const UpdateModal = ({ singleData }: IProduct,) => {
         if (product.statusCode === 200) {
 
             toast.success(product.message)
+            location.reload();
 
-            //navigate('/home')
         } else {
             toast.error(product.message)
         }
