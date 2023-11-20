@@ -267,9 +267,7 @@ const UpdateModal = ({ singleData }: IProduct,) => {
                                         <label className="label"> <span className="label-text">{key}</span></label>
 
                                         <input defaultValue={value as string | number | readonly string[] | undefined} type="text"
-                                            {...register(`others_info.${key}`, {
-
-                                            })}
+                                            {...register(`others_info.${key}` as keyof UpdateProductValues, {})}
                                             className="w-full max-w-xs input input-bordered" />
                                         {errors.others_info && <p className='text-red-600'>{errors.others_info?.message}</p>}
                                     </div>
