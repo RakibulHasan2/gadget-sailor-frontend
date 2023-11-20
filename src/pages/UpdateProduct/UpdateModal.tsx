@@ -6,9 +6,9 @@ import useApiData from "../../hooks/getAPIData";
 
 
 const UpdateModal = ({ singleData }: IProduct,) => {
-    const { register, handleSubmit, formState: { errors } } = useForm<AddProductValues>();
+    const { register, handleSubmit, formState: { errors } } = useForm<UpdateProductValues>();
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { __v, _id, category_name, sub_category_name, product_name, price, status, product_code, description, brand_name, image, model, warranty, ...otherProperties } = singleData;
+    const { __v, _id, category_name, sub_category_name, product_name, price, status, product_code, description, reviews, brand_name, image, model, warranty, ...otherProperties } = singleData;
     const { data, isLoading } = useApiData("http://localhost:5000/api/v1/allProducts")
     if (isLoading) {
         return <p>Loading...</p>;
@@ -54,7 +54,7 @@ const UpdateModal = ({ singleData }: IProduct,) => {
             price: data.price,
             product_code: data.product_code,
             status: data.status,
-            reviews: [],
+
             warranty: data.warranty,
             others_info: data.others_info,
         }
@@ -190,8 +190,35 @@ const UpdateModal = ({ singleData }: IProduct,) => {
                                         className="w-full max-w-xs input input-bordered" />
                                     {errors.warranty && <p className='text-red-600'>{errors.warranty?.message}</p>}
                                 </div>
+
+                                {/* Status */}
+                                <div className="w-full max-w-xs form-control">
+                                    <label className="label"> <span className="label-text">Status</span></label>
+
+                                    <input defaultValue={singleData?.status} type="text"
+                                        {...register("status", {
+
+                                        })}
+                                        className="w-full max-w-xs input input-bordered" />
+                                    {errors.status && <p className='text-red-600'>{errors.status?.message}</p>}
+                                </div>
                             </div>
+
+
                             <div className="w-full">
+                                {/* Product Code*/}
+                                <div className="w-full max-w-xs form-control">
+                                    <label className="label"> <span className="label-text">Product Code</span></label>
+
+                                    <input defaultValue={singleData?.product_code} type="text"
+                                        {...register("product_code", {
+
+                                        })}
+                                        className="w-full max-w-xs input input-bordered" />
+                                    {errors.product_code && <p className='text-red-600'>{errors.product_code?.message}</p>}
+                                </div>
+
+
                                 {Object.entries(otherProperties).map(([key, value]) => (
 
                                     <div className="w-full max-w-xs form-control">
