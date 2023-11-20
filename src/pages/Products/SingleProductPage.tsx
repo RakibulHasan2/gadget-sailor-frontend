@@ -5,6 +5,8 @@ import { useState } from "react";
 import ImageSlider from "../../components/ImageSlider/ImageSlider";
 import CartModal from '../../components/Products/CartModal';
 import { userData } from '../../hooks/getUserData';
+import { AiFillEdit } from "react-icons/ai";
+import UpdateModal from '../UpdateProduct/UpdateModal';
 
 export default function SingleProductPage() {
   // eslint-disable-next-line prefer-const
@@ -65,6 +67,13 @@ export default function SingleProductPage() {
     CartDetails();
   };
 
+  const openEditModal = () => {
+    const modal = document.getElementById('editModal') as HTMLDialogElement | null;
+    if (modal) {
+      modal.showModal();
+    }
+  };
+
   return (
     <div className="container mx-auto my-8">
       <div className="items-center justify-center lg:flex">
@@ -103,7 +112,28 @@ export default function SingleProductPage() {
       </div>
       {/*----- specification section ------*/}
       <div className="w-3/5 p-6 mt-10 shadow-xl lg:ml-36">
-        <p className="text-3xl font-bold">Specification</p>
+        <div className='flex items-end justify-between'>
+          <p className="text-3xl font-bold">Specification</p>
+          <button onClick={openEditModal} className='flex items-center'><AiFillEdit />Edit</button>
+
+          {/* edit modal */}
+
+          <dialog id="editModal" className="modal">
+            <div className="modal-box w-11/12 max-w-5xl">
+              <form method="dialog">
+
+                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                  ✕
+                </button>
+              </form>
+              <h3 className="font-bold text-2xl text-center">{product_name} </h3>
+              <UpdateModal
+                singleData={singleProductData} otherProperties={otherProperties} _id={''} category_name={''} sub_category_name={''} brand_name={''} product_name={''} image={[]} model={''} description={''} price={0} product_code={0} status={''} reviews={[]} warranty={''} __v={''} others_info={[]}              ></UpdateModal>
+
+
+            </div>
+          </dialog>
+        </div>
         <div className="lg:ml-5">
           {/* basic information */}
           <div className="mb-6">
