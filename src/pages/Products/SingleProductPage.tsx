@@ -7,6 +7,7 @@ import CartModal from '../../components/Products/CartModal';
 import { userData } from '../../hooks/getUserData';
 import { AiFillEdit } from "react-icons/ai";
 import UpdateModal from '../UpdateProduct/UpdateModal';
+import useApiData from '../../hooks/getAPIData';
 
 export default function SingleProductPage() {
   // eslint-disable-next-line prefer-const
@@ -14,6 +15,7 @@ export default function SingleProductPage() {
   const singleProduct = useLoaderData() as IProduct;
   const singleProductData = singleProduct.data;
   const user = userData();
+  const { refetch } = useApiData("http://localhost:5000/api/v1/getCart");
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { __v, _id, category_name, sub_category_name, product_name, price, status, product_code, brand_name, image, model, warranty, ...otherProperties } = singleProductData;
@@ -52,16 +54,20 @@ export default function SingleProductPage() {
       model: model,
       email: user.email
     }
-    fetch('http://localhost:5000/api/v1/addCart', {
+    const response = await fetch('http://localhost:5000/api/v1/addCart', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(cartData),
     })
+    console.log(response)
+    if (response.ok) {
+      // Call refetch to update cart data after adding the item
+      refetch();
+    } 
 
   }
-
   const handleClick = () => {
     openImageModal();
     CartDetails();
