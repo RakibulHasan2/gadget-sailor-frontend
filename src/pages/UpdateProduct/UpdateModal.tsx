@@ -73,7 +73,24 @@ const UpdateModal = ({ singleData }: IProduct,) => {
             // others_info: { ...otherProperties, ...data.other_info }
         }
         console.log(productData)
+        const response = await fetch(`http://localhost:5000/api/v1/allProducts/${_id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(productData)
+        });
+        const product = await response.json();
+        console.log(product);
 
+        if (product.statusCode === 200) {
+
+            toast.success(product.message)
+
+            //navigate('/home')
+        } else {
+            toast.error(product.message)
+        }
     }
     return (
         <div>
@@ -92,7 +109,9 @@ const UpdateModal = ({ singleData }: IProduct,) => {
 
                                 <div className="w-full max-w-xs form-control">
                                     <label className="label"> <span className="label-text">Product category</span></label>
-                                    <select className="w-full max-w-xs select select-bordered" placeholder={singleData.category_name} {...register("category_name",)} >
+                                    <select className="w-full max-w-xs select select-bordered" placeholder={singleData.category_name} {...register("category_name", {
+                                        required: 'Required'
+                                    })} >
 
                                         {
                                             getOneCategory.map(d => (
@@ -111,7 +130,9 @@ const UpdateModal = ({ singleData }: IProduct,) => {
                                     <label className="label"> <span className="label-text">Subcategory name</span></label>
 
 
-                                    <select className="w-full max-w-xs select select-bordered" {...register("sub_category_name",)}>
+                                    <select className="w-full max-w-xs select select-bordered" {...register("sub_category_name", {
+                                        required: 'Required'
+                                    })}>
                                         {
                                             getOneSubCategory.map(d => (
                                                 <option key={d} value={d}>{d}</option>
@@ -129,7 +150,9 @@ const UpdateModal = ({ singleData }: IProduct,) => {
                                 <div className="w-full max-w-xs form-control">
                                     <label className="label"> <span className="label-text">Brand Name</span></label>
 
-                                    <select defaultValue={singleData?.brand_name} className="w-full max-w-xs select select-bordered" {...register("brand_name",)}>
+                                    <select defaultValue={singleData?.brand_name} className="w-full max-w-xs select select-bordered" {...register("brand_name", {
+                                        required: 'Required'
+                                    })}>
                                         {
                                             getOneBrand.map(d => (
                                                 <option key={d} value={d}>{d}</option>
