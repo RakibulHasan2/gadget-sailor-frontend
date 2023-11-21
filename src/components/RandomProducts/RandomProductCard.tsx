@@ -1,6 +1,7 @@
 import { FaCartPlus } from "react-icons/fa";
 import { IProduct } from "../../types/ProductsType";
 import { Link } from "react-router-dom";
+import LikeButton from "../Shared/LikeButton/LikeButton";
 import React from "react";
 import { userData } from "../../hooks/getUserData";
 import CartModal from "../Products/CartModal";
@@ -64,24 +65,18 @@ const RandomProductCard = ({ data }: IProduct) => {
                     <img src={data?.image[0]} alt="" className="rounded-xl" />
                 </figure>
 
-            <div className="items-center text-center card-body">
-                <Link to={`/product/${data?._id}`}>
-                    <p className='w-full h-20 font-bold border-b-2 hover:text-blue-700'>{data?.product_name}</p>
-                </Link>
-                <div className="mt-5 card-actions">
-                    <p className="font-bold text-yellow-700">{data?.price}৳</p>
+                <div className="items-center text-center card-body">
+                    <Link to={`/product/${data?._id}`}>
+                        <p className='w-full h-20 font-bold border-b-2 hover:text-blue-700'>{data?.product_name}</p>
+                    </Link>
+                    <div className="mt-5 card-actions">
+                        <p className="font-bold text-yellow-700">{data?.price}৳</p>
+                    </div>
+                    <div>
+                        <button className='flex items-center justify-center p-2 text-lg text-blue-700 bg-gray-100 rounded-md gap-x-3 w-44 hover:bg-blue-700 hover:text-white'><FaCartPlus></FaCartPlus> Buy now</button>
+                    </div>
+                    <LikeButton></LikeButton>
                 </div>
-                <div>
-                    <button onClick={handleClick} className='flex items-center justify-center p-2 text-lg text-blue-700 bg-gray-100 rounded-md gap-x-3 w-44 hover:bg-blue-700 hover:text-white'><FaCartPlus></FaCartPlus> Buy now</button>
-                </div>
-                <CartModal
-                        closeCartModal={closeCartModal}
-                        isCartModalOpen={isCartModalOpen}
-                        product_name={product_name}
-                        count={1}
-                        total={price}
-                    ></CartModal>
-            </div>
 
             </div>
 

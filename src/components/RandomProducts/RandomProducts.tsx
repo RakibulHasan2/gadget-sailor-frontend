@@ -37,16 +37,11 @@ const RandomProducts = () => {
                 }
             </div>
 
-            <div className="flex justify-center btn-group pagination ">
-                {
-                    [...Array(pages).keys()].map(number => <button
-                        key={number}
 
-                        onClick={() => { setPage(number + 1); setCount(number)}}
-                        className={page === number + 1 ? "btn btn-primary" : "btn"}>{number + 1}</button>)
-
-                }
-
+            <div className="join btn-info">
+                <button onClick={() => { setPage(page - 1); setCount(page - 2) }} className="join-item btn" disabled={page === 1}>«</button>
+                <button className="join-item btn">Page {page}</button>
+                <button onClick={() => { setPage(page + 1); setCount(page) }} className="join-item btn" disabled={page === pages}>»</button>
             </div>
         </div>
     );

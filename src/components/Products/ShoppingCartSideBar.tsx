@@ -30,7 +30,7 @@ export default function ShoppingCartSideBar() {
         data.forEach((item) => {
             totalPrice += item.total_price;
         });
-        return totalPrice.toFixed(2);
+        return totalPrice;
     };
 
     return (
