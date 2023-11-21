@@ -1,19 +1,22 @@
 import { FieldValues, useForm } from "react-hook-form";
-import { AddProductValues } from "../../types/ProductTypes";
+import { UpdateProductValues } from "../../types/ProductTypes";
 import { IProduct } from "../../types/ProductsType";
 
 import useApiData from "../../hooks/getAPIData";
+import toast from "react-hot-toast";
 
 
-const UpdateModal = ({ singleData }: IProduct,) => {
-    const { register, handleSubmit, formState: { errors } } = useForm<AddProductValues>();
+
+const UpdateModal = ({ singleData, closeModal }: IProduct,) => {
+    const { register, handleSubmit, formState: { errors } } = useForm<UpdateProductValues>();
+
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { __v, _id, category_name, sub_category_name, product_name, price, status, product_code, brand_name, image, model, warranty, ...otherProperties } = singleData;
+    const { __v, _id, category_name, sub_category_name, product_name, price, status, product_code, description, reviews, brand_name, image, model, warranty, ...otherProperties } = singleData;
     const { data, isLoading } = useApiData("http://localhost:5000/api/v1/allProducts")
     if (isLoading) {
         return <p>Loading...</p>;
     }
-
+    console.log(_id)
 
     //console.log(singleData)
     //console.log(singleData.product_name)
@@ -44,6 +47,54 @@ const UpdateModal = ({ singleData }: IProduct,) => {
 
     const handleUpdateProduct = async (data: FieldValues) => {
         console.log(data)
+
+        //     const obj: object = {
+
+        //        {
+        //         Object.keys(otherProperties).map((key) => (
+        //             `${key}`: `${data.key}`,
+        //         ))
+        //     }
+        // }
+
+        const productData: UpdateProductValues = {
+            category_name: data.category_name,
+            sub_category_name: data.sub_category_name,
+            brand_name: data.brand_name,
+            product_name: data.product_name,
+            model: data.model,
+            description: data.description,
+            price: data.price,
+            product_code: data.product_code,
+            status: data.status,
+
+            warranty: data.warranty,
+            ...Object.fromEntries(
+                Object.keys(otherProperties).map((key) => [key, data.others_info[key]])
+            )
+            // others_info: { ...otherProperties, ...data.other_info }
+        }
+        console.log(productData)
+        const response = await fetch(`http://localhost:5000/api/v1/allProducts/${_id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(productData)
+        });
+        const product = await response.json();
+        console.log(product);
+
+        if (product.statusCode === 200) {
+
+            toast.success(product.message)
+            closeModal();
+            location.reload();
+
+
+        } else {
+            toast.error(product.message)
+        }
     }
     return (
         <div>
@@ -62,7 +113,9 @@ const UpdateModal = ({ singleData }: IProduct,) => {
 
                                 <div className="w-full max-w-xs form-control">
                                     <label className="label"> <span className="label-text">Product category</span></label>
-                                    <select className="w-full max-w-xs select select-bordered" placeholder={singleData.category_name} {...register("category_name",)} >
+                                    <select className="w-full max-w-xs select select-bordered" placeholder={singleData.category_name} {...register("category_name", {
+                                        required: 'Required'
+                                    })} >
 
                                         {
                                             getOneCategory.map(d => (
@@ -81,7 +134,9 @@ const UpdateModal = ({ singleData }: IProduct,) => {
                                     <label className="label"> <span className="label-text">Subcategory name</span></label>
 
 
-                                    <select className="w-full max-w-xs select select-bordered" {...register("sub_category_name",)}>
+                                    <select className="w-full max-w-xs select select-bordered" {...register("sub_category_name", {
+                                        required: 'Required'
+                                    })}>
                                         {
                                             getOneSubCategory.map(d => (
                                                 <option key={d} value={d}>{d}</option>
@@ -99,7 +154,9 @@ const UpdateModal = ({ singleData }: IProduct,) => {
                                 <div className="w-full max-w-xs form-control">
                                     <label className="label"> <span className="label-text">Brand Name</span></label>
 
-                                    <select defaultValue={singleData?.brand_name} className="w-full max-w-xs select select-bordered" {...register("brand_name",)}>
+                                    <select defaultValue={singleData?.brand_name} className="w-full max-w-xs select select-bordered" {...register("brand_name", {
+                                        required: 'Required'
+                                    })}>
                                         {
                                             getOneBrand.map(d => (
                                                 <option key={d} value={d}>{d}</option>
@@ -175,17 +232,46 @@ const UpdateModal = ({ singleData }: IProduct,) => {
                                         className="w-full max-w-xs input input-bordered" />
                                     {errors.warranty && <p className='text-red-600'>{errors.warranty?.message}</p>}
                                 </div>
+
+                                {/* Status */}
+                                <div className="w-full max-w-xs form-control">
+                                    <label className="label"> <span className="label-text">Status</span></label>
+
+                                    <input defaultValue={singleData?.status} type="text"
+                                        {...register("status", {
+
+                                        })}
+                                        className="w-full max-w-xs input input-bordered" />
+                                    {errors.status && <p className='text-red-600'>{errors.status?.message}</p>}
+                                </div>
                             </div>
+
+
                             <div className="w-full">
+
+
+                                {/* Product Code*/}
+                                <div className="w-full max-w-xs form-control">
+                                    <label className="label"> <span className="label-text">Product Code</span></label>
+
+                                    <input defaultValue={singleData?.product_code} type="text"
+                                        {...register("product_code", {
+
+                                        })}
+                                        className="w-full max-w-xs input input-bordered" />
+                                    {errors.product_code && <p className='text-red-600'>{errors.product_code?.message}</p>}
+                                </div>
+
+
                                 {Object.entries(otherProperties).map(([key, value]) => (
 
                                     <div className="w-full max-w-xs form-control">
                                         <label className="label"> <span className="label-text">{key}</span></label>
 
                                         <input defaultValue={value as string | number | readonly string[] | undefined} type="text"
-
+                                            {...register(`others_info.${key}` as keyof UpdateProductValues, {})}
                                             className="w-full max-w-xs input input-bordered" />
-
+                                        {errors.others_info && <p className='text-red-600'>{errors.others_info?.message}</p>}
                                     </div>
                                 ))}
                             </div>
