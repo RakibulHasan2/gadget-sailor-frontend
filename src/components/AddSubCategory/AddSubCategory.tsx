@@ -46,12 +46,12 @@ const AddSubCategory = () => {
         <div>
             <form onSubmit={
                 handleSubmit(handleAddSubCategory)
-            }>
+            } className="pl-16">
 
                 {/* category */}
                 <div className="w-full max-w-xs form-control">
                     <label className="label"> <span className="label-text">Product category</span></label>
-                    <select className="select select-bordered  w-full max-w-xs" {...register("category_name", {
+                    <select className="w-full max-w-xs select select-bordered rounded-3xl" {...register("category_name", {
                         required: 'Required'
                     })}>
                         {
@@ -71,12 +71,12 @@ const AddSubCategory = () => {
 
                     <input type="text" placeholder="Sub-category Name"
                         {...register("sub_category_name")}
-                        className="w-full max-w-xs input input-bordered" />
+                        className="w-full max-w-xs input input-bordered rounded-3xl" />
                     {errors.sub_category_name && <p className='text-red-600'>{errors.sub_category_name?.message}</p>}
                 </div>
 
-                <div className="mt-9">
-                    <input className="text-white bg-blue-600 hover:text-black btn rounded-xl" value="Add" type="submit" />
+                <div className="mt-6 ml-36">
+                    <input className="text-white bg-blue-600 hover:text-black btn rounded-xl"  value="Add" type="submit" />
                 </div>
             </form>
 

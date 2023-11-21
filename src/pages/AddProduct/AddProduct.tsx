@@ -2,17 +2,14 @@ import { FieldValues, useForm } from "react-hook-form";
 import { AddProductValues } from "../../types/ProductTypes";
 import useApiData from "../../hooks/getAPIData";
 import toast from "react-hot-toast";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import React from "react";
 import AddCategory from "../../components/AddCategory/AddCategory";
 import { ICategory, ICategoryResponse } from "../../types/CategoryType";
-import { BiSolidDashboard } from "react-icons/bi";
 import AddSubCategory from "../../components/AddSubCategory/AddSubCategory";
 import { FaBoxOpen } from "react-icons/fa";
-
-
-
-
+import { MdCategory } from "react-icons/md";
+import { BiCategoryAlt } from "react-icons/bi";
 
 
 const AddProduct = () => {
@@ -20,9 +17,6 @@ const AddProduct = () => {
     const imageHosKey = '1a6c0e11cdde66ffb8f933ec4079f59e';
     const navigate = useNavigate();
     const { data, isLoading } = useApiData("http://localhost:5000/api/v1/allProducts")
-
-
-
     // get categories---------------------------------
     const [categoryData, setCategoryData] = React.useState<ICategory[]>([]);
 
@@ -38,13 +32,8 @@ const AddProduct = () => {
             });
     }, []);
 
-    // console.log(categoryData)
-
-
     //get sub category-----------------------------
-
     const [subCategoryData, setSubCategoryData] = React.useState<ICategory[]>([]);
-
     React.useEffect(() => {
         fetch('http://localhost:5000/api/v1/get-subCategories')
             .then(res => res.json())
@@ -58,46 +47,17 @@ const AddProduct = () => {
     }, []);
 
     console.log(subCategoryData)
-
-    // const category = useLoaderData() as ICategoryResponse;
-    // console.log(category);
-    // setSubCategoryData(category.data);
-    // console.log(subCategoryData)
-
-    // const getCategory: Set<string> = new Set()
-    // const getSubCategory: Set<string> = new Set()
     const getBrand: Set<string> = new Set()
 
     data.forEach(d => {
-        // if (!getCategory.has(d.category_name)) {
-        //     getCategory.add(d.category_name);
-
-        // }
-        // if (!getSubCategory.has(d.sub_category_name)) {
-        //     getSubCategory.add(d.sub_category_name);
-        // }
         if (!getBrand.has(d.brand_name)) {
-            // console.log(d.brand_name);
             getBrand.add(d.brand_name);
         }
     });
-
-    //const getOneCategory = Array.from(getCategory);
-    // const getOneSubCategory = Array.from(getSubCategory).filter((item) => item !== undefined && item !== '');
     const getOneBrand = Array.from(getBrand).filter((item) => item !== undefined);
-
-
-    // console.log(getOneSubCategory)
-    // console.log(getOneCategory);
-    // console.log(getOneSubCategory);
-    // console.log(getOneBrand)
-
     if (isLoading) {
         return <p>Loading...</p>;
     }
-
-
-
     //Handle category Modal------------------
     const openCategoryModal = () => {
         const modal = document.getElementById('categoryModal') as HTMLDialogElement | null;
@@ -105,7 +65,6 @@ const AddProduct = () => {
             modal.showModal();
         }
     };
-
     //Handle Sub-category Modal------------------
     const openSubCategoryModal = () => {
         const modal = document.getElementById('subCategoryModal') as HTMLDialogElement | null;
@@ -113,18 +72,10 @@ const AddProduct = () => {
             modal.showModal();
         }
     };
-
-
-
-
-
     //Handle Add Product----------------------
-
     const handleAddProduct = async (data: FieldValues) => {
         const imageFiles: FileList = data.image;
         console.log(imageFiles)
-
-
         //POST image on imagebb for hosting
         const uploadPromises = Array.from(imageFiles).map(async (image) => {
 
@@ -175,8 +126,6 @@ const AddProduct = () => {
             warranty: data.warranty,
             others_info: data.others_info,
         }
-
-
         console.log(productData);
         console.log(imageFiles);
 
@@ -201,45 +150,48 @@ const AddProduct = () => {
 
 
     }
-
-
-    // const handleAddCategory = async (data: FieldValues) => {
-    //     console.log(data)
-    // }
-
-
     return (
 
         <div className="flex background-my-profile">
 
-            <div className='bg-blue-900 w-60 '>
-                <h1 className='flex items-center justify-center mt-5 mb-10 text-3xl text-white border-b-2'><BiSolidDashboard />Porduct-add</h1>
+            <div className='bg-blue-900 w-72 '>
+                <h1 className='flex items-center justify-center mt-5 mb-10 text-2xl text-white border-b-2'><FaBoxOpen />Porduct-Management</h1>
                 <div>
-                    <button className="flex items-center justify-center w-48 h-10 mb-6 ml-5 font-bold btn-one gap-x-2" onClick={openCategoryModal}> Add New Category</button>
-                    <button className="flex items-center justify-center w-48 h-10 mb-6 ml-5 font-bold btn-one gap-x-2" onClick={openSubCategoryModal}> Add New Sub-category</button>
+                    <button className="flex items-center justify-center w-56 h-10 mb-6 ml-6 font-bold btn-one gap-x-2" onClick={openCategoryModal}><span><MdCategory />
+                    </span> Add Category</button>
+                    <button className="flex items-center justify-center w-56 h-10 mb-6 ml-6 font-bold btn-one gap-x-2" onClick={openSubCategoryModal}> <span><BiCategoryAlt /></span> Add Sub-category</button>
                     {/* add category */}
                     <dialog id="categoryModal" className="modal">
-                        <div className="modal-box">
+                        <div className="modal-box rounded-2xl">
                             <form method="dialog">
                                 <button className="absolute btn btn-sm btn-circle btn-ghost right-2 top-2">
                                     ✕
                                 </button>
                             </form>
-                            <h3 className="text-lg font-bold">Add your new category here</h3>
+                            <div className="items-center justify-center text-center ">
+                                <span className="flex justify-center text-5xl text-blue-600"><MdCategory />
+                                </span>
+                            <h3 className="text-lg font-bold border-b-4">Add Category</h3>
+                            </div>
+                          
                             <AddCategory></AddCategory>
                         </div>
                     </dialog>
                     {/* add sub-category */}
 
                     <dialog id="subCategoryModal" className="modal">
-                        <div className="modal-box">
+                        <div className="modal-box rounded-3xl">
                             <form method="dialog">
 
                                 <button className="absolute btn btn-sm btn-circle btn-ghost right-2 top-2">
                                     ✕
                                 </button>
                             </form>
-                            <h3 className="text-lg font-bold">Add your new Sub-category here</h3>
+                            <div className="items-center justify-center text-center ">
+                                <span className="flex justify-center text-5xl text-blue-600"><BiCategoryAlt />
+                                </span>
+                            <h3 className="text-lg font-bold border-b-4">Add Sub-Category</h3>
+                            </div>
                             <AddSubCategory></AddSubCategory>
 
 
