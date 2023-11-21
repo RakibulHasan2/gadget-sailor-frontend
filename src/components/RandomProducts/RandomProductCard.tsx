@@ -1,6 +1,7 @@
 import { FaCartPlus } from "react-icons/fa";
 import { IProduct } from "../../types/ProductsType";
 import { Link } from "react-router-dom";
+import LikeButton from "../Shared/LikeButton/LikeButton";
 
 
 
@@ -38,6 +39,7 @@ const RandomProductCard = ({ data }: IProduct) => {
                     <div>
                         <button className='flex items-center justify-center p-2 text-lg text-blue-700 bg-gray-100 rounded-md gap-x-3 w-44 hover:bg-blue-700 hover:text-white'><FaCartPlus></FaCartPlus> Buy now</button>
                     </div>
+                    <LikeButton></LikeButton>
                 </div>
 
             </div>

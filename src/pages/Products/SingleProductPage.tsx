@@ -8,6 +8,8 @@ import { userData } from '../../hooks/getUserData';
 import { AiFillEdit } from "react-icons/ai";
 import UpdateModal from '../UpdateProduct/UpdateModal';
 import useApiData from '../../hooks/getAPIData';
+import UpdateImage from '../UpdateProduct/UpdateImage';
+
 
 export default function SingleProductPage() {
   // eslint-disable-next-line prefer-const
@@ -61,11 +63,10 @@ export default function SingleProductPage() {
       },
       body: JSON.stringify(cartData),
     })
-    console.log(response)
     if (response.ok) {
       // Call refetch to update cart data after adding the item
       refetch();
-    } 
+    }
 
   }
   const handleClick = () => {
@@ -73,8 +74,23 @@ export default function SingleProductPage() {
     CartDetails();
   };
 
+  // for edit all data modal
   const openEditModal = () => {
     const modal = document.getElementById('editModal') as HTMLDialogElement | null;
+    if (modal) {
+      modal.showModal();
+    }
+  };
+  const closeModal = () => {
+    const modal = document.getElementById('editModal') as HTMLDialogElement | null;
+    if (modal) {
+      modal.close();
+    }
+  };
+
+  //for edit image modal
+  const openEditImage = () => {
+    const modal = document.getElementById('editImage') as HTMLDialogElement | null;
     if (modal) {
       modal.showModal();
     }
@@ -86,7 +102,32 @@ export default function SingleProductPage() {
         {/* image slider */}
         <div className="">
           <ImageSlider images={image} />
+          <button onClick={openEditImage} className='flex items-center'><AiFillEdit />Edit Image</button>
+
+          {/* modal for edit image */}
+          <dialog id="editImage" className="modal">
+            <div className="modal-box ">
+              <form method="dialog">
+
+                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                  ✕
+                </button>
+              </form>
+
+              <UpdateImage
+                singleData={singleProductData}
+              ></UpdateImage>
+            </div>
+          </dialog>
+
         </div>
+
+
+
+
+
+
+
         {/* product basic info */}
         <div className="w-2/4 lg:ms-12 lg:p-5">
           <h1 className="text-2xl font-bold text-blue-900 lg:mt-10">{product_name}</h1>
@@ -134,7 +175,8 @@ export default function SingleProductPage() {
               </form>
               <h3 className="font-bold text-2xl text-center">{product_name} </h3>
               <UpdateModal
-                singleData={singleProductData} otherProperties={otherProperties} _id={''} category_name={''} sub_category_name={''} brand_name={''} product_name={''} image={[]} model={''} description={''} price={0} product_code={0} status={''} reviews={[]} warranty={''} __v={''} others_info={[]}              ></UpdateModal>
+                singleData={singleProductData}
+                closeModal={closeModal} otherProperties={otherProperties} _id={''} category_name={''} sub_category_name={''} brand_name={''} product_name={''} image={[]} model={''} description={''} price={0} product_code={0} status={''} reviews={[]} warranty={''} __v={''} others_info={[]}              ></UpdateModal>
 
 
             </div>
