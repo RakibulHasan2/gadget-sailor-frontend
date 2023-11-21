@@ -9,6 +9,7 @@ import { AiFillEdit } from "react-icons/ai";
 import UpdateModal from '../UpdateProduct/UpdateModal';
 import useApiData from '../../hooks/getAPIData';
 import UpdateImage from '../UpdateProduct/UpdateImage';
+import { AiOutlineProfile } from "react-icons/ai";
 
 
 export default function SingleProductPage() {
@@ -98,17 +99,17 @@ export default function SingleProductPage() {
 
   return (
     <div className="container mx-auto my-8">
-      <div className="flex flex-col lg:flex-row items-center justify-center border">
+      <div className="flex flex-col items-center justify-center border lg:flex-row">
         {/* image slider */}
         <div className="">
           <ImageSlider images={image} />
           <button onClick={openEditImage} className='flex items-center'><AiFillEdit />Edit Image</button>
           {/* modal for edit image */}
           <dialog id="editImage" className="modal">
-            <div className="modal-box ">
+            <div className="modal-box rounded-3xl">
               <form method="dialog">
 
-                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                <button className="absolute btn btn-sm btn-circle btn-ghost right-2 top-2">
                   ✕
                 </button>
               </form>
@@ -120,9 +121,9 @@ export default function SingleProductPage() {
 
         </div>
         {/* product basic info */}
-        <div className="lg:w-1/2 lg:ms-12 p-5">
+        <div className="p-5 lg:w-1/2 lg:ms-12">
           <h1 className="text-2xl font-bold text-blue-900 lg:mt-10">{product_name}</h1>
-          <div className="flex flex-col lg:flex-row lg:justify-evenly mt-5 mb-5">
+          <div className="flex flex-col mt-5 mb-5 lg:flex-row lg:justify-evenly">
             <p className="p-2 text-gray-600 rounded bg-slate-100">Price: <span className="font-bold text-black">{price}৳</span></p>
             <p className="p-2 text-gray-600 rounded bg-slate-100">Status: <span className="font-bold text-black">{status}</span></p>
             <p className="p-2 text-gray-600 rounded bg-slate-100">Product Code: <span className="font-bold text-black">{product_code}</span></p>
@@ -149,7 +150,7 @@ export default function SingleProductPage() {
         </div>
       </div>
       {/*----- specification section ------*/}
-      <div className="w-full lg:w-3/5 p-6 mt-10 shadow-xl lg:ml-36">
+      <div className="w-full p-6 mt-10 shadow-xl lg:w-3/5 lg:ml-36">
         <div className='flex items-end justify-between'>
           <p className="text-3xl font-bold">Specification</p>
           <button onClick={openEditModal} className='flex items-center'><AiFillEdit />Edit</button>
@@ -157,14 +158,20 @@ export default function SingleProductPage() {
           {/* edit modal */}
 
           <dialog id="editModal" className="modal">
-            <div className="modal-box w-11/12 max-w-5xl">
+            <div className="w-11/12 max-w-5xl modal-box rounded-3xl">
               <form method="dialog">
 
-                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                <button className="absolute btn btn-sm btn-circle btn-ghost right-2 top-2">
                   ✕
                 </button>
               </form>
-              <h3 className="font-bold text-2xl text-center">{product_name} </h3>
+              <div>
+                <span className='flex justify-center text-5xl text-blue-700'>
+                  <AiOutlineProfile />
+                </span>
+                <h3 className="text-2xl font-bold text-center border-b-8">Update "<span className='text-blue-800'>{product_name}</span>" Information </h3>
+
+              </div>
               <UpdateModal
                 singleData={singleProductData}
                 closeModal={closeModal} otherProperties={otherProperties} _id={''} category_name={''} sub_category_name={''} brand_name={''} product_name={''} image={[]} model={''} description={''} price={0} product_code={0} status={''} reviews={[]} warranty={''} __v={''} others_info={[]}              ></UpdateModal>

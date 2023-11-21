@@ -92,191 +92,179 @@ const UpdateModal = ({ singleData, closeModal }: IProduct,) => {
     return (
         <div>
             <div>
-
-            </div>
-            <div>
                 <div className='items-center'>
-                    <h2 className='text-3xl font-bold text-center text-sky-500'>Update Product:</h2>
-                    <form className="" onSubmit={handleSubmit(handleUpdateProduct)}>
 
-                        <div className="flex justify-center">
+                    <form className="mt-10" onSubmit={handleSubmit(handleUpdateProduct)}>
 
-                            <div className="w-full">
+                        <div className="flex justify-between">
+
+                            <div className="w-3/4 mr-40 ">
                                 {/* category */}
-
-                                <div className="w-full max-w-xs form-control">
-                                    <label className="label"> <span className="label-text">Product category</span></label>
-                                    <select className="w-full max-w-xs select select-bordered" placeholder={singleData.category_name} {...register("category_name", {
-                                        required: 'Required'
-                                    })} >
-
-                                        {
-                                            getOneCategory.map(d => (
-                                                <option key={d} value={d}>{d}</option>
-                                            ))
-                                        }
-
-                                    </select>
-                                    {errors.category_name && <p className='text-red-600'>{errors.category_name?.message}</p>}
+                                <div className="flex justify-center text-2xl text-blue-800 border-b-4">
+                                    <h1>Basic Info</h1>
                                 </div>
-
-
-
-                                {/* Sub-Category */}
-                                <div className="w-full max-w-xs form-control">
-                                    <label className="label"> <span className="label-text">Subcategory name</span></label>
-
-
-                                    <select className="w-full max-w-xs select select-bordered" {...register("sub_category_name", {
-                                        required: 'Required'
-                                    })}>
-                                        {
-                                            getOneSubCategory.map(d => (
-                                                <option key={d} value={d}>{d}</option>
-                                            ))
-                                        }
-                                    </select>
-
-
-
-                                    {errors.sub_category_name && <p className='text-red-600'>{errors.sub_category_name?.message}</p>}
-                                </div>
-
-                                {/* Brand Name */}
-
-                                <div className="w-full max-w-xs form-control">
-                                    <label className="label"> <span className="label-text">Brand Name</span></label>
-
-                                    <select defaultValue={singleData?.brand_name} className="w-full max-w-xs select select-bordered" {...register("brand_name", {
-                                        required: 'Required'
-                                    })}>
-                                        {
-                                            getOneBrand.map(d => (
-                                                <option key={d} value={d}>{d}</option>
-                                            ))
-                                        }
-                                    </select>
-                                    {errors.brand_name && <p className='text-red-600'>{errors.brand_name?.message}</p>}
-                                </div>
-
-
-                                {/* Product Name */}
-
-                                <div className="w-full max-w-xs form-control">
-                                    <label className="label"> <span className="label-text">Product Name</span></label>
-
-                                    <input type="text"
-                                        defaultValue={singleData?.product_name || ''}
-                                        {...register("product_name", {
+                               
+                                    <div className="w-full max-w-xs mt-3 form-control">
+                                        <label className="font-bold label"> <span className="label-text">Product category</span></label>
+                                        <select className="w-full max-w-xs select select-bordered rounded-3xl" placeholder={singleData.category_name} {...register("category_name", {
                                             required: 'Required'
-                                        })}
-                                        className="w-full max-w-xs input input-bordered" />
+                                        })} >
 
-                                </div>
+                                            {
+                                                getOneCategory.map(d => (
+                                                    <option key={d} value={d}>{d}</option>
+                                                ))
+                                            }
 
-
-                                {/* Model */}
-                                <div className="w-full max-w-xs form-control">
-                                    <label className="label"> <span className="label-text">Model</span></label>
-
-                                    <input defaultValue={singleData?.model} type="text"
-                                        {...register("model", {
-
-                                        })}
-                                        className="w-full max-w-xs input input-bordered" />
-                                    {errors.model && <p className='text-red-600'>{errors.model?.message}</p>}
-                                </div>
-
-
-                                {/* Description */}
-
-                                <div className="w-full max-w-xs form-control">
-                                    <label className="label"> <span className="label-text">Product Description</span></label>
-
-                                    <textarea defaultValue={singleData?.description} placeholder="Descriptions"
-                                        {...register("description", {
-
-                                        })}
-                                        className="w-full max-w-xs input input-bordered" />
-                                    {errors.description && <p className='text-red-600'>{errors.description?.message}</p>}
-                                </div>
-
-                                {/* Price */}
-                                <div className="w-full max-w-xs form-control">
-                                    <label className="label"> <span className="label-text">Price</span></label>
-
-                                    <input defaultValue={singleData?.price} type="text"
-                                        {...register("price", {
-
-                                        })}
-                                        className="w-full max-w-xs input input-bordered" />
-                                    {errors.price && <p className='text-red-600'>{errors.price?.message}</p>}
-                                </div>
-
-
-                                {/* Wrranty */}
-                                <div className="w-full max-w-xs form-control">
-                                    <label className="label"> <span className="label-text">Warranty</span></label>
-
-                                    <input defaultValue={singleData?.warranty} type="text"
-                                        {...register("warranty", {
-
-                                        })}
-                                        className="w-full max-w-xs input input-bordered" />
-                                    {errors.warranty && <p className='text-red-600'>{errors.warranty?.message}</p>}
-                                </div>
-
-                                {/* Status */}
-                                <div className="w-full max-w-xs form-control">
-                                    <label className="label"> <span className="label-text">Status</span></label>
-
-                                    <input defaultValue={singleData?.status} type="text"
-                                        {...register("status", {
-
-                                        })}
-                                        className="w-full max-w-xs input input-bordered" />
-                                    {errors.status && <p className='text-red-600'>{errors.status?.message}</p>}
-                                </div>
-                            </div>
-
-
-                            <div className="w-full">
-
-
-                                {/* Product Code*/}
-                                <div className="w-full max-w-xs form-control">
-                                    <label className="label"> <span className="label-text">Product Code</span></label>
-
-                                    <input defaultValue={singleData?.product_code} type="text"
-                                        {...register("product_code", {
-
-                                        })}
-                                        className="w-full max-w-xs input input-bordered" />
-                                    {errors.product_code && <p className='text-red-600'>{errors.product_code?.message}</p>}
-                                </div>
-
-
-                                {Object.entries(otherProperties).map(([key, value]) => (
-
-                                    <div className="w-full max-w-xs form-control">
-                                        <label className="label"> <span className="label-text">{key}</span></label>
-
-                                        <input defaultValue={value as string | number | readonly string[] | undefined} type="text"
-                                            {...register(`others_info.${key}` as keyof UpdateProductValues, {})}
-                                            className="w-full max-w-xs input input-bordered" />
-                                        {errors.others_info && <p className='text-red-600'>{errors.others_info?.message}</p>}
+                                        </select>
+                                        {errors.category_name && <p className='text-red-600'>{errors.category_name?.message}</p>}
                                     </div>
-                                ))}
+                                    {/* Sub-Category */}
+                                    <div className="w-full max-w-xs mt-2 form-control">
+                                        <label className="font-bold label"> <span className="label-text">Subcategory name</span></label>
+
+
+                                        <select className="w-full max-w-xs select select-bordered rounded-3xl" {...register("sub_category_name", {
+                                            required: 'Required'
+                                        })}>
+                                            {
+                                                getOneSubCategory.map(d => (
+                                                    <option key={d} value={d}>{d}</option>
+                                                ))
+                                            }
+                                        </select>
+
+
+
+                                        {errors.sub_category_name && <p className='text-red-600'>{errors.sub_category_name?.message}</p>}
+                                    </div>
+                                    {/* Brand Name */}
+                                    <div className="w-full max-w-xs mt-2 form-control">
+                                        <label className="font-bold label"> <span className="label-text">Brand Name</span></label>
+
+                                        <select defaultValue={singleData?.brand_name} className="w-full max-w-xs select select-bordered rounded-3xl" {...register("brand_name", {
+                                            required: 'Required'
+                                        })}>
+                                            {
+                                                getOneBrand.map(d => (
+                                                    <option key={d} value={d}>{d}</option>
+                                                ))
+                                            }
+                                        </select>
+                                        {errors.brand_name && <p className='text-red-600'>{errors.brand_name?.message}</p>}
+                                    </div>
+                                    {/* Product Name */}
+                                    <div className="w-full max-w-xs mt-2 form-control">
+                                        <label className="font-bold label"> <span className="label-text">Product Name</span></label>
+
+                                        <input type="text"
+                                            defaultValue={singleData?.product_name || ''}
+                                            {...register("product_name", {
+                                                required: 'Required'
+                                            })}
+                                            className="w-full max-w-xs input input-bordered rounded-3xl" />
+
+                                    </div>
+                                    {/* Model */}
+                                    <div className="w-full max-w-xs mt-2 form-control">
+                                        <label className="font-bold label"> <span className="label-text">Model</span></label>
+
+                                        <input defaultValue={singleData?.model} type="text"
+                                            {...register("model", {
+
+                                            })}
+                                            className="w-full max-w-xs input input-bordered rounded-3xl" />
+                                        {errors.model && <p className='text-red-600'>{errors.model?.message}</p>}
+                                    </div>
+                                    {/* Description */}
+                                    <div className="w-full max-w-xs mt-2 form-control">
+                                        <label className="font-bold label"> <span className="label-text">Product Description</span></label>
+
+                                        <textarea defaultValue={singleData?.description} placeholder="Descriptions"
+                                            {...register("description", {
+
+                                            })}
+                                            className="w-full max-w-xs input input-bordered rounded-3xl" />
+                                        {errors.description && <p className='text-red-600'>{errors.description?.message}</p>}
+                                    </div>
+                                    {/* Price */}
+                                    <div className="w-full max-w-xs mt-2 form-control">
+                                        <label className="font-bold label"> <span className="label-text">Price</span></label>
+
+                                        <input defaultValue={singleData?.price} type="text"
+                                            {...register("price", {
+
+                                            })}
+                                            className="w-full max-w-xs input input-bordered rounded-3xl" />
+                                        {errors.price && <p className='text-red-600'>{errors.price?.message}</p>}
+                                    </div>
+
+
+                                    {/* Wrranty */}
+                                    <div className="w-full max-w-xs mt-2 form-control">
+                                        <label className="font-bold label"> <span className="label-text">Warranty</span></label>
+
+                                        <input defaultValue={singleData?.warranty} type="text"
+                                            {...register("warranty", {
+
+                                            })}
+                                            className="w-full max-w-xs input input-bordered rounded-3xl" />
+                                        {errors.warranty && <p className='text-red-600'>{errors.warranty?.message}</p>}
+                                    </div>
+
+                                    {/* Status */}
+                                    <div className="w-full max-w-xs mt-2 form-control">
+                                        <label className="font-bold label"> <span className="label-text">Status</span></label>
+
+                                        <input defaultValue={singleData?.status} type="text"
+                                            {...register("status", {
+
+                                            })}
+                                            className="w-full max-w-xs input input-bordered rounded-3xl" />
+                                        {errors.status && <p className='text-red-600'>{errors.status?.message}</p>}
+                                    </div>
+
+                                    {/* Product Code*/}
+                                    <div className="w-full max-w-xs mt-3 form-control">
+                                        <label className="font-bold label"> <span className="label-text">Product Code</span></label>
+
+                                        <input defaultValue={singleData?.product_code} type="text"
+                                            {...register("product_code", {
+
+                                            })}
+                                            className="w-full max-w-xs input input-bordered rounded-3xl" />
+                                        {errors.product_code && <p className='text-red-600'>{errors.product_code?.message}</p>}
+                                    </div>
+                              
                             </div>
 
+                            <div className="w-full ">
+                                <div className="flex justify-center mb-3 text-2xl text-blue-800 border-b-4">
+                                    <h1>Feature's Info</h1>
+                                </div>
+
+                                <div className="grid grid-cols-3 gap-x-2 gap-y-5">
+
+                                    {Object.entries(otherProperties).map(([key, value]) => (
+
+                                        <div className="w-full max-w-xs form-contro">
+                                            <label className="font-bold label"> <span className="label-text">{key}</span></label>
+
+                                            <input defaultValue={value as string | number | readonly string[] | undefined} type="text"
+                                                {...register(`others_info.${key}` as keyof UpdateProductValues, {})}
+                                                className="w-full max-w-xs input input-bordered rounded-3xl" />
+                                            {errors.others_info && <p className='text-red-600'>{errors.others_info?.message}</p>}
+                                        </div>
+
+
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                        <div className="flex justify-center">
+                            <input className='mt-4 text-white bg-blue-600 rounded-2xl hover:text-black w-52 btn' value="Update" type="submit" />
                         </div>
 
-
-
-
-
-
-                        <input className='w-full  mt-4 bg-blue-600 btn' value="Update" type="submit" />
 
                     </form>
 
