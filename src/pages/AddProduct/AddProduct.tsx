@@ -2,15 +2,15 @@ import { FieldValues, useForm } from "react-hook-form";
 import { AddProductValues } from "../../types/ProductTypes";
 import useApiData from "../../hooks/getAPIData";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React from "react";
 import AddCategory from "../../components/AddCategory/AddCategory";
 import { ICategory, ICategoryResponse } from "../../types/CategoryType";
 import AddSubCategory from "../../components/AddSubCategory/AddSubCategory";
-import { FaBoxOpen } from "react-icons/fa";
+import { FaBoxOpen, FaHome } from "react-icons/fa";
 import { MdCategory } from "react-icons/md";
 import { BiCategoryAlt } from "react-icons/bi";
-
+import '../../styles/Porduct-loader.css'
 
 const AddProduct = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<AddProductValues>();
@@ -56,7 +56,7 @@ const AddProduct = () => {
     });
     const getOneBrand = Array.from(getBrand).filter((item) => item !== undefined);
     if (isLoading) {
-        return <p>Loading...</p>;
+        return <div className="flex items-center justify-center mt-72"><span className="loaderr"></span></div> ;
     }
     //Handle category Modal------------------
     const openCategoryModal = () => {
@@ -160,6 +160,8 @@ const AddProduct = () => {
                     <button className="flex items-center justify-center w-56 h-10 mb-6 ml-6 font-bold btn-one gap-x-2" onClick={openCategoryModal}><span><MdCategory />
                     </span> Add Category</button>
                     <button className="flex items-center justify-center w-56 h-10 mb-6 ml-6 font-bold btn-one gap-x-2" onClick={openSubCategoryModal}> <span><BiCategoryAlt /></span> Add Sub-category</button>
+                    <Link to='/home'><button className="flex items-center justify-center w-56 h-10 mb-6 ml-6 font-bold btn-one gap-x-2"><FaHome />
+                        Back Home</button></Link>
                     {/* add category */}
                     <dialog id="categoryModal" className="modal">
                         <div className="modal-box rounded-2xl">
