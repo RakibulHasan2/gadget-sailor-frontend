@@ -5,7 +5,7 @@ export default function MyOrder() {
   const { data, refetch  } = useApiData("http://localhost:5000/api/v1/getCart");
 
   const calculateTotalPrice = () => {
-    let totalPrice = 0;
+    let totalPrice : number = 0;
     data.forEach((item) => {
       totalPrice += item.total_price;
     });
