@@ -106,7 +106,7 @@ const UpdateModal = ({ singleData, closeModal }: IProduct,) => {
                                
                                     <div className="w-full max-w-xs mt-3 form-control">
                                         <label className="font-bold label"> <span className="label-text">Product category</span></label>
-                                        <select className="w-full max-w-xs select select-bordered rounded-3xl" placeholder={singleData.category_name} {...register("category_name", {
+                                        <select  className="w-full max-w-xs select select-bordered rounded-3xl" {...register("category_name", {
                                             required: 'Required'
                                         })} >
 
@@ -114,16 +114,15 @@ const UpdateModal = ({ singleData, closeModal }: IProduct,) => {
                                                 getOneCategory.map(d => (
                                                     <option key={d} value={d}>{d}</option>
                                                 ))
+                                                
                                             }
-
+                                        
                                         </select>
                                         {errors.category_name && <p className='text-red-600'>{errors.category_name?.message}</p>}
                                     </div>
                                     {/* Sub-Category */}
                                     <div className="w-full max-w-xs mt-2 form-control">
                                         <label className="font-bold label"> <span className="label-text">Subcategory name</span></label>
-
-
                                         <select className="w-full max-w-xs select select-bordered rounded-3xl" {...register("sub_category_name", {
                                             required: 'Required'
                                         })}>
@@ -261,7 +260,7 @@ const UpdateModal = ({ singleData, closeModal }: IProduct,) => {
                                 </div>
                             </div>
                         </div>
-                        <div className="flex justify-center">
+                        <div className="flex justify-center mt-5">
                             <input className='mt-4 text-white bg-blue-600 rounded-2xl hover:text-black w-52 btn' value="Update" type="submit" />
                         </div>
 
