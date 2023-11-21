@@ -9,7 +9,7 @@ const RandomProducts = () => {
     const [page, setPage] = useState(1);
 
     const [count, setCount] = useState(0)
-    const size = 8;
+    const size = 10;
     const { data, isLoading } = useApiData("http://localhost:5000/api/v1/allProducts")
     if (isLoading) {
         return <div className="flex justify-center p-10"><span className="loader"></span></div>;
@@ -27,7 +27,7 @@ const RandomProducts = () => {
 
     return (
         <div className="mt-28">
-            <div className="flex-col p-4 lg:grid lg:grid-cols-4 lg:gap-x-2 lg:gap-y-8 lg:grid-rows-2 mb-7 justify-items-center">
+            <div className="flex-col p-4 lg:grid lg:grid-cols-5 lg:gap-x-2 lg:gap-y-8 lg:grid-rows-2 mb-7 justify-items-center">
                 {
                     limitData.map(i => (
                         <RandomProductCard
