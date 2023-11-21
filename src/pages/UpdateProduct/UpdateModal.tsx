@@ -48,14 +48,7 @@ const UpdateModal = ({ singleData, closeModal }: IProduct,) => {
     const handleUpdateProduct = async (data: FieldValues) => {
         console.log(data)
 
-        //     const obj: object = {
 
-        //        {
-        //         Object.keys(otherProperties).map((key) => (
-        //             `${key}`: `${data.key}`,
-        //         ))
-        //     }
-        // }
 
         const productData: UpdateProductValues = {
             category_name: data.category_name,

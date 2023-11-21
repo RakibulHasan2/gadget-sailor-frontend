@@ -7,7 +7,6 @@ import MainLayout from "../layouts/MainLayout";
 import AddProduct from "../pages/AddProduct/AddProduct";
 import Products from "../pages/Products/Products";
 import SingleProductPage from "../pages/Products/SingleProductPage";
-import UpdateProduct from "../pages/UpdateProduct/UpdateProduct";
 import MyProfile from './../pages/MyProfile/MyProfile';
 import MyOrder from "../pages/MyOrder/MyOrder";
 import PrivateRoute from "./PrivateRoute";
@@ -71,10 +70,7 @@ const routes = createBrowserRouter([
     path: "/addProduct",
     element: <PrivateRoute><AddProduct /></PrivateRoute>,
   },
-  {
-    path: "/updateProduct",
-    element: <UpdateProduct />,
-  },
+
   {
     path: "/my-profile",
     element: <MyProfile />,
