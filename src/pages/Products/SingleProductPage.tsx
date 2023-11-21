@@ -98,12 +98,11 @@ export default function SingleProductPage() {
 
   return (
     <div className="container mx-auto my-8">
-      <div className="items-center justify-center lg:flex">
+      <div className="flex flex-col lg:flex-row items-center justify-center border">
         {/* image slider */}
         <div className="">
           <ImageSlider images={image} />
           <button onClick={openEditImage} className='flex items-center'><AiFillEdit />Edit Image</button>
-
           {/* modal for edit image */}
           <dialog id="editImage" className="modal">
             <div className="modal-box ">
@@ -115,23 +114,15 @@ export default function SingleProductPage() {
               </form>
 
               <UpdateImage
-                singleData={singleProductData}
-              ></UpdateImage>
+                singleData={singleProductData} _id={''} category_name={''} sub_category_name={''} brand_name={''} product_name={''} image={[]} model={''} description={''} price={0} product_code={0} status={''} reviews={[]} warranty={''} __v={''} others_info={[]}></UpdateImage>
             </div>
           </dialog>
 
         </div>
-
-
-
-
-
-
-
         {/* product basic info */}
-        <div className="w-2/4 lg:ms-12 lg:p-5">
+        <div className="lg:w-1/2 lg:ms-12 p-5">
           <h1 className="text-2xl font-bold text-blue-900 lg:mt-10">{product_name}</h1>
-          <div className="flex justify-evenly lg:mt-5">
+          <div className="flex flex-col lg:flex-row lg:justify-evenly mt-5 mb-5">
             <p className="p-2 text-gray-600 rounded bg-slate-100">Price: <span className="font-bold text-black">{price}৳</span></p>
             <p className="p-2 text-gray-600 rounded bg-slate-100">Status: <span className="font-bold text-black">{status}</span></p>
             <p className="p-2 text-gray-600 rounded bg-slate-100">Product Code: <span className="font-bold text-black">{product_code}</span></p>
@@ -158,7 +149,7 @@ export default function SingleProductPage() {
         </div>
       </div>
       {/*----- specification section ------*/}
-      <div className="w-3/5 p-6 mt-10 shadow-xl lg:ml-36">
+      <div className="w-full lg:w-3/5 p-6 mt-10 shadow-xl lg:ml-36">
         <div className='flex items-end justify-between'>
           <p className="text-3xl font-bold">Specification</p>
           <button onClick={openEditModal} className='flex items-center'><AiFillEdit />Edit</button>
