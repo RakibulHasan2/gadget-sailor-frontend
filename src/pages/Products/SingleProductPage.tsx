@@ -63,7 +63,6 @@ export default function SingleProductPage() {
       },
       body: JSON.stringify(cartData),
     })
-    console.log(response)
     if (response.ok) {
       // Call refetch to update cart data after adding the item
       refetch();
