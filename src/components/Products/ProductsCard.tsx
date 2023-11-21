@@ -5,9 +5,10 @@ import { FaCartPlus } from 'react-icons/fa';
 import React from 'react';
 import CartModal from './CartModal';
 import { userData } from '../../hooks/getUserData';
+import LikeButton from '../Shared/LikeButton/LikeButton';
 
 export default function ProductsCard({ product }: IProduct) {
-    const { product_name, price, _id, image,model } = product;
+    const { product_name, price, _id, image, model } = product;
     const user = userData()
     const CartDetails = async () => {
         const cartData = {
@@ -58,6 +59,8 @@ export default function ProductsCard({ product }: IProduct) {
                     <div>
                         <button onClick={handleClick} className='flex items-center justify-center p-2 text-lg text-blue-700 bg-gray-100 rounded-md gap-x-3 w-44 hover:bg-blue-700 hover:text-white'><FaCartPlus></FaCartPlus> Buy now</button>
                     </div>
+                    <LikeButton
+                        info={product} _id={''} category_name={''} sub_category_name={''} brand_name={''} product_name={''} image={[]} model={''} description={''} price={0} product_code={0} status={''} reviews={[]} warranty={''} __v={''} others_info={[]}                    ></LikeButton>
                     <CartModal
                         closeCartModal={closeCartModal}
                         isCartModalOpen={isCartModalOpen}
