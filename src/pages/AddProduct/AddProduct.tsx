@@ -6,22 +6,17 @@ import { Link, useNavigate } from "react-router-dom";
 import React from "react";
 import AddCategory from "../../components/AddCategory/AddCategory";
 import { ICategory, ICategoryResponse } from "../../types/CategoryType";
-import { BiSolidDashboard } from "react-icons/bi";
 import AddSubCategory from "../../components/AddSubCategory/AddSubCategory";
-
-
-
-
-
+import { FaBoxOpen, FaHome } from "react-icons/fa";
+import { MdCategory } from "react-icons/md";
+import { BiCategoryAlt } from "react-icons/bi";
+import '../../styles/Porduct-loader.css'
 
 const AddProduct = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<AddProductValues>();
     const imageHosKey = '1a6c0e11cdde66ffb8f933ec4079f59e';
     const navigate = useNavigate();
     const { data, isLoading } = useApiData("http://localhost:5000/api/v1/allProducts")
-
-
-
     // get categories---------------------------------
     const [categoryData, setCategoryData] = React.useState<ICategory[]>([]);
 
@@ -37,13 +32,8 @@ const AddProduct = () => {
             });
     }, []);
 
-    // console.log(categoryData)
-
-
     //get sub category-----------------------------
-
     const [subCategoryData, setSubCategoryData] = React.useState<ICategory[]>([]);
-
     React.useEffect(() => {
         fetch('http://localhost:5000/api/v1/get-subCategories')
             .then(res => res.json())
@@ -57,46 +47,17 @@ const AddProduct = () => {
     }, []);
 
     console.log(subCategoryData)
-
-    // const category = useLoaderData() as ICategoryResponse;
-    // console.log(category);
-    // setSubCategoryData(category.data);
-    // console.log(subCategoryData)
-
-    // const getCategory: Set<string> = new Set()
-    // const getSubCategory: Set<string> = new Set()
     const getBrand: Set<string> = new Set()
 
     data.forEach(d => {
-        // if (!getCategory.has(d.category_name)) {
-        //     getCategory.add(d.category_name);
-
-        // }
-        // if (!getSubCategory.has(d.sub_category_name)) {
-        //     getSubCategory.add(d.sub_category_name);
-        // }
         if (!getBrand.has(d.brand_name)) {
-            // console.log(d.brand_name);
             getBrand.add(d.brand_name);
         }
     });
-
-    //const getOneCategory = Array.from(getCategory);
-    // const getOneSubCategory = Array.from(getSubCategory).filter((item) => item !== undefined && item !== '');
     const getOneBrand = Array.from(getBrand).filter((item) => item !== undefined);
-
-
-    // console.log(getOneSubCategory)
-    // console.log(getOneCategory);
-    // console.log(getOneSubCategory);
-    // console.log(getOneBrand)
-
     if (isLoading) {
-        return <p>Loading...</p>;
+        return <div className="flex items-center justify-center mt-72"><span className="loaderr"></span></div> ;
     }
-
-
-
     //Handle category Modal------------------
     const openCategoryModal = () => {
         const modal = document.getElementById('categoryModal') as HTMLDialogElement | null;
@@ -104,7 +65,6 @@ const AddProduct = () => {
             modal.showModal();
         }
     };
-
     //Handle Sub-category Modal------------------
     const openSubCategoryModal = () => {
         const modal = document.getElementById('subCategoryModal') as HTMLDialogElement | null;
@@ -112,18 +72,10 @@ const AddProduct = () => {
             modal.showModal();
         }
     };
-
-
-
-
-
     //Handle Add Product----------------------
-
     const handleAddProduct = async (data: FieldValues) => {
         const imageFiles: FileList = data.image;
         console.log(imageFiles)
-
-
         //POST image on imagebb for hosting
         const uploadPromises = Array.from(imageFiles).map(async (image) => {
 
@@ -174,8 +126,6 @@ const AddProduct = () => {
             warranty: data.warranty,
             others_info: data.others_info,
         }
-
-
         console.log(productData);
         console.log(imageFiles);
 
@@ -200,58 +150,50 @@ const AddProduct = () => {
 
 
     }
-
-
-    // const handleAddCategory = async (data: FieldValues) => {
-    //     console.log(data)
-    // }
-
-
     return (
 
-        <div className="flex pl-3 background-my-profile">
+        <div className="flex background-my-profile">
 
-            <div className='p-3 bg-blue-500 w-60 rounded-xl'>
-                <h1 className='flex items-center justify-center mb-10 text-3xl text-white border-b-2'><BiSolidDashboard />Dashboard</h1>
+            <div className='bg-blue-900 w-72 '>
+                <h1 className='flex items-center justify-center mt-5 mb-10 text-2xl text-white border-b-2'><FaBoxOpen />Porduct-Management</h1>
                 <div>
-                    <button className="flex items-center justify-center w-full h-10 mb-5 font-bold btn-one gap-x-2" onClick={openCategoryModal}> Add New Category</button>
-
-
-                    <button className="flex items-center justify-center w-full h-10 mb-5 font-bold btn-one gap-x-2" onClick={openSubCategoryModal}> Add New Sub-category</button>
-
-
-
-
-
-
+                    <button className="flex items-center justify-center w-56 h-10 mb-6 ml-6 font-bold btn-one gap-x-2" onClick={openCategoryModal}><span><MdCategory />
+                    </span> Add Category</button>
+                    <button className="flex items-center justify-center w-56 h-10 mb-6 ml-6 font-bold btn-one gap-x-2" onClick={openSubCategoryModal}> <span><BiCategoryAlt /></span> Add Sub-category</button>
+                    <Link to='/home'><button className="flex items-center justify-center w-56 h-10 mb-6 ml-6 font-bold btn-one gap-x-2"><FaHome />
+                        Back Home</button></Link>
                     {/* add category */}
                     <dialog id="categoryModal" className="modal">
-                        <div className="modal-box">
+                        <div className="modal-box rounded-2xl">
                             <form method="dialog">
-
-                                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                                <button className="absolute btn btn-sm btn-circle btn-ghost right-2 top-2">
                                     ✕
                                 </button>
                             </form>
-                            <h3 className="font-bold text-lg">Add your new category here</h3>
-
+                            <div className="items-center justify-center text-center ">
+                                <span className="flex justify-center text-5xl text-blue-600"><MdCategory />
+                                </span>
+                            <h3 className="text-lg font-bold border-b-4">Add Category</h3>
+                            </div>
+                          
                             <AddCategory></AddCategory>
-
                         </div>
                     </dialog>
-
-
                     {/* add sub-category */}
 
                     <dialog id="subCategoryModal" className="modal">
-                        <div className="modal-box">
+                        <div className="modal-box rounded-3xl">
                             <form method="dialog">
 
-                                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                                <button className="absolute btn btn-sm btn-circle btn-ghost right-2 top-2">
                                     ✕
                                 </button>
                             </form>
-                            <h3 className="font-bold text-lg">Add your new Sub-category here</h3>
+                            <div className="items-center justify-center text-center ">
+                                <span className="flex justify-center text-5xl text-blue-600"><BiCategoryAlt />
+                                </span>
+                            <h3 className="text-lg font-bold border-b-4">Add Sub-Category</h3>
+                            </div>
                             <AddSubCategory></AddSubCategory>
 
 
@@ -264,154 +206,163 @@ const AddProduct = () => {
             </div>
 
             <div>
-                <div className='w-96 p-7'>
-                    <h2 className='text-3xl font-bold text-center text-sky-500'>Add a New Product</h2>
-                    <form onSubmit={handleSubmit(handleAddProduct)}>
+                <div className='w-full p-7 ml-28'>
+                    <div className="mt-2 border-b-4">
+                        <h1 className='flex justify-center text-5xl text-center text-blue-700'><FaBoxOpen ></FaBoxOpen></h1>
+                        <h2 className='text-3xl font-bold text-center text-sky-500'>Add New Product Section</h2>
+                    </div>
 
-                        <div className="w-full max-w-xs form-control">
-                            <label className="label"> <span className="label-text">Product category</span></label>
-                            <select className="select select-bordered  w-full max-w-xs" {...register("category_name", {
-                                required: 'Required'
-                            })}>
-                                {
-                                    categoryData.map(d => (
-                                        <option key={d.id} value={d.category_name}>{d.category_name}</option>
-                                    ))
-                                }
-                            </select>
-                            {errors.category_name && <p className='text-red-600'>{errors.category_name?.message}</p>}
+                    <form onSubmit={handleSubmit(handleAddProduct)} className="mt-10">
+                        <div className="flex justify-between">
+                            <div>
+
+
+                                <div className="w-full max-w-xs form-control">
+                                    <label className="label"> <span className="label-text">Product category</span></label>
+                                    <select className="w-full max-w-xs select select-bordered rounded-3xl" {...register("category_name", {
+                                        required: 'Required'
+                                    })}>
+                                        {
+                                            categoryData.map(d => (
+                                                <option key={d.id} value={d.category_name}>{d.category_name}</option>
+                                            ))
+                                        }
+                                    </select>
+                                    {errors.category_name && <p className='text-red-600'>{errors.category_name?.message}</p>}
+                                </div>
+                                {/* Sub-Category */}
+                                <div className="w-full max-w-xs form-control">
+                                    <label className="label"> <span className="label-text">Sub-category</span></label>
+
+
+                                    <select className="w-full max-w-xs select select-bordered rounded-3xl" {...register("sub_category_name", {
+                                        required: 'Required'
+                                    })}>
+                                        {
+                                            subCategoryData.map(d => (
+                                                <option key={d.id} value={d.sub_category_name}>{d.sub_category_name}</option>
+                                            ))
+                                        }
+                                    </select>
+
+                                    {errors.sub_category_name && <p className='text-red-600'>{errors.sub_category_name?.message}</p>}
+                                </div>
+
+                                {/* Brand Name */}
+
+                                <div className="w-full max-w-xs form-control">
+                                    <label className="label"> <span className="label-text">Brand Name</span></label>
+
+                                    <select className="w-full max-w-xs select select-bordered rounded-3xl" {...register("brand_name", {
+                                        required: 'Required'
+                                    })}>
+                                        {
+                                            getOneBrand.map(d => (
+                                                <option key={d} value={d}>{d}</option>
+                                            ))
+                                        }
+                                    </select>
+                                    {errors.brand_name && <p className='text-red-600'>{errors.brand_name?.message}</p>}
+                                </div>
+
+
+                                {/* Product Name */}
+
+                                <div className="w-full max-w-xs form-control">
+                                    <label className="label"> <span className="label-text">Product Name</span></label>
+
+                                    <input type="text" placeholder="Product Name"
+                                        {...register("product_name", {
+                                            required: 'Required'
+                                        })}
+                                        className="w-full max-w-xs input input-bordered rounded-3xl" />
+                                    {errors.product_name && <p className='text-red-600'>{errors.product_name?.message}</p>}
+                                </div>
+
+                                {/* Image */}
+
+                                <div className="w-full max-w-xs form-control">
+                                    <label className="label"> <span className="label-text">Photo (photo Should be png/jpg format)</span></label>
+                                    <input type="file" multiple {...register("image", {
+                                        required: 'Required'
+                                    })} className="w-full max-w-xs input input-bordered rounded-3xl" />
+                                    {errors.image && <p className='text-red-500'>{errors.image.message}</p>}
+                                </div>
+
+                            </div>
+                            <div>
+                                {/* Model */}
+                                <div className="w-full max-w-xs form-control">
+                                    <label className="label"> <span className="label-text">Model</span></label>
+
+                                    <input type="text" placeholder="Model"
+                                        {...register("model", {
+                                            required: 'Required'
+                                        })}
+                                        className="max-w-xs w-96 input input-bordered rounded-3xl " />
+                                    {errors.model && <p className='text-red-600'>{errors.model?.message}</p>}
+                                </div>
+
+
+                                {/* Description */}
+
+                                <div className="w-full max-w-xs form-control">
+                                    <label className="label"> <span className="label-text">Product Description</span></label>
+
+                                    <textarea placeholder="Descriptions"
+                                        {...register("description", {
+                                            required: 'Required'
+                                        })}
+                                        className="w-full max-w-xs pt-3 input input-bordered rounded-3xl"
+
+                                    />
+                                    {errors.description && <p className='text-red-600'>{errors.description?.message}</p>}
+                                </div>
+
+                                {/* Price */}
+                                <div className="w-full max-w-xs form-control">
+                                    <label className="label"> <span className="label-text">Price</span></label>
+
+                                    <input type="text"
+                                        {...register("price", {
+                                            required: 'Required'
+                                        })}
+                                        className="w-full max-w-xs input input-bordered rounded-3xl" placeholder="Price" />
+                                    {errors.price && <p className='text-red-600'>{errors.price?.message}</p>}
+                                </div>
+
+
+                                {/* Wrranty */}
+                                <div className="w-full max-w-xs form-control">
+                                    <label className="label"> <span className="label-text">Warranty</span></label>
+
+                                    <input type="text"
+                                        {...register("warranty", {
+                                            required: 'Required'
+                                        })}
+                                        className="w-full max-w-xs input input-bordered rounded-3xl" placeholder="Warranty" />
+                                    {errors.warranty && <p className='text-red-600'>{errors.warranty?.message}</p>}
+                                </div>
+
+
+
+                                {/* Others Info */}
+                                <div className="w-full max-w-xs form-control">
+                                    <label className="label"> <span className="label-text">Others Info</span></label>
+
+                                    <textarea
+                                        {...register("others_info", {
+                                            required: 'Required'
+                                        })}
+                                        className="w-full max-w-xs pt-3 input input-bordered rounded-3xl" placeholder="please input Product json" />
+                                    {errors.others_info && <p className='text-red-600'>{errors.others_info?.message}</p>}
+                                </div>
+
+                            </div>
                         </div>
+                        <div className="flex justify-center"><input className='w-48 mt-4 text-white bg-blue-600 rounded-2xl btn hover:text-black' value="Add Product" type="submit" />
 
-
-                        {/* Sub-Category */}
-                        <div className="w-full max-w-xs form-control">
-                            <label className="label"> <span className="label-text">Sub-category</span></label>
-
-
-                            <select className="select select-bordered  w-full max-w-xs" {...register("sub_category_name", {
-                                required: 'Required'
-                            })}>
-                                {
-                                    subCategoryData.map(d => (
-                                        <option key={d.id} value={d.sub_category_name}>{d.sub_category_name}</option>
-                                    ))
-                                }
-                            </select>
-
-                            {errors.sub_category_name && <p className='text-red-600'>{errors.sub_category_name?.message}</p>}
                         </div>
-
-                        {/* Brand Name */}
-
-                        <div className="w-full max-w-xs form-control">
-                            <label className="label"> <span className="label-text">Brand Name</span></label>
-
-                            <select className="select select-bordered  w-full max-w-xs" {...register("brand_name", {
-                                required: 'Required'
-                            })}>
-                                {
-                                    getOneBrand.map(d => (
-                                        <option key={d} value={d}>{d}</option>
-                                    ))
-                                }
-                            </select>
-                            {errors.brand_name && <p className='text-red-600'>{errors.brand_name?.message}</p>}
-                        </div>
-
-
-                        {/* Product Name */}
-
-                        <div className="w-full max-w-xs form-control">
-                            <label className="label"> <span className="label-text">Product Name</span></label>
-
-                            <input type="text" placeholder="Product Name"
-                                {...register("product_name", {
-                                    required: 'Required'
-                                })}
-                                className="w-full max-w-xs input input-bordered" />
-                            {errors.product_name && <p className='text-red-600'>{errors.product_name?.message}</p>}
-                        </div>
-
-                        {/* Image */}
-
-                        <div className="form-control w-full max-w-xs">
-                            <label className="label"> <span className="label-text">Photo (photo Should be png/jpg format)</span></label>
-                            <input type="file" multiple {...register("image", {
-                                required: 'Required'
-                            })} className="input input-bordered w-full max-w-xs" />
-                            {errors.image && <p className='text-red-500'>{errors.image.message}</p>}
-                        </div>
-
-
-
-                        {/* Model */}
-                        <div className="w-full max-w-xs form-control">
-                            <label className="label"> <span className="label-text">Model</span></label>
-
-                            <input type="text" placeholder="Model"
-                                {...register("model", {
-
-                                })}
-                                className="w-full max-w-xs input input-bordered" />
-                            {errors.model && <p className='text-red-600'>{errors.model?.message}</p>}
-                        </div>
-
-
-                        {/* Description */}
-
-                        <div className="w-full max-w-xs form-control">
-                            <label className="label"> <span className="label-text">Product Description</span></label>
-
-                            <textarea placeholder="Descriptions"
-                                {...register("description", {
-
-                                })}
-                                className="w-full max-w-xs input input-bordered" />
-                            {errors.description && <p className='text-red-600'>{errors.description?.message}</p>}
-                        </div>
-
-                        {/* Price */}
-                        <div className="w-full max-w-xs form-control">
-                            <label className="label"> <span className="label-text">Price</span></label>
-
-                            <input type="text"
-                                {...register("price", {
-
-                                })}
-                                className="w-full max-w-xs input input-bordered" />
-                            {errors.price && <p className='text-red-600'>{errors.price?.message}</p>}
-                        </div>
-
-
-                        {/* Wrranty */}
-                        <div className="w-full max-w-xs form-control">
-                            <label className="label"> <span className="label-text">Warranty</span></label>
-
-                            <input type="text"
-                                {...register("warranty", {
-
-                                })}
-                                className="w-full max-w-xs input input-bordered" />
-                            {errors.warranty && <p className='text-red-600'>{errors.warranty?.message}</p>}
-                        </div>
-
-
-
-                        {/* Others Info */}
-                        <div className="w-full max-w-xs form-control">
-                            <label className="label"> <span className="label-text">Others Info</span></label>
-
-                            <textarea
-                                {...register("others_info", {
-
-                                })}
-                                className="w-full max-w-xs input input-bordered" />
-                            {errors.others_info && <p className='text-red-600'>{errors.others_info?.message}</p>}
-                        </div>
-
-
-
-                        <input className='w-full bg-blue-600 btn mt-4' value="Submit" type="submit" />
                         <div>
 
                         </div>
