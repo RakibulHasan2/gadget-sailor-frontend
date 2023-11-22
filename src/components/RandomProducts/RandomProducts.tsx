@@ -2,7 +2,8 @@ import { useState } from "react";
 import useApiData from "../../hooks/getAPIData";
 import RandomProductCard from "./RandomProductCard";
 import '../../styles/Loader.css'
-
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import '../../styles/Text-shadow.css'
 
 
 const RandomProducts = () => {
@@ -26,7 +27,10 @@ const RandomProducts = () => {
     console.log(limitData)
 
     return (
-        <div className="mt-28">
+        <div className="mt-20 ">
+            <div className="flex justify-center mb-10" >
+                <h1 className="text-3xl font-bold text-shadow-blue"><span className="text-blue-600">Suggest</span> Products</h1>
+            </div>
             <div className="flex-col p-4 lg:grid lg:grid-cols-5 lg:gap-x-2 lg:gap-y-8 lg:grid-rows-2 mb-7 justify-items-center">
                 {
                     limitData.map(i => (
@@ -37,12 +41,14 @@ const RandomProducts = () => {
                 }
             </div>
 
-
-            <div className="join btn-info">
-                <button onClick={() => { setPage(page - 1); setCount(page - 2) }} className="join-item btn" disabled={page === 1}>«</button>
-                <button className="join-item btn">Page {page}</button>
-                <button onClick={() => { setPage(page + 1); setCount(page) }} className="join-item btn" disabled={page === pages}>»</button>
+            <div className="flex justify-center mt-5 mb-10">
+                <div className="join">
+                    <button onClick={() => { setPage(page - 1); setCount(page - 2) }} className="mr-3 border join-item btn hover:bg-blue-800 hover:text-white" disabled={page === 1}><FaArrowLeft></FaArrowLeft></button>
+                    <button className="join-item btn">Page {page}</button>
+                    <button onClick={() => { setPage(page + 1); setCount(page) }} className="ml-3 border join-item btn hover:bg-blue-800 hover:text-white" disabled={page === pages}><FaArrowRight></FaArrowRight></button>
+                </div>
             </div>
+
         </div>
     );
 };
