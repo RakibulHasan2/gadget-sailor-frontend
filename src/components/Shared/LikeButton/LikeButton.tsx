@@ -4,7 +4,8 @@ import { userData } from "../../../hooks/getUserData";
 import { IProduct } from "../../../types/ProductsType";
 //import useApiData from "../../../hooks/getAPIData";
 import React from "react";
-import { FavDataType, FavDataTypeResponse } from "../../../types/favDataType";
+import { FavDataType, FavDataTypeResponse } from "../../../types/FavDataType";
+
 
 
 const LikeButton = ({ info }: IProduct) => {
@@ -40,6 +41,7 @@ const LikeButton = ({ info }: IProduct) => {
             email: user.email
         }
         console.log(favData)
+
         if (user) {
             if (liked) {
                 setLiked(false)
@@ -71,9 +73,6 @@ const LikeButton = ({ info }: IProduct) => {
         else {
             alert('Please log in to add into the favourite.');
         }
-
-
-
 
     }
 
