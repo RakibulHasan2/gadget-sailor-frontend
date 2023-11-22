@@ -26,13 +26,13 @@ export default function ShoppingCartSideBar() {
 
     // Function to calculate total price
     const calculateTotalPrice = () => {
-        let totalPrice = 0;
+        let totalPrice : number = 0;
         data.forEach((item) => {
-            totalPrice += item.total_price;
+          const price = parseFloat(item.total_price);
+          totalPrice += price;
         });
         return totalPrice;
-    };
-
+      };
     return (
         <div>
             <CartIcon
