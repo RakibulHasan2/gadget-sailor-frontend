@@ -2,11 +2,13 @@
 
 
 export type FavDataType = {
-    product_name: string;
-    model: string;
-    price: number;
-    image: string;
-    email: string;
+    _id?: string;
+    product_name?: string;
+    model?: string;
+    price?: number;
+    image?: string;
+    email?: string;
+    count?: number;
 }
 
 export interface FavDataTypeResponse {
