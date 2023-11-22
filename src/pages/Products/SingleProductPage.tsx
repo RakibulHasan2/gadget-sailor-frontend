@@ -6,9 +6,9 @@ import ImageSlider from "../../components/ImageSlider/ImageSlider";
 import CartModal from '../../components/Products/CartModal';
 import { userData } from '../../hooks/getUserData';
 import { AiFillEdit } from "react-icons/ai";
-import UpdateModal from '../UpdateProduct/UpdateModal';
+import UpdateModal from '../../components/UpdateProduct/UpdateModal';
 import useApiData from '../../hooks/getAPIData';
-import UpdateImage from '../UpdateProduct/UpdateImage';
+import UpdateImage from '../../components/UpdateProduct/UpdateImage';
 import { AiOutlineProfile } from "react-icons/ai";
 
 
