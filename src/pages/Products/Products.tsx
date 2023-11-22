@@ -77,13 +77,13 @@ export default function Products() {
                     }
                 </div>
             </div>
-            <div className="lg:flex gap-4 p-5">
+            <div className="gap-4 p-5 lg:flex">
                 {/* products sidebar */}
                 <div className="">
-                    <div className="h-full md:flex md:justify-evenly lg:flex-col lg:justify-start border">
+                    <div className="h-full md:flex md:justify-evenly lg:flex-col lg:justify-start">
                         {/* sub category checkbox */}
                         {subCategories.length > 1 &&
-                            <div className="lg:w-48 text-white bg-blue-900 rounded-xl flex justify-center p-5">
+                            <div className="flex justify-center p-5 text-white bg-blue-900 lg:w-48 rounded-xl">
                                 <div>
                                     <h2 className="mb-4 text-xl font-bold">Subcategories:</h2>
                                     <span className="">--------</span>
@@ -105,7 +105,7 @@ export default function Products() {
                         }
                         {/* brands checkbox */}
                         {brands.length > 0 ?
-                            <div className="lg:w-48 md:w-64 p-5 mt-10 text-white bg-blue-900 border rounded-lg">
+                            <div className="p-5 mt-10 text-white bg-blue-900 border rounded-lg lg:w-48 md:w-64">
                                 <h2 className="mb-4 text-xl font-bold">Brands:</h2>
                                 <span className="">-------</span>
                                 <div className="flex flex-col">
@@ -130,7 +130,7 @@ export default function Products() {
                 <div className="">
                     {
                         filteredProducts.length > 0 ?
-                            <div className="grid lg:grid-cols-4 md:grid-cols-3 gap-2 p-2">
+                            <div className="grid gap-2 p-2 lg:grid-cols-4 md:grid-cols-3">
                                 {
                                     filteredProducts?.map((product: IProduct) =>
                                         <ProductsCard

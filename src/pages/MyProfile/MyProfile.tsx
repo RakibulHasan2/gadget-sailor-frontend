@@ -30,7 +30,7 @@ export default function MyProfile() {
     const closeImageModal = () => {
         setIsImageModalOpen(false);
     };
-
+//------------------------for password----------------
     const [isPasswordModalOpen, setIsPasswordModalOpen] = React.useState(false);
     const openPasswordModal = () => {
         setIsPasswordModalOpen(true);
