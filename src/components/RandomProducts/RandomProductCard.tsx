@@ -81,13 +81,13 @@ const RandomProductCard = ({ data }: IProduct) => {
                     <div>
                         <button className='flex items-center justify-center p-2 text-lg text-blue-700 bg-gray-100 rounded-md gap-x-3 w-44 hover:bg-blue-700 hover:text-white'><FaCartPlus></FaCartPlus> Buy now</button>
                     </div>
-                    {/* {
-                        user ? */}
-                    <LikeButton
-                        info={data} _id={""} category_name={""} sub_category_name={""} brand_name={""} product_name={""} image={[]} model={""} description={""} price={0} product_code={0} status={""} reviews={[]} warranty={""} __v={""} others_info={[]}                    ></LikeButton>
+                    {
+                        user ?
+                            <LikeButton
+                                info={data} _id={""} category_name={""} sub_category_name={""} brand_name={""} product_name={""} image={[]} model={""} description={""} price={0} product_code={0} status={""} reviews={[]} warranty={""} __v={""} others_info={[]}                    ></LikeButton>
 
-                    {/* :
-                             <button className="" title="add to favourite"
+                            :
+                            <button className="" title="add to favourite"
                                 onClick={handleLike}
                             >
 
@@ -95,7 +95,7 @@ const RandomProductCard = ({ data }: IProduct) => {
                             </button>
 
 
-                    } */}
+                    }
                 </div>
 
             </div>

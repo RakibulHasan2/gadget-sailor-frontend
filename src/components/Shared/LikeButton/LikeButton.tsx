@@ -42,37 +42,34 @@ const LikeButton = ({ info }: IProduct) => {
         }
         console.log(favData)
 
-        if (user) {
-            if (liked) {
-                setLiked(false)
-                // setLikeCount(likeCount - 1)
-                toast.error("Removed from your favourite list")
-            }
-            else {
-                setLiked(true)
-                // setLikeCount(likeCount + 1)
 
-                const response = await fetch('http://localhost:5000/api/v1/addFav', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(favData),
-                })
-                if (response.ok) {
-                    // Call refetch to update cart data after adding the item
-                    toast.success("Added to your favourite list")
-                    //refetch();
-                }
-                else {
-                    toast.error("Couldn't add to your favurite");
-                }
-
-            }
+        if (liked) {
+            setLiked(false)
+            // setLikeCount(likeCount - 1)
+            toast.error("Removed from your favourite list")
         }
         else {
-            alert('Please log in to add into the favourite.');
+            setLiked(true)
+            // setLikeCount(likeCount + 1)
+
+            const response = await fetch('http://localhost:5000/api/v1/addFav', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(favData),
+            })
+            if (response.ok) {
+                // Call refetch to update cart data after adding the item
+                toast.success("Added to your favourite list")
+                //refetch();
+            }
+            else {
+                toast.error("Couldn't add to your favurite");
+            }
+
         }
+
 
     }
 
