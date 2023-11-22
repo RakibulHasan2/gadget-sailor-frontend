@@ -99,11 +99,11 @@ export default function SingleProductPage() {
 
   return (
     <div className="container mx-auto my-8">
-      <div className="flex flex-col items-center justify-center border lg:flex-row">
+      <div className="flex flex-col items-center justify-center lg:flex-row">
         {/* image slider */}
         <div className="">
           <ImageSlider images={image} />
-          <button onClick={openEditImage} className='flex items-center'><AiFillEdit />Edit Image</button>
+          <button onClick={openEditImage} className='flex items-center p-2 hover:bg-blue-800 bg-slate-100 rounded-2xl hover hover:text-white'><AiFillEdit />Edit Image</button>
           {/* modal for edit image */}
           <dialog id="editImage" className="modal">
             <div className="modal-box rounded-3xl">
@@ -153,7 +153,7 @@ export default function SingleProductPage() {
       <div className="w-full p-6 mt-10 shadow-xl lg:w-3/5 lg:ml-36">
         <div className='flex items-end justify-between'>
           <p className="text-3xl font-bold">Specification</p>
-          <button onClick={openEditModal} className='flex items-center'><AiFillEdit />Edit</button>
+          <button onClick={openEditModal} className='flex items-center p-2 hover:bg-blue-800 bg-slate-100 rounded-2xl hover hover:text-white'><AiFillEdit />Edit</button>
 
           {/* edit modal */}
 

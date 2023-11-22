@@ -1,10 +1,9 @@
 import { FieldValues, useForm } from "react-hook-form";
 import { UpdateProductValues } from "../../types/ProductTypes";
 import { IProduct } from "../../types/ProductsType";
-
 import useApiData from "../../hooks/getAPIData";
 import toast from "react-hot-toast";
-
+import '../../styles/Loader.css'
 
 
 const UpdateModal = ({ singleData, closeModal }: IProduct,) => {
@@ -14,13 +13,11 @@ const UpdateModal = ({ singleData, closeModal }: IProduct,) => {
     const { __v, _id, category_name, sub_category_name, product_name, price, status, product_code, description, reviews, brand_name, image, model, warranty, ...otherProperties } = singleData;
     const { data, isLoading } = useApiData("http://localhost:5000/api/v1/allProducts")
     if (isLoading) {
-        return <p>Loading...</p>;
+        return <div className="flex justify-center p-10"><span className="loader"></span></div>;
     }
     console.log(_id)
 
-    //console.log(singleData)
-    //console.log(singleData.product_name)
-    //console.log(data)
+
 
     const getCategory: Set<string> = new Set()
     const getSubCategory: Set<string> = new Set()
