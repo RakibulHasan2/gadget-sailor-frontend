@@ -7,9 +7,10 @@ export default function MyOrder() {
   const calculateTotalPrice = () => {
     let totalPrice : number = 0;
     data.forEach((item) => {
-      totalPrice += item.total_price;
+      const price = parseFloat(item.total_price);
+      totalPrice += price;
     });
-    return totalPrice.toFixed(2);
+    return totalPrice;
   };
 
   const handleDeleteCart = (id: string) => {
