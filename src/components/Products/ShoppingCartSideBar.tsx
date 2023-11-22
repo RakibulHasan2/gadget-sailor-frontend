@@ -26,18 +26,18 @@ export default function ShoppingCartSideBar() {
 
     // Function to calculate total price
     const calculateTotalPrice = () => {
-        let totalPrice : number = 0;
+        let totalPrice: number = 0;
         data.forEach((item) => {
-          const price = parseFloat(item.total_price);
-          totalPrice += price;
+            const price = parseFloat(item.total_price);
+            totalPrice += price;
         });
         return totalPrice;
-      };
+    };
     return (
         <div>
             <CartIcon
                 toggleCart={toggleCart}
-                
+
             />
             {isOpen && (
                 <div
@@ -92,7 +92,7 @@ export default function ShoppingCartSideBar() {
                         <div className="flex justify-center">
                             <button className="flex items-center justify-center p-3 text-white bg-blue-900 rounded-lg w-52 hover:bg-sky-700 gap-x-2"><FaShoppingBag></FaShoppingBag> Confirm Order</button>
                         </div>
-                        
+
                     </div>
                 </div>
             )}
