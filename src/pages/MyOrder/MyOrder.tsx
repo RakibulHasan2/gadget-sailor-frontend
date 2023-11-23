@@ -10,7 +10,7 @@ export default function MyOrder() {
       const price = parseFloat(item.total_price);
       totalPrice += price;
     });
-    return totalPrice;
+    return totalPrice.toFixed(2);
   };
   
   const handleDeleteCart = (id: string) => {
