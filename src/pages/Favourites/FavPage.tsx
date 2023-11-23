@@ -2,16 +2,19 @@
 import { userData } from "../../hooks/getUserData";
 import useFavData from "../../hooks/getFavData";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
+
 
 
 // interface FavModalProps {
 //     onClose: () => void;
 // }
 
-const FavModal = () => {
+const FavPage = () => {
     const user = userData();
     const { data, refetch } = useFavData(`http://localhost:5000/api/v1/getFav/${user.email}`);
     console.log(data)
+
 
     const handleDeleteFav = (id: string | undefined) => {
 
@@ -23,10 +26,12 @@ const FavModal = () => {
                 if (response.ok) {
                     toast.error("Removed from your favourite list")
                     refetch();
+
                 }
             })
 
     }
+
 
     return (
         <div className="flex justify-center mt-10 mb-10">
@@ -62,24 +67,19 @@ const FavModal = () => {
 
 
                                         <td>{item.price}৳</td>
-                                        <td><button className="btn">Details</button></td>
+                                        <td><Link to={`/product/${item.I_id}`}><button className="btn">Details</button></Link></td>
                                         <th><button onClick={() => handleDeleteFav(item._id)} className='text-2xl text-blue-900'>x</button></th>
-                                        {/* <td>{item.total_price}৳	</td> */}
+
                                     </tr>
                                 )
                             }
                         </tbody>
                     </table>
-                    {/* <div className="flex justify-end">
-                        <div>
-                            <p className="text-lg font-bold mb-4">Total: {calculateTotalPrice()}৳</p>
-                            <button className="border p-3 rounded-lg bg-blue-900 text-white hover:bg-sky-700">Confirm Order</button>
-                        </div>
-                    </div> */}
+
                 </div>
             </div>
         </div>
     );
 };
 
-export default FavModal;
+export default FavPage;

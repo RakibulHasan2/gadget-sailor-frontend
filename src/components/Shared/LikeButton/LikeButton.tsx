@@ -2,9 +2,6 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { userData } from "../../../hooks/getUserData";
 import { IProduct } from "../../../types/ProductsType";
-//import useApiData from "../../../hooks/getAPIData";
-// import React from "react";
-// import { FavDataType, FavDataTypeResponse } from "../../../types/FavDataType";
 import useFavData from "../../../hooks/getFavData";
 import { FavDataType } from "../../../types/FavDataType";
 
@@ -40,6 +37,7 @@ const LikeButton = ({ info }: IProduct) => {
     const handleData = async () => {
 
         const favData = {
+            I_id: info._id,
             product_name: info.product_name,
             model: info.model,
             price: info.price,
@@ -76,7 +74,10 @@ const LikeButton = ({ info }: IProduct) => {
             })
             if (response.ok) {
                 toast.success("Added to your favourite list")
+
+
                 refetch();
+
                 //location.reload();
 
             }
