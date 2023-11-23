@@ -12,13 +12,6 @@ import logo from '../../../assets/logo/Screenshot_2023-11-15_122159-trsfansforme
 
 
 export default function Navbar() {
-
-  // const [isFavModalOpen, setIsFavModalOpen] = useState(false);
-
-  // const toggleFavModal = () => {
-  //   setIsFavModalOpen(!isFavModalOpen);
-  // };
-
   const userData = sessionStorage.getItem('userData');
   const user = JSON.parse(userData as string);
   const [expanded, setExpanded] = useState(true);
@@ -96,13 +89,14 @@ export default function Navbar() {
           </div>
           <div>
             <Link to='/my-order'>
-              <button className="mr-5 text-2xl align-middle hover:text-gray-400" title="Cart"><FaCartArrowDown></FaCartArrowDown></button>
+              <button className="mr-5 text-2xl align-middle hover:text-gray-400" title="Cart"><FaCartArrowDown ></FaCartArrowDown></button>
             </Link>
           </div>
           <div className="mr-5">
 
             <Link to="/fav-item">
-              <button className="text-2xl align-middle hover:text-red-700" title="wishlist"><AiOutlineHeart></AiOutlineHeart></button>
+              <button className="text-2xl align-middle hover:text-red-700" title="wishlist">
+                <AiOutlineHeart className=""></AiOutlineHeart></button>
             </Link>
 
           </div>
