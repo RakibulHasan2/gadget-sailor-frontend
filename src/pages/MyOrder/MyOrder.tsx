@@ -12,7 +12,7 @@ export default function MyOrder() {
     });
     return totalPrice;
   };
-
+  
   const handleDeleteCart = (id: string) => {
     fetch(`http://localhost:5000/api/v1/getCart/${id}`, {
       method: 'DELETE',
