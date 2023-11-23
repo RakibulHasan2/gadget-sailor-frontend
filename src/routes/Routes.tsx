@@ -13,6 +13,7 @@ import PrivateRoute from "./PrivateRoute";
 import HotOfferPage from './../pages/HotOfferPage/HotOfferPage';
 import BuildPC from "../pages/BuildPC/BuildPC";
 import BuildProductsChose from "../pages/BuildPC/BuildProductsChose";
+import FavPage from "../pages/Favourites/FavPage";
 
 const baseUrl = "http://localhost:5000/api/v1";
 
@@ -60,7 +61,7 @@ const routes = createBrowserRouter([
       },
       {
         path: "/fav-item",
-        element: <PrivateRoute><FavModal /></PrivateRoute>,
+        element: <PrivateRoute><FavPage /></PrivateRoute>,
       },
       {
         path: "/build-pc",
