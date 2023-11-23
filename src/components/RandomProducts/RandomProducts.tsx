@@ -23,8 +23,8 @@ const RandomProducts = () => {
 
 
     const limitData = randomDatas.slice(count * size, page * size)
-    console.log(limitData)
-    console.log(limitData)
+    // console.log(limitData)
+    //console.log(limitData)
 
     return (
         <div className="mt-20 ">
