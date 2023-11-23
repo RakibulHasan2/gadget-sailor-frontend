@@ -19,7 +19,7 @@ export default function BuildPC() {
       const price = parseFloat(item.price);
       totalPrice += price;
     });
-    return totalPrice;
+    return totalPrice.toFixed(2);
   };
 
   const addToCart = async () => {
@@ -106,7 +106,6 @@ export default function BuildPC() {
       <div className="flex justify-center">
         <div>
           <h1 className="font-bold text-2xl mb-5">Total: {calculateTotalPrice()}৳</h1>
-          <button className="btn btn-info mb-10">Confirm Order</button>
           <button onClick={addToCart} className="btn btn-info mb-10 ms-5">Add To Cart</button>
         </div>
       </div>

@@ -50,21 +50,6 @@ const RandomProductCard = ({ data }: IProduct) => {
     }
 
     return (
-
-        // <div className="items-center text-center border rounded-md card w-72 bg-base-100 shadow-slate-400 hover:border-blue-400 " >
-        //     <figure className="w-full h-full px-10 pt-10">
-        //         <img src={data.image[0]} className="rounded-xl" />
-        //     </figure>
-        //     <h2 className="mt-2 card-title">{data.product_name}</h2>
-        //     <div className="grid items-center content-end grid-cols-1 gap-4 text-center card-body">
-
-
-        //         <div className="flex-col card-actions">
-        //             <p className="mb-0">Price: {data.price}</p>
-        //             <button className="btn btn-primary">Buy Now</button>
-        //         </div>
-        //     </div>
-        // </div>
         <div>
             <div className="relative w-full overflow-hidden transition-all duration-300 border border-transparent shadow-md card bg-base-100 hover:border-blue-400 hover:shadow-customBlue card-height rounded-xl">
                 <figure className="h-full px-10 pt-10 transition-transform transform hover:scale-110">
@@ -79,7 +64,7 @@ const RandomProductCard = ({ data }: IProduct) => {
                         <p className="font-bold text-yellow-700">{data?.price}৳</p>
                     </div>
                     <div>
-                        <button className='flex items-center justify-center p-2 text-lg text-blue-700 bg-gray-100 rounded-md gap-x-3 w-44 hover:bg-blue-700 hover:text-white'><FaCartPlus></FaCartPlus> Buy now</button>
+                        <button onClick={handleClick} className='flex items-center justify-center p-2 text-lg text-blue-700 bg-gray-100 rounded-md gap-x-3 w-44 hover:bg-blue-700 hover:text-white'><FaCartPlus></FaCartPlus> Buy now</button>
                     </div>
                     {
                         user ?
@@ -93,14 +78,17 @@ const RandomProductCard = ({ data }: IProduct) => {
 
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
                             </button>
-
-
                     }
                 </div>
-
+                {/* cart modal */}
+                <CartModal
+                    closeCartModal={closeCartModal}
+                    isCartModalOpen={isCartModalOpen}
+                    product_name={product_name}
+                    count={1}
+                    total={price}
+                ></CartModal>
             </div>
-
-
         </div>
     );
 };
