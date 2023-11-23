@@ -10,6 +10,7 @@ import UpdateModal from '../../components/UpdateProduct/UpdateModal';
 import useApiData from '../../hooks/getAPIData';
 import UpdateImage from '../../components/UpdateProduct/UpdateImage';
 import { AiOutlineProfile } from "react-icons/ai";
+import SuggestedData from './SuggestedData';
 
 
 export default function SingleProductPage() {
@@ -109,11 +110,14 @@ export default function SingleProductPage() {
         setSuggestedData(data.data)
       })
   }, [sub_category_name])
-  console.log(suggestedData)
 
+  const randomSuggestion = [...suggestedData].sort(() => Math.random() - 0.5)
+  const limitData = randomSuggestion.slice(0, 5)
+  console.log(limitData)
+  //console.log(randomSuggestion)
 
   return (
-    <div>
+    <div >
       <div className="container mx-auto my-8">
         <div className="flex flex-col items-center justify-center lg:flex-row">
           {/* image slider */}
@@ -166,67 +170,79 @@ export default function SingleProductPage() {
           </div>
         </div>
         {/*----- specification section ------*/}
-        <div className="w-full p-6 mt-10 shadow-xl lg:w-3/5 lg:ml-36">
-          <div className='flex items-end justify-between'>
-            <p className="text-3xl font-bold">Specification</p>
-            <button onClick={openEditModal} className='flex items-center p-2 hover:bg-blue-800 bg-slate-100 rounded-2xl hover hover:text-white'><AiFillEdit />Edit</button>
+        <div className='flex'>
+          <div className="w-full p-6 mt-10 shadow-xl lg:w-3/5 lg:ml-36">
+            <div className='flex items-end justify-between'>
+              <p className="text-3xl font-bold">Specification</p>
+              <button onClick={openEditModal} className='flex items-center p-2 hover:bg-blue-800 bg-slate-100 rounded-2xl hover hover:text-white'><AiFillEdit />Edit</button>
 
-            {/* edit modal */}
+              {/* edit modal */}
 
-            <dialog id="editModal" className="modal">
-              <div className="w-11/12 max-w-5xl modal-box rounded-3xl">
-                <form method="dialog">
+              <dialog id="editModal" className="modal">
+                <div className="w-11/12 max-w-5xl modal-box rounded-3xl">
+                  <form method="dialog">
 
-                  <button className="absolute btn btn-sm btn-circle btn-ghost right-2 top-2">
-                    ✕
-                  </button>
-                </form>
-                <div>
-                  <span className='flex justify-center text-5xl text-blue-700'>
-                    <AiOutlineProfile />
-                  </span>
-                  <h3 className="text-2xl font-bold text-center border-b-8">Update "<span className='text-blue-800'>{product_name}</span>" Information </h3>
+                    <button className="absolute btn btn-sm btn-circle btn-ghost right-2 top-2">
+                      ✕
+                    </button>
+                  </form>
+                  <div>
+                    <span className='flex justify-center text-5xl text-blue-700'>
+                      <AiOutlineProfile />
+                    </span>
+                    <h3 className="text-2xl font-bold text-center border-b-8">Update "<span className='text-blue-800'>{product_name}</span>" Information </h3>
+
+                  </div>
+                  <UpdateModal
+                    singleData={singleProductData}
+                    closeModal={closeModal} otherProperties={otherProperties} _id={''} category_name={''} sub_category_name={''} brand_name={''} product_name={''} image={[]} model={''} description={''} price={0} product_code={0} status={''} reviews={[]} warranty={''} __v={''} others_info={[]}              ></UpdateModal>
+
 
                 </div>
-                <UpdateModal
-                  singleData={singleProductData}
-                  closeModal={closeModal} otherProperties={otherProperties} _id={''} category_name={''} sub_category_name={''} brand_name={''} product_name={''} image={[]} model={''} description={''} price={0} product_code={0} status={''} reviews={[]} warranty={''} __v={''} others_info={[]}              ></UpdateModal>
-
-
+              </dialog>
+            </div>
+            <div className="lg:ml-5">
+              {/* basic information */}
+              <div className="mb-6">
+                <h2 className="p-2 mt-5 text-lg font-bold text-blue-900 bg-green-100">Basic Information</h2>
+                {Object.keys(otherProperties).map((key) => (
+                  <div key={key} className="flex items-center justify-between py-3 border-b border-gray-700">
+                    <p className="text-gray-600">{key}</p>
+                    <p className="w-2/3">{otherProperties[key]}</p>
+                  </div>
+                ))}
               </div>
-            </dialog>
+              {/* warranty information */}
+              <div className="mb-6">
+                <h2 className="p-2 mt-5 text-lg font-bold text-blue-900 bg-green-100">Warranty Information</h2>
+                <p className="py-3 mt-3 border-b border-gray-700">Warranty <span className="lg:ml-44">{warranty} Limited Warranty</span></p>
+              </div>
+              {/* cart modal */}
+              <CartModal
+                closeCartModal={closeCartModal}
+                isCartModalOpen={isCartModalOpen}
+                product_name={product_name}
+                count={count}
+                total={totalPrice}
+              ></CartModal>
+            </div>
           </div>
-          <div className="lg:ml-5">
-            {/* basic information */}
-            <div className="mb-6">
-              <h2 className="p-2 mt-5 text-lg font-bold text-blue-900 bg-green-100">Basic Information</h2>
-              {Object.keys(otherProperties).map((key) => (
-                <div key={key} className="flex items-center justify-between py-3 border-b border-gray-700">
-                  <p className="text-gray-600">{key}</p>
-                  <p className="w-2/3">{otherProperties[key]}</p>
-                </div>
-              ))}
+          <div>
+            <div className='text-center bg-sky-950 px-4'>
+              <h2 className='text-lg text-white'>Related Products</h2>
             </div>
-            {/* warranty information */}
-            <div className="mb-6">
-              <h2 className="p-2 mt-5 text-lg font-bold text-blue-900 bg-green-100">Warranty Information</h2>
-              <p className="py-3 mt-3 border-b border-gray-700">Warranty <span className="lg:ml-44">{warranty} Limited Warranty</span></p>
-            </div>
-            {/* cart modal */}
-            <CartModal
-              closeCartModal={closeCartModal}
-              isCartModalOpen={isCartModalOpen}
-              product_name={product_name}
-              count={count}
-              total={totalPrice}
-            ></CartModal>
+            {
+              limitData.map(d => (
+
+                <SuggestedData key={d._id}
+                  data={d} _id={''} category_name={''} sub_category_name={''} brand_name={''} product_name={''} image={[]} model={''} description={''} price={0} product_code={0} status={''} reviews={[]} warranty={''} __v={''} others_info={[]}            ></SuggestedData>
+              ))
+            }
           </div>
         </div>
       </div>
 
-      <div>
 
-      </div>
     </div>
   )
 }
