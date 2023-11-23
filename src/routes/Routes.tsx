@@ -13,7 +13,7 @@ import PrivateRoute from "./PrivateRoute";
 import HotOfferPage from './../pages/HotOfferPage/HotOfferPage';
 import BuildPC from "../pages/BuildPC/BuildPC";
 import BuildProductsChose from "../components/BuildProductsChose/BuildProductsChose";
-import FavModal from "../components/Favourites/FavModal";
+import FavModal from "../pages/Favourites/FavPage";
 
 const baseUrl = "http://localhost:5000/api/v1";
 

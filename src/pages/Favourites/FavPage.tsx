@@ -1,8 +1,7 @@
-import { FaTimes } from "react-icons/fa";
 
 import { userData } from "../../hooks/getUserData";
-import { MdDelete } from "react-icons/md";
 import useFavData from "../../hooks/getFavData";
+import toast from "react-hot-toast";
 
 
 // interface FavModalProps {
@@ -17,6 +16,15 @@ const FavModal = () => {
     const handleDeleteFav = (id: string | undefined) => {
 
         console.log(id)
+        fetch(`http://localhost:5000/api/v1/getFav/${id}`, {
+            method: 'DELETE',
+        })
+            .then(response => {
+                if (response.ok) {
+                    toast.error("Removed from your favourite list")
+                    refetch();
+                }
+            })
 
     }
 

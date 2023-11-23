@@ -9,7 +9,7 @@ import '../../../styles/Navbar.css'
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import logo from '../../../assets/logo/Screenshot_2023-11-15_122159-trsfansformed-remdfosfafvebg-preview_waifu2x_art_noise1_scale.png';
-import FavModal from "../../Favourites/FavModal";
+
 
 export default function Navbar() {
 
@@ -18,10 +18,7 @@ export default function Navbar() {
   // const toggleFavModal = () => {
   //   setIsFavModalOpen(!isFavModalOpen);
   // };
-  const handleFav = () => {
-    alert('Please log in to see the favourite list.');
 
-  }
   const userData = sessionStorage.getItem('userData');
   const user = JSON.parse(userData as string);
   const [expanded, setExpanded] = useState(true);
