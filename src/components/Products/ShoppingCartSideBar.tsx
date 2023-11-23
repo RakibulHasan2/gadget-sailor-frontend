@@ -31,7 +31,7 @@ export default function ShoppingCartSideBar() {
             const price = parseFloat(item.total_price);
             totalPrice += price;
         });
-        return totalPrice;
+        return totalPrice.toFixed(2);
     };
     return (
         <div>

@@ -19,7 +19,7 @@ export default function BuildPC() {
       const price = parseFloat(item.price);
       totalPrice += price;
     });
-    return totalPrice;
+    return totalPrice.toFixed(2);
   };
 
   const addToCart = async () => {
