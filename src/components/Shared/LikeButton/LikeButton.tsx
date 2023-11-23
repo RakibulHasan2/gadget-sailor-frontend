@@ -3,8 +3,10 @@ import toast from "react-hot-toast";
 import { userData } from "../../../hooks/getUserData";
 import { IProduct } from "../../../types/ProductsType";
 //import useApiData from "../../../hooks/getAPIData";
-import React from "react";
-import { FavDataType, FavDataTypeResponse } from "../../../types/FavDataType";
+// import React from "react";
+// import { FavDataType, FavDataTypeResponse } from "../../../types/FavDataType";
+import useFavData from "../../../hooks/getFavData";
+import { FavDataType } from "../../../types/FavDataType";
 
 
 
@@ -14,18 +16,7 @@ const LikeButton = ({ info }: IProduct) => {
 
     console.log(liked, count)
     const user = userData();
-    const [data, setData] = React.useState<FavDataType[]>([]);
-    React.useEffect(() => {
-        fetch(`http://localhost:5000/api/v1/getFav/${user.email}`)
-            .then(res => res.json())
-            .then((data: FavDataTypeResponse) => {
-
-                setData(data.data);
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-            });
-    }, [user.email]);
+    const { data, refetch } = useFavData(`http://localhost:5000/api/v1/getFav/${user.email}`);
     const likedData: FavDataType | undefined = data.find((item) => item.product_name === info.product_name)
 
     console.log(data)
@@ -46,15 +37,6 @@ const LikeButton = ({ info }: IProduct) => {
         }
     }
 
-    const fetchData = async () => {
-        try {
-            const response = await fetch(`http://localhost:5000/api/v1/getFav/${user.email}`);
-            const newData = await response.json();
-            setData(newData.data);
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    };
     const handleData = async () => {
 
         const favData = {
@@ -69,9 +51,6 @@ const LikeButton = ({ info }: IProduct) => {
 
 
         if (liked && count === 1 || likedData?.count === 0) {
-            // setLiked(false)
-            // setCount(count - 1)
-
 
             fetch(`http://localhost:5000/api/v1/getFav/${likedData?._id}`, {
                 method: 'DELETE',
@@ -81,15 +60,13 @@ const LikeButton = ({ info }: IProduct) => {
                         toast.error("Removed from your favourite list")
                         // location.reload();
 
-                        fetchData();
+                        refetch();
                     }
                 })
 
         }
         else {
 
-            // setLiked(true)
-            // setCount(count + 1)
             const response = await fetch('http://localhost:5000/api/v1/addFav', {
                 method: 'POST',
                 headers: {
@@ -99,7 +76,7 @@ const LikeButton = ({ info }: IProduct) => {
             })
             if (response.ok) {
                 toast.success("Added to your favourite list")
-                fetchData();
+                refetch();
                 //location.reload();
 
             }
@@ -115,7 +92,6 @@ const LikeButton = ({ info }: IProduct) => {
     const handleClick = () => {
         handleLike();
         handleData();
-        console.log(liked, count)
     }
 
     return (
