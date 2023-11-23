@@ -10,7 +10,7 @@ export default function NavbarItem() {
     const categories: string[] = [...new Set(data.map((item: IProduct) => item.category_name))];
 
     if (isLoading) {
-        return <div className="flex justify-center mt-2"><span className="loader"></span></div>;
+        return <div className="flex justify-center mt-5"><span className="loader"></span></div>;
     }
  
     return (
