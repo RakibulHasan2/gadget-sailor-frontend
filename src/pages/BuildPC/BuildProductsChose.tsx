@@ -1,6 +1,5 @@
 import { Link, useLoaderData } from "react-router-dom";
 import { IProduct } from "../../types/ProductsType";
-// import { useState } from "react";
 import { useSelectedProducts } from "../../context/SelectedProductsProvider";
 
 export default function BuildProductsChose() {
