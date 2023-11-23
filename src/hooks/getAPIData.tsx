@@ -4,6 +4,7 @@ import { IProduct } from '../types/ProductsType';
 import { ICartDetails } from '../types/CartModalType';
 
 
+
 export type ApiData = IProduct | ICartDetails;
 
 const useApiData = (apiUrl: string) => {
@@ -18,7 +19,7 @@ const useApiData = (apiUrl: string) => {
         setData(jsonData.data);
       }
     } catch (error) {
-      console.log("Error Fetching Data",error);
+      console.log("Error Fetching Data", error);
     } finally {
       setIsLoading(false);
     }

@@ -13,6 +13,7 @@ import PrivateRoute from "./PrivateRoute";
 import HotOfferPage from './../pages/HotOfferPage/HotOfferPage';
 import BuildPC from "../pages/BuildPC/BuildPC";
 import BuildProductsChose from "../components/BuildProductsChose/BuildProductsChose";
+import FavModal from "../components/Favourites/FavModal";
 
 const baseUrl = "http://localhost:5000/api/v1";
 
@@ -59,12 +60,16 @@ const routes = createBrowserRouter([
         element: <PrivateRoute><MyOrder /></PrivateRoute>,
       },
       {
+        path: "/fav-item",
+        element: <PrivateRoute><FavModal /></PrivateRoute>,
+      },
+      {
         path: "/build-pc",
         element: <BuildPC />,
       },
       {
         path: "/chose-components/:components",
-        element: <BuildProductsChose/>,
+        element: <BuildProductsChose />,
         loader: async ({ params }) => await fetch(`${baseUrl}/allProducts/Components/${params.components}`)
       },
     ],

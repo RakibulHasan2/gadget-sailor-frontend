@@ -13,11 +13,11 @@ import FavModal from "../../Favourites/FavModal";
 
 export default function Navbar() {
 
-  const [isFavModalOpen, setIsFavModalOpen] = useState(false);
+  // const [isFavModalOpen, setIsFavModalOpen] = useState(false);
 
-  const toggleFavModal = () => {
-    setIsFavModalOpen(!isFavModalOpen);
-  };
+  // const toggleFavModal = () => {
+  //   setIsFavModalOpen(!isFavModalOpen);
+  // };
   const handleFav = () => {
     alert('Please log in to see the favourite list.');
 
@@ -104,8 +104,10 @@ export default function Navbar() {
           </div>
           <div className="mr-5">
 
-            <button onClick={user ? toggleFavModal : handleFav} className="text-2xl align-middle hover:text-red-700" title="wishlist"><AiOutlineHeart></AiOutlineHeart></button>
-            {isFavModalOpen && <FavModal onClose={toggleFavModal} />}
+            <Link to="/fav-item">
+              <button className="text-2xl align-middle hover:text-red-700" title="wishlist"><AiOutlineHeart></AiOutlineHeart></button>
+            </Link>
+
           </div>
           {
             users ? <div className="dropdown dropdown-end">
