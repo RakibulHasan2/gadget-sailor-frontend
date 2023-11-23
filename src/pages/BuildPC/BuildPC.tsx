@@ -79,37 +79,5 @@ export default function BuildPC() {
         </div>
       </div>
     </div>
-    // <div>
-    //   <div className="p-10 mt-10 border">
-    //     <h1>BUILD PC</h1>
-    //     {data.data.map((item) => {
-    //       // Check if sub_category_name is unique
-    //       if (!uniqueSubCategories.has(item.sub_category_name)) {
-    //         uniqueSubCategories.add(item.sub_category_name);
-
-    //         // selectedProducts.filter((p) => p.sub_category_name === item.sub_category_name)
-    //         // .map(r => console.log(r))
-    //         return (
-    //           <div key={item._id} className="flex justify-between mt-5 border">
-    //             <BsCpu className="text-3xl text-blue-900"></BsCpu>
-    //             {/* <h1 className="text-xl font-bold">{item.sub_category_name}</h1> */}
-    //             {
-    //               selectedProducts.filter((p) => p.sub_category_name === item.sub_category_name)
-    //                 .map(product => <>
-    //                   <h1>{product.product_name}</h1>
-    //                 </>)
-    //             }
-    //             <Link to={`/chose-components/${item.sub_category_name}`}>
-    //               <button type="button" className="p-3 text-white bg-blue-600 rounded-xl hover:bg-sky-700">
-    //                 Choose
-    //               </button>
-    //             </Link>
-    //           </div>
-    //         );
-    //       }
-    //       return null; // Skip rendering if sub_category_name is not unique
-    //     })}
-    //   </div>
-    // </div>
   );
 }
