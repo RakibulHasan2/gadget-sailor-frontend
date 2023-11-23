@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import logo from '../../../assets/logo/Screenshot_2023-11-15_122159-trsfansformed-remdfosfafvebg-preview_waifu2x_art_noise1_scale.png';
 
+
 export default function Navbar() {
   const userData = sessionStorage.getItem('userData');
   const user = JSON.parse(userData as string);
@@ -88,12 +89,16 @@ export default function Navbar() {
           </div>
           <div>
             <Link to='/my-order'>
-              <button className="mr-5 text-2xl align-middle hover:text-gray-400" title="Cart"><FaCartArrowDown></FaCartArrowDown></button>
+              <button className="mr-5 text-2xl align-middle hover:text-gray-400" title="Cart"><FaCartArrowDown ></FaCartArrowDown></button>
             </Link>
           </div>
           <div className="mr-5">
 
-            <button className="text-2xl align-middle hover:text-red-700" title="wishlist"><AiOutlineHeart></AiOutlineHeart></button>
+            <Link to="/fav-item">
+              <button className="text-2xl align-middle hover:text-red-700" title="wishlist">
+                <AiOutlineHeart className=""></AiOutlineHeart></button>
+            </Link>
+
           </div>
           {
             users ? <div className="dropdown dropdown-end">
