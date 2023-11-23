@@ -37,7 +37,6 @@ export default function ShoppingCartSideBar() {
         <div>
             <CartIcon
                 toggleCart={toggleCart}
-
             />
             {isOpen && (
                 <div
@@ -66,7 +65,7 @@ export default function ShoppingCartSideBar() {
                                         data.map((data) =>
                                             <div className="flex items-center justify-between p-3 mt-3 border-b-2">
                                                 <div>
-                                                    <img className="w-12" src={data.image} alt="" />
+                                                    <img className="w-12" src={data.image as string} alt="" />
                                                 </div>
                                                 <div>
                                                     <p>{data.product_name}</p>
