@@ -3,11 +3,14 @@ import { Link } from "react-router-dom";
 import { useSelectedProducts } from "../../context/SelectedProductsProvider";
 import { useState } from 'react';
 import '../../styles/BuildPC.css';
+import { userData } from "../../hooks/getUserData";
+import toast from "react-hot-toast";
 
 export default function BuildPC() {
   const data = useApiData('http://localhost:5000/api/v1/allProducts/Components')
   const { selectedProducts, deleteProduct } = useSelectedProducts();
   const [chosenItems, setChosenItems] = useState(new Set());
+  const user = userData();
   const uniqueCategories = {};
 
   const calculateTotalPrice = () => {
@@ -17,6 +20,34 @@ export default function BuildPC() {
       totalPrice += price;
     });
     return totalPrice;
+  };
+
+  const addToCart = async () => {
+    try {
+      for (const selectedProduct of selectedProducts) {
+        const cartItem = {
+          product_name: selectedProduct.product_name,
+          image: selectedProduct.image[0],
+          unit_price: selectedProduct.price,
+          total_price: selectedProduct.price,
+          quantity: 1,
+          model: selectedProduct.model,
+          email: user.email,
+        };
+
+        // Make the POST request to add this item to the cart
+        await fetch('http://localhost:5000/api/v1/addCart', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(cartItem),
+        });
+      }
+      toast.success("Successfully added")
+    } catch {
+      toast.error("Failed To Add Item!");
+    }
   };
 
   return (
@@ -76,6 +107,7 @@ export default function BuildPC() {
         <div>
           <h1 className="font-bold text-2xl mb-5">Total: {calculateTotalPrice()}৳</h1>
           <button className="btn btn-info mb-10">Confirm Order</button>
+          <Link to='/my-order'><button onClick={addToCart} className="btn btn-info mb-10 ms-5">Add To Cart</button></Link>
         </div>
       </div>
     </div>
