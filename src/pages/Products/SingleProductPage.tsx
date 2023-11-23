@@ -227,8 +227,8 @@ export default function SingleProductPage() {
               ></CartModal>
             </div>
           </div>
-          <div>
-            <div className='text-center bg-sky-950 px-4'>
+          <div className='ml-4'>
+            <div className='text-center bg-sky-950 py-4 mt-4'>
               <h2 className='text-lg text-white'>Related Products</h2>
             </div>
             {
