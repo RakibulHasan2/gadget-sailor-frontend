@@ -9,7 +9,6 @@ export type ApiData = IProduct | ICartDetails;
 const useApiData = (apiUrl: string) => {
   const [data, setData] = useState<ApiData[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
   const fetchData = async () => {
     setIsLoading(true);
     try {
