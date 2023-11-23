@@ -1,4 +1,3 @@
-// import { BsCpu } from "react-icons/bs";
 import useApiData from "../../hooks/getAPIData";
 import { Link } from "react-router-dom";
 import { useSelectedProducts } from "../../context/SelectedProductsProvider";
@@ -10,8 +9,6 @@ export default function BuildPC() {
   const { selectedProducts, deleteProduct } = useSelectedProducts();
   const [chosenItems, setChosenItems] = useState(new Set());
   const uniqueCategories = {};
-
-  console.log(selectedProducts)
 
   const calculateTotalPrice = () => {
     let totalPrice: number = 0;
@@ -47,7 +44,7 @@ export default function BuildPC() {
                                   <h1 className="text-lg ">{product.product_name}</h1>
                                 </div>
                                 <h1 className="font-bold">{product.price}৳</h1>
-                                <button onClick={() =>  deleteProduct(product._id)} className='text-2xl text-blue-900'>x</button>
+                                <button onClick={() => deleteProduct(product._id)} className='text-2xl text-blue-900'>x</button>
                               </div>)
                         }
                       </div>
