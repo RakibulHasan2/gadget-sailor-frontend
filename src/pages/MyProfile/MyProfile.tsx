@@ -12,7 +12,7 @@ import { userData } from '../../hooks/getUserData';
 
 export default function MyProfile() {
 
-   const user = userData()
+    const user = userData()
     console.log(user.division)
     // ------------------for editprodile-----------------
     const [isUserModalOpen, setIsUserModalOpen] = React.useState(false);
@@ -30,7 +30,7 @@ export default function MyProfile() {
     const closeImageModal = () => {
         setIsImageModalOpen(false);
     };
-//------------------------for password----------------
+    //------------------------for password----------------
     const [isPasswordModalOpen, setIsPasswordModalOpen] = React.useState(false);
     const openPasswordModal = () => {
         setIsPasswordModalOpen(true);
@@ -49,8 +49,10 @@ export default function MyProfile() {
                     <Link to='/my-order'>
                         <button className="flex items-center justify-center w-full h-10 mb-5 font-bold btn-one gap-x-2"><FaCartArrowDown /> My Order</button>
                     </Link>
-                    <button className="flex items-center justify-center w-full h-10 mb-5 font-bold btn-one gap-x-2"><AiOutlineHeart />Wishlist</button>
+                    <Link to="/fav-item">
+                        <button className="flex items-center justify-center w-full h-10 mb-5 font-bold btn-one gap-x-2"><AiOutlineHeart />Wishlist</button>
 
+                    </Link>
                     <button className="flex items-center justify-center w-full h-10 mb-5 font-bold btn-one gap-x-2" onClick={openUserModal}><FaUserEdit />Edit Profile </button>
 
                     <button className="flex items-center justify-center w-full h-10 mb-5 font-bold btn-one gap-x-2" onClick={openImageModal}><FaImage /> Upload image</button>

@@ -14,6 +14,8 @@ import HotOfferPage from './../pages/HotOfferPage/HotOfferPage';
 import BuildPC from "../pages/BuildPC/BuildPC";
 import BuildProductsChose from "../pages/BuildPC/BuildProductsChose";
 import FavPage from "../pages/Favourites/FavPage";
+import Payment from "../pages/Payment/Payment";
+import PaymentLayout from "../layouts/PaymentLayout";
 
 const baseUrl = "http://localhost:5000/api/v1";
 
@@ -71,8 +73,20 @@ const routes = createBrowserRouter([
         path: "/chose-components/:components",
         element: <BuildProductsChose />,
         loader: async ({ params }) => await fetch(`${baseUrl}/allProducts/Components/${params.components}`)
-      },
-    ],
+      }
+    ]
+  },
+  {
+    path: "/payment",
+    element: <PaymentLayout />,
+    errorElement: <ErrorPage></ErrorPage>,
+    children: [
+      {
+        path: "/payment/:email",
+        element: <Payment />,
+        loader: async ({ params }) => await fetch(`${baseUrl}/getCart/${params.email}`)
+      }
+    ]
   },
   {
     path: "/login",
