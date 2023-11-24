@@ -27,7 +27,7 @@ export default function MyOrder() {
 
   return (
     <div className="flex justify-center mt-10 mb-10">
-      <div className=" w-9/12 lg:p-10 shadow-2xl">
+      <div className="lg:w-9/12 lg:p-10 shadow-2xl">
         <p className="text-3xl font-bold">Shopping Cart</p>
         <div className="overflow-x-auto mt-5">
           <table className="table">
@@ -69,8 +69,8 @@ export default function MyOrder() {
           <div className="flex justify-end">
             <div>
               <p className="text-lg font-bold mb-4">Total: {calculateTotalPrice()}৳</p>
-              <Link  to={`/payment/${user.email}`}> 
-             
+              <Link to={`/payment/${user.email}`}>
+
                 <button className="border p-3 rounded-lg bg-blue-900 text-white hover:bg-sky-700">Confirm Order</button>
               </Link>
             </div>

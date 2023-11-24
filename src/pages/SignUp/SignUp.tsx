@@ -7,17 +7,17 @@ import { FiArrowRight } from 'react-icons/fi';
 import '../../styles/Signup.css'
 import { useState } from 'react';
 import { useToken } from "../../hooks/useToken";
+
 export default function SignUp() {
     const { register, handleSubmit, formState: { errors } } = useForm<FormValues>();
     const [createUserEmail, setCreateUserEmail] = useState('');
     const [token] = useToken(createUserEmail)
     const navigate = useNavigate();
-
     if (token) {
         navigate('/')
     }
-
     const handleSignUp = async (data: FieldValues) => {
+        
         const userData: IUser = {
             name: {
                 firstName: data.firstName,
@@ -27,6 +27,7 @@ export default function SignUp() {
             phoneNumber: data.phoneNumber,
             password: data.password
         }
+       
 
         await fetch('http://localhost:5000/api/v1/auth/signup', {
             method: 'POST',
@@ -50,7 +51,6 @@ export default function SignUp() {
     }
     return (
         <div className='items-center justify-center lg:flex background-image'>
-
             <div className="flex justify-between shadow-2xl sign-up-container rounded-2xl">
                 <div className="text-white rounded-2xl pc-image">
                     <Link to="/home"><button className="flex items-center mt-2 ml-2 hover:text-gray-400">Go back <FiArrowRight></FiArrowRight></button></Link>
@@ -62,8 +62,6 @@ export default function SignUp() {
 
                     </div>
                 </div>
-
-
                 <div className='bg-transparent rounded-2xl w-96 p-7'>
                     <form onSubmit={handleSubmit(handleSignUp)}>
                         <div className="flex gap-2 mb-4">
@@ -90,7 +88,6 @@ export default function SignUp() {
                             {errors.email && <small className='mt-1 ml-2 text-red-500'>{errors.email.message}</small>}
                         </div>
                         <div className="w-full max-w-xs mb-4 form-control">
-
                             <input type="text" {...register("phoneNumber", {
                                 required: "Phone Number is Required !",
                             })} className="w-full max-w-xs bg-transparent rounded-3xl input input-bordered" placeholder="☏ Phone number..." />
