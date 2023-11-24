@@ -6,6 +6,14 @@ import '../../styles/BuildPC.css';
 import { userData } from "../../hooks/getUserData";
 import toast from "react-hot-toast";
 import { MdDeleteForever } from "react-icons/md";
+import pro from "../../assets/build-pc logo/processor.png"
+import mother from "../../assets/build-pc logo/motheboard.png"
+import graphic from "../../assets/build-pc logo/graphic-card.png"
+import casing from "../../assets/build-pc logo/cpu-tower.png"
+import hdd from "../../assets/build-pc logo/hard-disk.png"
+import ram from "../../assets/build-pc logo/ram.png"
+import ssd from "../../assets/build-pc logo/ssd.png"
+import power from "../../assets/build-pc logo/powersupply.png"
 
 export default function BuildPC() {
   const data = useApiData('http://localhost:5000/api/v1/allProducts/Components')
@@ -95,7 +103,54 @@ export default function BuildPC() {
                       </div>
                     ) : (
                       // Display subcategory name
-                      <h1 className="pt-6 pb-6 text-xl font-bold">{item.sub_category_name}</h1>
+                      <div className="flex items-center p-3">
+                        
+                        {item.sub_category_name === "Processor" 
+                        &&
+                         <img className="" src={pro} alt="" />
+    
+                         }
+                         {
+                          item.sub_category_name === "Motherboard" 
+                          &&
+                           <img className="" src={mother} alt="" />
+                         }
+                         {
+                          item.sub_category_name === "RAM" 
+                          &&
+                           <img className="" src={ram} alt="" />
+                         }
+                         {
+                          item.sub_category_name === "SSD" 
+                          &&
+                           <img className="" src={ssd} alt="" />
+                         }
+                         {
+                          item.sub_category_name === "Power Supply" 
+                          &&
+                           <img className="" src={power} alt="" />
+                         }
+                         {
+                          item.sub_category_name === "Graphics Card" 
+                          &&
+                           <img className="w-16 " src={graphic} alt="" />
+                         }
+                         {
+                          item.sub_category_name === "Hard Disk Drive" 
+                          &&
+                           <img className="w-16 " src={hdd} alt="" />
+                         }
+                         {
+                          item.sub_category_name === "Casing" 
+                          &&
+                           <img className="w-16 " src={casing} alt="" />
+                         }
+                         <div>
+                           <h1 className="ml-2 text-xl font-bold">{item.sub_category_name}</h1>
+                         </div>
+                        
+                      </div>
+                     
                     )}
                     {!isSelected && (
                       // Render button only if not selected
