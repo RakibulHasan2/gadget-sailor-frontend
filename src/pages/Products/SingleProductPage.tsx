@@ -158,12 +158,20 @@ export default function SingleProductPage() {
             </div>
             {/* buy now button */}
             <div className="flex mt-10">
-              <div className="flex lg:mr-10">
+              <div className="flex mr-5">
                 <button className="px-6 text-4xl border" onClick={decrement}>-</button>
                 <p className="px-6 py-3 text-xl border">{count}</p>
                 <button className="px-6 text-4xl border" onClick={increment}>+</button>
               </div>
-              <button onClick={handleClick} className="text-white bg-blue-900 btn px-14 hover:text-black rounded-xl">Buy Now</button>
+              <button onClick={handleClick} className="text-white bg-blue-900 btn lg:px-14 hover:text-black rounded-xl">Buy Now</button>
+              {/* cart modal */}
+              <CartModal
+                closeCartModal={closeCartModal}
+                isCartModalOpen={isCartModalOpen}
+                product_name={product_name}
+                count={count}
+                total={totalPrice}
+              ></CartModal>
             </div>
           </div>
         </div>
@@ -215,14 +223,6 @@ export default function SingleProductPage() {
                 <h2 className="p-2 mt-5 text-lg font-bold text-blue-900 bg-green-100">Warranty Information</h2>
                 <p className="py-3 mt-3 border-b border-gray-700">Warranty <span className="lg:ml-44">{warranty} Limited Warranty</span></p>
               </div>
-              {/* cart modal */}
-              <CartModal
-                closeCartModal={closeCartModal}
-                isCartModalOpen={isCartModalOpen}
-                product_name={product_name}
-                count={count}
-                total={totalPrice}
-              ></CartModal>
             </div>
           </div>
           {
