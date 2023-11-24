@@ -4,10 +4,11 @@ import Footer from "../components/Shared/Footer/Footer";
 import ShoppingCartSideBar from "../components/Products/ShoppingCartSideBar";
 
 export default function MainLayout() {
+
   return (
     <div>
       <Navbar />
-     <ShoppingCartSideBar/>
+      <ShoppingCartSideBar />
       <div>
         <Outlet />
       </div>
