@@ -3,7 +3,6 @@ import { IProduct } from "../../types/ProductsType";
 import { CgChevronRight } from "react-icons/cg";
 
 const SuggestedData = ({ data }: IProduct) => {
-    console.log(data)
     return (
         <div>
             <div className="card w-96 bg-base-100 shadow-xl mb-2">
@@ -14,9 +13,7 @@ const SuggestedData = ({ data }: IProduct) => {
                             <h2 className="text-lg font-semibold">{data.model}</h2>
                             <p>Price: {data.price}</p>
                         </div>
-
-                        <Link to={`/product/${data._id}`} className="flex items-center border d"><button className="">Details </button><CgChevronRight /></Link>
-
+                        <Link to={`/product/${data._id}`} className=""><button className="p-2 px-2 rounded-xl bg-blue-900 text-white flex justify-center items-center"> <span>Details</span> <CgChevronRight className = 'mt-1'></CgChevronRight></button></Link>
                     </div>
 
                 </div>
