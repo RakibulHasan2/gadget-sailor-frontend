@@ -17,7 +17,7 @@ export default function SignUp() {
         navigate('/')
     }
     const handleSignUp = async (data: FieldValues) => {
-
+        
         const userData: IUser = {
             name: {
                 firstName: data.firstName,
@@ -51,7 +51,6 @@ export default function SignUp() {
     }
     return (
         <div className='items-center justify-center lg:flex background-image'>
-
             <div className="flex justify-between shadow-2xl sign-up-container rounded-2xl">
                 <div className="text-white rounded-2xl pc-image">
                     <Link to="/home"><button className="flex items-center mt-2 ml-2 hover:text-gray-400">Go back <FiArrowRight></FiArrowRight></button></Link>

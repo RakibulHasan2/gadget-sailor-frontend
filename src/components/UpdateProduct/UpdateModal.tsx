@@ -243,7 +243,7 @@ const UpdateModal = ({ singleData, closeModal }: IProduct,) => {
 
                                     {Object.entries(otherProperties).map(([key, value]) => (
 
-                                        <div className="w-full max-w-xs form-contro">
+                                        <div className="w-full max-w-xs form-control">
                                             <label className="font-bold label"> <span className="label-text">{key}</span></label>
 
                                             <input defaultValue={value as string | number | readonly string[] | undefined} type="text"
