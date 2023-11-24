@@ -157,7 +157,7 @@ export default function BuildPC() {
                       <Link to={`/chose-components/${item.sub_category_name}`}>
                         <button
                           type="button"
-                          className="p-3 text-white bg-blue-600 rounded-xl hover:bg-sky-700"
+                          className="p-3 mt-3 text-white bg-blue-600 rounded-xl hover:bg-sky-700"
                           onClick={() => setChosenItems(new Set(chosenItems.add(item.sub_category_name)))}
                         >
                           Choose
