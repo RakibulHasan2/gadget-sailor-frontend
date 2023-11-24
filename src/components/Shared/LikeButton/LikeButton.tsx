@@ -11,13 +11,13 @@ const LikeButton = ({ info }: IProduct) => {
     const [liked, setLiked] = useState(false);
     const [count, setCount] = useState(0)
 
-    console.log(liked, count)
+    // console.log(liked, count)
     const user = userData();
     const { data, refetch } = useFavData(`http://localhost:5000/api/v1/getFav/${user.email}`);
     const likedData: FavDataType | undefined = data.find((item) => item.product_name === info.product_name)
 
-    console.log(data)
-    console.log(likedData)
+    // console.log(data)
+    // console.log(likedData)
 
     const handleLike = () => {
         if (liked && count === 1) {
