@@ -113,8 +113,6 @@ export default function SingleProductPage() {
 
   const randomSuggestion = [...suggestedData].sort(() => Math.random() - 0.5)
   const limitData = randomSuggestion.slice(0, 5)
-  console.log(limitData)
-  //console.log(randomSuggestion)
 
   return (
     <div >
@@ -170,8 +168,8 @@ export default function SingleProductPage() {
           </div>
         </div>
         {/*----- specification section ------*/}
-        <div className='flex'>
-          <div className="w-full p-6 mt-10 shadow-xl lg:w-3/5 lg:ml-36">
+        <div className='lg:flex'>
+          <div className="w-full p-6 lg:mt-10 shadow-xl lg:w-3/5 lg:ml-36">
             <div className='flex items-end justify-between'>
               <p className="text-3xl font-bold">Specification</p>
               <button onClick={openEditModal} className='flex items-center p-2 hover:bg-blue-800 bg-slate-100 rounded-2xl hover hover:text-white'><AiFillEdit />Edit</button>
@@ -227,18 +225,21 @@ export default function SingleProductPage() {
               ></CartModal>
             </div>
           </div>
-          <div className='ml-4'>
-            <div className='text-center bg-sky-950 py-4 mt-4'>
-              <h2 className='text-lg text-white'>Related Products</h2>
-            </div>
-            {
-              limitData.map(d => (
-
-                <SuggestedData key={d._id}
-                  data={d} _id={''} category_name={''} sub_category_name={''} brand_name={''} product_name={''} image={[]} model={''} description={''} price={0} product_code={0} status={''} reviews={[]} warranty={''} __v={''} others_info={[]}            ></SuggestedData>
-              ))
-            }
-          </div>
+          {
+            suggestedData.length > 0 && <>
+              <div className='ml-4 lg:mt-10'>
+                <div className='text-center bg-sky-950 py-4 mt-4'>
+                  <h2 className='text-lg text-white'>Related Products</h2>
+                </div>
+                {
+                  limitData.map(d => (
+                    <SuggestedData key={d._id}
+                      data={d} _id={''} category_name={''} sub_category_name={''} brand_name={''} product_name={''} image={[]} model={''} description={''} price={0} product_code={0} status={''} reviews={[]} warranty={''} __v={''} others_info={[]}></SuggestedData>
+                  ))
+                }
+              </div>
+            </>
+          }
         </div>
       </div>
 
