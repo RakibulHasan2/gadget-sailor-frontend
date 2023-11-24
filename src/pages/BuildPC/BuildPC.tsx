@@ -75,18 +75,18 @@ export default function BuildPC() {
                           selectedProducts.filter((p) => p.sub_category_name === item.sub_category_name)
                             .map(product =>
                               <div className="grid w-full grid-cols-4 border-b-2 product-info">
-                                <div className="border ">
+                                <div className="">
                                   <img className="w-20" src={product.image[0]} alt="" />
                                 </div>
                                 
-                                <div className="text-left border">
+                                <div className="pt-2 text-left">
                                   <p className="font-bold text-blue-900 ">{product.sub_category_name}</p>
                                   <h1 className="text-sm">{product.product_name}</h1>
                                 </div>
-                                <div className="border">
+                                <div className=" pt-7 ml- text-end">
                                   <h1 className="font-bold">{product.price}৳</h1>
                                 </div>
-                                <div className="mt-4 text-end">
+                                <div className="pt-4 mb-2 ml-4 border-l-2 text-end">
                                    <button onClick={() => deleteProduct(product._id)} className='p-3 text-2xl text-blue-700 bg-slate-100 rounded-2xl hover:text-red-700'><MdDeleteForever /></button>
                                 </div>
                                
