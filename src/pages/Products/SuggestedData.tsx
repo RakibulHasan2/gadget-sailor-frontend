@@ -15,7 +15,6 @@ const SuggestedData = ({ data }: IProduct) => {
                         </div>
                         <Link to={`/product/${data._id}`} className=""><button className="p-2 px-2 rounded-xl bg-blue-900 text-white flex justify-center items-center"> <span>Details</span> <CgChevronRight className = 'mt-1'></CgChevronRight></button></Link>
                     </div>
-
                 </div>
             </div>
         </div>
