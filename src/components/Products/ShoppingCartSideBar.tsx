@@ -3,11 +3,13 @@ import CartIcon from "./CartIcon";
 import { useState } from 'react';
 import useApiData from "../../hooks/getAPIData";
 import { MdDelete } from "react-icons/md";
+import { Link } from "react-router-dom";
+import { userData } from "../../hooks/getUserData";
 
 export default function ShoppingCartSideBar() {
     const { data, refetch } = useApiData("http://localhost:5000/api/v1/getCart");
     const [isOpen, setIsOpen] = useState<boolean>(false);
-
+    const user = userData()
     const toggleCart: () => void = () => {
         refetch();
         setIsOpen(!isOpen);
@@ -88,10 +90,11 @@ export default function ShoppingCartSideBar() {
                     </div>
                     <div className="">
                         <p className="mb-4 text-lg font-bold text-right lg:mr-10 lg:mt-4">Total: {calculateTotalPrice()}৳</p>
-                        <div className="flex justify-center">
-                            <button className="flex items-center justify-center p-3 text-white bg-blue-900 rounded-lg w-52 hover:bg-sky-700 gap-x-2"><FaShoppingBag></FaShoppingBag> Confirm Order</button>
-                        </div>
-
+                        <Link to={`/payment/${user.email}`}>
+                            <div className="flex justify-center">
+                                <button className="flex items-center justify-center p-3 text-white bg-blue-900 rounded-lg w-52 hover:bg-sky-700 gap-x-2"><FaShoppingBag></FaShoppingBag> Confirm Order</button>
+                            </div>
+                        </Link>
                     </div>
                 </div>
             )}
