@@ -41,7 +41,7 @@ export default function BuildProductsChose() {
           filteredProducts.map((product: IProduct) => (
             <div key={product._id} className="grid grid-cols-3 p-4 mb-3 bg-white border rounded-lg shadow-md">
               <div className="border-r-2 mr-36 ">
-                <img className=" w-36" src={product?.image[0]} alt="" />
+                <img className="w-36" src={product?.image[0]} alt="" />
               </div>
               <div className="items-center">
                 <Link to={`/product/${product?._id}`}>
