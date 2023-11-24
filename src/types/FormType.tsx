@@ -5,3 +5,15 @@ export type FormValues = {
     phoneNumber: number,
     password: string
 }
+
+
+export type CheckoutFormValues = {
+    firstName: string
+    lastName: string,
+    email: string,
+    phoneNumber: number,
+    address: string,
+    city: string,
+    district: string,
+    comments: string
+}
