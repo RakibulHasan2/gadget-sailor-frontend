@@ -58,7 +58,7 @@ export default function ProductsCard({ product }: IProduct) {
             method: 'DELETE'
         })
             .then(response => {
-                if (response.ok) {
+                if (response.ok && filteredFav.length > 0) {
                     fetch(`http://localhost:5000/api/v1/getFav/${filteredFav[0]._id}`, {
                         method: 'DELETE'
                     })
@@ -70,6 +70,12 @@ export default function ProductsCard({ product }: IProduct) {
                                 }, 1000);
                             }
                         })
+                }
+                else {
+                    toast.success("Successfully deleted");
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1000);
                 }
             })
     };

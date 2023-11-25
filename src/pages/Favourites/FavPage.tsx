@@ -14,7 +14,7 @@ const FavPage = () => {
         })
             .then(response => {
                 if (response.ok) {
-                    toast.error("Removed from your favourite list")
+                    toast.success("Removed from your favorite list")
                     refetch();
                 }
             })
