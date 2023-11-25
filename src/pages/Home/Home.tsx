@@ -1,3 +1,4 @@
+import AutoCardCarousel from "../../components/AutoCardCarousel/AutoCardCarousel";
 import Banner from "../../components/Banner/Banner";
 import RandomProducts from "../../components/RandomProducts/RandomProducts";
 
@@ -7,6 +8,7 @@ export default function Home() {
     <div>
       <Banner></Banner>
       <RandomProducts></RandomProducts>
+      <AutoCardCarousel />
     </div>
   )
 }
