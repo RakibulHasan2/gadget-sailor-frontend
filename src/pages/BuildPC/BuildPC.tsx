@@ -90,17 +90,17 @@ export default function BuildPC() {
                   <span className="text-2xl text-blue-700 animate-pulse"><AiFillPrinter /></span>
                   <button className="text-sm hover:text-blue-600">Print</button>
                 </div>
-                <div className="flex flex-col items-center pr-4 border-r-2">
+                <div onClick={handleScreenshot} className="flex flex-col items-center pr-4 border-r-2">
                   <span className="text-2xl text-blue-700 animate-spin">
                     <MdOutlineCamera />
                   </span>
-                  <button className="text-sm hover:text-blue-600" onClick={handleScreenshot}>
+                  <button className="text-sm hover:text-blue-600" >
                     ScreenShot
                   </button>
                 </div>
-                <div className="flex flex-col items-center pr-4 border-r-2">
+                <div onClick={addToCart} className="flex flex-col items-center pr-4 border-r-2">
                   <span className="text-2xl text-blue-700 animate-pulse"><MdShoppingBasket /></span>
-                  <button onClick={addToCart} className="text-sm hover:text-blue-600">Add To Cart</button>
+                  <button className="text-sm hover:text-blue-600">Add To Cart</button>
                 </div>
                 <div className="p-2 text-white bg-blue-900 border rounded-xl">
                   <h1 className="text-lg">{calculateTotalPrice()}৳</h1>
