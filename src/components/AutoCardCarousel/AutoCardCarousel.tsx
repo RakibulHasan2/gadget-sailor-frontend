@@ -13,9 +13,9 @@ const AutoCardCarousel = () => {
 
 
     return (
-        <div className="">
+        <div className="bg-sky-100 py-8">
 
-            <Marquee>
+            <Marquee pauseOnHover>
                 {
                     data.map(d => (
                         <SingleCards

@@ -1,13 +1,26 @@
+import { Link } from "react-router-dom";
 import { IProduct } from "../../types/ProductsType";
 
 
 const SingleCards = ({ data }: IProduct) => {
     console.log(data)
     return (
-        <div className="card">
-            <img src={data.image} alt={''} />
-            {/* <h3>{card.title}</h3>
-            <p>{card.description}</p> */}
+        <div>
+            <div className=" w-60 max-h-64 border border-transparent shadow-md card bg-base-100 hover:border-blue-400 hover:shadow-customBlue card-height rounded-xl">
+                <figure className="h-full px-10 transition-transform transform hover:scale-110">
+                    <img src={data?.image} alt="" className="rounded-xl" />
+                </figure>
+
+                <div className="items-center text-center card-body">
+                    <Link to={`/product/${data?._id}`}>
+                        <p className='w-full h-16 font-bold  hover:text-blue-700'>{data?.product_name}</p>
+                    </Link>
+                    <p className="font-bold text-yellow-700">{data?.price}৳</p>
+
+                </div>
+
+
+            </div>
         </div>
     );
 };
