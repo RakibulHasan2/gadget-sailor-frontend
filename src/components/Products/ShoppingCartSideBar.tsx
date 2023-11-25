@@ -41,13 +41,13 @@ export default function ShoppingCartSideBar() {
                 toggleCart={toggleCart}
             />
             {isOpen && (
-                <div
+                <div className="lg:w-1/3"
                     style={{
                         position: 'fixed',
                         top: '0',
                         right: '0',
                         height: '100%',
-                        width: '38%',
+                        // width: '38%',
                         backgroundColor: 'white',
                         zIndex: '999',
                         boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
