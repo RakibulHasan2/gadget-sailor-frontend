@@ -15,8 +15,8 @@ export default function NavbarItem() {
  
     return (
         <div>
-            <div className='flex justify-center lg:h-16 border shadow-lg shadow-blue-900/50'>
-                <div className='relative lg:flex items-center lg:w-4/5 lg:h-16 rounded-3xl justify-evenly md:grid md:grid-rows-2 md:grid-cols-4 sm:grid sm:grid-rows-3 sm:grid-cols-3'>
+            <div className='flex justify-center shadow-lg lg:h-16 shadow-blue-900/50'>
+                <div className='relative items-center lg:flex lg:w-4/5 lg:h-16 rounded-3xl justify-evenly md:grid md:grid-rows-2 md:grid-cols-4 sm:grid sm:grid-rows-3 sm:grid-cols-3'>
                     {
                         categories.map((category) =>
                             <div className="relative dropdown dropdown-hover">
