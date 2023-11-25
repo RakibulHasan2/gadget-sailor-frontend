@@ -103,13 +103,24 @@ export default function SingleProductPage() {
 
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/v1/allProducts/${sub_category_name}`)
-      .then(res => res.json())
-      .then(data => {
-        //console.log(data.data)
-        setSuggestedData(data.data)
-      })
-  }, [sub_category_name])
+    if (category_name === 'UPS' || category_name === 'Monitor') {
+      fetch(`http://localhost:5000/api/v1/allProducts/${category_name}`)
+        .then(res => res.json())
+        .then(data => {
+          //console.log(data.data)
+          setSuggestedData(data.data)
+        })
+    }
+
+    else {
+      fetch(`http://localhost:5000/api/v1/allProducts/${sub_category_name}`)
+        .then(res => res.json())
+        .then(data => {
+          //console.log(data.data)
+          setSuggestedData(data.data)
+        })
+    }
+  }, [category_name, sub_category_name])
 
   const randomSuggestion = [...suggestedData].sort(() => Math.random() - 0.5)
   const limitData = randomSuggestion.slice(0, 5)
