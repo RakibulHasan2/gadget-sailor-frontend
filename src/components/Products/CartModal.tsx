@@ -17,18 +17,18 @@ export default function CartModal({ isCartModalOpen, closeCartModal, product_nam
                             </span>
                             You have added <span className="font-bold text-blue-900">{product_name}</span> to your shopping cart!
                         </div>
-                        <div className="lg:flex p-3 mt-4 text-lg text-white bg-blue-900 border justify-evenly rounded-xl">
-                            <span className="flex items-center gap-x-2 justify-center"><MdOutlineProductionQuantityLimits />Cart quantity:<span className="font-bold ">{count}</span></span>
+                        <div className="p-3 mt-4 text-lg text-white bg-blue-900 border lg:flex justify-evenly rounded-xl">
+                            <span className="flex items-center justify-center gap-x-2"><MdOutlineProductionQuantityLimits />Cart quantity:<span className="font-bold ">{count}</span></span>
                             <span className="lg:border-r-2"></span>
-                            <span className="flex items-center gap-x-2 justify-center "><FaCartFlatbedSuitcase />Cart Total:<span className="ml-2 font-bold">{total}</span> ৳</span>
+                            <span className="flex items-center justify-center gap-x-2 "><FaCartFlatbedSuitcase />Cart Total:<span className="ml-2 font-bold">{total}</span> ৳</span>
                         </div>
                     </div>
                     <div className="flex justify-center">
-                        <div className="lg:flex justify-around lg:mt-5 mt-2">
+                        <div className="justify-around mt-2 lg:flex lg:mt-5 lg:gap-x-5">
                             <Link to='/my-order'>
                                 <button className='flex items-center justify-center p-2 text-lg text-blue-700 bg-gray-100 rounded-md gap-x-3 w-44 hover:bg-blue-700 hover:text-white'><FaShoppingCart></FaShoppingCart>View Cart</button>
                             </Link>
-                            <button className='flex items-center justify-center lg:mt-0 mt-2 p-2 text-lg text-blue-700 bg-gray-100 rounded-md gap-x-3 w-44 hover:bg-blue-700 hover:text-white'><FaShoppingBag />Confirm Order</button>
+                            <button className='flex items-center justify-center p-2 mt-2 text-lg text-blue-700 bg-gray-100 rounded-md lg:mt-0 gap-x-3 w-44 hover:bg-blue-700 hover:text-white'><FaShoppingBag />Confirm Order</button>
                         </div>
                     </div>
                 </div>
