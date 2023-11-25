@@ -1,5 +1,4 @@
 import useFavData from "../../hooks/getFavData";
-import './AutoCardCarousel.css'
 import SingleCards from "./SingleCards";
 import Marquee from "react-fast-marquee";
 
