@@ -11,7 +11,7 @@ const SingleCards = ({ data }: IProduct) => {
                     <img src={data?.image} alt="" className="rounded-xl" />
                 </figure>
 
-                <div className="items-center text-center card-body py-0">
+                <div className="items-center text-center card-body p-2">
                     <Link to={`/product/${data?.I_id}`}>
                         <p className='w-full h-16 font-bold  hover:text-blue-700'>{data?.product_name}</p>
                     </Link>
