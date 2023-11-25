@@ -14,7 +14,10 @@ import hdd from "../../assets/build-pc logo/hard-disk.png"
 import ram from "../../assets/build-pc logo/ram.png"
 import ssd from "../../assets/build-pc logo/ssd.png"
 import power from "../../assets/build-pc logo/powersupply.png"
-
+import { AiFillPrinter } from "react-icons/ai";
+import { MdOutlineCamera } from "react-icons/md";
+import { MdShoppingBasket } from "react-icons/md";
+import html2canvas from 'html2canvas';
 export default function BuildPC() {
   const data = useApiData('http://localhost:5000/api/v1/allProducts/Components')
   const { selectedProducts, deleteProduct } = useSelectedProducts();
@@ -59,16 +62,52 @@ export default function BuildPC() {
     }
   };
 
+  const handleScreenshot = () => {
+    const element = document.getElementById('build-pc-container');
+    if (element) {
+      html2canvas(element).then((canvas) => {
+        const imageDataURL = canvas.toDataURL('image/png');
+        const link = document.createElement('a');
+        link.href = imageDataURL;
+        link.download = 'screenshot.png';
+        link.click();
+      });
+    }
+  };
+
+
   return (
     <div>
       <div className="flex justify-center mb-10">
-        <div className="w-2/3 pb-3 mt-10 border rounded-lg shadow-xl">
-          <div className="p-8 border-b-2">
+        <div className="w-2/3 pb-3 mt-10 border rounded-lg shadow-xl" id="build-pc-container">
+          <div className="flex items-center justify-between p-5 border-b-2">
             <h1 className="text-2xl font-bold text-blue-900">
-                PC-Build
+              PC-Build
             </h1>
+            <div className="">
+              <div className="flex items-center gap-x-4">
+                <div className="flex flex-col items-center pr-4 border-r-2">
+                  <span className="text-2xl text-blue-700 animate-pulse"><AiFillPrinter /></span>
+                  <button className="text-sm hover:text-blue-600">Print</button>
+                </div>
+                <div className="flex flex-col items-center pr-4 border-r-2">
+                  <span className="text-2xl text-blue-700 animate-spin">
+                    <MdOutlineCamera />
+                  </span>
+                  <button className="text-sm hover:text-blue-600" onClick={handleScreenshot}>
+                    ScreenShot
+                  </button>
+                </div>
+                <div className="flex flex-col items-center pr-4 border-r-2">
+                  <span className="text-2xl text-blue-700 animate-pulse"><MdShoppingBasket /></span>
+                  <button onClick={addToCart} className="text-sm hover:text-blue-600">Add To Cart</button>
+                </div>
+                <div className="p-2 text-white bg-blue-900 border rounded-xl">
+                  <h1 className="text-lg">{calculateTotalPrice()}৳</h1>
+                </div>
+              </div>
+            </div>
           </div>
-
           {data.data.map((item) => {
             if (!chosenItems.has(item.sub_category_name)) {
               const isSelected = selectedProducts.some(product => product.sub_category_name === item.sub_category_name);
@@ -86,7 +125,7 @@ export default function BuildPC() {
                                 <div className="">
                                   <img className="w-20" src={product.image[0]} alt="" />
                                 </div>
-                                
+
                                 <div className="pt-2 text-left">
                                   <p className="font-bold text-blue-900 ">{product.sub_category_name}</p>
                                   <h1 className="text-sm">{product.product_name}</h1>
@@ -95,65 +134,62 @@ export default function BuildPC() {
                                   <h1 className="font-bold">{product.price}৳</h1>
                                 </div>
                                 <div className="pt-4 mb-2 ml-4 border-l-2 text-end">
-                                   <button onClick={() => deleteProduct(product._id)} className='p-3 text-2xl text-blue-700 bg-slate-100 rounded-2xl hover:text-red-700'><MdDeleteForever /></button>
+                                  <button onClick={() => deleteProduct(product._id)} className='p-3 text-2xl text-blue-700 bg-slate-100 rounded-2xl hover:text-red-700'><MdDeleteForever /></button>
                                 </div>
-                               
                               </div>)
                         }
                       </div>
                     ) : (
                       // Display subcategory name
                       <div className="flex items-center p-3">
-                        
-                        {item.sub_category_name === "Processor" 
-                        &&
-                         <img className="" src={pro} alt="" />
-    
-                         }
-                         {
-                          item.sub_category_name === "Motherboard" 
+
+                        {item.sub_category_name === "Processor"
                           &&
-                           <img className="" src={mother} alt="" />
-                         }
-                         {
-                          item.sub_category_name === "RAM" 
+                          <img className="" src={pro} alt="" />
+
+                        }
+                        {
+                          item.sub_category_name === "Motherboard"
                           &&
-                           <img className="" src={ram} alt="" />
-                         }
-                         {
-                          item.sub_category_name === "SSD" 
+                          <img className="" src={mother} alt="" />
+                        }
+                        {
+                          item.sub_category_name === "RAM"
                           &&
-                           <img className="" src={ssd} alt="" />
-                         }
-                         {
-                          item.sub_category_name === "Power Supply" 
+                          <img className="" src={ram} alt="" />
+                        }
+                        {
+                          item.sub_category_name === "SSD"
                           &&
-                           <img className="" src={power} alt="" />
-                         }
-                         {
-                          item.sub_category_name === "Graphics Card" 
+                          <img className="" src={ssd} alt="" />
+                        }
+                        {
+                          item.sub_category_name === "Power Supply"
                           &&
-                           <img className="w-16 " src={graphic} alt="" />
-                         }
-                         {
-                          item.sub_category_name === "Hard Disk Drive" 
+                          <img className="" src={power} alt="" />
+                        }
+                        {
+                          item.sub_category_name === "Graphics Card"
                           &&
-                           <img className="w-16 " src={hdd} alt="" />
-                         }
-                         {
-                          item.sub_category_name === "Casing" 
+                          <img className="w-16 " src={graphic} alt="" />
+                        }
+                        {
+                          item.sub_category_name === "Hard Disk Drive"
                           &&
-                           <img className="w-16 " src={casing} alt="" />
-                         }
-                         <div>
-                           <h1 className="ml-2 text-xl font-bold">{item.sub_category_name}</h1>
-                         </div>
-                        
+                          <img className="w-16 " src={hdd} alt="" />
+                        }
+                        {
+                          item.sub_category_name === "Casing"
+                          &&
+                          <img className="w-16 " src={casing} alt="" />
+                        }
+                        <div>
+                          <h1 className="ml-2 text-xl font-bold">{item.sub_category_name}</h1>
+                        </div>
+
                       </div>
-                     
                     )}
                     {!isSelected && (
-                      // Render button only if not selected
                       <Link to={`/chose-components/${item.sub_category_name}`}>
                         <button
                           type="button"
@@ -168,14 +204,8 @@ export default function BuildPC() {
                 );
               }
             }
-            return null; // Skip rendering if sub_category_name is not unique
+            return null;
           })}
-        </div>
-      </div>
-      <div className="flex justify-center">
-        <div>
-          <h1 className="mb-5 text-2xl font-bold">Total: {calculateTotalPrice()}৳</h1>
-          <button onClick={addToCart} className="mb-10 btn btn-info ms-5">Add To Cart</button>
         </div>
       </div>
     </div>
