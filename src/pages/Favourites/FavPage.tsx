@@ -4,32 +4,20 @@ import useFavData from "../../hooks/getFavData";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
-
-
-// interface FavModalProps {
-//     onClose: () => void;
-// }
-
 const FavPage = () => {
     const user = userData();
     const { data, refetch } = useFavData(`http://localhost:5000/api/v1/getFav/${user.email}`);
-    console.log(data)
-
 
     const handleDeleteFav = (id: string | undefined) => {
-
-        console.log(id)
         fetch(`http://localhost:5000/api/v1/getFav/${id}`, {
             method: 'DELETE',
         })
             .then(response => {
                 if (response.ok) {
-                    toast.error("Removed from your favourite list")
+                    toast.success("Removed from your favorite list")
                     refetch();
-
                 }
             })
-
     }
 
 
