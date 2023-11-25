@@ -17,14 +17,14 @@ import power from "../../assets/build-pc logo/powersupply.png"
 import { AiFillPrinter } from "react-icons/ai";
 import { MdOutlineCamera } from "react-icons/md";
 import { MdShoppingBasket } from "react-icons/md";
-
+import html2canvas from 'html2canvas';
 export default function BuildPC() {
   const data = useApiData('http://localhost:5000/api/v1/allProducts/Components')
   const { selectedProducts, deleteProduct } = useSelectedProducts();
   const [chosenItems, setChosenItems] = useState(new Set());
   const user = userData();
   const uniqueCategories = {};
-  
+
   const calculateTotalPrice = () => {
     let totalPrice: number = 0;
     selectedProducts.forEach((item) => {
@@ -62,13 +62,24 @@ export default function BuildPC() {
     }
   };
 
- 
+  const handleScreenshot = () => {
+    const element = document.getElementById('build-pc-container');
+    if (element) {
+      html2canvas(element).then((canvas) => {
+        const imageDataURL = canvas.toDataURL('image/png');
+        const link = document.createElement('a');
+        link.href = imageDataURL;
+        link.download = 'screenshot.png';
+        link.click();
+      });
+    }
+  };
 
 
   return (
     <div>
       <div className="flex justify-center mb-10">
-        <div className="w-2/3 pb-3 mt-10 border rounded-lg shadow-xl">
+        <div className="w-2/3 pb-3 mt-10 border rounded-lg shadow-xl" id="build-pc-container">
           <div className="flex items-center justify-between p-5 border-b-2">
             <h1 className="text-2xl font-bold text-blue-900">
               PC-Build
@@ -79,25 +90,24 @@ export default function BuildPC() {
                   <span className="text-2xl text-blue-700 animate-pulse"><AiFillPrinter /></span>
                   <button className="text-sm hover:text-blue-600">Print</button>
                 </div>
-
                 <div className="flex flex-col items-center pr-4 border-r-2">
-                  <span className="text-2xl text-blue-700 animate-spin"><MdOutlineCamera /></span>
-                  <button className="text-sm hover:text-blue-600">ScreenShot</button>
+                  <span className="text-2xl text-blue-700 animate-spin">
+                    <MdOutlineCamera />
+                  </span>
+                  <button className="text-sm hover:text-blue-600" onClick={handleScreenshot}>
+                    ScreenShot
+                  </button>
                 </div>
                 <div className="flex flex-col items-center pr-4 border-r-2">
                   <span className="text-2xl text-blue-700 animate-pulse"><MdShoppingBasket /></span>
                   <button onClick={addToCart} className="text-sm hover:text-blue-600">Add To Cart</button>
                 </div>
-
                 <div className="p-2 text-white bg-blue-900 border rounded-xl">
                   <h1 className="text-lg">{calculateTotalPrice()}৳</h1>
                 </div>
-
-
               </div>
             </div>
           </div>
-
           {data.data.map((item) => {
             if (!chosenItems.has(item.sub_category_name)) {
               const isSelected = selectedProducts.some(product => product.sub_category_name === item.sub_category_name);
@@ -126,7 +136,6 @@ export default function BuildPC() {
                                 <div className="pt-4 mb-2 ml-4 border-l-2 text-end">
                                   <button onClick={() => deleteProduct(product._id)} className='p-3 text-2xl text-blue-700 bg-slate-100 rounded-2xl hover:text-red-700'><MdDeleteForever /></button>
                                 </div>
-
                               </div>)
                         }
                       </div>
@@ -179,7 +188,6 @@ export default function BuildPC() {
                         </div>
 
                       </div>
-
                     )}
                     {!isSelected && (
                       <Link to={`/chose-components/${item.sub_category_name}`}>
@@ -200,7 +208,6 @@ export default function BuildPC() {
           })}
         </div>
       </div>
-
     </div>
   );
 }
