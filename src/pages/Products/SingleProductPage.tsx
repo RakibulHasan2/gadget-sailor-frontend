@@ -236,6 +236,8 @@ export default function SingleProductPage() {
               </div>
             </div>
           </div>
+
+          {/* Related Products Section */}
           {
             suggestedData.length > 0 && <>
               <div className='ml-4 lg:mt-10'>
