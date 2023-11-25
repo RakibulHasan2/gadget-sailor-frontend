@@ -12,6 +12,7 @@ export default function Products() {
     const products = Array.isArray(productsData.data) ? productsData.data : [];
     const [selectedSubcategories, setSelectedSubcategories] = useState<string[]>([]);
     const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
+    
     // subcategories array
     const subCategories = [...new Set(products.map((product: IProduct) => product.sub_category_name))].filter((subcategory) => subcategory) as string[];
     //  brands array

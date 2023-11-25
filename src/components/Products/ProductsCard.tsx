@@ -6,6 +6,8 @@ import React from 'react';
 import CartModal from './CartModal';
 import { userData } from '../../hooks/getUserData';
 import LikeButton from '../Shared/LikeButton/LikeButton';
+import { RiDeleteBin5Line } from "react-icons/ri";
+import toast from 'react-hot-toast';
 
 export default function ProductsCard({ product }: IProduct) {
     const { product_name, price, _id, image, model } = product;
@@ -47,13 +49,30 @@ export default function ProductsCard({ product }: IProduct) {
         alert('Please log in to add into the favourite.');
 
     }
+
+    const handleDelete = async (id: string) => {
+        fetch(`http://localhost:5000/api/v1/allProducts/${id}`, {
+            method: 'DELETE'
+        })
+            .then(response => {
+                if (response.ok) {
+                    toast.success("Successfully deleted");
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1000);
+                }
+            })
+    };
+
     return (
-        <div>
+        <div className=''>
+            <div className='flex justify-end'>
+                <p onClick={() => handleDelete(_id)} className='text-lg mt-2 mr-4 mb-2'><RiDeleteBin5Line /></p>
+            </div>
             <div className="relative w-full overflow-hidden transition-all duration-300 border border-transparent shadow-md card bg-base-100 hover:border-blue-400 hover:shadow-customBlue card-height rounded-xl">
                 <figure className="h-full px-10 pt-10 transition-transform transform hover:scale-110">
                     <img src={image[0]} alt="" className="rounded-xl" />
                 </figure>
-
                 <div className="items-center text-center card-body">
                     <Link to={`/product/${_id}`}>
                         <p className='w-full h-20 font-bold border-b-2 hover:text-blue-700'>{product_name}</p>
