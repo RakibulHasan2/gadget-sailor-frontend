@@ -8,10 +8,12 @@ import { userData } from '../../hooks/getUserData';
 import LikeButton from '../Shared/LikeButton/LikeButton';
 import { RiDeleteBin5Line } from "react-icons/ri";
 import toast from 'react-hot-toast';
+import useFavData from '../../hooks/getFavData';
 
 export default function ProductsCard({ product }: IProduct) {
     const { product_name, price, _id, image, model } = product;
     const user = userData()
+    const { data } = useFavData(`http://localhost:5000/api/v1/getFav/${user.email}`);
     const CartDetails = async () => {
         const cartData = {
             product_name: product_name,
@@ -50,16 +52,24 @@ export default function ProductsCard({ product }: IProduct) {
 
     }
 
-    const handleDelete = async (id: string) => {
+    const handleDelete = async (id: string, product_name: string) => {
+        const filteredFav = data.filter(f => f.product_name === product_name);
         fetch(`http://localhost:5000/api/v1/allProducts/${id}`, {
             method: 'DELETE'
         })
             .then(response => {
                 if (response.ok) {
-                    toast.success("Successfully deleted");
-                    setTimeout(() => {
-                        window.location.reload();
-                    }, 1000);
+                    fetch(`http://localhost:5000/api/v1/getFav/${filteredFav[0]._id}`, {
+                        method: 'DELETE'
+                    })
+                        .then(anotherResponse => {
+                            if (anotherResponse.ok) {
+                                toast.success("Successfully deleted");
+                                setTimeout(() => {
+                                    window.location.reload();
+                                }, 1000);
+                            }
+                        })
                 }
             })
     };
@@ -67,7 +77,7 @@ export default function ProductsCard({ product }: IProduct) {
     return (
         <div className=''>
             <div className='flex justify-end'>
-                <p onClick={() => handleDelete(_id)} className='text-lg mt-2 mr-4 mb-2'><RiDeleteBin5Line /></p>
+                <p onClick={() => handleDelete(_id, product_name)} className='text-lg mt-2 mr-4 mb-2'><RiDeleteBin5Line /></p>
             </div>
             <div className="relative w-full overflow-hidden transition-all duration-300 border border-transparent shadow-md card bg-base-100 hover:border-blue-400 hover:shadow-customBlue card-height rounded-xl">
                 <figure className="h-full px-10 pt-10 transition-transform transform hover:scale-110">
