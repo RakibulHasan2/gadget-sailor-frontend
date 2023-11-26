@@ -11,9 +11,7 @@ import ChangePassword from '../../components/EditProfile/ChangePassword';
 import { userData } from '../../hooks/getUserData';
 
 export default function MyProfile() {
-
     const user = userData()
-    console.log(user.division)
     // ------------------for editprodile-----------------
     const [isUserModalOpen, setIsUserModalOpen] = React.useState(false);
     const openUserModal = () => {
@@ -91,7 +89,6 @@ export default function MyProfile() {
                                             <FaUserEdit className="ml-5 text-6xl text-blue-900"></FaUserEdit>
                                             <h1 className="font-bold">Edit Profile</h1>
                                         </div>
-
                                     </div>
                                     <div className="modal-body">
                                         <EditProfile />
@@ -154,7 +151,5 @@ export default function MyProfile() {
                 </div>
             </div>
         </div>
-
-
     )
 }

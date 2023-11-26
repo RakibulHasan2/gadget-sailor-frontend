@@ -22,12 +22,8 @@ export default function SingleProductPage() {
   const user = userData();
   const { refetch } = useProductData("http://localhost:5000/api/v1/getCart");
 
-
-
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { __v, _id, category_name, sub_category_name, product_name, price, status, product_code, brand_name, image, model, warranty, ...otherProperties } = singleProductData;
-
-  // console.log(singleProductData)
 
   const increment = () => {
     count++;
@@ -137,17 +133,14 @@ export default function SingleProductPage() {
             <dialog id="editImage" className="modal">
               <div className="modal-box rounded-3xl">
                 <form method="dialog">
-
                   <button className="absolute btn btn-sm btn-circle btn-ghost right-2 top-2">
                     ✕
                   </button>
                 </form>
-
                 <UpdateImage
                   singleData={singleProductData} _id={''} category_name={''} sub_category_name={''} brand_name={''} product_name={''} image={[]} model={''} description={''} price={0} product_code={0} status={''} reviews={[]} warranty={''} __v={''} others_info={[]}></UpdateImage>
               </div>
             </dialog>
-
           </div>
           {/* product basic info */}
           <div className="p-5 lg:w-1/2 lg:ms-12">
@@ -213,8 +206,6 @@ export default function SingleProductPage() {
                   <UpdateModal
                     singleData={singleProductData}
                     closeModal={closeModal} otherProperties={otherProperties} _id={''} category_name={''} sub_category_name={''} brand_name={''} product_name={''} image={[]} model={''} description={''} price={0} product_code={0} status={''} reviews={[]} warranty={''} __v={''} others_info={[]}              ></UpdateModal>
-
-
                 </div>
               </dialog>
             </div>
@@ -236,7 +227,6 @@ export default function SingleProductPage() {
               </div>
             </div>
           </div>
-
           {/* Related Products Section */}
           {
             suggestedData.length > 0 && <>
@@ -255,8 +245,6 @@ export default function SingleProductPage() {
           }
         </div>
       </div>
-
-
     </div>
   )
 }

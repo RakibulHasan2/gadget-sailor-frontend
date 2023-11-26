@@ -5,10 +5,8 @@ import useProductData from "../../hooks/useProductData";
 import toast from "react-hot-toast";
 import '../../styles/Loader.css'
 
-
 const UpdateModal = ({ singleData, closeModal }: IProduct,) => {
     const { register, handleSubmit, formState: { errors } } = useForm<UpdateProductValues>();
-
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { __v, _id, category_name, sub_category_name, product_name, price, status, product_code, description, reviews, brand_name, image, model, warranty, ...otherProperties } = singleData;
     const { data, isLoading } = useProductData("http://localhost:5000/api/v1/allProducts")
@@ -16,23 +14,17 @@ const UpdateModal = ({ singleData, closeModal }: IProduct,) => {
         return <div className="flex justify-center p-10"><span className="loader"></span></div>;
     }
     // console.log(_id)
-
-
-
     const getCategory: Set<string> = new Set()
     const getSubCategory: Set<string> = new Set()
     const getBrand: Set<string> = new Set()
-
     data.forEach(d => {
         if (!getCategory.has(d.category_name)) {
             getCategory.add(d.category_name);
-
         }
         if (!getSubCategory.has(d.sub_category_name)) {
             getSubCategory.add(d.sub_category_name);
         }
         if (!getBrand.has(d.brand_name)) {
-            // console.log(d.brand_name);
             getBrand.add(d.brand_name);
         }
     });
@@ -40,13 +32,7 @@ const UpdateModal = ({ singleData, closeModal }: IProduct,) => {
     const getOneCategory = Array.from(getCategory);
     const getOneSubCategory = Array.from(getSubCategory).filter((item) => item !== undefined && item !== '');
     const getOneBrand = Array.from(getBrand).filter((item) => item !== undefined);
-
-
     const handleUpdateProduct = async (data: FieldValues) => {
-        console.log(data)
-
-
-
         const productData: UpdateProductValues = {
             category_name: data.category_name,
             sub_category_name: data.sub_category_name,
@@ -57,14 +43,12 @@ const UpdateModal = ({ singleData, closeModal }: IProduct,) => {
             price: data.price,
             product_code: data.product_code,
             status: data.status,
-
             warranty: data.warranty,
             ...Object.fromEntries(
                 Object.keys(otherProperties).map((key) => [key, data.others_info[key]])
             )
-            // others_info: { ...otherProperties, ...data.other_info }
         }
-        console.log(productData)
+
         const response = await fetch(`http://localhost:5000/api/v1/allProducts/${_id}`, {
             method: 'PUT',
             headers: {
@@ -73,7 +57,6 @@ const UpdateModal = ({ singleData, closeModal }: IProduct,) => {
             body: JSON.stringify(productData)
         });
         const product = await response.json();
-        console.log(product);
 
         if (product.statusCode === 200) {
 
@@ -90,30 +73,24 @@ const UpdateModal = ({ singleData, closeModal }: IProduct,) => {
         <div>
             <div>
                 <div className='items-center'>
-
                     <form className="mt-10" onSubmit={handleSubmit(handleUpdateProduct)}>
-
                         <div className="flex justify-between">
-
                             <div className="w-3/4 mr-40 ">
                                 {/* category */}
                                 <div className="flex justify-center text-2xl text-blue-800 border-b-4">
                                     <h1>Basic Info</h1>
                                 </div>
-
                                 <div className="w-full max-w-xs mt-3 form-control">
                                     <label className="font-bold label"> <span className="label-text">Product category</span></label>
                                     <select className="w-full max-w-xs select select-bordered rounded-3xl" {...register("category_name", {
                                         required: 'Required'
                                     })} >
-
                                         {
                                             getOneCategory.map(d => (
                                                 <option key={d} value={d}>{d}</option>
                                             ))
 
                                         }
-
                                     </select>
                                     {errors.category_name && <p className='text-red-600'>{errors.category_name?.message}</p>}
                                 </div>
@@ -129,9 +106,6 @@ const UpdateModal = ({ singleData, closeModal }: IProduct,) => {
                                             ))
                                         }
                                     </select>
-
-
-
                                     {errors.sub_category_name && <p className='text-red-600'>{errors.sub_category_name?.message}</p>}
                                 </div>
                                 {/* Brand Name */}
@@ -207,7 +181,6 @@ const UpdateModal = ({ singleData, closeModal }: IProduct,) => {
                                         className="w-full max-w-xs input input-bordered rounded-3xl" />
                                     {errors.warranty && <p className='text-red-600'>{errors.warranty?.message}</p>}
                                 </div>
-
                                 {/* Status */}
                                 <div className="w-full max-w-xs mt-2 form-control">
                                     <label className="font-bold label"> <span className="label-text">Status</span></label>
@@ -219,7 +192,6 @@ const UpdateModal = ({ singleData, closeModal }: IProduct,) => {
                                         className="w-full max-w-xs input input-bordered rounded-3xl" />
                                     {errors.status && <p className='text-red-600'>{errors.status?.message}</p>}
                                 </div>
-
                                 {/* Product Code*/}
                                 <div className="w-full max-w-xs mt-3 form-control">
                                     <label className="font-bold label"> <span className="label-text">Product Code</span></label>
@@ -231,28 +203,20 @@ const UpdateModal = ({ singleData, closeModal }: IProduct,) => {
                                         className="w-full max-w-xs input input-bordered rounded-3xl" />
                                     {errors.product_code && <p className='text-red-600'>{errors.product_code?.message}</p>}
                                 </div>
-
                             </div>
-
                             <div className="w-full ">
                                 <div className="flex justify-center mb-3 text-2xl text-blue-800 border-b-4">
                                     <h1>Feature's Info</h1>
                                 </div>
-
                                 <div className="grid grid-cols-3 gap-x-2 gap-y-5">
-
                                     {Object.entries(otherProperties).map(([key, value]) => (
-
                                         <div className="w-full max-w-xs form-control">
                                             <label className="font-bold label"> <span className="label-text">{key}</span></label>
-
                                             <input defaultValue={value as string | number | readonly string[] | undefined} type="text"
                                                 {...register(`others_info.${key}` as keyof UpdateProductValues, {})}
                                                 className="w-full max-w-xs input input-bordered rounded-3xl" />
                                             {errors.others_info && <p className='text-red-600'>{errors.others_info?.message}</p>}
                                         </div>
-
-
                                     ))}
                                 </div>
                             </div>
@@ -260,11 +224,7 @@ const UpdateModal = ({ singleData, closeModal }: IProduct,) => {
                         <div className="flex justify-center mt-5">
                             <input className='mt-4 text-white bg-blue-600 rounded-2xl hover:text-black w-52 btn' value="Update" type="submit" />
                         </div>
-
-
                     </form>
-
-
                 </div>
             </div>
         </div>

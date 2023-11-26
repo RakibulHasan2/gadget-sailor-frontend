@@ -12,13 +12,10 @@ export default function Login() {
   const [loginUserEmail, setLoginUserEmail] = useState('');
   const [token] = useToken(loginUserEmail)
   const navigate = useNavigate();
-
   if (token) {
     navigate('/')
   }
-
   const handleLogin = async (data: FieldValues) => {
-
     fetch('http://localhost:5000/api/v1/auth/login', {
       method: 'POST',
       headers: {
@@ -34,11 +31,10 @@ export default function Login() {
           toast.success('Successfully logged in');
           sessionStorage.setItem('userData', JSON.stringify(data));
         }
-        else{
+        else {
           toast.error(data.message)
         }
       })
-
   }
 
   return (
@@ -51,7 +47,6 @@ export default function Login() {
               <h1 className="mb-2 text-4xl font-extrabold">Login.</h1>
               <small>for land shsine ksjdh kdhbi sdfhsfi <br /> jjsfhi jshf kiafha jjhafha of ioaf9 oashf fha oafh</small>
             </div>
-
           </div>
         </div>
         <div className='w-96 p-7'>
@@ -74,10 +69,8 @@ export default function Login() {
           </form>
           <small className="ml-10 font-black">New in Gadget-Sailor? <Link className='font-bold text-indigo-600' to="/signup">Please Sign-up</Link></small>
           <div className="divider">OR</div>
-          {/* <button onClick={googleSignIn} className='w-full btn btn-outline'>Continue With Google <FcGoogle className='ml-3'></FcGoogle></button> */}
         </div>
       </div>
-
     </div>
   )
 }

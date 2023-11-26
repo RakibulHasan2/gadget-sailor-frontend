@@ -1,6 +1,3 @@
-
-
-
 export default function HotOffer() {
     return (
         <div className="flex justify-center p-16 mb-28">
@@ -10,7 +7,6 @@ export default function HotOffer() {
                 <h1 className="text-3xl">Marzia the Complex problem solver,</h1>
                 <h1 className="text-3xl">porosh the hudai asi 🙂</h1>
             </div>
-
         </div>
     )
 }
