@@ -9,11 +9,11 @@ import '../../../styles/Navbar.css'
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import logo from '../../../assets/logo/Screenshot_2023-11-15_122159-trsfansformed-remdfosfafvebg-preview_waifu2x_art_noise1_scale.png';
+import { userData } from "../../../hooks/getUserData";
 
 
 export default function Navbar() {
-  const userData = sessionStorage.getItem('userData');
-  const user = JSON.parse(userData as string);
+  const user = userData();
   const [expanded, setExpanded] = useState(true);
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -49,16 +49,16 @@ export default function Navbar() {
     setUsers(null)
   }
 
+
   return (
-    <div className="">
+    <div>
       <div className="p-0 shadow-sm lg:p-5 navbar nav-bg">
         <div className="navbar-start">
-
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
               <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
             </label>
-  {/* for mobile view---------------------------------------------------------- */}
+            {/* for mobile view---------------------------------------------------------- */}
             <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 w-60 rounded-lg">
               <div className="flex pb-2 mb-5 border-b-2">
                 <input type="text" placeholder="Search Item" className="w-full max-w-xs input input-bordered" />
@@ -92,7 +92,7 @@ export default function Navbar() {
             </ul>
           </div>
 
-{/* for desktop view---------------------------------------------- */}
+          {/* for desktop view---------------------------------------------- */}
           <Link to='/'>
             <img className="w-24 ml-20 lg:ml-0 lg:w-40" src={logo} alt="" />
           </Link>

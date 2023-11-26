@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useApiData from "../../hooks/getAPIData";
+import useProductData from "../../hooks/useProductData";
 import RandomProductCard from "./RandomProductCard";
 import '../../styles/Loader.css'
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
@@ -13,7 +13,8 @@ const RandomProducts = () => {
 
     const [count, setCount] = useState(0)
     const size = 6;
-    const { data, isLoading } = useApiData("http://localhost:5000/api/v1/allProducts")
+    const { data, isLoading } = useProductData("http://localhost:5000/api/v1/allProducts")
+
     if (isLoading) {
         return <div className="flex justify-center p-10"><span className="loader"></span></div>;
     }
@@ -36,7 +37,7 @@ const RandomProducts = () => {
                 </div>
                 <div className="lg:flex">
                     {/* sidebar information */}
-                    <div className="w-72 h-full">
+                    <div className="w-72 h-full mr-5">
                         <div className="shadow-xl mb-10 border rounded-md">
                             <div className="w-48 text-center mx-auto mt-10 mb-10">
                                 <LiaShippingFastSolid className='text-4xl mx-auto text-red-700'></LiaShippingFastSolid>

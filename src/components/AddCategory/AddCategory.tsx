@@ -1,8 +1,6 @@
 import { FieldValues, useForm } from "react-hook-form";
 import { ICategory } from "../../types/CategoryType";
 import toast from "react-hot-toast";
-import { MdCategory } from "react-icons/md";
-
 
 const AddCategory = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<ICategory>();

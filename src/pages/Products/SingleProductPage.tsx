@@ -7,7 +7,7 @@ import CartModal from '../../components/Products/CartModal';
 import { userData } from '../../hooks/getUserData';
 import { AiFillEdit } from "react-icons/ai";
 import UpdateModal from '../../components/UpdateProduct/UpdateModal';
-import useApiData from '../../hooks/getAPIData';
+import useProductData from '../../hooks/useProductData';
 import UpdateImage from '../../components/UpdateProduct/UpdateImage';
 import { AiOutlineProfile } from "react-icons/ai";
 import SuggestedData from './SuggestedData';
@@ -20,7 +20,7 @@ export default function SingleProductPage() {
   const singleProduct = useLoaderData() as IProduct;
   const singleProductData = singleProduct.data;
   const user = userData();
-  const { refetch } = useApiData("http://localhost:5000/api/v1/getCart");
+  const { refetch } = useProductData("http://localhost:5000/api/v1/getCart");
 
 
 
