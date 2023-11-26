@@ -1,33 +1,17 @@
-import { useLoaderData } from "react-router-dom"
-import { ICartResponse } from "../../types/CartModalType"
-import { useForm } from 'react-hook-form';
+import { useForm } from "react-hook-form";
 import { CheckoutFormValues } from "../../types/FormType";
 import { userData } from "../../hooks/getUserData";
 
-export default function Payment() {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const data = useLoaderData() as ICartResponse;
-    const user = userData()
-    const CartDetails = data.data;
+const Pay = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<CheckoutFormValues>();
-    console.log(CartDetails);
+
+    const user = userData();
 
     const handleCheckout = async (data: CheckoutFormValues) => {
-
         console.log(data)
-        const checkoutInfo = {
-            name: {
-                firstName: data.firstName,
-                lastName: data.lastName
-            },
-            email: data.email,
-            phoneNumber: data.phoneNumber,
-            address: data.address,
-            city: data.city,
-            comments: data.comments
-        }
-        console.log(checkoutInfo)
     }
+
+
     return (
         <div className="">
             <p className="text-2xl font-bold">Customer Information</p>
@@ -116,5 +100,7 @@ export default function Payment() {
                 </form>
             </div>
         </div>
-    )
-}
+    );
+};
+
+export default Pay;

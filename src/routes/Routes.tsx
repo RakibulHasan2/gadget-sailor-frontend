@@ -14,8 +14,9 @@ import HotOfferPage from './../pages/HotOfferPage/HotOfferPage';
 import BuildPC from "../pages/BuildPC/BuildPC";
 import BuildProductsChose from "../pages/BuildPC/BuildProductsChose";
 import FavPage from "../pages/Favourites/FavPage";
-import Payment from "../pages/Payment/Payment";
+//import Payment from "../pages/Payment/Payment";
 import PaymentLayout from "../layouts/PaymentLayout";
+import Pay from "../pages/Payment/Pay";
 
 const baseUrl = "http://localhost:5000/api/v1";
 
@@ -81,13 +82,17 @@ const routes = createBrowserRouter([
     element: <PaymentLayout />,
     errorElement: <ErrorPage></ErrorPage>,
     children: [
+      // {
+      //   path: "/payment/:email",
+      //   element: <Payment />,
+      //   loader: async ({ params }) => {
+      //     await fetch(`http://localhost:5000/api/v1/getCart/${params.email}`)
+      //     console.log(params.email)
+      //   }
+      // }
       {
-        path: "/payment/:email",
-        element: <Payment />,
-        loader: async ({ params }) => {
-          await fetch(`${baseUrl}/getCart/${params.email}`)
-          console.log(params)
-        }
+        path: "/payment/pay",
+        element: <Pay />,
       }
     ]
   },
@@ -108,6 +113,7 @@ const routes = createBrowserRouter([
     path: "/my-profile",
     element: <MyProfile />,
   },
+
 
 ]);
 

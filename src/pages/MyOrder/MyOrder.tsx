@@ -48,7 +48,7 @@ export default function MyOrder() {
               {
                 data.map((item, index) =>
                   // row
-                  <tr>
+                  <tr key={item._id}>
                     <th>{index + 1}</th>
                     <td> {item.image && typeof item.image === 'string' ? (
                       <img className="w-16" src={item.image} alt="" />
@@ -69,7 +69,8 @@ export default function MyOrder() {
           <div className="flex justify-end">
             <div>
               <p className="text-lg font-bold mb-4">Total: {calculateTotalPrice()}৳</p>
-              <Link to={`/payment/${user?.email}`}>
+              {/* <Link to={`/payment/${user?.email}`}> */}
+              <Link to="/payment/pay">
                 <button className="border p-3 rounded-lg bg-blue-900 text-white hover:bg-sky-700">Confirm Order</button>
               </Link>
             </div>
