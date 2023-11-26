@@ -22,7 +22,9 @@ export default function ProductsCard({ product }: IProduct) {
             total_price: price,
             quantity: 1,
             model: model,
-            email: user?.email
+            email: user?.email,
+            u_id: user.id,
+
         }
         fetch('http://localhost:5000/api/v1/addCart', {
             method: 'POST',
