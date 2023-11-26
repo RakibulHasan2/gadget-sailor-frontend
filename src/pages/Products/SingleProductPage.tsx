@@ -22,7 +22,7 @@ export default function SingleProductPage() {
   const user = userData();
   const { refetch } = useProductData("http://localhost:5000/api/v1/getCart");
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { __v, _id, category_name, sub_category_name, product_name, price, status, product_code, brand_name, image, model, warranty, ...otherProperties } = singleProductData;
+  const { __v, quantity,_id, category_name, sub_category_name, product_name, price, status, product_code, brand_name, image, model, warranty, ...otherProperties } = singleProductData;
 
   const increment = () => {
     count++;
@@ -148,6 +148,7 @@ export default function SingleProductPage() {
               <p className="p-2 text-gray-600 rounded bg-slate-100">Price: <span className="font-bold text-black">{price}৳</span></p>
               <p className="p-2 text-gray-600 rounded bg-slate-100">Status: <span className="font-bold text-black">{status}</span></p>
               <p className="p-2 text-gray-600 rounded bg-slate-100">Product Code: <span className="font-bold text-black">{product_code}</span></p>
+              <p className="p-2 text-gray-600 rounded bg-slate-100">Quantity: <span className="font-bold text-black">{quantity}</span></p>
               {
                 brand_name &&
                 <p className="p-2 text-gray-600 rounded bg-slate-100">Brand Name: <span className="font-bold text-black"> {brand_name}</span></p>
@@ -180,7 +181,7 @@ export default function SingleProductPage() {
         </div>
         {/*----- specification section ------*/}
         <div className='lg:flex'>
-          <div className="w-full p-6 lg:mt-10 shadow-xl lg:w-3/5 lg:ml-36">
+          <div className="w-full p-6 shadow-xl lg:mt-10 lg:w-3/5 lg:ml-36">
             <div className='flex items-end justify-between'>
               <p className="text-3xl font-bold">Specification</p>
               <button onClick={openEditModal} className='flex items-center p-2 hover:bg-blue-800 bg-slate-100 rounded-2xl hover hover:text-white'><AiFillEdit />Edit</button>
@@ -230,7 +231,7 @@ export default function SingleProductPage() {
           {
             suggestedData.length > 0 && <>
               <div className='ml-4 lg:mt-10'>
-                <div className='text-center bg-sky-950 py-4 mt-4'>
+                <div className='py-4 mt-4 text-center bg-sky-950'>
                   <h2 className='text-lg text-white'>Related Products</h2>
                 </div>
                 {
