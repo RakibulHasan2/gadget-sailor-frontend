@@ -120,11 +120,7 @@ export default function ProductsCard({ product }: IProduct) {
                         total={price}
                     ></CartModal>
                 </div>
-
             </div>
-
-
         </div>
-
     )
 }

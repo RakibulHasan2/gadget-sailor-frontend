@@ -1,4 +1,3 @@
-
 import { FieldValues, useForm } from "react-hook-form";
 import { FaEye, FaUserLock } from "react-icons/fa";
 import { IUpdateUsers } from "../../types/MyProfileType";
@@ -8,9 +7,7 @@ import { userData } from "../../hooks/getUserData";
 
 const ChangePassword = () => {
     const { register, handleSubmit, getValues, formState: { errors } } = useForm<IUpdateUsers>();
-
     const user = userData()
-
     const [hideCurrent, setHideCurrent] = useState(true);
     const [hideNew, setHideNew] = useState(true);
     const [hideConfirm, setHideConfirm] = useState(true);
@@ -114,20 +111,19 @@ const ChangePassword = () => {
                                 <div className="w-full">
                                     <input
                                         type={passwordFieldType("new")}
-                                        {...register("password", { 
+                                        {...register("password", {
                                             required: "Filed is Required !",
                                             minLength: { value: 6, message: "Password must be 6 characters long" },
                                             pattern: { value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/, message: 'Password must have uppercase, number and special characters' }
-                                             })}
+                                        })}
                                         className="w-full max-w-xs input input-bordered rounded-3xl"
                                     />
-                                 <small> {errors.password && <p className='text-red-600'>{errors.password.message}</p>}</small> 
+                                    <small> {errors.password && <p className='text-red-600'>{errors.password.message}</p>}</small>
                                 </div>
 
                                 <a className='ml-2 text-2xl text-blue-800 cursor-pointer' title="See password" onClick={() => seePass("new")}><FaEye /></a>
                             </div>
                         </div>
-
                         <div className="w-full max-w-xs form-control">
                             <label className="label"> <span className="label-text">Confirm Password</span></label>
                             <div className="flex items-center">
@@ -138,16 +134,15 @@ const ChangePassword = () => {
                                             required: "Field is Required !",
                                             minLength: { value: 6, message: "Password must be 6 characters long" },
                                             pattern: { value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/, message: 'Password must have uppercase, number and special characters' }
-                                            })}
+                                        })}
                                         className="w-full max-w-xs input input-bordered rounded-3xl"
                                     />
-                                   <small>{errors.confirmPassword && <p className='text-red-600'>{errors.confirmPassword.message}</p>}</small> 
+                                    <small>{errors.confirmPassword && <p className='text-red-600'>{errors.confirmPassword.message}</p>}</small>
                                 </div>
 
                                 <a className='ml-2 text-2xl text-blue-800 cursor-pointer' title="See password" onClick={() => seePass("confirm")}><FaEye /></a>
                             </div>
                         </div>
-
                         <div className="mt-5 ml-28">
                             <input className="text-white bg-blue-600 hover:text-black btn rounded-3xl" value="Update" type="submit" />
                         </div>

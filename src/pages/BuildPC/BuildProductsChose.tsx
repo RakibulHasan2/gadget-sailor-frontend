@@ -51,7 +51,6 @@ export default function BuildProductsChose() {
                 <li className=""><span className="font-bold">Price-</span> {product.price}৳</li>
                 <li className=""><span className="font-bold">Warranty-</span> {product.warranty}</li>
               </div>
-
               <div className="flex items-center justify-end pr-10 ">
                 <Link to='/build-pc'>
                   <button onClick={() => handleAddToBuild(product)} className="flex items-center justify-center p-2 mt-12 text-lg font-bold bg-gray-200 w-36 gap-x-2 rounded-2xl hover:bg-blue-800 hover:text-white">
@@ -59,7 +58,6 @@ export default function BuildProductsChose() {
                   </button>
                 </Link>
               </div>
-
             </div>
           ))
         ) : (

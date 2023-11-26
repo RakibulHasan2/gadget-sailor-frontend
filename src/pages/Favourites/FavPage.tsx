@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 const FavPage = () => {
     const user = userData();
     const { data, refetch } = useFavData(`http://localhost:5000/api/v1/getFav/${user.email}`);
-
     const handleDeleteFav = (id: string | undefined) => {
         fetch(`http://localhost:5000/api/v1/getFav/${id}`, {
             method: 'DELETE',
@@ -63,7 +62,6 @@ const FavPage = () => {
                             }
                         </tbody>
                     </table>
-
                 </div>
             </div>
         </div>
