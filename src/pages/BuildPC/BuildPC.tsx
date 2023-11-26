@@ -49,6 +49,7 @@ export default function BuildPC() {
           quantity: 1,
           model: selectedProduct.model,
           email: user.email,
+          u_id: user.id,
         };
 
         // Make the POST request to add this item to the cart
