@@ -11,13 +11,9 @@ const LikeButton = ({ info }: IProduct) => {
     const [liked, setLiked] = useState(false);
     const [count, setCount] = useState(0)
 
-    // console.log(liked, count)
     const user = userData();
     const { data, refetch } = useFavData(`http://localhost:5000/api/v1/getFav/${user.email}`);
     const likedData: FavDataType | undefined = data.find((item) => item.product_name === info.product_name)
-
-    // console.log(data)
-    // console.log(likedData)
 
     const handleLike = () => {
         if (liked && count === 1) {
@@ -56,8 +52,6 @@ const LikeButton = ({ info }: IProduct) => {
                 .then(response => {
                     if (response.ok) {
                         toast.error("Removed from your favourite list")
-                        // location.reload();
-
                         refetch();
                     }
                 })
@@ -74,20 +68,12 @@ const LikeButton = ({ info }: IProduct) => {
             })
             if (response.ok) {
                 toast.success("Added to your favourite list")
-
-
                 refetch();
-
-                //location.reload();
-
             }
             else {
                 toast.error("Couldn't add to your favurite");
             }
-
         }
-
-
     }
 
     const handleClick = () => {
