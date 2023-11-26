@@ -1,6 +1,6 @@
 import '../../styles/MyOrder.css';
 import { Link } from 'react-router-dom';
-//import { userData } from './../../hooks/getUserData';
+import { userData } from './../../hooks/getUserData';
 import useCartData from "../../hooks/useCartData";
 
 export default function MyOrder() {
@@ -69,8 +69,8 @@ export default function MyOrder() {
           <div className="flex justify-end">
             <div>
               <p className="text-lg font-bold mb-4">Total: {calculateTotalPrice()}৳</p>
-              {/* <Link to={`/payment/${user?.email}`}> */}
-              <Link to="/payment/pay">
+              <Link to={`/payment/:${user?.id}`}>
+                {/* <Link to="/payment/pay"> */}
                 <button className="border p-3 rounded-lg bg-blue-900 text-white hover:bg-sky-700">Confirm Order</button>
               </Link>
             </div>

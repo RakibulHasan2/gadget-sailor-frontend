@@ -1,11 +1,12 @@
 import { useLoaderData } from "react-router-dom"
-import { ICartResponse } from "../../types/CartModalType"
+
 import { useForm } from 'react-hook-form';
 import { CheckoutFormValues } from "../../types/FormType";
 import { userData } from "../../hooks/getUserData";
+import { ICartResponse } from "../../types/CartModalType";
 
 export default function Payment() {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
     const data = useLoaderData() as ICartResponse;
     const user = userData()
     const CartDetails = data.data;
