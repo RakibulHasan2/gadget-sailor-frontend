@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import useCartData from "../../hooks/useCartData";
 
 export default function MyOrder() {
-  const { data, refetch } = useCartData("http://localhost:5000/api/v1/getCart");
-  //const user = userData()
+  const user = userData()
+  const { data, refetch } = useCartData(`http://localhost:5000/api/v1/getCart/${user?.id}`);
   const calculateTotalPrice = () => {
     let totalPrice: number = 0;
     data.forEach((item) => {

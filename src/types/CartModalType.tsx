@@ -16,10 +16,3 @@ export interface ICartDetails {
     email: string;
     _id: string;
 }
-
-export interface ICartResponse {
-    statusCode: number;
-    success: boolean;
-    message: string;
-    data: ICartDetails[];
-}
