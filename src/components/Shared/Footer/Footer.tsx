@@ -1,4 +1,3 @@
-
 export default function Footer() {
     return (
         <footer className="footer footer-center p-10 text-white rounded" style={{backgroundColor: "rgb(5, 28, 77)"}}>

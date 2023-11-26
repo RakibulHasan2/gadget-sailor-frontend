@@ -11,7 +11,7 @@ const SingleCards = ({ data }: IProduct) => {
                     <Link to={`/product/${data?.I_id}`}>
                         <p className='w-full h-16 font-bold  hover:text-blue-700'>{data?.product_name}</p>
                     </Link>
-                    <p className="font-bold text-yellow-700">{data?.price}৳</p>
+                    <p className="font-bold text-blue-900 mb-5">{data?.price}৳</p>
                 </div>
             </div>
         </div>

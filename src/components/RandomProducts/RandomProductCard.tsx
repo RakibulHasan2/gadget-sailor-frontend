@@ -6,8 +6,6 @@ import React from "react";
 import { userData } from "../../hooks/getUserData";
 import CartModal from "../Products/CartModal";
 
-
-
 const RandomProductCard = ({ data }: IProduct) => {
     const { product_name, price, image, model } = data;
     const user = userData()
