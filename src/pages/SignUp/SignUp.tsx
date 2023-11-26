@@ -59,21 +59,18 @@ export default function SignUp() {
                             <h1 className="mb-2 text-4xl font-extrabold">Sign Up</h1>
                             <small>for land shsine ksjdh kdhbi sdfhsfi <br /> jjsfhi jshf kiafha jjhafha of ioaf9 oashf fha oafh</small>
                         </div>
-
                     </div>
                 </div>
                 <div className='bg-transparent rounded-2xl w-96 p-7'>
                     <form onSubmit={handleSubmit(handleSignUp)}>
                         <div className="flex gap-2 mb-4">
                             <div className="w-full max-w-xs form-control ">
-
                                 <input type="text" {...register("firstName", {
                                     required: "First Name is Required !"
                                 })} className="w-full max-w-xs bg-transparent rounded-3xl input input-bordered" placeholder="First name..." />
                                 {errors.firstName && <small className='mt-1 ml-2 text-red-500'>{errors.firstName?.message}</small>}
                             </div>
                             <div className="w-full max-w-xs form-control">
-
                                 <input type="text" {...register("lastName", {
                                     required: "Last Name is Required !"
                                 })} className="w-full max-w-xs bg-transparent rounded-3xl input input-bordered" placeholder="Last name..." />
@@ -81,7 +78,6 @@ export default function SignUp() {
                             </div>
                         </div>
                         <div className="w-full max-w-xs mb-4 form-control">
-
                             <input type="email" {...register("email", {
                                 required: "Email is Required !"
                             })} className="w-full max-w-xs bg-transparent rounded-3xl input input-bordered" placeholder="✉ Email..." />
@@ -107,7 +103,6 @@ export default function SignUp() {
                     <small className="font-black ml-11">Already have an account? <Link className='font-bold text-indigo-600' to="/login">Please Login</Link></small>
                 </div>
             </div>
-
         </div>
     )
 }

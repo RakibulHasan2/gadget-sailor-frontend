@@ -11,7 +11,6 @@ import { Link } from "react-router-dom";
 import logo from '../../../assets/logo/Screenshot_2023-11-15_122159-trsfansformed-remdfosfafvebg-preview_waifu2x_art_noise1_scale.png';
 import { userData } from "../../../hooks/getUserData";
 
-
 export default function Navbar() {
   const user = userData();
   const [expanded, setExpanded] = useState(true);
@@ -42,13 +41,11 @@ export default function Navbar() {
     sessionStorage.getItem('userData')
   )
 
-
   const handleLogout = () => {
     sessionStorage.removeItem('userData')
     toast.success('logged out successfully')
     setUsers(null)
   }
-
 
   return (
     <div>
@@ -91,7 +88,6 @@ export default function Navbar() {
               </Link>
             </ul>
           </div>
-
           {/* for desktop view---------------------------------------------- */}
           <Link to='/'>
             <img className="w-24 ml-20 lg:ml-0 lg:w-40" src={logo} alt="" />
@@ -147,14 +143,12 @@ export default function Navbar() {
           <div className="hidden lg:block">
             <Link to='/build-pc'> <a className="text-white btn rounded-2xl glow-on-hover"><MdBuild className='text-2xl'></MdBuild> Build PC </a></Link>
           </div>
-
         </div>
       </div>
       {/* ..........................item area............................ */}
       <div className="navbar-item">
         <NavbarItem></NavbarItem>
       </div>
-
     </div>
   );
 }

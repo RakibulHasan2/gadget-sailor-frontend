@@ -8,7 +8,6 @@ export default function Payment() {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const data = useLoaderData() as any;
     const user = userData()
-
     const CartDetails = data.data as ICartDetails;
     const { register, handleSubmit, formState: { errors } } = useForm<CheckoutFormValues>();
     console.log(CartDetails);

@@ -29,7 +29,6 @@ export default function BuildPC() {
   const [chosenItems, setChosenItems] = useState(new Set());
   const user = userData();
   const uniqueCategories : UniqueCategories = {};
-
   const calculateTotalPrice = () => {
     let totalPrice: number = 0;
     selectedProducts.forEach((item) => {
