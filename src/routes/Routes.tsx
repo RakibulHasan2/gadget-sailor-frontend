@@ -84,7 +84,10 @@ const routes = createBrowserRouter([
       {
         path: "/payment/:email",
         element: <Payment />,
-        loader: async ({ params }) => await fetch(`${baseUrl}/getCart/${params.email}`)
+        loader: async ({ params }) => {
+          await fetch(`${baseUrl}/getCart/${params.email}`)
+          console.log(params)
+        }
       }
     ]
   },
