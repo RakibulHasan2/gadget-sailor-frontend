@@ -15,4 +15,5 @@ export interface ICartDetails {
     model: string;
     email: string;
     _id: string;
+    u_id: string
 }
