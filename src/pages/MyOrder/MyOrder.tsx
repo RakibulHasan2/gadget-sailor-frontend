@@ -9,7 +9,7 @@ export default function MyOrder() {
   const calculateTotalPrice = () => {
     let totalPrice: number = 0;
     data.forEach((item) => {
-      const price = parseFloat(item.total_price);
+      const price = Number(item.total_price);
       totalPrice += price;
     });
     return totalPrice.toFixed(2);

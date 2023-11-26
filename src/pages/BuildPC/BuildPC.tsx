@@ -18,17 +18,22 @@ import { AiFillPrinter } from "react-icons/ai";
 import { MdOutlineCamera } from "react-icons/md";
 import { MdShoppingBasket } from "react-icons/md";
 import html2canvas from 'html2canvas';
+
+interface UniqueCategories {
+  [key: string]: boolean; 
+}
+
 export default function BuildPC() {
   const data = useProductData('http://localhost:5000/api/v1/allProducts/Components')
   const { selectedProducts, deleteProduct } = useSelectedProducts();
   const [chosenItems, setChosenItems] = useState(new Set());
   const user = userData();
-  const uniqueCategories = {};
+  const uniqueCategories : UniqueCategories = {};
 
   const calculateTotalPrice = () => {
     let totalPrice: number = 0;
     selectedProducts.forEach((item) => {
-      const price = parseFloat(item.price);
+      const price = Number(item.price);
       totalPrice += price;
     });
     return totalPrice.toFixed(2);
