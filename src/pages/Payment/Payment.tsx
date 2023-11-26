@@ -13,6 +13,8 @@ export default function Payment() {
     console.log(CartDetails);
 
     const handleCheckout = async (data: CheckoutFormValues) => {
+
+        console.log(data)
         const checkoutInfo = {
             name: {
                 firstName: data.firstName,
@@ -22,7 +24,6 @@ export default function Payment() {
             phoneNumber: data.phoneNumber,
             address: data.address,
             city: data.city,
-            Address: data.address,
             comments: data.comments
         }
         console.log(checkoutInfo)
@@ -33,13 +34,17 @@ export default function Payment() {
             <div className='bg-transparent rounded-2xl w-96 p-7'>
                 <form onSubmit={handleSubmit(handleCheckout)}>
                     <div className="flex gap-2 mb-4">
+
+                        {/*User First Name */}
                         <div className="w-full max-w-xs form-control ">
                             <label htmlFor="">First Name</label>
-                            <input defaultValue={user?.name?.firstName}  type="text" {...register("firstName", {
+                            <input defaultValue={user?.name?.firstName} type="text" {...register("firstName", {
                                 required: "First Name is Required !"
                             })} className="w-full max-w-xs bg-transparent input input-bordered" placeholder="First name..." />
                             {errors.firstName && <small className='mt-1 ml-2 text-red-500'>{errors.firstName?.message}</small>}
                         </div>
+
+                        {/*User Last Name */}
                         <div className="w-full max-w-xs form-control">
                             <label htmlFor="">Last Name</label>
                             <input defaultValue={user?.name?.lastName} type="text" {...register("lastName", {
@@ -48,6 +53,8 @@ export default function Payment() {
                             {errors.lastName && <small className='mt-1 ml-2 text-red-500'>{errors.lastName?.message}</small>}
                         </div>
                     </div>
+
+                    {/* Email */}
                     <div className="w-full max-w-xs mb-4 form-control">
                         <label htmlFor="">Email</label>
                         <input defaultValue={user?.email} type="email" {...register("email", {
@@ -55,6 +62,8 @@ export default function Payment() {
                         })} className="w-full max-w-xs bg-transparent input input-bordered" placeholder="✉ Email..." />
                         {errors.email && <small className='mt-1 ml-2 text-red-500'>{errors.email.message}</small>}
                     </div>
+
+                    {/* Phone Number */}
                     <div className="w-full max-w-xs mb-4 form-control">
                         <label htmlFor="">Phone Number</label>
                         <input defaultValue={user?.phoneNumber} type="text" {...register("phoneNumber", {
@@ -62,13 +71,17 @@ export default function Payment() {
                         })} className="w-full max-w-xs bg-transparent input input-bordered" placeholder="☏ Phone number..." />
                         {errors.phoneNumber && <small className='mt-1 ml-2 text-red-500'>{errors.phoneNumber.message}</small>}
                     </div>
+
+                    {/* Address */}
                     <div className="w-full max-w-xs form-control">
                         <label htmlFor="">Address</label>
                         <input type="text" {...register("address", {
                             required: "Password is Required !",
-                        })} className="w-full max-w-xs bg-transparent input input-bordered" placeholder="Phone Number..." />
+                        })} className="w-full max-w-xs bg-transparent input input-bordered" placeholder="House no, Road No/Name..." />
                         {errors.address && <small className='mt-1 ml-2 text-red-500'>{errors.address.message}</small>}
                     </div>
+
+                    {/* City */}
                     <div className="flex gap-2 mb-4 mt-5">
                         <div className="w-full max-w-xs form-control ">
                             <label htmlFor="">City</label>
@@ -77,6 +90,9 @@ export default function Payment() {
                             })} className="w-full max-w-xs bg-transparent input input-bordered" placeholder="City..." />
                             {errors.firstName && <small className='mt-1 ml-2 text-red-500'>{errors.firstName?.message}</small>}
                         </div>
+
+
+                        {/* District */}
                         <div className="w-full max-w-xs form-control">
                             <label htmlFor="">District</label>
                             <input type="text" {...register("district", {
@@ -85,6 +101,8 @@ export default function Payment() {
                             {errors.lastName && <small className='mt-1 ml-2 text-red-500'>{errors.lastName?.message}</small>}
                         </div>
                     </div>
+
+                    {/* Comments */}
                     <div className="w-full max-w-xs form-control">
                         <label htmlFor="">Comments</label>
                         <textarea placeholder="Descriptions"
