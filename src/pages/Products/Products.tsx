@@ -12,7 +12,7 @@ export default function Products() {
     const products = Array.isArray(productsData.data) ? productsData.data : [];
     const [selectedSubcategories, setSelectedSubcategories] = useState<string[]>([]);
     const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
-    
+
     // subcategories array
     const subCategories = [...new Set(products.map((product: IProduct) => product.sub_category_name))].filter((subcategory) => subcategory) as string[];
     //  brands array
@@ -27,13 +27,11 @@ export default function Products() {
         window.location.reload();
     }
 
-    // console.log(filteredProducts)
-
     const handleSubcategoryChange = (subcategory: string) => {
         if (selectedSubcategories.includes(subcategory)) {
             setSelectedSubcategories(selectedSubcategories.filter((item) => item !== subcategory));
         } else {
-            setSelectedSubcategories([...selectedSubcategories,subcategory]);
+            setSelectedSubcategories([...selectedSubcategories, subcategory]);
         }
     };
 
@@ -41,7 +39,7 @@ export default function Products() {
         if (selectedBrands.includes(brand)) {
             setSelectedBrands(selectedBrands.filter((item) => item !== brand));
         } else {
-            setSelectedBrands([...selectedBrands,brand]);
+            setSelectedBrands([...selectedBrands, brand]);
         }
     };
     return (
