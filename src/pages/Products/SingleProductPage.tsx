@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect } from 'react';
 import { useLoaderData } from "react-router-dom";
 import { IProduct } from "../../types/ProductsType";
@@ -12,16 +13,14 @@ import UpdateImage from '../../components/UpdateProduct/UpdateImage';
 import { AiOutlineProfile } from "react-icons/ai";
 import SuggestedData from './SuggestedData';
 
-
 export default function SingleProductPage() {
   // eslint-disable-next-line prefer-const
   let [count, setCount] = useState(1);
   const [suggestedData, setSuggestedData] = useState<IProduct[]>([]);
-  const singleProduct = useLoaderData() as IProduct;
-  const singleProductData = singleProduct.data;
+  const singleProduct = useLoaderData() as any;
+  const singleProductData = singleProduct.data as IProduct;
   const user = userData();
   const { refetch } = useProductData("http://localhost:5000/api/v1/getCart");
-
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { __v, _id, category_name, sub_category_name, product_name, price, status, product_code, brand_name, image, model, warranty, ...otherProperties } = singleProductData;
 
