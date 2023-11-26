@@ -7,13 +7,14 @@ import { AiOutlineHeart } from 'react-icons/ai';
 import { BiLogIn } from 'react-icons/bi';
 import '../../../styles/Navbar.css'
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import logo from '../../../assets/logo/Screenshot_2023-11-15_122159-trsfansformed-remdfosfafvebg-preview_waifu2x_art_noise1_scale.png';
 import { userData } from "../../../hooks/getUserData";
 
 export default function Navbar() {
   const user = userData();
   const [expanded, setExpanded] = useState(true);
+  const navigate  = useNavigate()
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const input: any = document.getElementById("myInput");
@@ -45,6 +46,7 @@ export default function Navbar() {
     sessionStorage.removeItem('userData')
     toast.success('logged out successfully')
     setUsers(null)
+    navigate('/');
   }
 
   return (

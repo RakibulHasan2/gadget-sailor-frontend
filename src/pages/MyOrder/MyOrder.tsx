@@ -4,8 +4,8 @@ import { userData } from './../../hooks/getUserData';
 import useCartData from "../../hooks/useCartData";
 
 export default function MyOrder() {
-   const user = userData()
-   const { data, refetch } = useCartData(`http://localhost:5000/api/v1/getCart/${user?.email}`);
+  const user = userData()
+  const { data, refetch } = useCartData(`http://localhost:5000/api/v1/getCart/${user?.id}`);
   const calculateTotalPrice = () => {
     let totalPrice: number = 0;
     data.forEach((item) => {

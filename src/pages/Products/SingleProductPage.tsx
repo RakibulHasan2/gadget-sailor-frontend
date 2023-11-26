@@ -45,7 +45,6 @@ export default function SingleProductPage() {
   };
 
   const totalPrice = count * price;
-
   const CartDetails = async () => {
     const cartData = {
       product_name: product_name,
@@ -54,8 +53,10 @@ export default function SingleProductPage() {
       total_price: totalPrice,
       quantity: count,
       model: model,
-      email: user.email
+      email: user.email,
+      u_id: user.id
     }
+
     const response = await fetch('http://localhost:5000/api/v1/addCart', {
       method: 'POST',
       headers: {
