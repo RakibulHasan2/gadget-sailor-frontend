@@ -1,15 +1,15 @@
-import useApiData from "../../hooks/getAPIData";
 import '../../styles/MyOrder.css';
 import { Link } from 'react-router-dom';
 import { userData } from './../../hooks/getUserData';
+import useCartData from "../../hooks/useCartData";
 
 export default function MyOrder() {
-  const { data, refetch } = useApiData("http://localhost:5000/api/v1/getCart");
+  const { data, refetch } = useCartData("http://localhost:5000/api/v1/getCart");
   const user = userData()
   const calculateTotalPrice = () => {
     let totalPrice: number = 0;
     data.forEach((item) => {
-      const price = parseFloat(item.total_price);
+      const price = Number(item.total_price);
       totalPrice += price;
     });
     return totalPrice.toFixed(2);
@@ -69,8 +69,7 @@ export default function MyOrder() {
           <div className="flex justify-end">
             <div>
               <p className="mb-4 text-lg font-bold">Total: {calculateTotalPrice()}৳</p>
-              <Link to={`/payment/${user.email}`}>
-
+              <Link to={`/payment/${user?.email}`}>
                 <button className="p-3 text-white bg-blue-900 border rounded-lg hover:bg-sky-700">Confirm Order</button>
               </Link>
             </div>

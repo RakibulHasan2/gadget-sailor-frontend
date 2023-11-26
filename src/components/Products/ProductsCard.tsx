@@ -13,7 +13,7 @@ import useFavData from '../../hooks/getFavData';
 export default function ProductsCard({ product }: IProduct) {
     const { product_name, price, _id, image, model } = product;
     const user = userData()
-    const { data } = useFavData(`http://localhost:5000/api/v1/getFav/${user.email}`);
+    const { data } = useFavData(`http://localhost:5000/api/v1/getFav/${user?.email}`);
     const CartDetails = async () => {
         const cartData = {
             product_name: product_name,
@@ -22,7 +22,7 @@ export default function ProductsCard({ product }: IProduct) {
             total_price: price,
             quantity: 1,
             model: model,
-            email: user.email
+            email: user?.email
         }
         fetch('http://localhost:5000/api/v1/addCart', {
             method: 'POST',
@@ -53,7 +53,7 @@ export default function ProductsCard({ product }: IProduct) {
     }
 
     const handleDelete = async (id: string, product_name: string) => {
-        const filteredFav = data.filter(f => f.product_name === product_name);
+        const filteredFav = data?.filter(f => f?.product_name === product_name);
         fetch(`http://localhost:5000/api/v1/allProducts/${id}`, {
             method: 'DELETE'
         })
@@ -120,11 +120,7 @@ export default function ProductsCard({ product }: IProduct) {
                         total={price}
                     ></CartModal>
                 </div>
-
             </div>
-
-
         </div>
-
     )
 }
