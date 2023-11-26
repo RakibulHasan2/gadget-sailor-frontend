@@ -36,7 +36,7 @@ const RandomProducts = () => {
                 </div>
                 <div className="lg:flex">
                     {/* sidebar information */}
-                    <div className="w-72 h-full">
+                    <div className="w-72 h-full mr-5">
                         <div className="shadow-xl mb-10 border rounded-md">
                             <div className="w-48 text-center mx-auto mt-10 mb-10">
                                 <LiaShippingFastSolid className='text-4xl mx-auto text-red-700'></LiaShippingFastSolid>

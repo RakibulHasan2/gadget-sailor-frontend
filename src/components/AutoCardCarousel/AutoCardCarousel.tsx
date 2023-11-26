@@ -5,7 +5,8 @@ import Marquee from "react-fast-marquee";
 const AutoCardCarousel = () => {
     const { data } = useFavData(`http://localhost:5000/api/v1/getFav`);
     return (
-        <div className="bg-sky-100 py-8">
+        <div className="py-8">
+            <p className="text-3xl font-bold text-blue-900 text-center mb-10">Customer's Favorite</p>
             <Marquee pauseOnHover>
                 {
                     data.map(d => (
