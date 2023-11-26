@@ -1,6 +1,6 @@
 import { FieldValues, useForm } from "react-hook-form";
 import { AddProductValues } from "../../types/ProductTypes";
-import useApiData from "../../hooks/getAPIData";
+import useProductData from "../../hooks/useProductData";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import React from "react";
@@ -16,7 +16,7 @@ const AddProduct = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<AddProductValues>();
     const imageHosKey = '1a6c0e11cdde66ffb8f933ec4079f59e';
     const navigate = useNavigate();
-    const { data, isLoading } = useApiData("http://localhost:5000/api/v1/allProducts")
+    const { data, isLoading } = useProductData("http://localhost:5000/api/v1/allProducts")
     // get categories---------------------------------
     const [categoryData, setCategoryData] = React.useState<ICategory[]>([]);
 

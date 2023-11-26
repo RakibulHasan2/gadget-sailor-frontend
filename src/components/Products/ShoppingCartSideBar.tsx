@@ -1,13 +1,13 @@
 import { FaCartPlus, FaShoppingBag, FaTimes } from "react-icons/fa";
 import CartIcon from "./CartIcon";
 import { useState } from 'react';
-import useApiData from "../../hooks/getAPIData";
 import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { userData } from "../../hooks/getUserData";
+import useCartData from "../../hooks/useCartData";
 
 export default function ShoppingCartSideBar() {
-    const { data, refetch } = useApiData("http://localhost:5000/api/v1/getCart");
+    const { data, refetch } = useCartData("http://localhost:5000/api/v1/getCart");
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const user = userData()
     const toggleCart: () => void = () => {

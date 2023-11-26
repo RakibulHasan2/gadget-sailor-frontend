@@ -1,12 +1,12 @@
 import '../../../styles/Navbar.css'
-import useApiData from "../../../hooks/getAPIData";
+import useProductData from "../../../hooks/useProductData";
 import { Link } from 'react-router-dom';
 import { IProduct } from '../../../types/ProductsType'
 import '../../../styles/Loader.css'
 export default function NavbarItem() {
 
     // const [brand, setBrand] = useState('');
-    const { data, isLoading } = useApiData("http://localhost:5000/api/v1/allProducts")
+    const { data, isLoading } = useProductData("http://localhost:5000/api/v1/allProducts")
     const categories: string[] = [...new Set(data.map((item: IProduct) => item.category_name))];
 
     if (isLoading) {

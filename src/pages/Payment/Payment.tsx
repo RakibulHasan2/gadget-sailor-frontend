@@ -8,6 +8,7 @@ export default function Payment() {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const data = useLoaderData() as any;
     const user = userData()
+
     const CartDetails = data.data as ICartDetails;
     const { register, handleSubmit, formState: { errors } } = useForm<CheckoutFormValues>();
     console.log(CartDetails);
@@ -35,7 +36,7 @@ export default function Payment() {
                     <div className="flex gap-2 mb-4">
                         <div className="w-full max-w-xs form-control ">
                             <label htmlFor="">First Name</label>
-                            <input defaultValue={user?.name?.firstName}  type="text" {...register("firstName", {
+                            <input defaultValue={user?.name?.firstName} type="text" {...register("firstName", {
                                 required: "First Name is Required !"
                             })} className="w-full max-w-xs bg-transparent input input-bordered" placeholder="First name..." />
                             {errors.firstName && <small className='mt-1 ml-2 text-red-500'>{errors.firstName?.message}</small>}

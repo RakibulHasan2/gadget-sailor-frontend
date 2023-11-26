@@ -1,4 +1,4 @@
-import useApiData from "../../hooks/getAPIData";
+import useProductData from "../../hooks/useProductData";
 import { Link } from "react-router-dom";
 import { useSelectedProducts } from "../../context/SelectedProductsProvider";
 import { useState } from 'react';
@@ -19,7 +19,7 @@ import { MdOutlineCamera } from "react-icons/md";
 import { MdShoppingBasket } from "react-icons/md";
 import html2canvas from 'html2canvas';
 export default function BuildPC() {
-  const data = useApiData('http://localhost:5000/api/v1/allProducts/Components')
+  const data = useProductData('http://localhost:5000/api/v1/allProducts/Components')
   const { selectedProducts, deleteProduct } = useSelectedProducts();
   const [chosenItems, setChosenItems] = useState(new Set());
   const user = userData();

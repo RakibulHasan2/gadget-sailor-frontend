@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useApiData from "../../hooks/getAPIData";
+import useProductData from "../../hooks/useProductData";
 import RandomProductCard from "./RandomProductCard";
 import '../../styles/Loader.css'
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
@@ -13,7 +13,7 @@ const RandomProducts = () => {
 
     const [count, setCount] = useState(0)
     const size = 6;
-    const { data, isLoading } = useApiData("http://localhost:5000/api/v1/allProducts")
+    const { data, isLoading } = useProductData("http://localhost:5000/api/v1/allProducts")
     if (isLoading) {
         return <div className="flex justify-center p-10"><span className="loader"></span></div>;
     }

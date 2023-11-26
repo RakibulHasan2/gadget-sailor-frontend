@@ -1,14 +1,9 @@
-// useApiData.ts
+
 import { useEffect, useState } from 'react';
-import { IProduct } from '../types/ProductsType';
 import { ICartDetails } from '../types/CartModalType';
 
-
-
-export type ApiData = IProduct | ICartDetails;
-
-const useApiData = (apiUrl: string) => {
-  const [data, setData] = useState<ApiData[]>([]);
+const useCartData = (apiUrl: string) => {
+  const [data, setData] = useState<ICartDetails[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const fetchData = async () => {
     setIsLoading(true);
@@ -36,4 +31,4 @@ const useApiData = (apiUrl: string) => {
   return { data, isLoading, refetch };
 };
 
-export default useApiData;
+export default useCartData;

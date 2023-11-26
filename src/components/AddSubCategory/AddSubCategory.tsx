@@ -1,11 +1,11 @@
 import { FieldValues, useForm } from "react-hook-form";
 import { ICategory } from "../../types/CategoryType";
-import useApiData from "../../hooks/getAPIData";
+import useProductData from "../../hooks/useProductData";
 import toast from "react-hot-toast";
 
 const AddSubCategory = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<ICategory>();
-    const { data, isLoading } = useApiData("http://localhost:5000/api/v1/get-AllCategories")
+    const { data, isLoading } = useProductData("http://localhost:5000/api/v1/get-AllCategories")
 
     // console.log(data)
     if (isLoading) {
