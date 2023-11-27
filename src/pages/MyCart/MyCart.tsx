@@ -1,9 +1,9 @@
 import '../../styles/MyOrder.css';
 import { Link } from 'react-router-dom';
-import { userData } from './../../hooks/getUserData';
+import { userData } from '../../hooks/getUserData';
 import useCartData from "../../hooks/useCartData";
 
-export default function MyOrder() {
+export default function MyCart() {
   const user = userData()
   const { data, refetch } = useCartData(`http://localhost:5000/api/v1/getCart/${user?.id}`);
   const calculateTotalPrice = () => {

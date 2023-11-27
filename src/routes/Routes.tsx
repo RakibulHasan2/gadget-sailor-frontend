@@ -8,7 +8,7 @@ import AddProduct from "../pages/AddProduct/AddProduct";
 import Products from "../pages/Products/Products";
 import SingleProductPage from "../pages/Products/SingleProductPage";
 import MyProfile from './../pages/MyProfile/MyProfile';
-import MyOrder from "../pages/MyOrder/MyOrder";
+//import MyOrder from "../pages/MyCart/MyCart";
 import PrivateRoute from "./PrivateRoute";
 import HotOfferPage from './../pages/HotOfferPage/HotOfferPage';
 import BuildPC from "../pages/BuildPC/BuildPC";
@@ -16,6 +16,7 @@ import BuildProductsChose from "../pages/BuildPC/BuildProductsChose";
 import FavPage from "../pages/Favourites/FavPage";
 import Payment from "../pages/Payment/Payment";
 import PaymentLayout from "../layouts/PaymentLayout";
+import MyCart from "../pages/MyCart/MyCart";
 //import Pay from "../pages/Payment/Pay";
 
 const baseUrl = "http://localhost:5000/api/v1";
@@ -59,8 +60,8 @@ const routes = createBrowserRouter([
         loader: async ({ params }) => await fetch(`${baseUrl}/allProducts/${params.id}`)
       },
       {
-        path: "/my-order",
-        element: <PrivateRoute><MyOrder /></PrivateRoute>,
+        path: "/my-cart",
+        element: <PrivateRoute><MyCart /></PrivateRoute>,
       },
       {
         path: "/fav-item",
