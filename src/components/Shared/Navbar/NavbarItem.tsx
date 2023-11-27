@@ -22,7 +22,7 @@ export default function NavbarItem() {
                                         {category}
                                     </p>
                                 </Link>
-                                <ul className="absolute hidden dropdown-content z-[1] shadow bg-base-100  p-1 border rounded-lg">
+                                <ul className="absolute hidden dropdown-content z-20 shadow bg-base-100  p-1 border rounded-lg">
                                     {
                                         data.filter((item) => item?.category_name === category)
                                             .map((item) => item.sub_category_name)
