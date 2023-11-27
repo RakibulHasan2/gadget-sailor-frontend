@@ -123,7 +123,7 @@ export default function MyOrder() {
                                 className="w-full max-w-xs input input-bordered " />
                             {errors.comments && <p className='text-red-600'>{errors.comments?.message}</p>}
                         </div>
-                        <input className='w-full p-2 mt-4 mb-4 text-black bg-blue-400 btn rounded-3xl' value="Sign Up" type="submit" />
+                        <input className='w-full p-2 mt-4 mb-4 text-black bg-blue-400 btn rounded-3xl' value="Submit" type="submit" />
                     </form>
                 </div>
             </div>
