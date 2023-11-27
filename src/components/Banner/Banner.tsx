@@ -8,7 +8,6 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 const Banner = () => {
- 
   return (
     <section className='bg-white'>
     <Swiper

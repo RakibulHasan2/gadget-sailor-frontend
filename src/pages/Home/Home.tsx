@@ -9,8 +9,8 @@ export default function Home() {
     <div>
       <Banner></Banner>
       <AutoCardCarousel />
-      <RandomProducts />
       <Parallax />
+      <RandomProducts />
       <WhyGadgetSailor />
     </div>
   )

@@ -1,8 +1,9 @@
 import '../../styles/WhyGadgetSailor.css'
+import img from '../../assets/banner/thinking.jpg'
 
 const WhyGadgetSailor = () => {
     return (
-        <div className='mt-20 relative bg-[url("https://img.freepik.com/free-photo/image-confused-middleaged-man-with-grey-hair-shrugging-looking-away-cannot-understand-somethi_1258-148709.jpg?size=626&ext=jpg&ga=GA1.1.670690934.1670350375&semt=ais")]  bg-cover bg-no-repeat bg-right-top h-96 md:h-[480px] lg:h-[540px] xl:h-[600px] duration-300'>
+        <div className={`mt-20 relative bg-cover bg-no-repeat bg-right-top h-96 md:h-[480px] lg:h-[540px] xl:h-[600px] duration-300`}  style={{ backgroundImage: `url(${img})` }}>
             {/* Opacity controller */}
             <div className="absolute inset-0 bg-white/40 md:bg-black/5 bg-opacity-80"></div>
 
