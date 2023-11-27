@@ -1,7 +1,9 @@
 import '../../styles/Banner.css'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
-// Import Swiper styles
+import img1 from '../../assets/banner/banner1.png';
+import img2 from '../../assets/banner/banner2.png';
+import img3 from '../../assets/banner/banner3.png'
 import 'swiper/css';
 import 'swiper/css/pagination';
 
@@ -22,7 +24,7 @@ const Banner = () => {
   >
     <SwiperSlide>
         <div className='relative'>
-            <img className='w-full h-80 md:h-full 2xl:h-[620px] duration-300 object-cover object-left' src="https://i.ibb.co/0KYQVwT/top-view-person-writing-laptop-with-copy-space-23-2148708035.png" alt="" />
+            <img className='w-full h-80 md:h-full 2xl:h-[620px] duration-300 object-cover object-left' src={img2} alt="" />
              {/* Opacity controller */}
             <div className="block md:hidden absolute inset-0 bg-white bg-opacity-80"></div>
             <div className='absolute top-24 md:top-1/4 lg:top-1/3 right-10 md:right-[10%] max-w-6xl'>
@@ -40,7 +42,7 @@ const Banner = () => {
     </SwiperSlide>
     <SwiperSlide>
        <div className='relative'>
-          <img className='w-full h-80 md:h-full 2xl:h-[620px] duration-300 object-cover object-right' src="https://i.ibb.co/NCm7j7P/01.png" alt="" />
+          <img className='w-full h-80 md:h-full 2xl:h-[620px] duration-300 object-cover object-right' src={img1} alt="" />
            {/* Opacity controller */}
           <div className="block md:hidden absolute inset-0 bg-white bg-opacity-80"></div>
           <div className='absolute top-24 md:top-1/4 lg:top-1/3 left-10 md:left-[10%] max-w-6xl'>
@@ -58,7 +60,7 @@ const Banner = () => {
     </SwiperSlide>
     <SwiperSlide>
        <div className='relative'>
-          <img className='w-full h-80 md:h-full 2xl:h-[620px] duration-300 object-cover object-left' src="https://i.ibb.co/FwfWZct/02-1.png" alt="" />
+          <img className='w-full h-80 md:h-full 2xl:h-[620px] duration-300 object-cover object-left' src={img3} alt="" />
            {/* Opacity controller */}
           <div className="block md:hidden absolute inset-0 bg-white bg-opacity-80"></div>
           <div className='absolute top-24 md:top-1/4 lg:top-1/3 right-10 md:right-[10%] max-w-6xl'>
