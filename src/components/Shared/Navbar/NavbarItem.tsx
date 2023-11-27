@@ -9,7 +9,6 @@ export default function NavbarItem() {
     if (isLoading) {
         return <div className="flex justify-center mt-5"><span className="loader"></span></div>;
     }
- 
     return (
         <div>
             <div className='flex justify-center shadow-lg lg:h-16 shadow-blue-900/50'>
@@ -22,7 +21,7 @@ export default function NavbarItem() {
                                         {category}
                                     </p>
                                 </Link>
-                                <ul className="absolute hidden dropdown-content z-[1] shadow bg-base-100  p-1 border rounded-lg">
+                                <ul className="absolute hidden dropdown-content z-20 shadow bg-base-100  p-1 border rounded-lg">
                                     {
                                         data.filter((item) => item?.category_name === category)
                                             .map((item) => item.sub_category_name)
