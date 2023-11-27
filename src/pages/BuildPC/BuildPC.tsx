@@ -83,19 +83,19 @@ export default function BuildPC() {
 
   return (
     <div>
-      <div className="flex justify-center mb-10">
-        <div className="w-2/3 pb-3 mt-10 border rounded-lg shadow-xl" id="build-pc-container">
-          <div className="flex items-center justify-between p-5 border-b-2">
-            <h1 className="text-2xl font-bold text-blue-900">
+      <div className="flex justify-center p-2 mb-10 lg:p-0">
+        <div className="pb-3 mt-10 border rounded-lg shadow-xl lg:w-2/3" id="build-pc-container">
+          <div className="items-center justify-between p-5 border-b-2 lg:flex">
+            <h1 className="flex justify-center mb-2 text-2xl font-bold text-blue-900 border-b-2 lg:border-b-0 lg:mb-0 lg:flex-none">
               PC-Build
             </h1>
-            <div className="">
-              <div className="flex items-center gap-x-4">
-                <div className="flex flex-col items-center pr-4 border-r-2">
+            <div className=" lg:flex">
+              <div className="flex items-center pl-10 mb-2lg:gap-x-4 gap-x-3 lg:pl-0 lg:mb-0">
+                <div className="flex flex-col items-center pr-4 mr-3 lg:mr-0 lg:border-r-2">
                   <span className="text-2xl text-blue-700 animate-pulse"><AiFillPrinter /></span>
                   <button className="text-sm hover:text-blue-600">Print</button>
                 </div>
-                <div onClick={handleScreenshot} className="flex flex-col items-center pr-4 border-r-2">
+                <div onClick={handleScreenshot} className="flex flex-col items-center pr-4 lg:border-r-2">
                   <span className="text-2xl text-blue-700 animate-spin">
                     <MdOutlineCamera />
                   </span>
@@ -103,14 +103,14 @@ export default function BuildPC() {
                     ScreenShot
                   </button>
                 </div>
-                <div onClick={addToCart} className="flex flex-col items-center pr-4 border-r-2">
+                <div onClick={addToCart} className="flex flex-col items-center pr-4 lg:border-r-2">
                   <span className="text-2xl text-blue-700 animate-pulse"><MdShoppingBasket /></span>
                   <button className="text-sm hover:text-blue-600">Add To Cart</button>
                 </div>
-                <div className="p-2 text-white bg-blue-900 border rounded-xl">
+              </div>
+              <div className="p-2 ml-3 text-white bg-blue-900 border rounded-xl">
                   <h1 className="text-lg">{calculateTotalPrice()}৳</h1>
                 </div>
-              </div>
             </div>
           </div>
           {data.data.map((item) => {
@@ -120,25 +120,25 @@ export default function BuildPC() {
               if (!uniqueCategories[item.sub_category_name]) {
                 uniqueCategories[item.sub_category_name] = true;
                 return (
-                  <div key={item._id} className="flex justify-between mt-4 ml-12 mr-12 border-b-2">
+                  <div key={item._id} className="flex justify-between p-2 mt-4 ml-12 mr-12 shadow-xl lg:p-0 lg:shadow-none rounded-xl lg:border-b-2">
                     {isSelected ? (
                       <div className="w-full">
                         {
                           selectedProducts.filter((p) => p.sub_category_name === item.sub_category_name)
                             .map(product =>
-                              <div className="grid w-full grid-cols-4 border-b-2 product-info">
-                                <div className="">
-                                  <img className="w-20" src={product.image[0]} alt="" />
+                              <div className="w-full p-2 text-center border lg:p-0 lg:border-none lg:border-b-2 rounded-xl lg:grid-cols-4 lg:grid product-info">
+                                <div className="border-b-2 lg:border-b-0">
+                                  <img className=" lg:w-20" src={product.image[0]} alt="" />
                                 </div>
 
-                                <div className="pt-2 text-left">
+                                <div className="lg:text-left lg:pt-2">
                                   <p className="font-bold text-blue-900 ">{product.sub_category_name}</p>
                                   <h1 className="text-sm">{product.product_name}</h1>
                                 </div>
-                                <div className=" pt-7 ml- text-end">
-                                  <h1 className="font-bold">{product.price}৳</h1>
+                                <div className=" lg:ml-4 lg:pt-7 lg:text-end">
+                                  <h1 className="font-bold"><span className="lg:hidden">Price-</span> {product.price}৳</h1>
                                 </div>
-                                <div className="pt-4 mb-2 ml-4 border-l-2 text-end">
+                                <div className="pt-4 mb-2 text-center lg:ml-4 lg:border-l-2 lg:text-end">
                                   <button onClick={() => deleteProduct(product._id)} className='p-3 text-2xl text-blue-700 bg-slate-100 rounded-2xl hover:text-red-700'><MdDeleteForever /></button>
                                 </div>
                               </div>)
@@ -146,7 +146,7 @@ export default function BuildPC() {
                       </div>
                     ) : (
                       // Display subcategory name
-                      <div className="flex items-center p-3">
+                      <div className="items-center p-3 lg:flex">
 
                         {item.sub_category_name === "Processor"
                           &&
@@ -189,7 +189,7 @@ export default function BuildPC() {
                           <img className="w-16 " src={casing} alt="" />
                         }
                         <div>
-                          <h1 className="ml-2 text-xl font-bold">{item.sub_category_name}</h1>
+                          <h1 className="font-bold lg:ml-2 lg:text-xl">{item.sub_category_name}</h1>
                         </div>
 
                       </div>
@@ -198,7 +198,7 @@ export default function BuildPC() {
                       <Link to={`/chose-components/${item.sub_category_name}`}>
                         <button
                           type="button"
-                          className="p-3 mt-3 text-white bg-blue-600 rounded-xl hover:bg-sky-700"
+                          className="p-3 mt-8 text-sm text-white bg-blue-600 lg:mt-3 rounded-xl hover:bg-sky-700 "
                           onClick={() => setChosenItems(new Set(chosenItems.add(item.sub_category_name)))}
                         >
                           Choose

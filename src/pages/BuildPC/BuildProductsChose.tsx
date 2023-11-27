@@ -24,13 +24,13 @@ export default function BuildProductsChose() {
   });
 
   return (
-    <div className="flex justify-between p-5">
-      <div className="p-2 w-60 bg-slate-100">
+    <div className="justify-between p-5 lg:flex">
+      <div className="p-2 w-60 bg-slate-100 ">
         <div>
           <input
             type="text"
             placeholder="Search Brand..."
-            className="w-full max-w-xs input input-bordered input-info"
+            className="w-full max-w-xs input input-bordered input-info rounded-3xl"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
