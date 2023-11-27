@@ -127,15 +127,13 @@ export default function Navbar() {
             users ? <div className="dropdown dropdown-end">
               <label tabIndex={0} className="m-1"><button className="mt-2 mr-1 text-2xl font-bold text-center lg:mt-2 lg:mr-5 hover:text-gray-400">
                 <div className="avatar online">
-
                   {user?.image !== undefined ? <div className="w-10 rounded-full hover:ring hover:ring-info">
                     <img src={user?.image} />
                   </div> : <div className="text-4xl rounded-full hover:ring hover:ring-info">
                     <FaUserCircle></FaUserCircle>
                   </div>}
-
                 </div></button></label>
-              <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-lg w-52 border text-black">
+              <ul tabIndex={0} className="dropdown-content z-[10] menu p-2 shadow bg-base-100 rounded-lg w-52 border text-black">
                 <Link to='/my-profile'><li><a className=" hover:bg-blue-800 hover:text-white">My Profile</a></li></Link>
                 <Link to='/addProduct'><li><a className=" hover:bg-blue-800 hover:text-white">Add Product</a></li></Link>
                 <li onClick={() => handleLogout()}><a className=" hover:bg-red-600 hover:text-white">Log-out</a></li>
