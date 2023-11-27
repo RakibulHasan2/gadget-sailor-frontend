@@ -58,7 +58,7 @@ export default function Navbar() {
               <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
             </label>
             {/* for mobile view---------------------------------------------------------- */}
-            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 w-60 rounded-lg">
+            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[10] p-2 shadow bg-base-100 w-60 rounded-lg">
               <div className="flex pb-2 mb-5 border-b-2">
                 <input type="text" placeholder="Search Item" className="w-full max-w-xs input input-bordered" />
                 <button className="text-black btn btn-ghost btn-circle">

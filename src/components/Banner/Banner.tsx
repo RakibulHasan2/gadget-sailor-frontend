@@ -26,7 +26,7 @@ const Banner = () => {
             <img className='w-full h-80 md:h-full 2xl:h-[620px] duration-300 object-cover object-left' src={img2} alt="" />
              {/* Opacity controller */}
             <div className="block md:hidden absolute inset-0 bg-white bg-opacity-80"></div>
-            <div className='absolute top-24 md:top-1/4 lg:top-1/3 right-10 md:right-[10%] max-w-6xl'>
+            <div className='ml-10 absolute top-20 md:top-1/4 lg:top-1/3 right-10 md:right-[10%] max-w-6xl'>
               <div className='w-fit mb-3 lg:mb-5'>
                   <p className='text-sm md:text-base lg:text-lg xl:text-xl font-semibold tracking-wide md:tracking-widest mx-1'>THE BIGGEST SELECTION OF QUALITY DEVICES</p>
                   <p className='border-[3px] md:border-[5px] -mt-2 md:-mt-3 border-yellow-300'></p>
@@ -62,7 +62,7 @@ const Banner = () => {
           <img className='w-full h-80 md:h-full 2xl:h-[620px] duration-300 object-cover object-left' src={img3} alt="" />
            {/* Opacity controller */}
           <div className="block md:hidden absolute inset-0 bg-white bg-opacity-80"></div>
-          <div className='absolute top-24 md:top-1/4 lg:top-1/3 right-10 md:right-[10%] max-w-6xl'>
+          <div className='ml-10 absolute top-20 md:top-1/4 lg:top-1/3 right-10 md:right-[10%] max-w-6xl'>
               <div className='w-fit mb-3 lg:mb-5'>
                   <p className='text-sm md:text-base lg:text-lg xl:text-xl font-semibold tracking-wide md:tracking-widest mx-1'>THE BIGGEST SELECTION OF QUALITY DEVICES</p>
                   <p className='border-[3px] md:border-[5px] -mt-2 md:-mt-3 border-yellow-300'></p>

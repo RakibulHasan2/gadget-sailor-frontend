@@ -26,9 +26,9 @@ const RandomProducts = () => {
                 <div className="flex justify-center mb-10" >
                     <h1 className="text-3xl font-bold text-shadow-blue"><span className="text-blue-600">Featured</span> Products</h1>
                 </div>
-                <div className="lg:flex">
+                <div className="lg:flex justify-center">
                     {/* sidebar information */}
-                    <div className="w-72 h-full mr-5">
+                    <div className="w-72 h-full lg:mr-5 mx-auto">
                         <div className="shadow-xl mb-10 border rounded-md">
                             <div className="w-48 text-center mx-auto mt-10 mb-10">
                                 <LiaShippingFastSolid className='text-4xl mx-auto text-red-700'></LiaShippingFastSolid>
@@ -55,7 +55,7 @@ const RandomProducts = () => {
                         </div>
                     </div>
                     {/* random product */}
-                    <div className="w-3/4">
+                    <div className="lg:w-3/4 lg:mt-0 mt-10">
                         <div className="flex-col p-4 lg:grid lg:grid-cols-3 lg:gap-x-2 lg:gap-y-8 lg:grid-rows-2 mb-7 justify-items-center">
                             {
                                 limitData.map(i => (
@@ -65,7 +65,6 @@ const RandomProducts = () => {
                                 ))
                             }
                         </div>
-
                         <div className="flex justify-center mt-5 mb-10">
                             <div className="join">
                                 <button onClick={() => { setPage(page - 1); setCount(page - 2) }} className="mr-3 border join-item btn hover:bg-blue-800 hover:text-white" disabled={page === 1}><FaArrowLeft></FaArrowLeft></button>
