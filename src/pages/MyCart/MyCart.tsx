@@ -1,4 +1,4 @@
-import '../../styles/MyOrder.css';
+import '../../styles/MyCart.css';
 import { Link } from 'react-router-dom';
 import { userData } from '../../hooks/getUserData';
 import useCartData from "../../hooks/useCartData";
