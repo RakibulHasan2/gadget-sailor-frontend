@@ -7,7 +7,6 @@ import WhyGadgetSailor from "../../components/WhyGadgetSailor/WhyGadgetSailor";
 export default function Home() {
   return (
     <div>
-      {/* Fahim has started Fahimming */}
       <Banner></Banner>
       <AutoCardCarousel />
       <RandomProducts />
