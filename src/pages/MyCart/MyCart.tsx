@@ -69,7 +69,7 @@ export default function MyCart() {
           <div className="flex justify-end">
             <div>
               <p className="text-lg font-bold mb-4">Total: {calculateTotalPrice()}৳</p>
-              <Link to={`/payment/${user?.id}`}>
+              <Link to={`/payment/myOrder/${user?.id}`}>
                 <button className="border p-3 rounded-lg bg-blue-900 text-white hover:bg-sky-700">Confirm Order</button>
               </Link>
             </div>

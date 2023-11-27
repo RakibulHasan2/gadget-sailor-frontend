@@ -5,7 +5,7 @@ import { CheckoutFormValues } from "../../types/FormType";
 import { userData } from "../../hooks/getUserData";
 import { ICartResponse } from "../../types/CartModalType";
 
-export default function Payment() {
+export default function MyOrder() {
 
     const data = useLoaderData() as ICartResponse;
     const user = userData()
