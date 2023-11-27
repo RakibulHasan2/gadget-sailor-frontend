@@ -58,7 +58,7 @@ export default function Navbar() {
               <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
             </label>
             {/* for mobile view---------------------------------------------------------- */}
-            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 w-60 rounded-lg">
+            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[10] p-2 shadow bg-base-100 w-60 rounded-lg">
               <div className="flex pb-2 mb-5 border-b-2">
                 <input type="text" placeholder="Search Item" className="w-full max-w-xs input input-bordered" />
                 <button className="text-black btn btn-ghost btn-circle">
@@ -127,15 +127,13 @@ export default function Navbar() {
             users ? <div className="dropdown dropdown-end">
               <label tabIndex={0} className="m-1"><button className="mt-2 mr-1 text-2xl font-bold text-center lg:mt-2 lg:mr-5 hover:text-gray-400">
                 <div className="avatar online">
-
                   {user?.image !== undefined ? <div className="w-10 rounded-full hover:ring hover:ring-info">
                     <img src={user?.image} />
                   </div> : <div className="text-4xl rounded-full hover:ring hover:ring-info">
                     <FaUserCircle></FaUserCircle>
                   </div>}
-
                 </div></button></label>
-              <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-lg w-52 border text-black">
+              <ul tabIndex={0} className="dropdown-content z-[10] menu p-2 shadow bg-base-100 rounded-lg w-52 border text-black">
                 <Link to='/my-profile'><li><a className=" hover:bg-blue-800 hover:text-white">My Profile</a></li></Link>
                 <Link to='/addProduct'><li><a className=" hover:bg-blue-800 hover:text-white">Add Product</a></li></Link>
                 <li onClick={() => handleLogout()}><a className=" hover:bg-red-600 hover:text-white">Log-out</a></li>
