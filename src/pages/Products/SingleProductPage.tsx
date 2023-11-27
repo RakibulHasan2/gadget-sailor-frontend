@@ -149,7 +149,7 @@ export default function SingleProductPage() {
               <p className="p-2 text-gray-600 rounded bg-slate-100">Price: <span className="font-bold text-black">{price}৳</span></p>
               <p className="p-2 text-gray-600 rounded bg-slate-100">Status: <span className="font-bold text-black">{status}</span></p>
               <p className="p-2 text-gray-600 rounded bg-slate-100">Product Code: <span className="font-bold text-black">{product_code}</span></p>
-              <p className="p-2 text-gray-600 rounded bg-slate-100">Quantity: <span className="font-bold text-black">{quantity}</span></p>
+              {/* <p className="p-2 text-gray-600 rounded bg-slate-100">Quantity: <span className="font-bold text-black">{quantity}</span></p> */}
               {
                 brand_name &&
                 <p className="p-2 text-gray-600 rounded bg-slate-100">Brand Name: <span className="font-bold text-black"> {brand_name}</span></p>
