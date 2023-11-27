@@ -72,7 +72,7 @@ const UpdateImage = ({ singleData }: IProduct) => {
                 </div>
             </div>
             <div>
-                <form onSubmit={handleSubmit(handleUpdateImage)} className="flex justify-around mb-10">
+                <form onSubmit={handleSubmit(handleUpdateImage)} className="justify-around mb-10 lg:flex">
                     <div className="w-full max-w-xs form-control">
                         <label className="label"> <span className="label-text">Photo (photo Should be png/jpg format)</span></label>
                         <input type="file" multiple {...register("image", {
@@ -80,7 +80,7 @@ const UpdateImage = ({ singleData }: IProduct) => {
                         })} className="w-full max-w-xs input input-bordered rounded-3xl" />
                         {errors.image && <p className='text-red-500'>please select image file</p>}
                     </div>
-                    <div className="mt-9">
+                    <div className="ml-24 mt-9 lg:ml-0">
                         <input className="text-white bg-blue-600 hover:text-black btn rounded-3xl" value="Upload" type="submit" />
                     </div>
                 </form>
