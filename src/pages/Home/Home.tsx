@@ -12,6 +12,8 @@ export default function Home() {
       <Banner></Banner>
       <RandomProducts></RandomProducts>
       <AutoCardCarousel />
+      <Parallax />
+      <WhyGadgetSailor />
       <RandomProducts/>
     </div>
   )
