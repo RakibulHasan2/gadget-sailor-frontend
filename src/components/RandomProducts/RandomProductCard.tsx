@@ -49,7 +49,7 @@ const RandomProductCard = ({ data }: IProduct) => {
 
     return (
         <div>
-            <div className="relative w-full overflow-hidden transition-all duration-300 border border-transparent shadow-md card bg-base-100 hover:border-blue-400 hover:shadow-customBlue card-height rounded-xl">
+            <div className="relative w-full overflow-hidden transition-all duration-300 border border-transparent shadow-md card bg-base-100 hover:border-blue-400 hover:shadow-customBlue card-height rounded-xl lg:mt-0 mt-10">
                 <figure className="h-full px-10 pt-10 transition-transform transform hover:scale-110">
                     <img src={data?.image[0]} alt="" className="rounded-xl" />
                 </figure>
