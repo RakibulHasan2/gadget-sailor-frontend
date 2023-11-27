@@ -25,14 +25,12 @@ export default function SingleProductPage() {
   const { __v, _id, category_name, sub_category_name, product_name, price, status, product_code, brand_name, image, model, warranty, ...otherProperties } = singleProductData;
 
   const increment = () => {
-    count++;
-    setCount(count);
+    setCount(count + 1);
   }
 
   const decrement = () => {
     if (count >= 1) {
-      setCount(count);
-      count--;
+      setCount(count - 1);
     }
   }
   // for cart modal
