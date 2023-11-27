@@ -9,7 +9,6 @@ export default function NavbarItem() {
     if (isLoading) {
         return <div className="flex justify-center mt-5"><span className="loader"></span></div>;
     }
- 
     return (
         <div>
             <div className='flex justify-center shadow-lg lg:h-16 shadow-blue-900/50'>
