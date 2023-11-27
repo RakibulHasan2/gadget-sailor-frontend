@@ -9,11 +9,8 @@ import { Link } from 'react-router-dom';
 import UploadImage from '../../components/EditProfile/UploadImage';
 import ChangePassword from '../../components/EditProfile/ChangePassword';
 import { userData } from '../../hooks/getUserData';
-
 export default function MyProfile() {
-
     const user = userData()
-    console.log(user.division)
     // ------------------for editprodile-----------------
     const [isUserModalOpen, setIsUserModalOpen] = React.useState(false);
     const openUserModal = () => {
@@ -47,7 +44,7 @@ export default function MyProfile() {
                 <h1 className='flex items-center justify-center mb-10 text-3xl text-white border-b-2'><BiSolidDashboard />My Profile</h1>
                 <div>
                     <Link to='/my-order'>
-                        <button className="flex items-center justify-center w-full h-10 mb-5 font-bold btn-one gap-x-2"><FaCartArrowDown /> My Order</button>
+                        <button className="flex items-center justify-center w-full h-10 mb-5 font-bold btn-one gap-x-2"><FaCartArrowDown /> My Cart</button>
                     </Link>
                     <Link to="/fav-item">
                         <button className="flex items-center justify-center w-full h-10 mb-5 font-bold btn-one gap-x-2"><AiOutlineHeart />Wishlist</button>
@@ -68,7 +65,7 @@ export default function MyProfile() {
             <div className="w-2/3 ml-20">
                 <div className="mb-10 ">
                     <div className="">
-                        <img src="https://scontent.fdac15-1.fna.fbcdn.net/v/t1.15752-9/370247270_326392490024066_3245730488107685687_n.png?_nc_cat=111&ccb=1-7&_nc_sid=8cd0a2&_nc_ohc=jjfLxEf9c-wAX8uJ8CW&_nc_ht=scontent.fdac15-1.fna&oh=03_AdSEHe3YQtLqsj9QkZfJRxB5-29DYsTHWlDdtBImSdZBoQ&oe=6577E9E3" alt="" className="w-full rounded-lg h-52" />
+                        <img src="https://www.greatmindscomms.com/wp-content/uploads/2019/07/team-comm.png" alt="" className="w-full object-cover rounded-lg h-52" />
                     </div>
                     {user.image !== undefined ? <div className="absolute ml-10 top-40 avatar online">
                         <div className="w-24 rounded-full ring ring-info ring-offset-base-100 ring-offset-2">
@@ -79,7 +76,8 @@ export default function MyProfile() {
                             <div className='bg-white rounded-full text-8xl ring ring-info'>
                                 <FaUserCircle></FaUserCircle>
                             </div>
-                        </div>}
+                        </div>
+                    }
                     <div className="flex items-center justify-between mt-14">
                         <h1 className='flex items-center ml-2 text-3xl font-bold'><BsPersonBadge></BsPersonBadge>  {user?.name?.firstName} {user?.name?.lastName}</h1>
                         {/* --------------------------------------edit profile modal-------------------------------------- */}
@@ -91,7 +89,6 @@ export default function MyProfile() {
                                             <FaUserEdit className="ml-5 text-6xl text-blue-900"></FaUserEdit>
                                             <h1 className="font-bold">Edit Profile</h1>
                                         </div>
-
                                     </div>
                                     <div className="modal-body">
                                         <EditProfile />
@@ -126,16 +123,15 @@ export default function MyProfile() {
                         </dialog>
                     </div>
                     <div className='mt-5'>
-                        <div className='p-3 font-bold text-white bg-blue-900 rounded-lg'>
+                        <div className='p-3 font-bold text-white bg-gray-600 rounded-lg'>
                             <h1>Basic Information</h1>
                         </div>
                         <div className='p-2 mt-2'>
-                            <h1 className='mt-3 font-bold border-b-4'>Name : {user?.name.firstName} {user?.name.lastName}</h1>
                             <h1 className='mt-3 font-bold border-b-4'>Email  : {user?.email}</h1>
                             <h1 className='mt-3 font-bold border-b-4'>Phone  : {user?.phoneNumber}</h1>
                         </div>
                         {user?.division && user?.city && user?.present_address !== undefined ? <>
-                            <div className='p-3 mt-5 font-bold text-white bg-blue-900 rounded-lg'>
+                            <div className='p-3 mt-5 font-bold text-white bg-gray-600 rounded-lg'>
                                 <h1>Address</h1>
                             </div>
                             <div className='p-2 mt-2'>
@@ -154,7 +150,5 @@ export default function MyProfile() {
                 </div>
             </div>
         </div>
-
-
     )
 }

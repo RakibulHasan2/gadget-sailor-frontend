@@ -1,15 +1,14 @@
 import { FaCartPlus, FaShoppingBag, FaTimes } from "react-icons/fa";
 import CartIcon from "./CartIcon";
 import { useState } from 'react';
-import useApiData from "../../hooks/getAPIData";
 import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { userData } from "../../hooks/getUserData";
-
+import useCartData from "../../hooks/useCartData";
 export default function ShoppingCartSideBar() {
-    const { data, refetch } = useApiData("http://localhost:5000/api/v1/getCart");
-    const [isOpen, setIsOpen] = useState<boolean>(false);
     const user = userData()
+    const { data, refetch } = useCartData(`http://localhost:5000/api/v1/getCart/${user?.id}`);
+    const [isOpen, setIsOpen] = useState<boolean>(false);
     const toggleCart: () => void = () => {
         refetch();
         setIsOpen(!isOpen);
@@ -30,7 +29,7 @@ export default function ShoppingCartSideBar() {
     const calculateTotalPrice = () => {
         let totalPrice: number = 0;
         data.forEach((item) => {
-            const price = parseFloat(item.total_price);
+            const price = Number(item.total_price);
             totalPrice += price;
         });
         return totalPrice.toFixed(2);
@@ -90,7 +89,7 @@ export default function ShoppingCartSideBar() {
                     </div>
                     <div className="">
                         <p className="mb-4 text-lg font-bold text-right lg:mr-10 lg:mt-4">Total: {calculateTotalPrice()}৳</p>
-                        <Link to={`/payment/${user.email}`}>
+                        <Link to={`/payment/${user?.email}`}>
                             <div className="flex justify-center">
                                 <button className="flex items-center justify-center p-3 text-white bg-blue-900 rounded-lg w-52 hover:bg-sky-700 gap-x-2"><FaShoppingBag></FaShoppingBag> Confirm Order</button>
                             </div>

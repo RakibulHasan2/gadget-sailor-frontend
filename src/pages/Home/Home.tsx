@@ -11,9 +11,8 @@ export default function Home() {
       {/* Fahim has started Fahimming */}
       <Banner></Banner>
       <RandomProducts></RandomProducts>
-      <WhyGadgetSailor />
-      <Parallax />
       <AutoCardCarousel />
+      <RandomProducts/>
     </div>
   )
 }
