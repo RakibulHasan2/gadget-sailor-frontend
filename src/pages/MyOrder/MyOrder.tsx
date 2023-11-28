@@ -31,39 +31,30 @@ export default function MyOrder() {
         return totalPrice.toFixed(2);
     };
 
-    const checkoutInfoArray = CartDetails.map(item => (
+
+
+
+    const checkoutInfo = CartDetails.map(item => (
         {
             [item.product_name]: item.product_name,
-            price: item.unit_price
+            [`${item.product_name}_price`]: item.unit_price
             ,
         }
     ));
 
+    const checkoutInfoArray = Object.assign({}, ...checkoutInfo);
+
+    const combinedObject = Object.assign({}, ...userInfo, checkoutInfoArray);
+
     const handleCheckout = async (data: CheckoutFormValues) => {
 
-        console.log(data)
-        // const checkoutInfo = {
-        //     name: {
-        //         firstName: data.firstName,
-        //         lastName: data.lastName
-        //     },
-        //     email: data.email,
-        //     phoneNumber: data.phoneNumber,
-        //     address: data.address,
-        //     city: data.city,
-        //     comments: data.comments,
-        //     ...Object.fromEntries(
-        //         Object.keys(CartDetails).map((key) => [key, CartDetails[key]])
-        //     )
-        // }
-
-
-        //console.log(checkoutInfo)
-        console.log(checkoutInfoArray)
-        setUserInfo(data)
+        //console.log(data)
+        // console.log(checkoutInfoArray)
+        setUserInfo([data])
     }
 
     console.log(userInfo)
+    console.log(combinedObject)
     return (
         <div className="flex gap-2">
             <div className="">
