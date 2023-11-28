@@ -40,7 +40,7 @@ export default function Login() {
   return (
     <div className='items-center justify-center p-2 pt-10 lg:pt-0 lg:p-0 lg:flex background-image'>
       <div className="justify-between shadow-2xl lg:flex sign-up-container rounded-2xl">
-        <div className="text-white rounded-2xl pc-image">
+        <div className="text-white rounded rounded-l-2xl pc-image rounded-r-2xl lg:rounded-r-none">
           <Link to="/home"><button className="flex items-center pt-2 mt-2 ml-2 lg:pt-0 hover:text-gray-400">Go back <FiArrowRight></FiArrowRight></button></Link>
           <div className="flex items-center justify-center h-80">
             <div className="items-center">
