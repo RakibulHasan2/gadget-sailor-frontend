@@ -56,7 +56,7 @@ const UploadImage = () => {
         </div>
       </div>
       <div>
-        <form onSubmit={handleSubmit(handleAddImage)} className="flex justify-around mb-10">
+        <form onSubmit={handleSubmit(handleAddImage)} className="justify-around mb-10 lg:flex">
           <div className="w-full max-w-xs form-control">
             <label className="label"> <span className="label-text">Photo (photo Should be png/jpg format)</span></label>
             <input type="file" multiple {...register("image", {
@@ -64,7 +64,7 @@ const UploadImage = () => {
             })} className="w-full max-w-xs input input-bordered rounded-3xl" />
             {errors.image && <p className='text-red-500'>please select image file</p>}
           </div>
-          <div className="mt-9">
+          <div className="flex justify-center mt-3 lg:flex-none lg:mt-9">
             <input className="text-white bg-blue-600 hover:text-black btn rounded-3xl" value="Upload" type="submit" />
           </div>
         </form>
