@@ -44,33 +44,36 @@ export default function Login() {
           <Link to="/home"><button className="flex items-center pt-2 mt-2 ml-2 lg:pt-0 hover:text-gray-400">Go back <FiArrowRight></FiArrowRight></button></Link>
           <div className="flex items-center justify-center h-80">
             <div className="items-center">
-             <span className="flex justify-center text-6xl "><FiUserCheck /></span> 
+              <span className="flex justify-center ml-3 text-6xl"><FiUserCheck /></span>
               <h1 className="mb-2 text-4xl font-extrabold ">Login<span className="animate-pulse">...</span></h1>
               <small className="hidden">for land shsine ksjdh kdhbi sdfhsfi <br /> jjsfhi jshf kiafha jjhafha of ioaf9 oashf fha oafh</small>
             </div>
           </div>
         </div>
-        <div className='p-4 lg:w-96 lg:p-7'>
-          <form onSubmit={handleSubmit(handleLogin)} className="pl-1 lg:pt-5">
-            <div className="w-full max-w-xs mb-4 form-control">
-              <input type="email" {...register("email", {
-                required: "Email is Required !"
-              })} className="w-full max-w-xs bg-transparent rounded-3xl input input-bordered" placeholder="✉ Email..." />
-              {errors.email && <small className='mt-1 ml-2 text-red-500'>{errors.email.message}</small>}
-            </div>
-            <div className="w-full max-w-xs mb-3 form-control">
-              <input type="password" {...register("password", {
-                required: "Password is Required !",
-                minLength: { value: 6, message: "Password must be 6 characters long" },
-                pattern: { value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/, message: 'Password must have uppercase, number and special characters' }
-              })} className="w-full max-w-xs bg-transparent rounded-3xl input input-bordered" placeholder="🗝 Password..." />
-              {errors.password && <small className='mt-1 ml-2 text-red-500'>{errors.password.message}</small>}
-            </div>
+        <div className="flex justify-center">
+          <div className='p-4 lg:w-96 lg:p-7'>
+            <form onSubmit={handleSubmit(handleLogin)} className=" lg:pt-5">
+              <div className="max-w-xs mb-4 w-80 form-control">
+                <input type="email" {...register("email", {
+                  required: "Email is Required !"
+                })} className="w-full max-w-xs bg-transparent rounded-3xl input input-bordered" placeholder="✉ Email..." />
+                {errors.email && <small className='mt-1 ml-2 text-red-500'>{errors.email.message}</small>}
+              </div>
+              <div className="max-w-xs mb-3 w-80 form-control">
+                <input type="password" {...register("password", {
+                  required: "Password is Required !",
+                  minLength: { value: 6, message: "Password must be 6 characters long" },
+                  pattern: { value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/, message: 'Password must have uppercase, number and special characters' }
+                })} className="w-full max-w-xs bg-transparent rounded-3xl input input-bordered" placeholder="🗝 Password..." />
+                {errors.password && <small className='mt-1 ml-2 text-red-500'>{errors.password.message}</small>}
+              </div>
 
-            <input className='p-2 mt-4 mb-4 text-black bg-blue-400 w-80 btn rounded-3xl' value="Login" type="submit" />
-          </form>
-          <small className="ml-10 font-black">New in Gadget-Sailor? <Link className='font-bold text-indigo-600' to="/signup">Please Sign-up</Link></small>
+              <input className='p-2 mt-4 mb-4 text-black bg-blue-400 w-80 btn rounded-3xl' value="Login" type="submit" />
+            </form>
+            <small className="ml-10 font-black">New in Gadget-Sailor? <Link className='font-bold text-indigo-600' to="/signup">Please Sign-up</Link></small>
+          </div>
         </div>
+
       </div>
     </div>
   )
