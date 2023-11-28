@@ -1,6 +1,8 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 
-const CheckoutForm = () => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const CheckoutForm = ({ data }: any) => {
+    console.log(data)
     const stripe = useStripe();
     const elements = useElements();
 
@@ -12,6 +14,22 @@ const CheckoutForm = () => {
 
             return;
         }
+
+        const card = elements.getElement(CardElement);
+        if (card == null) {
+            return;
+        }
+        const { error, paymentMethod } = await stripe.createPaymentMethod({
+            type: 'card',
+            card,
+        });
+
+        if (error) {
+            console.log('[error]', error);
+        } else {
+            console.log('[PaymentMethod]', paymentMethod);
+        }
+
 
     }
 
@@ -34,7 +52,7 @@ const CheckoutForm = () => {
                     },
                 }}
             />
-            <button type="submit" disabled={!stripe}>
+            <button className='btn btn-sm mt-4 btn-primary' type="submit" disabled={!stripe}>
                 Pay
             </button>
         </form>

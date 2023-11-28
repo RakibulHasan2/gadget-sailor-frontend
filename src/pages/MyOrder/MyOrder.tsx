@@ -10,7 +10,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { useState } from "react";
 
 
-const stripePromise = loadStripe(import.meta.env.REACT_APP_STRIPE_PK);
+const stripePromise = loadStripe('pk_test_51M8NuoDiyv5tmMKuNdL0GTfndh3lFLwZKkkSn2ITrLo3HjeSIyf7tjD0vTCQqf6x6dGXKjgqm0XCTJdmFJEmgCge00LyoHRros');
 console.log(stripePromise)
 
 export default function MyOrder() {
@@ -200,11 +200,22 @@ export default function MyOrder() {
                     <p className="text-lg font-bold mb-4">Total: {calculateTotalPrice()}৳</p>
                 </div>
 
-                <div>
-                    <Elements stripe={stripePromise}>
-                        <CheckoutForm />
-                    </Elements>
-                </div>
+
+                {
+                    count === 0 && userInfo.length === 0 ?
+                        <div className='w-96 my-12' >
+                            <button onClick={() => alert('Please fill up the customer information form at first.')} className='btn btn-sm mt-4 btn-primary'>Pay</button>
+                        </div>
+                        :
+
+                        <div className='w-96 my-12' >
+                            <Elements stripe={stripePromise}>
+                                <CheckoutForm
+                                    data={combinedObject} />
+                            </Elements>
+                        </div>
+
+                }
             </div>
 
         </div>
