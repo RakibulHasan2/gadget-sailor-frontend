@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect } from 'react';
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { IProduct } from "../../types/ProductsType";
 import { useState } from "react";
 import ImageSlider from "../../components/ImageSlider/ImageSlider";
@@ -12,6 +12,8 @@ import useProductData from '../../hooks/useProductData';
 import UpdateImage from '../../components/UpdateProduct/UpdateImage';
 import { AiOutlineProfile } from "react-icons/ai";
 import SuggestedData from './SuggestedData';
+import toast from 'react-hot-toast';
+
 
 export default function SingleProductPage() {
   // eslint-disable-next-line prefer-const
@@ -20,9 +22,10 @@ export default function SingleProductPage() {
   const singleProduct = useLoaderData() as any;
   const singleProductData = singleProduct.data as IProduct;
   const user = userData();
+  const navigate = useNavigate()
   const { refetch } = useProductData("http://localhost:5000/api/v1/getCart");
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { __v, quantity,_id, category_name, sub_category_name, product_name, price, status, product_code, brand_name, image, model, warranty, ...otherProperties } = singleProductData;
+  const { __v, quantity, _id, category_name, sub_category_name, product_name, price, status, product_code, brand_name, image, model, warranty, ...otherProperties } = singleProductData;
 
   const increment = () => {
     setCount(count + 1);
@@ -119,6 +122,71 @@ export default function SingleProductPage() {
   const randomSuggestion = [...suggestedData].sort(() => Math.random() - 0.5)
   const limitData = randomSuggestion.slice(0, 5)
 
+  // review functionality area---------------------------
+  const [rating, setRating] = useState<number>(0);
+  const [error, setError] = useState<string>('');
+
+  const handleRatingClick = (value: number) => {
+    setRating(value === rating ? 0 : value);
+  };
+
+  const renderRatingStars = () => {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      const starClass = i <= rating ? 'text-yellow-500' : 'text-gray-300';
+      stars.push(
+        <span
+          key={i}
+          onClick={() => handleRatingClick(i)}
+          className={`text-3xl cursor-pointer ${starClass}`}
+        >
+          ★
+        </span>
+      );
+    }
+    return stars;
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.target as HTMLFormElement
+    const reviewValue = (event.currentTarget.querySelector(
+      'textarea[name="textArea"]'
+    ) as HTMLTextAreaElement)?.value;
+
+    if (rating === 0 || !reviewValue.trim()) {
+      setError('Rating and review are required.');
+      return;
+    }
+    if (user) {
+      const reviewData = {
+        customer_name: user.name,
+        email: user.email,
+        image: user.image,
+        p_id: _id,
+        review: reviewValue,
+        rating: rating
+      }
+      const response = await fetch('http://localhost:5000/api/v1/create-review', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(reviewData)
+      });
+      const review = await response.json();
+      if (review.statusCode === 200) {
+        toast.success('Review Added Successfully')
+        form.reset();
+        setRating(0);
+        setError(''); 
+      }
+    }
+    else {
+      navigate('/login')
+    }
+  }
+
   return (
     <div >
       <div className="container mx-auto my-8">
@@ -184,9 +252,7 @@ export default function SingleProductPage() {
             <div className='flex items-end justify-between'>
               <p className="text-3xl font-bold">Specification</p>
               <button onClick={openEditModal} className='flex items-center p-2 hover:bg-blue-800 bg-slate-100 rounded-2xl hover hover:text-white'><AiFillEdit />Edit</button>
-
               {/* edit modal */}
-
               <dialog id="editModal" className="modal">
                 <div className="w-11/12 max-w-5xl modal-box rounded-3xl">
                   <form method="dialog">
@@ -224,6 +290,26 @@ export default function SingleProductPage() {
                 <h2 className="p-2 mt-5 text-lg font-bold text-blue-900 bg-green-100">Warranty Information</h2>
                 <p className="py-3 mt-3 border-b border-gray-700">Warranty <span className="lg:ml-44">{warranty} Limited Warranty</span></p>
               </div>
+            </div>
+            {/*----------- review area --------------------*/}
+            <div className='border'>
+              <p className="text-3xl font-bold mt-12">Reviews</p>
+              <div>
+                <p>Rating</p>
+                {renderRatingStars()}
+              </div>
+              <form onSubmit={handleSubmit}>
+                <div>
+                  <label className="textArea"> <span className="label-text text-lg">Write Here:</span></label>
+                  <textarea
+                    className="w-full pt-3 input input-bordered rounded-3xl"
+                    placeholder="your valuable comment"
+                    name='textArea'
+                  />
+                </div>
+                <button type="submit">Submit</button>
+                {error && <div style={{ color: 'red' }}>{error}</div>}
+              </form>
             </div>
           </div>
           {/* Related Products Section */}
