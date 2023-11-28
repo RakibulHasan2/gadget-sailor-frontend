@@ -90,7 +90,7 @@ const ChangePassword = () => {
                         </div>
                     </div>
                 </div>
-                <div className="pl-20">
+                <div className="lg:pl-20">
                     <form onSubmit={handleSubmit(handleUpdatePassword)} className="mb-10">
                         <div className="w-full max-w-xs form-control">
                             <label className="label"> <span className="label-text">Current Password</span></label>
