@@ -17,6 +17,7 @@ export default function MyOrder() {
 
     const data = useLoaderData() as ICartResponse;
     const [userInfo, setUserInfo] = useState<CheckoutFormValues[]>([]);
+    const [count, setCount] = useState(0);
     const user = userData()
     const CartDetails = data.data;
     const { register, handleSubmit, formState: { errors } } = useForm<CheckoutFormValues>();
@@ -37,8 +38,8 @@ export default function MyOrder() {
     const checkoutInfo = CartDetails.map(item => (
         {
             [item.product_name]: item.product_name,
-            [`${item.product_name}_price`]: item.unit_price
-            ,
+            [`${item.product_name}_price`]: item.unit_price,
+            total_price: item.total_price,
         }
     ));
 
@@ -46,14 +47,32 @@ export default function MyOrder() {
 
     const combinedObject = Object.assign({}, ...userInfo, checkoutInfoArray);
 
+    const handleCount = () => {
+        if (count === 0) {
+            setCount(1)
+        }
+        else {
+            setCount(0)
+        }
+    }
+
     const handleCheckout = async (data: CheckoutFormValues) => {
 
         //console.log(data)
         // console.log(checkoutInfoArray)
         setUserInfo([data])
+        handleCount();
     }
 
+
+
+    // const handleFunctions = () => {
+    //     handleCount();
+    //     handleCheckout(info);
+    // }
+
     console.log(userInfo)
+    console.log(count)
     console.log(combinedObject)
     return (
         <div className="flex gap-2">
