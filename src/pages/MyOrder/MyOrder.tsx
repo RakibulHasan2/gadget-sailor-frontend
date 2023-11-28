@@ -4,6 +4,10 @@ import { useForm } from 'react-hook-form';
 import { CheckoutFormValues } from "../../types/FormType";
 import { userData } from "../../hooks/getUserData";
 import { ICartResponse } from "../../types/CartModalType";
+import { loadStripe } from "@stripe/stripe-js";
+
+
+const stripePromise = loadStripe('pk_test_51M8NuoDiyv5tmMKuNdL0GTfndh3lFLwZKkkSn2ITrLo3HjeSIyf7tjD0vTCQqf6x6dGXKjgqm0XCTJdmFJEmgCge00LyoHRros');
 
 export default function MyOrder() {
 
