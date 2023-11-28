@@ -14,6 +14,8 @@ import { AiOutlineProfile } from "react-icons/ai";
 import SuggestedData from './SuggestedData';
 import toast from 'react-hot-toast';
 import useReviewData from '../../hooks/getReviewData';
+import { SlCalender } from "react-icons/sl";
+import { MdOutlineRateReview } from "react-icons/md";
 
 
 export default function SingleProductPage() {
@@ -195,6 +197,19 @@ export default function SingleProductPage() {
 
   }
 
+
+  const [specificationHide, setSpecificationHide] = useState('block')
+  const [reviewHide, setReviewHide] = useState('hidden')
+
+  const hideSpacification = () => {
+    setSpecificationHide('block')
+    setReviewHide('hidden')
+  }
+  const hideReview = () => {
+    setSpecificationHide('hidden')
+    setReviewHide('block')
+  }
+
   return (
     <div >
       <div className="container mx-auto my-8">
@@ -254,70 +269,112 @@ export default function SingleProductPage() {
             </div>
           </div>
         </div>
-        {/*----- specification section ------*/}
-        <div className='lg:flex'>
-          <div className="w-full p-6 shadow-xl lg:mt-10 lg:w-3/5 lg:ml-36">
-            <div className='flex items-end justify-between'>
-              <p className="text-3xl font-bold">Specification</p>
-              <button onClick={openEditModal} className='flex items-center p-2 hover:bg-blue-800 bg-slate-100 rounded-2xl hover hover:text-white'><AiFillEdit />Edit</button>
-              {/* edit modal */}
-              <dialog id="editModal" className="modal">
-                <div className="w-11/12 max-w-5xl modal-box rounded-3xl">
-                  <form method="dialog">
+        <div className='flex ml-36 gap-x-5 lg:mt-10'>
+          <button className='btn btn-primary' onClick={hideSpacification}>Specification</button>
+          <button className='btn btn-primary' onClick={hideReview}>Reviews ({data.length})</button>
+        </div>
+        <div className='border lg:flex'>
+          {/*----- specification section ------*/}
+          <div className="w-full p-6 shadow-xl lg:mt-5 lg:w-3/5 lg:ml-36">
+            <div className={specificationHide}>
+              <div className='flex items-end justify-between'>
+                <p className="text-3xl font-bold">Specification</p>
+                <button onClick={openEditModal} className='flex items-center p-2 hover:bg-blue-800 bg-slate-100 rounded-2xl hover hover:text-white'><AiFillEdit />Edit</button>
+                {/* edit modal */}
+                <dialog id="editModal" className="modal">
+                  <div className="w-11/12 max-w-5xl modal-box rounded-3xl">
+                    <form method="dialog">
 
-                    <button className="absolute btn btn-sm btn-circle btn-ghost right-2 top-2">
-                      ✕
-                    </button>
-                  </form>
-                  <div>
-                    <span className='flex justify-center text-5xl text-blue-700'>
-                      <AiOutlineProfile />
-                    </span>
-                    <h3 className="text-2xl font-bold text-center border-b-8">Update "<span className='text-blue-800'>{product_name}</span>" Information </h3>
+                      <button className="absolute btn btn-sm btn-circle btn-ghost right-2 top-2">
+                        ✕
+                      </button>
+                    </form>
+                    <div>
+                      <span className='flex justify-center text-5xl text-blue-700'>
+                        <AiOutlineProfile />
+                      </span>
+                      <h3 className="text-2xl font-bold text-center border-b-8">Update "<span className='text-blue-800'>{product_name}</span>" Information </h3>
 
+                    </div>
+                    <UpdateModal
+                      singleData={singleProductData}
+                      closeModal={closeModal} otherProperties={otherProperties} _id={''} category_name={''} sub_category_name={''} brand_name={''} product_name={''} image={[]} model={''} description={''} price={0} product_code={0} status={''} reviews={[]} warranty={''} __v={''} others_info={[]}              ></UpdateModal>
                   </div>
-                  <UpdateModal
-                    singleData={singleProductData}
-                    closeModal={closeModal} otherProperties={otherProperties} _id={''} category_name={''} sub_category_name={''} brand_name={''} product_name={''} image={[]} model={''} description={''} price={0} product_code={0} status={''} reviews={[]} warranty={''} __v={''} others_info={[]}              ></UpdateModal>
+                </dialog>
+              </div>
+              <div className="lg:ml-5">
+                {/* basic information */}
+                <div className="mb-6">
+                  <h2 className="p-2 mt-5 text-lg font-bold text-blue-900 bg-green-100">Basic Information</h2>
+                  {Object.keys(otherProperties).map((key) => (
+                    <div key={key} className="flex items-center justify-between py-3 border-b border-gray-700">
+                      <p className="text-gray-600">{key}</p>
+                      <p className="w-2/3">{otherProperties[key]}</p>
+                    </div>
+                  ))}
                 </div>
-              </dialog>
-            </div>
-            <div className="lg:ml-5">
-              {/* basic information */}
-              <div className="mb-6">
-                <h2 className="p-2 mt-5 text-lg font-bold text-blue-900 bg-green-100">Basic Information</h2>
-                {Object.keys(otherProperties).map((key) => (
-                  <div key={key} className="flex items-center justify-between py-3 border-b border-gray-700">
-                    <p className="text-gray-600">{key}</p>
-                    <p className="w-2/3">{otherProperties[key]}</p>
-                  </div>
-                ))}
-              </div>
-              {/* warranty information */}
-              <div className="mb-6">
-                <h2 className="p-2 mt-5 text-lg font-bold text-blue-900 bg-green-100">Warranty Information</h2>
-                <p className="py-3 mt-3 border-b border-gray-700">Warranty <span className="lg:ml-44">{warranty} Limited Warranty</span></p>
+                {/* warranty information */}
+                <div className="mb-6">
+                  <h2 className="p-2 mt-5 text-lg font-bold text-blue-900 bg-green-100">Warranty Information</h2>
+                  <p className="py-3 mt-3 border-b border-gray-700">Warranty <span className="lg:ml-44">{warranty} Limited Warranty</span></p>
+                </div>
               </div>
             </div>
+
+
             {/*----------- review area --------------------*/}
-            <div className='border'>
-              <p className="text-3xl font-bold mt-12">Reviews</p>
-              <div>
+            <div className={reviewHide}>
+              <div className='flex justify-center border-b-2'>
+                <p className="mt-12 text-3xl font-bold">Reviews</p>
+              </div>
+
+              <div className='mt-10 rounded-2xl'>
                 {
-                  data?.map(review => <>
-                    {review.review}
-                  </>)
+                  data?.map(review =>
+                    <div className='mb-10 border min-h-40 rounded-2xl'>
+                      <div className='flex justify-between bg-blue-900 border-b-2 rounded-tl-2xl rounded-tr-2xl'>
+                        <div className='flex items-center p-2 gap-x-2'>
+                          <div className="avatar">
+                            <div className="w-10 rounded-full ">
+                              <img src={review.image} />
+                            </div>
+                          </div>
+                          <small className='text-white'>{review.email}</small>
+                        </div>
+                        <div className='flex items-center gap-3 pr-3 text-white'>
+                          <span className=' animate-bounce'><SlCalender /></span> {typeof review?.createdAt === 'string' && review?.createdAt.slice(0, 10)}
+                        </div>
+                      </div>
+                      <div className='p-2 border-b-2'>
+                        <p className='text-3xl text-blue-700'><MdOutlineRateReview /></p>
+                        <h1 className=''><span className='font-bold'>❝</span> {review.review} <span className='font-bold'>❞</span></h1>
+                      </div>
+
+                      <div>
+                        {Array.from({ length: review.rating }, (_, index) => (
+                          <span key={index} className="text-yellow-500">
+                            ★
+                          </span>
+                        ))}
+                        {Array.from({ length: 5 - review.rating }, (_, index) => (
+                          <span key={index} className="text-gray-300">
+                            ★
+                          </span>
+                        ))}
+                      </div>
+
+                    </div>)
                 }
 
               </div>
-              <div>
+              <div className='mt-10'>
                 <div>
                   <p>Rating</p>
                   {renderRatingStars()}
                 </div>
                 <form onSubmit={handleSubmit}>
                   <div>
-                    <label className="textArea"> <span className="label-text text-lg">Write Here:</span></label>
+                    <label className="textArea"> <span className="text-lg label-text">Write Here:</span></label>
                     <textarea
                       className="w-full pt-3 input input-bordered rounded-3xl"
                       placeholder="your valuable comment"
