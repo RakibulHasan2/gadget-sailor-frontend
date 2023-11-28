@@ -126,9 +126,9 @@ export default function SingleProductPage() {
       <div className="container mx-auto my-8">
         <div className="flex flex-col items-center justify-center lg:flex-row">
           {/* image slider */}
-          <div className="">
+          <div className="pb-2 border-b-2 lg:border-b-0">
             <ImageSlider images={image} />
-            <button onClick={openEditImage} className='flex items-center p-2 hover:bg-blue-800 bg-slate-100 rounded-2xl hover hover:text-white'><AiFillEdit />Edit Image</button>
+            <button onClick={openEditImage} className='flex items-center p-2 ml-2 hover:bg-blue-800 bg-slate-100 rounded-2xl hover hover:text-white'><AiFillEdit />Edit Image</button>
             {/* modal for edit image */}
             <dialog id="editImage" className="modal">
               <div className="modal-box rounded-3xl">
