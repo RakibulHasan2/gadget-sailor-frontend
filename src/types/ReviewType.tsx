@@ -4,5 +4,6 @@ export type ReviewType = {
     image: string;
     p_id: string;
     review: string;
-    rating: number
+    rating: number,
+    product_name: string;
 }

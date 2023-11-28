@@ -13,6 +13,7 @@ import UpdateImage from '../../components/UpdateProduct/UpdateImage';
 import { AiOutlineProfile } from "react-icons/ai";
 import SuggestedData from './SuggestedData';
 import toast from 'react-hot-toast';
+import useReviewData from '../../hooks/getReviewData';
 
 
 export default function SingleProductPage() {
@@ -123,8 +124,10 @@ export default function SingleProductPage() {
   const limitData = randomSuggestion.slice(0, 5)
 
   // review functionality area---------------------------
+
   const [rating, setRating] = useState<number>(0);
   const [error, setError] = useState<string>('');
+  const { data, refetchReview } = useReviewData(`http://localhost:5000/api/v1/get-AllReviews/${_id}`);
 
   const handleRatingClick = (value: number) => {
     setRating(value === rating ? 0 : value);
@@ -158,6 +161,7 @@ export default function SingleProductPage() {
       setError('Rating and review are required.');
       return;
     }
+
     if (user) {
       const reviewData = {
         customer_name: user.name,
@@ -165,7 +169,8 @@ export default function SingleProductPage() {
         image: user.image,
         p_id: _id,
         review: reviewValue,
-        rating: rating
+        rating: rating,
+        product_name: product_name
       }
       const response = await fetch('http://localhost:5000/api/v1/create-review', {
         method: 'POST',
@@ -179,12 +184,15 @@ export default function SingleProductPage() {
         toast.success('Review Added Successfully')
         form.reset();
         setRating(0);
-        setError(''); 
+        setError('');
+        refetchReview()
       }
+
     }
     else {
       navigate('/login')
     }
+
   }
 
   return (
@@ -295,21 +303,31 @@ export default function SingleProductPage() {
             <div className='border'>
               <p className="text-3xl font-bold mt-12">Reviews</p>
               <div>
-                <p>Rating</p>
-                {renderRatingStars()}
+                {
+                  data?.map(review => <>
+                    {review.review}
+                  </>)
+                }
+
               </div>
-              <form onSubmit={handleSubmit}>
+              <div>
                 <div>
-                  <label className="textArea"> <span className="label-text text-lg">Write Here:</span></label>
-                  <textarea
-                    className="w-full pt-3 input input-bordered rounded-3xl"
-                    placeholder="your valuable comment"
-                    name='textArea'
-                  />
+                  <p>Rating</p>
+                  {renderRatingStars()}
                 </div>
-                <button type="submit">Submit</button>
-                {error && <div style={{ color: 'red' }}>{error}</div>}
-              </form>
+                <form onSubmit={handleSubmit}>
+                  <div>
+                    <label className="textArea"> <span className="label-text text-lg">Write Here:</span></label>
+                    <textarea
+                      className="w-full pt-3 input input-bordered rounded-3xl"
+                      placeholder="your valuable comment"
+                      name='textArea'
+                    />
+                  </div>
+                  <button className='' type="submit">Submit</button>
+                  {error && <div style={{ color: 'red' }}>{error}</div>}
+                </form>
+              </div>
             </div>
           </div>
           {/* Related Products Section */}
