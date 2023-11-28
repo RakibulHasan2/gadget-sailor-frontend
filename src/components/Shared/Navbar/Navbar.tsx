@@ -7,14 +7,14 @@ import { AiOutlineHeart } from 'react-icons/ai';
 import { BiLogIn } from 'react-icons/bi';
 import '../../../styles/Navbar.css'
 import toast from "react-hot-toast";
-import { Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from '../../../assets/logo/Screenshot_2023-11-15_122159-trsfansformed-remdfosfafvebg-preview_waifu2x_art_noise1_scale.png';
 import { userData } from "../../../hooks/getUserData";
 
 export default function Navbar() {
   const user = userData();
   const [expanded, setExpanded] = useState(true);
-  const navigate  = useNavigate()
+  const navigate = useNavigate()
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const input: any = document.getElementById("myInput");
@@ -71,7 +71,7 @@ export default function Navbar() {
                     <button className="flex items-center font-bold"><small className="">Hot Offer!</small> <GiElectric className='text-3xl font-extrabol icon'></GiElectric></button>
                   </div>
                 </Link>
-                <Link to='/my-order'>
+                <Link to='/my-cart'>
                   <div className="p-2 mb-2 text-black bg-blue-50 rounded-xl hover:text-white hover:bg-blue-700">
                     <button className="flex items-center mr-5 align-middle gap-x-2" title="Cart">My-Cart<FaCartArrowDown className='text-2xl' ></FaCartArrowDown> </button>
                   </div>
@@ -113,7 +113,7 @@ export default function Navbar() {
             <Link to='/hot-offer'><button className="flex items-center font-bold"><small className="hover:text-gray-400">Hot Offer!</small> <GiElectric className='text-3xl font-extrabol icon'></GiElectric></button></Link>
           </div>
           <div className="hidden lg:block">
-            <Link to='/my-order'>
+            <Link to='/my-cart'>
               <button className="mr-5 text-2xl align-middle hover:text-gray-400" title="Cart"><FaCartArrowDown ></FaCartArrowDown></button>
             </Link>
           </div>
