@@ -69,9 +69,9 @@ export default function MyProfile() {
                     </div>
                     {user.image !== undefined ?
 
-                        <div className='border'>
+                        <div className=''>
                             <div className="absolute mb-10 lg:ml-10 lg:top-40 avatar online">
-                                <div className="w-32 rounded-full lg:w-24 ring ring-info ring-offset-base-100 ring-offset-2">
+                                <div className="w-32 border rounded-full lg:w-24 ring ring-info ring-offset-base-100 ring-offset-2">
                                     <img src={user.image} />
                                 </div>
                             </div>
@@ -84,7 +84,7 @@ export default function MyProfile() {
                         </div>
                     }
                     <div className="flex items-center justify-between mt-32 border lg:mt-14">
-                        <div className='flex w-full border'>
+                        <div className='flex justify-center w-full border lg:mr-96 lg:flex-none'>
                             <h1 className='flex items-center text-3xl font-bold border lg:ml-2'><BsPersonBadge></BsPersonBadge>  {user?.name?.firstName} {user?.name?.lastName}</h1>
                         </div>
                         {/* --------------------------------------edit profile modal-------------------------------------- */}
