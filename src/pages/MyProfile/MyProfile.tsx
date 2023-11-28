@@ -43,7 +43,7 @@ export default function MyProfile() {
             <div className='p-5 bg-blue-900 w-60'>
                 <h1 className='flex items-center justify-center mb-10 text-3xl text-white border-b-2'><BiSolidDashboard />My Profile</h1>
                 <div>
-                    <Link to='/my-order'>
+                    <Link to='/my-cart'>
                         <button className="flex items-center justify-center w-full h-10 mb-5 font-bold btn-one gap-x-2"><FaCartArrowDown /> My Cart</button>
                     </Link>
                     <Link to="/fav-item">
