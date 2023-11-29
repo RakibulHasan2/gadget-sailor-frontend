@@ -1,5 +1,5 @@
-import '../../styles/WhyGadgetSailor.css'
-import img from '../../assets/banner/thinking.jpg'
+import '../../../styles/WhyGadgetSailor.css'
+import img from '../../../assets/banner/thinking.jpg'
 import { MdOutlinePriceChange } from 'react-icons/md';
 import { FaMoneyCheckDollar } from 'react-icons/fa6';
 import { TbTruckReturn } from "react-icons/tb";

@@ -1,9 +1,9 @@
 import { useState } from "react";
-import useProductData from "../../hooks/useProductData";
+import useProductData from "../../../hooks/useProductData";
 import RandomProductCard from "./RandomProductCard";
-import '../../styles/Loader.css'
+import '../../../styles/Loader.css'
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-import '../../styles/Text-shadow.css'
+import '../../../styles/Text-shadow.css'
 import { LiaShippingFastSolid } from "react-icons/lia";
 import { IoShieldCheckmarkOutline } from "react-icons/io5";
 import { MdOutlinePayment } from "react-icons/md";

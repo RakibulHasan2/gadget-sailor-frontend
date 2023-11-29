@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { IProduct } from "../../types/ProductsType";
+import { IProduct } from "../../../types/ProductsType";
 const SingleCards = ({ data }: IProduct) => {
     return (
         <div>
