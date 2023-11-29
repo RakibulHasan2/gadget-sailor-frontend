@@ -351,6 +351,7 @@ export default function SingleProductPage() {
                       </div>
 
                       <div>
+                        <p>rating-</p>
                         {Array.from({ length: review.rating }, (_, index) => (
                           <span key={index} className="text-yellow-500">
                             ★
