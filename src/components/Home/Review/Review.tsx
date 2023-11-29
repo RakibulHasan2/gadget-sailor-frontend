@@ -7,9 +7,11 @@ import useReviewData from "../../../hooks/getReviewData"
 
 export default function Review() {
     const { data } = useReviewData('http://localhost:5000/api/v1/get-AllReviews')
+    const firstFourReviews = data.slice(0, 4);
+
     return (
-        <section className='mx-2 pb-20'>
-            <p className='text-3xl font-bold text-center mt-10 mb-10'>Hear what our clients have to say</p>
+        <section className='mx-2 pb-20 lg:mt-20 mt-10'>
+            <p className='text-3xl font-bold text-center mb-10'>Hear what our clients have said</p>
             <Swiper
                 spaceBetween={30}
                 centeredSlides={true}
@@ -24,7 +26,7 @@ export default function Review() {
                 className="mySwiper"
             >
                 {
-                    data?.map(review =>
+                    firstFourReviews?.map(review =>
                         <SwiperSlide key={review.review}>
                             <div className='duration-300 h-72 bg-lightDark rounded-lg p-3 md:py-5 md:px-8 border border-slate-500 shadow-lg max-w-4xl mx-auto'>
 
