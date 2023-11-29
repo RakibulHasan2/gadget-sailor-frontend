@@ -214,6 +214,18 @@ export default function SingleProductPage() {
     setReviewHide('block')
   }
 
+  const [s, setS] = useState('w-32 p-2 border rounded-lg bg-blue-800 text-white')
+  const [r, setR] = useState('w-32 p-2 border rounded-lg bg-gray-200 text-black')
+
+  const sb = () =>{
+      setS('w-32 p-2 border rounded-lg bg-blue-800 text-white')
+      setR('w-32 p-2 border rounded-lg bg-gray-200 text-black')
+  }
+  const rb = () =>{
+      setS('w-32 p-2 border rounded-lg bg-gray-200 text-black')
+      setR('w-32 p-2 border rounded-lg bg-blue-800 text-white')
+  }
+
   return (
     <div >
       <div className="container mx-auto my-8">
@@ -274,8 +286,8 @@ export default function SingleProductPage() {
           </div>
         </div>
         <div className='flex ml-36 gap-x-5 lg:mt-10'>
-          <button className='btn btn-primary' onClick={hideSpacification}>Specification</button>
-          <button className='btn btn-primary' onClick={hideReview}>Reviews ({data.length})</button>
+          <button className={s} onClick={()=>{hideSpacification();sb()}}>Specification</button>
+          <button className={r} onClick={()=>{hideReview();rb()}}>Reviews ({data.length})</button>
         </div>
         <div className=' lg:flex'>
           {/*----- specification section ------*/}
@@ -324,8 +336,6 @@ export default function SingleProductPage() {
                 </div>
               </div>
             </div>
-
-
             {/*----------- review area --------------------*/}
             <div className={reviewHide}>
               <div className='mt-2 shadow-xl rounded-2xl'>
@@ -353,20 +363,14 @@ export default function SingleProductPage() {
                       <div>
                         <button className=' btn-flip speed' type="submit" data-front="Submit Review ＋" data-back="Click to add ≣"></button> <br />
                         {error && <small className='' style={{ color: 'red' }}>{error}</small>}
-                      </div>
-                      
-                    </div>
-
-                   
+                      </div>                  
+                    </div>              
                   </form>
                 </div>
-
-
               </div>
               <div className='flex justify-center mt-10 border-b-2'>
                 <p className="mt-12 mb-2 text-3xl font-bold review-text-shadow-blue"><span className='text-blue-600'>Customer</span> Reviews</p>
               </div>
-
               <div className='mt-10 rounded-2xl'>
                 {
                   data
@@ -390,7 +394,6 @@ export default function SingleProductPage() {
                           <p className='text-2xl text-blue-700'><MdOutlineRateReview /></p>
                           <h1 className='pl-2 mb-3'><span className='font-bold'>❝</span> {review.review} <span className='font-bold'>❞</span></h1>
                         </div>
-
                         <div className='flex items-center justify-between'>
                           <div className='flex p-4 gap-x-1'>
                             <p className='flex items-center font-bold gap-x-1'><TbDeviceIpadHorizontalStar />Rating:</p>
@@ -416,15 +419,9 @@ export default function SingleProductPage() {
                             </div>
                           </div>
                         </div>
-
-
                       </div>)
-                }
-
+                    }
               </div>
-
-
-
             </div>
           </div>
           {/* Related Products Section */}
