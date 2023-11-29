@@ -2,6 +2,7 @@ import AutoCardCarousel from "../../components/Home/AutoCardCarousel/AutoCardCar
 import Banner from "../../components/Home/Banner/Banner";
 import Parallax from "../../components/Home/Parallax/Parallax";
 import RandomProducts from "../../components/Home/RandomProducts/RandomProducts";
+import Review from "../../components/Home/Review/Review";
 import WhyGadgetSailor from "../../components/Home/WhyGadgetSailor/WhyGadgetSailor";
 import Modal from "../../components/Modal";
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
       <Parallax />
       <RandomProducts />
       <WhyGadgetSailor />
+      <Review />
     </div>
   )
 }
