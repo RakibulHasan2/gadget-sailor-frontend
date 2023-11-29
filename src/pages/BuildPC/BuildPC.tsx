@@ -90,7 +90,7 @@ export default function BuildPC() {
               PC-Build
             </h1>
             <div className=" lg:flex">
-              <div className="flex items-center pl-10 mb-2lg:gap-x-4 gap-x-3 lg:pl-0 lg:mb-0">
+              <div className="flex items-center justify-center pl-10 mb-2 mb-2lg:gap-x-4 gap-x-3 lg:pl-0 lg:mb-0">
                 <div className="flex flex-col items-center pr-4 mr-3 lg:mr-0 lg:border-r-2">
                   <span className="text-2xl text-blue-700 animate-pulse"><AiFillPrinter /></span>
                   <button className="text-sm hover:text-blue-600">Print</button>

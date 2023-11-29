@@ -25,7 +25,7 @@ export default function CartModal({ isCartModalOpen, closeCartModal, product_nam
                     </div>
                     <div className="flex justify-center">
                         <div className="justify-around mt-2 lg:flex lg:mt-5 lg:gap-x-5">
-                            <Link to='/my-order'>
+                            <Link to='/my-cart'>
                                 <button className='flex items-center justify-center p-2 text-lg text-blue-700 bg-gray-100 rounded-md gap-x-3 w-44 hover:bg-blue-700 hover:text-white'><FaShoppingCart></FaShoppingCart>View Cart</button>
                             </Link>
                             <button className='flex items-center justify-center p-2 mt-2 text-lg text-blue-700 bg-gray-100 rounded-md lg:mt-0 gap-x-3 w-44 hover:bg-blue-700 hover:text-white'><FaShoppingBag />Confirm Order</button>

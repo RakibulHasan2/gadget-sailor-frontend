@@ -62,7 +62,7 @@ const UpdateImage = ({ singleData }: IProduct) => {
 
     }
     return (
-        <div>
+        <div className="">
             <div>
                 <div className="flex justify-center mb-10 border-b-8">
                     <div className=''>
@@ -80,7 +80,7 @@ const UpdateImage = ({ singleData }: IProduct) => {
                         })} className="w-full max-w-xs input input-bordered rounded-3xl" />
                         {errors.image && <p className='text-red-500'>please select image file</p>}
                     </div>
-                    <div className="ml-24 mt-9 lg:ml-0">
+                    <div className="flex justify-center mt-9 lg:ml-0">
                         <input className="text-white bg-blue-600 hover:text-black btn rounded-3xl" value="Upload" type="submit" />
                     </div>
                 </form>

@@ -38,7 +38,7 @@ export default function MyProfile() {
 
 
     return (
-        <div className='flex background-my-profile'>
+        <div className='lg:flex background-my-profile'>
             {/* Dashboard side bar */}
             <div className='p-5 bg-blue-900 w-60'>
                 <h1 className='flex items-center justify-center mb-10 text-3xl text-white border-b-2'><BiSolidDashboard />My Profile</h1>
@@ -62,24 +62,31 @@ export default function MyProfile() {
                 </div>
             </div>
             {/* my profile Information */}
-            <div className="w-2/3 ml-20">
-                <div className="mb-10 ">
-                    <div className="">
-                        <img src="https://codedesign.org/storage/app/media/uploaded-files/how-to-choose-the-right-e-commerce-agency.jpeg" alt="" className="w-full object-cover rounded-lg h-52" />
+            <div className=" lg:ml-20 lg:w-2/3">
+                <div className="lg:mb-10 ">
+                    <div className="border">
+                        <img src="https://codedesign.org/storage/app/media/uploaded-files/how-to-choose-the-right-e-commerce-agency.jpeg" alt="" className="object-cover w-full rounded-lg h-52" />
                     </div>
-                    {user.image !== undefined ? <div className="absolute ml-10 top-40 avatar online">
-                        <div className="w-24 rounded-full ring ring-info ring-offset-base-100 ring-offset-2">
-                            <img src={user.image} />
+                    {user.image !== undefined ?
+
+                        <div className=''>
+                            <div className="absolute mb-10 lg:ml-10 lg:top-40 avatar online">
+                                <div className="w-32 border rounded-full lg:w-24 ring ring-info ring-offset-base-100 ring-offset-2">
+                                    <img src={user.image} />
+                                </div>
+                            </div>
                         </div>
-                    </div> :
+                        :
                         <div className="absolute ml-10 top-40 avatar online">
                             <div className='bg-white rounded-full text-8xl ring ring-info'>
                                 <FaUserCircle></FaUserCircle>
                             </div>
                         </div>
                     }
-                    <div className="flex items-center justify-between mt-14">
-                        <h1 className='flex items-center ml-2 text-3xl font-bold'><BsPersonBadge></BsPersonBadge>  {user?.name?.firstName} {user?.name?.lastName}</h1>
+                    <div className="flex items-center justify-between mt-32 border lg:mt-14">
+                        <div className='flex justify-center w-full border lg:mr-96 lg:flex-none'>
+                            <h1 className='flex items-center text-3xl font-bold border lg:ml-2'><BsPersonBadge></BsPersonBadge>  {user?.name?.firstName} {user?.name?.lastName}</h1>
+                        </div>
                         {/* --------------------------------------edit profile modal-------------------------------------- */}
                         <dialog id="my_modal_4" className="modal" open={isUserModalOpen} onClose={closeUserModal}>
                             <div className="w-11/12 max-w-5xl modal-box rounded-3xl">

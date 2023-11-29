@@ -1,4 +1,7 @@
+import { ReactNode } from "react";
+
 export type ReviewType = {
+    createdAt?: ReactNode;
     customer_name: string;
     email: string;
     image: string;
