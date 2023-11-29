@@ -202,6 +202,18 @@ export default function SingleProductPage() {
 
   }
 
+  const handleDelete = async (id: string) => {
+    await fetch(`http://localhost:5000/api/v1/get-AllReviews/${id}`, {
+      method: 'DELETE'
+    })
+      .then(response => {
+        if (response.ok) {
+          refetchReview();
+          toast.success('Review Deleted Successfully');
+        }
+      })
+  }
+
 
   const [specificationHide, setSpecificationHide] = useState('block')
   const [reviewHide, setReviewHide] = useState('hidden')
@@ -218,13 +230,13 @@ export default function SingleProductPage() {
   const [s, setS] = useState('w-32 p-2 border rounded-lg bg-blue-800 text-white')
   const [r, setR] = useState('w-32 p-2 border rounded-lg bg-gray-200 text-black')
 
-  const sb = () =>{
-      setS('w-32 p-2 border rounded-lg bg-blue-800 text-white')
-      setR('w-32 p-2 border rounded-lg bg-gray-200 text-black')
+  const sb = () => {
+    setS('w-32 p-2 border rounded-lg bg-blue-800 text-white')
+    setR('w-32 p-2 border rounded-lg bg-gray-200 text-black')
   }
-  const rb = () =>{
-      setS('w-32 p-2 border rounded-lg bg-gray-200 text-black')
-      setR('w-32 p-2 border rounded-lg bg-blue-800 text-white')
+  const rb = () => {
+    setS('w-32 p-2 border rounded-lg bg-gray-200 text-black')
+    setR('w-32 p-2 border rounded-lg bg-blue-800 text-white')
   }
 
   return (
@@ -287,8 +299,8 @@ export default function SingleProductPage() {
           </div>
         </div>
         <div className='flex mt-10 ml-10 lg:ml-36 gap-x-5 lg:mt-10 lg:mt-0'>
-          <button className={s} onClick={()=>{hideSpacification();sb()}}>Specification</button>
-          <button className={r} onClick={()=>{hideReview();rb()}}>Reviews ({data.length})</button>
+          <button className={s} onClick={() => { hideSpacification(); sb() }}>Specification</button>
+          <button className={r} onClick={() => { hideReview(); rb() }}>Reviews ({data.length})</button>
         </div>
         <div className=' lg:flex'>
           {/*----- specification section ------*/}
@@ -364,8 +376,8 @@ export default function SingleProductPage() {
                       <div>
                         <button className=' btn-flip speed' type="submit" data-front="Submit Review ＋" data-back="Click to add ≣"></button> <br />
                         {error && <small className='' style={{ color: 'red' }}>{error}</small>}
-                      </div>                  
-                    </div>              
+                      </div>
+                    </div>
                   </form>
                 </div>
               </div>
@@ -416,12 +428,12 @@ export default function SingleProductPage() {
                           </div>
                           <div>
                             <div className="mb-2 mr-2 text-center lg:text-end lg:mb-0" title='Delete Review'>
-                              <button className='p-3 text-lg text-blue-700 bg-slate-100 rounded-2xl hover:text-red-700'><MdDeleteForever /></button>
+                              <button onClick={() => handleDelete(review._id)} className='p-3 text-lg text-blue-700 bg-slate-100 rounded-2xl hover:text-red-700'><MdDeleteForever /></button>
                             </div>
                           </div>
                         </div>
                       </div>)
-                    }
+                }
               </div>
             </div>
           </div>
