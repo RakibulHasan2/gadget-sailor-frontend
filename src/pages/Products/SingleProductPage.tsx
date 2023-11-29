@@ -18,7 +18,9 @@ import { SlCalender } from "react-icons/sl";
 import { MdOutlineRateReview } from "react-icons/md";
 import { TbDeviceIpadHorizontalStar } from "react-icons/tb";
 import { MdDeleteForever } from "react-icons/md";
-
+import { TbUserStar } from "react-icons/tb";
+import { BsStar } from "react-icons/bs";
+import '../../styles/ReviewButton.css'
 
 export default function SingleProductPage() {
   // eslint-disable-next-line prefer-const
@@ -145,7 +147,7 @@ export default function SingleProductPage() {
         <span
           key={i}
           onClick={() => handleRatingClick(i)}
-          className={`text-3xl cursor-pointer ${starClass}`}
+          className={`text-5xl font-extrabold cursor-pointer ${starClass}`}
         >
           ★
         </span>
@@ -326,81 +328,98 @@ export default function SingleProductPage() {
 
             {/*----------- review area --------------------*/}
             <div className={reviewHide}>
+              <div className='mt-2 border rounded-2xl'>
+                <div className='p-2 text-white bg-blue-950 rounded-tl-2xl rounded-tr-2xl'>
+                  <div className='flex justify-center text-5xl'><h1><TbUserStar /></h1></div>
+                  <div className='flex justify-center text-lg'><h1>Add Review</h1></div>
+                </div>
+
+                <div className='p-2'>
+                  <div className='flex items-center justify-center mt-2 font-bold gap-x-2'><p className='text-lg text-yellow-500 animate-bounce'><BsStar />
+                  </p><p>What's your rating ?</p></div>
+                  <div className='flex justify-center mt-2 font-bold border-b-4 animate-pulse'>
+                    {renderRatingStars()}
+                  </div>
+                  <form onSubmit={handleSubmit}>
+                    <div className='mt-5'>
+                      {/* <label className="textArea"> <span className="text-lg label-text">Write Here:</span></label> */}
+                      <textarea
+                        className="w-full pt-3 h-28 input input-bordered rounded-3xl"
+                        placeholder="Write your valuable Feedback here..."
+                        name='textArea'
+                      />
+                    </div>
+                   <div className="">
+                    <button className='' type="submit">Submit</button>
+                    </div> 
+                    {error && <div style={{ color: 'red' }}>{error}</div>}
+                  </form>
+                </div>
+
+
+              </div>
               <div className='flex justify-center border-b-2'>
                 <p className="mt-12 text-3xl font-bold">Reviews</p>
               </div>
 
               <div className='mt-10 rounded-2xl'>
                 {
-                  data?.map(review =>
-                    <div className='mb-10 border min-h-40 rounded-2xl'>
-                      <div className='flex justify-between bg-blue-900 border-b-2 rounded-tl-2xl rounded-tr-2xl'>
-                        <div className='flex items-center p-2 gap-x-2'>
-                          <div className="avatar">
-                            <div className="w-10 rounded-full ">
-                              <img src={review.image} />
+                  data
+                    ?.sort((a, b) => new Date(b.createdAt as any).getTime() - new Date(a.createdAt as any).getTime())
+                    .map((review) =>
+                      <div className='mb-10 border min-h-40 rounded-2xl'>
+                        <div className='flex justify-between bg-blue-800 border-b-2 rounded-tl-2xl rounded-tr-2xl'>
+                          <div className='flex items-center p-2 gap-x-2'>
+                            <div className="avatar">
+                              <div className="w-10 rounded-full ">
+                                <img src={review.image} />
+                              </div>
+                            </div>
+                            <small className='text-white'>{review.email}</small>
+                          </div>
+                          <div className='flex items-center gap-3 pr-3 text-white'>
+                            <span className=' animate-bounce'><SlCalender /></span> {typeof review?.createdAt === 'string' && review?.createdAt.slice(0, 10)}
+                          </div>
+                        </div>
+                        <div className='p-2 border-b-2'>
+                          <p className='text-2xl text-blue-700'><MdOutlineRateReview /></p>
+                          <h1 className='pl-2 mb-3'><span className='font-bold'>❝</span> {review.review} <span className='font-bold'>❞</span></h1>
+                        </div>
+
+                        <div className='flex items-center justify-between'>
+                          <div className='flex p-4 gap-x-1'>
+                            <p className='flex items-center font-bold gap-x-1'><TbDeviceIpadHorizontalStar />Rating:</p>
+                            <div>
+                              {Array.from({ length: review.rating }, (_, index) => (
+                                <span key={index} className="text-yellow-500 animate-pulse">
+                                  ★
+                                </span>
+                              ))}
+                              {Array.from({ length: 5 - review.rating }, (_, index) => (
+                                <span key={index} className="text-gray-300">
+                                  ★
+                                </span>
+                              ))}
+                            </div>
+                            <div>
+                              <h1>'{review.rating}.0' out of '5.0'</h1>
                             </div>
                           </div>
-                          <small className='text-white'>{review.email}</small>
-                        </div>
-                        <div className='flex items-center gap-3 pr-3 text-white'>
-                          <span className=' animate-bounce'><SlCalender /></span> {typeof review?.createdAt === 'string' && review?.createdAt.slice(0, 10)}
-                        </div>
-                      </div>
-                      <div className='p-2 border-b-2'>
-                        <p className='text-2xl text-blue-700'><MdOutlineRateReview /></p>
-                        <h1 className='pl-2 mb-3'><span className='font-bold'>❝</span> {review.review} <span className='font-bold'>❞</span></h1>
-                      </div>
-
-                      <div className='flex items-center justify-between'>
-                        <div className='flex p-4 gap-x-1'>
-                          <p className='flex items-center font-bold gap-x-1'><TbDeviceIpadHorizontalStar />Rating:</p>
                           <div>
-                            {Array.from({ length: review.rating }, (_, index) => (
-                              <span key={index} className="text-yellow-500 animate-pulse">
-                                ★
-                              </span>
-                            ))}
-                            {Array.from({ length: 5 - review.rating }, (_, index) => (
-                              <span key={index} className="text-gray-300">
-                                ★
-                              </span>
-                            ))}
-                          </div>
-                          <div>
-                            <h1>'{review.rating}.0' out of '5.0'</h1>
+                            <div className="mr-2 text-center lg:text-end" title='Delete Review'>
+                              <button className='p-3 text-lg text-blue-700 bg-slate-100 rounded-2xl hover:text-red-700'><MdDeleteForever /></button>
+                            </div>
                           </div>
                         </div>
-                        <div>
-                          <div className="mr-2 text-center lg:text-end" title='Delete Review'>
-                            <button className='p-3 text-lg text-blue-700 bg-slate-100 rounded-2xl hover:text-red-700'><MdDeleteForever /></button>
-                          </div>
-                        </div>
-                      </div>
 
 
-                    </div>)
+                      </div>)
                 }
 
               </div>
-              <div className='mt-10'>
-                <div>
-                  <p>Rating</p>
-                  {renderRatingStars()}
-                </div>
-                <form onSubmit={handleSubmit}>
-                  <div>
-                    <label className="textArea"> <span className="text-lg label-text">Write Here:</span></label>
-                    <textarea
-                      className="w-full pt-3 input input-bordered rounded-3xl"
-                      placeholder="your valuable comment"
-                      name='textArea'
-                    />
-                  </div>
-                  <button className='' type="submit">Submit</button>
-                  {error && <div style={{ color: 'red' }}>{error}</div>}
-                </form>
-              </div>
+
+
+
             </div>
           </div>
           {/* Related Products Section */}
