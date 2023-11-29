@@ -1,8 +1,11 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import { StripeError } from "@stripe/stripe-js";
+import { useState } from "react";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const CheckoutForm = ({ data }: any) => {
     console.log(data)
+    const [error, setError] = useState<StripeError | null>(null)
     const stripe = useStripe();
     const elements = useElements();
 
@@ -26,6 +29,7 @@ const CheckoutForm = ({ data }: any) => {
 
         if (error) {
             console.log('[error]', error);
+            setError(error)
         } else {
             console.log('[PaymentMethod]', paymentMethod);
         }
@@ -35,27 +39,30 @@ const CheckoutForm = ({ data }: any) => {
 
 
     return (
-        <form onSubmit={handleSubmit}>
-            <CardElement
-                options={{
-                    style: {
-                        base: {
-                            fontSize: '16px',
-                            color: '#424770',
-                            '::placeholder': {
-                                color: '#aab7c4',
+        <>
+            <form onSubmit={handleSubmit}>
+                <CardElement
+                    options={{
+                        style: {
+                            base: {
+                                fontSize: '16px',
+                                color: '#424770',
+                                '::placeholder': {
+                                    color: '#aab7c4',
+                                },
+                            },
+                            invalid: {
+                                color: '#9e2146',
                             },
                         },
-                        invalid: {
-                            color: '#9e2146',
-                        },
-                    },
-                }}
-            />
-            <button className='btn btn-sm mt-4 btn-primary' type="submit" disabled={!stripe}>
-                Pay
-            </button>
-        </form>
+                    }}
+                />
+                <button className='btn btn-sm mt-4 btn-primary' type="submit" disabled={!stripe}>
+                    Pay
+                </button>
+            </form>
+            <p className="text-red-50">{error}</p>
+        </>
     );
 };
 
