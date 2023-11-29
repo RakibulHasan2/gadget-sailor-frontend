@@ -349,17 +349,22 @@ export default function SingleProductPage() {
                         name='textArea'
                       />
                     </div>
-                   <div className="">
-                    <button className='' type="submit">Submit</button>
-                    </div> 
-                    {error && <div style={{ color: 'red' }}>{error}</div>}
+                    <div className="flex justify-center mt-2 text-center">
+                      <div>
+                        <button className=' btn-flip speed' type="submit" data-front="Submit Review ＋" data-back="Click to add"></button> <br />
+                        {error && <small className='' style={{ color: 'red' }}>{error}</small>}
+                      </div>
+                      
+                    </div>
+
+                   
                   </form>
                 </div>
 
 
               </div>
               <div className='flex justify-center border-b-2'>
-                <p className="mt-12 text-3xl font-bold">Reviews</p>
+                <p className="mt-12 text-3xl font-bold">Customer Reviews</p>
               </div>
 
               <div className='mt-10 rounded-2xl'>
