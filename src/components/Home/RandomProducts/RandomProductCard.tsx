@@ -1,10 +1,10 @@
 import { FaCartPlus } from "react-icons/fa";
-import { IProduct } from "../../types/ProductsType";
+import { IProduct } from "../../../types/ProductsType";
 import { Link } from "react-router-dom";
-import LikeButton from "../Shared/LikeButton/LikeButton";
+import LikeButton from "../../Shared/LikeButton/LikeButton";
 import React from "react";
-import { userData } from "../../hooks/getUserData";
-import CartModal from "../Products/CartModal";
+import { userData } from "../../../hooks/getUserData";
+import CartModal from "../../Products/CartModal";
 
 const RandomProductCard = ({ data }: IProduct) => {
     const { product_name, price, image, model } = data;

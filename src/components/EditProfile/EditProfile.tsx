@@ -53,7 +53,7 @@ export default function EditProfile() {
   return (
     <div>
       <form onSubmit={handleSubmit(handleUpdateProfile)}>
-        <div className="flex ">
+        <div className="lg:flex ">
           <div className="w-full">
             <div className="w-full max-w-xs form-control">
               <label className="label"> <span className="label-text">First Name</span></label>

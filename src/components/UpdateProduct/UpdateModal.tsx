@@ -74,8 +74,8 @@ const UpdateModal = ({ singleData, closeModal }: IProduct,) => {
             <div>
                 <div className='items-center'>
                     <form className="mt-10" onSubmit={handleSubmit(handleUpdateProduct)}>
-                        <div className="flex justify-between">
-                            <div className="w-3/4 mr-40 ">
+                        <div className="justify-between lg:flex">
+                            <div className="lg:mr-40 lg:w-3/4 ">
                                 {/* category */}
                                 <div className="flex justify-center text-2xl text-blue-800 border-b-4">
                                     <h1>Basic Info</h1>
@@ -208,7 +208,7 @@ const UpdateModal = ({ singleData, closeModal }: IProduct,) => {
                                 <div className="flex justify-center mb-3 text-2xl text-blue-800 border-b-4">
                                     <h1>Feature's Info</h1>
                                 </div>
-                                <div className="grid grid-cols-3 gap-x-2 gap-y-5">
+                                <div className="grid-cols-3 lg:grid gap-x-2 gap-y-5">
                                     {Object.entries(otherProperties).map(([key, value]) => (
                                         <div className="w-full max-w-xs form-control">
                                             <label className="font-bold label"> <span className="label-text">{key}</span></label>
