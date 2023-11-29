@@ -65,7 +65,7 @@ export default function MyProfile() {
             <div className=" lg:ml-20 lg:w-2/3">
                 <div className="lg:mb-10 ">
                     <div className="border">
-                        <img src="https://www.greatmindscomms.com/wp-content/uploads/2019/07/team-comm.png" alt="" className="object-cover w-full rounded-lg h-52" />
+                        <img src="https://codedesign.org/storage/app/media/uploaded-files/how-to-choose-the-right-e-commerce-agency.jpeg" alt="" className="object-cover w-full rounded-lg h-52" />
                     </div>
                     {user.image !== undefined ?
 
@@ -129,8 +129,8 @@ export default function MyProfile() {
                             </form>
                         </dialog>
                     </div>
-                    <div className='p-2 lg:mt-5'>
-                        <div className='p-3 font-bold text-white bg-gray-600 rounded-lg'>
+                    <div className='mt-5'>
+                        <div className='p-3 font-bold text-white bg-blue-900 rounded-lg'>
                             <h1>Basic Information</h1>
                         </div>
                         <div className='p-2 mt-2'>
@@ -138,7 +138,7 @@ export default function MyProfile() {
                             <h1 className='mt-3 font-bold border-b-4'>Phone  : {user?.phoneNumber}</h1>
                         </div>
                         {user?.division && user?.city && user?.present_address !== undefined ? <>
-                            <div className='p-3 mt-5 font-bold text-white bg-gray-600 rounded-lg'>
+                            <div className='p-3 mt-5 font-bold text-white bg-blue-900 rounded-lg'>
                                 <h1>Address</h1>
                             </div>
                             <div className='p-2 mt-2'>

@@ -1,4 +1,4 @@
-import useFavData from "../../hooks/getFavData";
+import useFavData from "../../../hooks/getFavData";
 import SingleCards from "./SingleCards";
 import Marquee from "react-fast-marquee";
 
