@@ -1,8 +1,8 @@
-import AutoCardCarousel from "../../components/AutoCardCarousel/AutoCardCarousel";
-import Banner from "../../components/Banner/Banner";
-import Parallax from "../../components/Parallax/Parallax";
-import RandomProducts from "../../components/RandomProducts/RandomProducts";
-import WhyGadgetSailor from "../../components/WhyGadgetSailor/WhyGadgetSailor";
+import AutoCardCarousel from "../../components/Home/AutoCardCarousel/AutoCardCarousel";
+import Banner from "../../components/Home/Banner/Banner";
+import Parallax from "../../components/Home/Parallax/Parallax";
+import RandomProducts from "../../components/Home/RandomProducts/RandomProducts";
+import WhyGadgetSailor from "../../components/Home/WhyGadgetSailor/WhyGadgetSailor";
 import Modal from "../../components/Modal";
 export default function Home() {
   return (

@@ -1,9 +1,9 @@
-import '../../styles/Banner.css'
+import '../../../styles/Banner.css'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
-import img1 from '../../assets/banner/banner1.png';
-import img2 from '../../assets/banner/banner2.png';
-import img3 from '../../assets/banner/banner3.png'
+import img1 from '../../../assets/banner/banner1.png';
+import img2 from '../../../assets/banner/banner2.png';
+import img3 from '../../../assets/banner/banner3.png'
 import 'swiper/css';
 import 'swiper/css/pagination';
 
