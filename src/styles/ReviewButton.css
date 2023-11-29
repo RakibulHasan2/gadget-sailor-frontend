@@ -50,9 +50,13 @@
     line-height: 40px;
     transition: 0.5s;
     position: relative;
-    background: #0f0f3a;
+    background: #1e1e70;
     content: attr(data-front);
     transform: translateY(0) rotateX(0);
     border-radius: 10px;
+  }
+
+  .review-text-shadow-blue {
+    text-shadow: 2px 5px 10px #3498db;
   }
   

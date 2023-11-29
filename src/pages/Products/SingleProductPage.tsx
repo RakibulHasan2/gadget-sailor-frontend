@@ -328,7 +328,7 @@ export default function SingleProductPage() {
 
             {/*----------- review area --------------------*/}
             <div className={reviewHide}>
-              <div className='mt-2 border rounded-2xl'>
+              <div className='mt-2 shadow-xl rounded-2xl'>
                 <div className='p-2 text-white bg-blue-950 rounded-tl-2xl rounded-tr-2xl'>
                   <div className='flex justify-center text-5xl'><h1><TbUserStar /></h1></div>
                   <div className='flex justify-center text-lg'><h1>Add Review</h1></div>
@@ -349,9 +349,9 @@ export default function SingleProductPage() {
                         name='textArea'
                       />
                     </div>
-                    <div className="flex justify-center mt-2 text-center">
+                    <div className="flex justify-center mt-2 mb-5 text-center">
                       <div>
-                        <button className=' btn-flip speed' type="submit" data-front="Submit Review ＋" data-back="Click to add"></button> <br />
+                        <button className=' btn-flip speed' type="submit" data-front="Submit Review ＋" data-back="Click to add ≣"></button> <br />
                         {error && <small className='' style={{ color: 'red' }}>{error}</small>}
                       </div>
                       
@@ -363,8 +363,8 @@ export default function SingleProductPage() {
 
 
               </div>
-              <div className='flex justify-center border-b-2'>
-                <p className="mt-12 text-3xl font-bold">Customer Reviews</p>
+              <div className='flex justify-center mt-10 border-b-2'>
+                <p className="mt-12 mb-2 text-3xl font-bold review-text-shadow-blue"><span className='text-blue-600'>Customer</span> Reviews</p>
               </div>
 
               <div className='mt-10 rounded-2xl'>
