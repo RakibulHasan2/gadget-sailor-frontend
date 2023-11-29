@@ -16,6 +16,8 @@ import toast from 'react-hot-toast';
 import useReviewData from '../../hooks/getReviewData';
 import { SlCalender } from "react-icons/sl";
 import { MdOutlineRateReview } from "react-icons/md";
+import { TbDeviceIpadHorizontalStar } from "react-icons/tb";
+import { MdDeleteForever } from "react-icons/md";
 
 
 export default function SingleProductPage() {
@@ -273,7 +275,7 @@ export default function SingleProductPage() {
           <button className='btn btn-primary' onClick={hideSpacification}>Specification</button>
           <button className='btn btn-primary' onClick={hideReview}>Reviews ({data.length})</button>
         </div>
-        <div className='border lg:flex'>
+        <div className=' lg:flex'>
           {/*----- specification section ------*/}
           <div className="w-full p-6 shadow-xl lg:mt-5 lg:w-3/5 lg:ml-36">
             <div className={specificationHide}>
@@ -346,23 +348,36 @@ export default function SingleProductPage() {
                         </div>
                       </div>
                       <div className='p-2 border-b-2'>
-                        <p className='text-3xl text-blue-700'><MdOutlineRateReview /></p>
-                        <h1 className=''><span className='font-bold'>❝</span> {review.review} <span className='font-bold'>❞</span></h1>
+                        <p className='text-2xl text-blue-700'><MdOutlineRateReview /></p>
+                        <h1 className='pl-2 mb-3'><span className='font-bold'>❝</span> {review.review} <span className='font-bold'>❞</span></h1>
                       </div>
 
-                      <div>
-                        <p>rating-</p>
-                        {Array.from({ length: review.rating }, (_, index) => (
-                          <span key={index} className="text-yellow-500">
-                            ★
-                          </span>
-                        ))}
-                        {Array.from({ length: 5 - review.rating }, (_, index) => (
-                          <span key={index} className="text-gray-300">
-                            ★
-                          </span>
-                        ))}
+                      <div className='flex items-center justify-between'>
+                        <div className='flex p-4 gap-x-1'>
+                          <p className='flex items-center font-bold gap-x-1'><TbDeviceIpadHorizontalStar />Rating:</p>
+                          <div>
+                            {Array.from({ length: review.rating }, (_, index) => (
+                              <span key={index} className="text-yellow-500 animate-pulse">
+                                ★
+                              </span>
+                            ))}
+                            {Array.from({ length: 5 - review.rating }, (_, index) => (
+                              <span key={index} className="text-gray-300">
+                                ★
+                              </span>
+                            ))}
+                          </div>
+                          <div>
+                            <h1>'{review.rating}.0' out of '5.0'</h1>
+                          </div>
+                        </div>
+                        <div>
+                          <div className="mr-2 text-center lg:text-end" title='Delete Review'>
+                            <button className='p-3 text-lg text-blue-700 bg-slate-100 rounded-2xl hover:text-red-700'><MdDeleteForever /></button>
+                          </div>
+                        </div>
                       </div>
+
 
                     </div>)
                 }
