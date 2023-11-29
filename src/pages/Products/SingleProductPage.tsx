@@ -286,7 +286,7 @@ export default function SingleProductPage() {
             </div>
           </div>
         </div>
-        <div className='flex ml-36 gap-x-5 lg:mt-10'>
+        <div className='flex mt-10 ml-10 lg:ml-36 gap-x-5 lg:mt-10 lg:mt-0'>
           <button className={s} onClick={()=>{hideSpacification();sb()}}>Specification</button>
           <button className={r} onClick={()=>{hideReview();rb()}}>Reviews ({data.length})</button>
         </div>
@@ -378,7 +378,7 @@ export default function SingleProductPage() {
                     ?.sort((a, b) => new Date(b.createdAt as any).getTime() - new Date(a.createdAt as any).getTime())
                     .map((review) =>
                       <div className='mb-10 border min-h-40 rounded-2xl'>
-                        <div className='flex justify-between bg-blue-800 border-b-2 rounded-tl-2xl rounded-tr-2xl'>
+                        <div className='justify-between bg-blue-800 border-b-2 lg:flex rounded-tl-2xl rounded-tr-2xl '>
                           <div className='flex items-center p-2 gap-x-2'>
                             <div className="avatar">
                               <div className="w-10 rounded-full ">
@@ -387,7 +387,7 @@ export default function SingleProductPage() {
                             </div>
                             <small className='text-white'>{review.email}</small>
                           </div>
-                          <div className='flex items-center gap-3 pr-3 text-white'>
+                          <div className='flex items-center gap-3 pr-3 mb-2 ml-5 text-sm text-white lg:mb-0 lg:ml-0 lg:text-md'>
                             <span className=' animate-bounce'><SlCalender /></span> {typeof review?.createdAt === 'string' && review?.createdAt.slice(0, 10)}
                           </div>
                         </div>
@@ -395,8 +395,8 @@ export default function SingleProductPage() {
                           <p className='text-2xl text-blue-700'><MdOutlineRateReview /></p>
                           <h1 className='pl-2 mb-3'><span className='font-bold'>❝</span> {review.review} <span className='font-bold'>❞</span></h1>
                         </div>
-                        <div className='flex items-center justify-between'>
-                          <div className='flex p-4 gap-x-1'>
+                        <div className='items-center justify-between lg:flex'>
+                          <div className='flex p-4 mb-2 border-b-2 gap-x-1 lg:border-b-0 lg:mb-0'>
                             <p className='flex items-center font-bold gap-x-1'><TbDeviceIpadHorizontalStar />Rating:</p>
                             <div>
                               {Array.from({ length: review.rating }, (_, index) => (
@@ -415,7 +415,7 @@ export default function SingleProductPage() {
                             </div>
                           </div>
                           <div>
-                            <div className="mr-2 text-center lg:text-end" title='Delete Review'>
+                            <div className="mb-2 mr-2 text-center lg:text-end lg:mb-0" title='Delete Review'>
                               <button className='p-3 text-lg text-blue-700 bg-slate-100 rounded-2xl hover:text-red-700'><MdDeleteForever /></button>
                             </div>
                           </div>
@@ -428,7 +428,7 @@ export default function SingleProductPage() {
           {/* Related Products Section */}
           {
             suggestedData.length > 0 && <>
-              <div className='ml-4 lg:mt-10'>
+              <div className='p-2 lg:ml-4 lg:mt-10'>
                 <div className='py-4 mt-4 text-center bg-sky-950'>
                   <h2 className='text-lg text-white'>Related Products</h2>
                 </div>

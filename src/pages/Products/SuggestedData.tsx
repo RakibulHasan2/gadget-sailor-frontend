@@ -4,12 +4,12 @@ import { CgChevronRight } from "react-icons/cg";
 
 const SuggestedData = ({ data }: IProduct) => {
     return (
-        <div className="mr-3 lg:mr-0">
+        <div className=" lg:mr-0">
             <div className="mb-2 shadow-xl card lg:w-96 bg-base-100">
                 <div className="card-body">
                     <div className="flex items-center">
-                        <img src={data.image[0]} alt="Product" className="rounded-xl w-14 mr-4" />
-                        <div className="mr-4 w-3/4">
+                        <img src={data.image[0]} alt="Product" className="mr-4 rounded-xl w-14" />
+                        <div className="w-3/4 mr-4">
                             <h2 className="text-lg font-semibold">{data.model}</h2>
                             <p>Price: {data.price}</p>
                         </div>
