@@ -4,10 +4,20 @@ import { useForm } from 'react-hook-form';
 import { CheckoutFormValues } from "../../types/FormType";
 import { userData } from "../../hooks/getUserData";
 import { ICartResponse } from "../../types/CartModalType";
+import { loadStripe } from "@stripe/stripe-js";
+import CheckoutForm from "./CheckoutForm";
+import { Elements } from "@stripe/react-stripe-js";
+import { useState } from "react";
+
+
+const stripePromise = loadStripe('pk_test_51M8NuoDiyv5tmMKuNdL0GTfndh3lFLwZKkkSn2ITrLo3HjeSIyf7tjD0vTCQqf6x6dGXKjgqm0XCTJdmFJEmgCge00LyoHRros');
+console.log(stripePromise)
 
 export default function MyOrder() {
 
     const data = useLoaderData() as ICartResponse;
+    const [userInfo, setUserInfo] = useState<CheckoutFormValues[]>([]);
+    const [count, setCount] = useState(0);
     const user = userData()
     const CartDetails = data.data;
     const { register, handleSubmit, formState: { errors } } = useForm<CheckoutFormValues>();
@@ -22,22 +32,48 @@ export default function MyOrder() {
         return totalPrice.toFixed(2);
     };
 
+
+
+
+    const checkoutInfo = CartDetails.map(item => (
+        {
+            [item.product_name]: item.product_name,
+            [`${item.product_name}_price`]: item.unit_price,
+            total_price: item.total_price,
+        }
+    ));
+
+    const checkoutInfoArray = Object.assign({}, ...checkoutInfo);
+
+    const combinedObject = Object.assign({}, ...userInfo, checkoutInfoArray);
+
+    const handleCount = () => {
+        if (count === 0) {
+            setCount(1)
+        }
+        else {
+            setCount(0)
+        }
+    }
+
     const handleCheckout = async (data: CheckoutFormValues) => {
 
-        console.log(data)
-        const checkoutInfo = {
-            name: {
-                firstName: data.firstName,
-                lastName: data.lastName
-            },
-            email: data.email,
-            phoneNumber: data.phoneNumber,
-            address: data.address,
-            city: data.city,
-            comments: data.comments
-        }
-        console.log(checkoutInfo)
+        //console.log(data)
+        // console.log(checkoutInfoArray)
+        setUserInfo([data])
+        handleCount();
     }
+
+
+
+    // const handleFunctions = () => {
+    //     handleCount();
+    //     handleCheckout(info);
+    // }
+
+    console.log(userInfo)
+    console.log(count)
+    console.log(combinedObject)
     return (
         <div className="flex gap-2">
             <div className="">
@@ -128,40 +164,60 @@ export default function MyOrder() {
                 </div>
             </div>
             <div>
-                <h2 className="text-lg font-semibold">Selected Products for payment:</h2>
-                <table className="table">
-                    {/* head */}
-                    <thead className="heading">
-                        <tr>
-                            <th></th>
+                <div>
+                    <h2 className="text-lg font-semibold">Selected Products for payment:</h2>
+                    <table className="table">
+                        {/* head */}
+                        <thead className="heading">
+                            <tr>
+                                <th></th>
 
-                            <th>Product Name</th>
-                            <th>Model</th>
-                            <th>Quantity</th>
-                            <th>Unit Price</th>
-                            <th>Total</th>
-                        </tr>
-                    </thead>
-                    <tbody className="row-info">
-                        {
-                            CartDetails.map((item, index) =>
-                                // row
-                                <tr key={item._id}>
-                                    <th>{index + 1}</th>
+                                <th>Product Name</th>
+                                <th>Model</th>
+                                <th>Quantity</th>
+                                <th>Unit Price</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody className="row-info">
+                            {
+                                CartDetails.map((item, index) =>
+                                    // row
+                                    <tr key={item._id}>
+                                        <th>{index + 1}</th>
 
-                                    <td>{item.product_name}</td>
-                                    <td>{item.model}</td>
-                                    <td>{item.quantity}</td>
+                                        <td>{item.product_name}</td>
+                                        <td>{item.model}</td>
+                                        <td>{item.quantity}</td>
 
-                                    <td>{item.unit_price}৳</td>
-                                    <td>{item.total_price}৳	</td>
-                                </tr>
-                            )
-                        }
-                    </tbody>
-                </table>
-                <p className="text-lg font-bold mb-4">Total: {calculateTotalPrice()}৳</p>
+                                        <td>{item.unit_price}৳</td>
+                                        <td>{item.total_price}৳	</td>
+                                    </tr>
+                                )
+                            }
+                        </tbody>
+                    </table>
+                    <p className="text-lg font-bold mb-4">Total: {calculateTotalPrice()}৳</p>
+                </div>
+
+
+                {
+                    count === 0 && userInfo.length === 0 ?
+                        <div className='w-96 my-12' >
+                            <button onClick={() => alert('Please fill up the customer information form at first.')} className='btn btn-sm mt-4 btn-primary'>Pay</button>
+                        </div>
+                        :
+
+                        <div className='w-96 my-12' >
+                            <Elements stripe={stripePromise}>
+                                <CheckoutForm
+                                    data={combinedObject} />
+                            </Elements>
+                        </div>
+
+                }
             </div>
+
         </div>
     )
 }
