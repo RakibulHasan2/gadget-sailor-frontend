@@ -56,3 +56,10 @@
     transform: scale(0.1, 1);
   }
   
+.lefts{
+  margin-left:25%;
+}
+
+.name-left{
+    margin-left:23%;
+}

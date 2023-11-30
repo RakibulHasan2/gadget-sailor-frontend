@@ -24,7 +24,7 @@ interface UniqueCategories {
 }
 
 export default function BuildPC() {
-  const data = useProductData('https://gadget-sailor-backend.vercel.app/api/v1/allProducts/Components')
+  const data = useProductData('http://localhost:5000/api/v1/allProducts/Components')
   const { selectedProducts, deleteProduct } = useSelectedProducts();
   const [chosenItems, setChosenItems] = useState(new Set());
   const user = userData();
@@ -53,7 +53,7 @@ export default function BuildPC() {
         };
 
         // Make the POST request to add this item to the cart
-        await fetch('https://gadget-sailor-backend.vercel.app/api/v1/addCart', {
+        await fetch('http://localhost:5000/api/v1/addCart', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

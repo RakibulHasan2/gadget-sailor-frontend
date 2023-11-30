@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { IProduct } from '../../../types/ProductsType'
 import '../../../styles/Loader.css'
 export default function NavbarItem() {
-    const { data, isLoading } = useProductData("https://gadget-sailor-backend.vercel.app/api/v1/allProducts")
+    const { data, isLoading } = useProductData("http://localhost:5000/api/v1/allProducts")
     const categories: string[] = [...new Set(data.map((item: IProduct) => item.category_name))];
     if (isLoading) {
         return <div className="flex justify-center mt-5"><span className="loader"></span></div>;

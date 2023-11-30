@@ -6,7 +6,7 @@ import 'swiper/css/navigation';
 import useReviewData from "../../../hooks/getReviewData"
 
 export default function Review() {
-    const { data } = useReviewData('https://gadget-sailor-backend.vercel.app/api/v1/get-AllReviews')
+    const { data } = useReviewData('http://localhost:5000/api/v1/get-AllReviews')
     const firstFourReviews = data.slice(0, 4);
 
     return (

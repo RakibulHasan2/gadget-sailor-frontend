@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 
 const AddSubCategory = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<ICategory>();
-    const { data, isLoading } = useProductData("https://gadget-sailor-backend.vercel.app/api/v1/get-AllCategories")
+    const { data, isLoading } = useProductData("http://localhost:5000/api/v1/get-AllCategories")
     if (isLoading) {
         return <p>Loading...</p>;
     }
@@ -15,7 +15,7 @@ const AddSubCategory = () => {
             sub_category_name: data.sub_category_name
 
         }
-        const response = await fetch('https://gadget-sailor-backend.vercel.app/api/v1/add_subCategory', {
+        const response = await fetch('http://localhost:5000/api/v1/add_subCategory', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -37,7 +37,7 @@ const AddSubCategory = () => {
         <div>
             <form onSubmit={
                 handleSubmit(handleAddSubCategory)
-            } className="pl-16">
+            } className="lg:pl-16">
                 {/* category */}
                 <div className="w-full max-w-xs form-control">
                     <label className="label"> <span className="label-text">Product category</span></label>
@@ -61,7 +61,7 @@ const AddSubCategory = () => {
                         className="w-full max-w-xs input input-bordered rounded-3xl" />
                     {errors.sub_category_name && <p className='text-red-600'>{errors.sub_category_name?.message}</p>}
                 </div>
-                <div className="mt-6 ml-36">
+                <div className="mt-6 ml-32 lg:ml-36">
                     <input className="text-white bg-blue-600 hover:text-black btn rounded-xl" value="Add" type="submit" />
                 </div>
             </form>
