@@ -1,11 +1,11 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { StripeError } from "@stripe/stripe-js";
-import { useState } from "react";
+//import { StripeError } from "@stripe/stripe-js";
+//import { useState } from "react";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const CheckoutForm = ({ data }: any) => {
     console.log(data)
-    const [error, setError] = useState<StripeError | null>(null)
+    // const [cardError, setCardError] = useState<string | null>(null)
     const stripe = useStripe();
     const elements = useElements();
 
@@ -29,7 +29,7 @@ const CheckoutForm = ({ data }: any) => {
 
         if (error) {
             console.log('[error]', error);
-            setError(error)
+            //setCardError(error)
         } else {
             console.log('[PaymentMethod]', paymentMethod);
         }
@@ -61,7 +61,7 @@ const CheckoutForm = ({ data }: any) => {
                     Pay
                 </button>
             </form>
-            <p className="text-red-50">{error}</p>
+            {/* <p className="text-red-50">{cardError}</p> */}
         </>
     );
 };
