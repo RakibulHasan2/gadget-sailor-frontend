@@ -7,7 +7,7 @@ import { userData } from "../../hooks/getUserData";
 import useCartData from "../../hooks/useCartData";
 export default function ShoppingCartSideBar() {
     const user = userData()
-    const { data, refetch } = useCartData(`https://gadget-sailor-backend.vercel.app/api/v1/getCart/${user?.id}`);
+    const { data, refetch } = useCartData(`http://localhost:5000/api/v1/getCart/${user?.id}`);
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const toggleCart: () => void = () => {
         refetch();
@@ -15,7 +15,7 @@ export default function ShoppingCartSideBar() {
     };
 
     const handleDeleteCart = (id: string) => {
-        fetch(`https://gadget-sailor-backend.vercel.app/api/v1/getCart/${id}`, {
+        fetch(`http://localhost:5000/api/v1/getCart/${id}`, {
             method: 'DELETE',
         })
             .then(response => {
