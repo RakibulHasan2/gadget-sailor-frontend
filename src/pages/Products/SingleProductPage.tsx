@@ -388,8 +388,8 @@ export default function SingleProductPage() {
               {
                 data.length === 0 ?
 
-                <div>
-                    <span className="no-found-review"></span>
+                <div className='flex justify-center mt-10 mb-10'>
+                    <span className="no-found-review">No reviews Found ☹</span>
                 </div>
                 :
 
