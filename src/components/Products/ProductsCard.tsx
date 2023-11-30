@@ -13,7 +13,7 @@ import useFavData from '../../hooks/getFavData';
 export default function ProductsCard({ product }: IProduct) {
     const { product_name, price, _id, image, model } = product;
     const user = userData()
-    const { data } = useFavData(`https://gadget-sailor-backend.vercel.app/api/v1/getFav/${user?.email}`);
+    const { data } = useFavData(`http://localhost:5000/api/v1/getFav/${user?.email}`);
     const CartDetails = async () => {
         const cartData = {
             product_name: product_name,

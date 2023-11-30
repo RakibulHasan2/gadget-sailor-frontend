@@ -16,13 +16,13 @@ const AddProduct = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<AddProductValues>();
     const imageHosKey = '1a6c0e11cdde66ffb8f933ec4079f59e';
     const navigate = useNavigate();
-    const { data, isLoading } = useProductData("https://gadget-sailor-backend.vercel.app/api/v1/allProducts")
+    const { data, isLoading } = useProductData("http://localhost:5000/api/v1/allProducts")
 
     // get categories---------------------------------
     const [categoryData, setCategoryData] = React.useState<ICategory[]>([]);
 
     React.useEffect(() => {
-        fetch('https://gadget-sailor-backend.vercel.app/api/v1/get-AllCategories')
+        fetch('http://localhost:5000/api/v1/get-AllCategories')
             .then(res => res.json())
             .then((data: ICategoryResponse) => {
                 setCategoryData(data.data);
@@ -35,7 +35,7 @@ const AddProduct = () => {
     //get sub category-----------------------------
     const [subCategoryData, setSubCategoryData] = React.useState<ICategory[]>([]);
     React.useEffect(() => {
-        fetch('https://gadget-sailor-backend.vercel.app/api/v1/get-subCategories')
+        fetch('http://localhost:5000/api/v1/get-subCategories')
             .then(res => res.json())
             .then((data: ICategoryResponse) => {
                 setSubCategoryData(data.data);
@@ -111,7 +111,7 @@ const AddProduct = () => {
             others_info: data.others_info,
         }
         //Create a new product
-        const response = await fetch('https://gadget-sailor-backend.vercel.app/api/v1/add-products', {
+        const response = await fetch('http://localhost:5000/api/v1/add-products', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -128,15 +128,18 @@ const AddProduct = () => {
         }
     }
     return (
-        <div className="flex background-my-profile">
-            <div className='bg-blue-900 w-72 '>
-                <h1 className='flex items-center justify-center mt-5 mb-10 text-2xl text-white border-b-2'><FaBoxOpen />Porduct-Management</h1>
-                <div>
-                    <button className="flex items-center justify-center w-56 h-10 mb-6 ml-6 font-bold btn-one gap-x-2" onClick={openCategoryModal}><span><MdCategory />
-                    </span> Add Category</button>
-                    <button className="flex items-center justify-center w-56 h-10 mb-6 ml-6 font-bold btn-one gap-x-2" onClick={openSubCategoryModal}> <span><BiCategoryAlt /></span> Add Sub-category</button>
-                    <Link to='/home'><button className="flex items-center justify-center w-56 h-10 mb-6 ml-6 font-bold btn-one gap-x-2"><FaHome />
-                        Back Home</button></Link>
+        <div className="lg:flex background-my-profile">
+            <div className='bg-blue-900 lg:w-72'>
+                <h1 className='flex items-center justify-center pt-3 mb-10 text-2xl text-white border-b-2 lg:mt-5'><FaBoxOpen />Porduct-Management</h1>
+                <div className="flex justify-center lg:flex-none">
+                    <div>
+                        <button className="flex items-center justify-center w-56 h-10 mb-6 ml-3 font-bold btn-one gap-x-2" onClick={openCategoryModal}><span><MdCategory />
+                        </span> Add Category</button>
+                        <button className="flex items-center justify-center w-56 h-10 mb-6 ml-3 font-bold btn-one gap-x-2" onClick={openSubCategoryModal}> <span><BiCategoryAlt /></span> Add Sub-category</button>
+                        <Link to='/home'><button className="flex items-center justify-center w-56 h-10 mb-5 ml-3 font-bold btn-one gap-x-2"><FaHome />
+                            Back Home</button></Link>
+                    </div>
+
                     {/* add category */}
                     <dialog id="categoryModal" className="modal">
                         <div className="modal-box rounded-2xl">
@@ -172,14 +175,15 @@ const AddProduct = () => {
                 </div>
             </div>
             <div>
-                <div className='w-full p-7 ml-28'>
+                <div className='w-full p-7 lg:ml-28'>
                     <div className="mt-2 border-b-4">
                         <h1 className='flex justify-center text-5xl text-center text-blue-700'><FaBoxOpen ></FaBoxOpen></h1>
                         <h2 className='text-3xl font-bold text-center text-sky-500'>Add New Product Section</h2>
                     </div>
                     <form onSubmit={handleSubmit(handleAddProduct)} className="mt-10">
-                        <div className="flex justify-between">
-                            <div>
+                        <div className="flex justify-center">
+                              <div className=" lg:justify-between lg:flex gap-x-10">
+                            <div className="">
                                 <div className="w-full max-w-xs form-control">
                                     <label className="label"> <span className="label-text">Product category</span></label>
                                     <select className="w-full max-w-xs select select-bordered rounded-3xl" {...register("category_name", {
@@ -295,6 +299,8 @@ const AddProduct = () => {
                                 </div>
                             </div>
                         </div>
+                        </div>
+                      
                         <div className="flex justify-center"><input className='w-48 mt-4 text-white bg-blue-600 rounded-2xl btn hover:text-black' value="Add Product" type="submit" />
                         </div>
                         <div>

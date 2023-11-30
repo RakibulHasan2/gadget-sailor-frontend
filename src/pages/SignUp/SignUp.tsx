@@ -29,7 +29,7 @@ export default function SignUp() {
         }
 
 
-        await fetch('https://gadget-sailor-backend.vercel.app/api/v1/auth/signup', {
+        await fetch('http://localhost:5000/api/v1/auth/signup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
