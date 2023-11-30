@@ -16,7 +16,7 @@ export default function Login() {
     navigate('/')
   }
   const handleLogin = async (data: FieldValues) => {
-    fetch('http://localhost:5000/api/v1/auth/login', {
+    fetch('https://gadget-sailor-backend.vercel.app/api/v1/auth/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

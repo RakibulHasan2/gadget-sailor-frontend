@@ -9,7 +9,7 @@ const UpdateModal = ({ singleData, closeModal }: IProduct,) => {
     const { register, handleSubmit, formState: { errors } } = useForm<UpdateProductValues>();
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { __v, _id, category_name, sub_category_name, product_name, price, status, product_code, description, reviews, brand_name, image, model, warranty, ...otherProperties } = singleData;
-    const { data, isLoading } = useProductData("http://localhost:5000/api/v1/allProducts")
+    const { data, isLoading } = useProductData("https://gadget-sailor-backend.vercel.app/api/v1/allProducts")
     if (isLoading) {
         return <div className="flex justify-center p-10"><span className="loader"></span></div>;
     }
@@ -49,7 +49,7 @@ const UpdateModal = ({ singleData, closeModal }: IProduct,) => {
             )
         }
 
-        const response = await fetch(`http://localhost:5000/api/v1/allProducts/${_id}`, {
+        const response = await fetch(`https://gadget-sailor-backend.vercel.app/api/v1/allProducts/${_id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
