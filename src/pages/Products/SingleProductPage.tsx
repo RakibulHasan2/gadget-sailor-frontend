@@ -29,7 +29,6 @@ export default function SingleProductPage() {
   const singleProduct = useLoaderData() as any;
   const singleProductData = singleProduct.data as IProduct;
   const user = userData();
-  console.log(user.name)
   const navigate = useNavigate()
   const { refetch } = useProductData("http://localhost:5000/api/v1/getCart");
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -202,6 +201,18 @@ export default function SingleProductPage() {
 
   }
 
+  const handleDelete = async (id: string) => {
+    await fetch(`http://localhost:5000/api/v1/get-AllReviews/${id}`, {
+      method: 'DELETE'
+    })
+      .then(response => {
+        if (response.ok) {
+          refetchReview();
+          toast.success('Review Deleted Successfully');
+        }
+      })
+  }
+
 
   const [specificationHide, setSpecificationHide] = useState('block')
   const [reviewHide, setReviewHide] = useState('hidden')
@@ -218,13 +229,13 @@ export default function SingleProductPage() {
   const [s, setS] = useState('w-32 p-2 border rounded-lg bg-blue-800 text-white')
   const [r, setR] = useState('w-32 p-2 border rounded-lg bg-gray-200 text-black')
 
-  const sb = () =>{
-      setS('w-32 p-2 border rounded-lg bg-blue-800 text-white')
-      setR('w-32 p-2 border rounded-lg bg-gray-200 text-black')
+  const sb = () => {
+    setS('w-32 p-2 border rounded-lg bg-blue-800 text-white')
+    setR('w-32 p-2 border rounded-lg bg-gray-200 text-black')
   }
-  const rb = () =>{
-      setS('w-32 p-2 border rounded-lg bg-gray-200 text-black')
-      setR('w-32 p-2 border rounded-lg bg-blue-800 text-white')
+  const rb = () => {
+    setS('w-32 p-2 border rounded-lg bg-gray-200 text-black')
+    setR('w-32 p-2 border rounded-lg bg-blue-800 text-white')
   }
 
   return (
@@ -286,9 +297,9 @@ export default function SingleProductPage() {
             </div>
           </div>
         </div>
-        <div className='flex mt-10 ml-10 lg:ml-36 gap-x-5 lg:mt-10 lg:mt-0'>
-          <button className={s} onClick={()=>{hideSpacification();sb()}}>Specification</button>
-          <button className={r} onClick={()=>{hideReview();rb()}}>Reviews ({data.length})</button>
+        <div className='flex mt-10 ml-10 lg:ml-36 gap-x-5 lg:mt-10'>
+          <button className={s} onClick={() => { hideSpacification(); sb() }}>Specification</button>
+          <button className={r} onClick={() => { hideReview(); rb() }}>Reviews ({data.length})</button>
         </div>
         <div className=' lg:flex'>
           {/*----- specification section ------*/}
@@ -364,15 +375,24 @@ export default function SingleProductPage() {
                       <div>
                         <button className=' btn-flip speed' type="submit" data-front="Submit Review ＋" data-back="Click to add ≣"></button> <br />
                         {error && <small className='' style={{ color: 'red' }}>{error}</small>}
-                      </div>                  
-                    </div>              
+                      </div>
+                    </div>
                   </form>
                 </div>
               </div>
               <div className='flex justify-center mt-10 border-b-2'>
                 <p className="mt-12 mb-2 text-3xl font-bold review-text-shadow-blue"><span className='text-blue-600'>Customer</span> Reviews</p>
               </div>
-              <div className='mt-10 rounded-2xl'>
+
+              {
+                data.length === 0 ?
+
+                <div className='flex justify-center mt-10 mb-10'>
+                    <span className="no-found-review">No reviews Found ☹</span>
+                </div>
+                :
+
+                <div className='mt-10 rounded-2xl'>
                 {
                   data
                     ?.sort((a, b) => new Date(b.createdAt as any).getTime() - new Date(a.createdAt as any).getTime())
@@ -385,7 +405,7 @@ export default function SingleProductPage() {
                                 <img src={review.image} />
                               </div>
                             </div>
-                            <small className='text-white'>{review.email}</small>
+                            <small className='text-white'>{review.customer_name}</small>
                           </div>
                           <div className='flex items-center gap-3 pr-3 mb-2 ml-5 text-sm text-white lg:mb-0 lg:ml-0 lg:text-md'>
                             <span className=' animate-bounce'><SlCalender /></span> {typeof review?.createdAt === 'string' && review?.createdAt.slice(0, 10)}
@@ -416,13 +436,14 @@ export default function SingleProductPage() {
                           </div>
                           <div>
                             <div className="mb-2 mr-2 text-center lg:text-end lg:mb-0" title='Delete Review'>
-                              <button className='p-3 text-lg text-blue-700 bg-slate-100 rounded-2xl hover:text-red-700'><MdDeleteForever /></button>
+                              <button onClick={() => handleDelete(review._id as string)} className='p-3 text-lg text-blue-700 bg-slate-100 rounded-2xl hover:text-red-700'><MdDeleteForever /></button>
                             </div>
                           </div>
                         </div>
                       </div>)
-                    }
-              </div>
+                }
+              </div>              
+              }
             </div>
           </div>
           {/* Related Products Section */}

@@ -9,4 +9,5 @@ export type ReviewType = {
     review: string;
     rating: number,
     product_name: string;
+    _id?:string;
 }
