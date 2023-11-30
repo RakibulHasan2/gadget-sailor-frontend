@@ -40,9 +40,9 @@ export default function MyProfile() {
     return (
         <div className='lg:flex background-my-profile'>
             {/* Dashboard side bar */}
-            <div className='p-5 bg-blue-900 w-60'>
+            <div className='w-full p-5 bg-blue-900 lg:w-60'>
                 <h1 className='flex items-center justify-center mb-10 text-3xl text-white border-b-2'><BiSolidDashboard />My Profile</h1>
-                <div>
+                <div className='grid grid-cols-2 lg:grid-cols-none gap-x-3'>
                     <Link to='/my-cart'>
                         <button className="flex items-center justify-center w-full h-10 mb-5 font-bold btn-one gap-x-2"><FaCartArrowDown /> My Cart</button>
                     </Link>
@@ -83,7 +83,7 @@ export default function MyProfile() {
                         </div>
                     }
                     <div className="flex items-center justify-between pl-2 mt-5 lg:mt-14 ">
-                        <div className='w-full lg:mr-96 lg:flex-none'>
+                        <div className='w-full lg:mr-96 name-left lg:ml-0'>
                             <h1 className='flex items-center text-3xl font-bold lg:ml-2'><BsPersonBadge></BsPersonBadge>  {user?.name?.firstName} {user?.name?.lastName}</h1>
                         </div>
                         {/* --------------------------------------edit profile modal-------------------------------------- */}
