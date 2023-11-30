@@ -29,7 +29,6 @@ export default function SingleProductPage() {
   const singleProduct = useLoaderData() as any;
   const singleProductData = singleProduct.data as IProduct;
   const user = userData();
-  console.log(user.name)
   const navigate = useNavigate()
   const { refetch } = useProductData("https://gadget-sailor-backend.vercel.app/api/v1/getCart");
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

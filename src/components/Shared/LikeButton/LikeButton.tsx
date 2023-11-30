@@ -63,7 +63,7 @@ const LikeButton = ({ info }: IProduct) => {
                 refetch();
             }
             else {
-                toast.error("Couldn't add to your favurite");
+                toast.error("Couldn't add to your favourite");
             }
         }
     }
