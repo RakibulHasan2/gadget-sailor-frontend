@@ -12,7 +12,7 @@ const RandomProducts = () => {
     const [page, setPage] = useState(1);
     const [count, setCount] = useState(0);
     const size = 6;
-    const { data, isLoading } = useProductData("https://gadget-sailor-backend.vercel.app/api/v1/allProducts");
+    const { data, isLoading } = useProductData("http://localhost:5000/api/v1/allProducts");
     if (isLoading) {
         return <div className="flex justify-center p-10"><span className="loader"></span></div>;
     }

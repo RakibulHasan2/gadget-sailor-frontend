@@ -19,7 +19,7 @@ import MyOrder from "../pages/MyOrder/MyOrder";
 
 
 
-const baseUrl = "https://gadget-sailor-backend.vercel.app/api/v1";
+const baseUrl = "http://localhost:5000/api/v1";
 
 const routes = createBrowserRouter([
   {

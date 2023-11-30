@@ -23,7 +23,7 @@ const UploadImage = () => {
         const upload: IUpdateUsers = {
           image: imgData.data.url,
         };
-        const updateResponse = await fetch(`https://gadget-sailor-backend.vercel.app/api/v1/users/${user._id}`, {
+        const updateResponse = await fetch(`http://localhost:5000/api/v1/users/${user._id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',

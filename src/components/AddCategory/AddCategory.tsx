@@ -9,7 +9,7 @@ const AddCategory = () => {
             category_name: data.category_name,
 
         }
-        const response = await fetch('https://gadget-sailor-backend.vercel.app/api/v1/create-category', {
+        const response = await fetch('http://localhost:5000/api/v1/create-category', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -31,7 +31,7 @@ const AddCategory = () => {
         <div className="rounded-2xl">
             <form onSubmit={
                 handleSubmit(handleAddCategory)
-            } className="pl-16 ">
+            } className="lg:pl-16">
                 <div className="w-full max-w-xs form-control">
                     <label className=" label"> <span className="label-text">Category Name</span></label>
 
@@ -43,7 +43,7 @@ const AddCategory = () => {
                         className="w-full max-w-xs input input-bordered rounded-3xl" />
                     {errors.category_name && <p className='text-red-600'>{errors.category_name?.message}</p>}
                 </div>
-                <div className="mt-6 ml-36">
+                <div className="mt-6 ml-32 lg:ml-36">
                     <input className="text-white bg-blue-600 hover:text-black btn rounded-xl" value="Add" type="submit" />
                 </div>
             </form>
