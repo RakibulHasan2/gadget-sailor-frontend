@@ -19,7 +19,7 @@ import MyOrder from "../pages/MyOrder/MyOrder";
 
 
 
-const baseUrl = "http://localhost:5000/api/v1";
+const baseUrl = "https://gadget-sailor-backend.vercel.app/api/v1";
 
 const routes = createBrowserRouter([
   {
@@ -87,7 +87,7 @@ const routes = createBrowserRouter([
         path: "/payment/myOrder/:u_id",
         element: <MyOrder />,
         loader: async ({ params }) => {
-          const response = await fetch(`http://localhost:5000/api/v1/getCart/${params?.u_id}`)
+          const response = await fetch(`${baseUrl}/getCart/${params?.u_id}`)
           const data = await response.json();
           console.log(params);
           console.log(data);
