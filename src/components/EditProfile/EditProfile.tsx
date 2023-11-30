@@ -24,7 +24,7 @@ export default function EditProfile() {
     };
 
     try {
-      const response = await fetch(`http://localhost:5000/api/v1/users/${user._id}`, {
+      const response = await fetch(`https://gadget-sailor-backend.vercel.app/api/v1/users/${user._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
