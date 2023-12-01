@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const CheckoutForm = ({ data }: any) => {
-    const { total_price } = data;
+    const { total_price, firstName, lastName, email, phoneNumber } = data;
     console.log(data)
     const [clientSecret, setClientSecret] = useState("");
-    // const [cardError, setCardError] = useState<string | null>(null)
+    const [cardError, setCardError] = useState<string | null>(null)
     const stripe = useStripe();
     const elements = useElements();
 
@@ -47,10 +47,37 @@ const CheckoutForm = ({ data }: any) => {
 
         if (error) {
             console.log('[error]', error);
-            //setCardError(error)
+            setCardError(error?.message ?? '');
+            console.log('cardError:', cardError);
         } else {
             console.log('[PaymentMethod]', paymentMethod);
         }
+
+        if (data) {
+            const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(
+                clientSecret,
+                {
+                    payment_method: {
+                        card: card,
+                        billing_details: {
+                            name: firstName + " " + lastName,
+                            email: email,
+                            phone: phoneNumber
+
+                        },
+                    },
+                },
+            );
+
+            if (confirmError) {
+                setCardError(confirmError?.message ?? '');
+                console.log('cardError:', cardError);
+                return;
+            }
+            console.log('paymentIntent', paymentIntent);
+
+        }
+
 
 
     }
@@ -79,7 +106,7 @@ const CheckoutForm = ({ data }: any) => {
                     Pay
                 </button>
             </form>
-            {/* <p className="text-red-50">{cardError}</p> */}
+            <p className="text-red-500">{cardError}</p>
         </>
     );
 };
