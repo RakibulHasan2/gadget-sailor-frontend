@@ -44,17 +44,24 @@ const CheckoutForm = ({ data }: any) => {
                             color: '#424770',
                             '::placeholder': {
                                 color: '#aab7c4',
+
                             },
+                          
                         },
                         invalid: {
                             color: '#9e2146',
                         },
+                        
                     },
                 }}
+                className="p-2 border"
             />
-            <button className='mt-4 btn btn-sm btn-primary' type="submit" disabled={!stripe}>
+            <div className="flex justify-center">
+            <button className='mt-5 btn-flip speed' type="submit" data-front="Confirm Click" data-back="PAY" disabled={!stripe}>
                 Pay
             </button>
+            </div>
+            
         </form>
     );
 };

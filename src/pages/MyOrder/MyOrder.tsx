@@ -166,9 +166,12 @@ export default function MyOrder() {
                     </form>
                 </div>
             </div>
-            <div className="p-5 border rounded-xl">
-                <div className="overflow-x-auto">
-                    <h2 className="text-lg font-semibold">Selected Products for payment:</h2>
+            <div className="p-5 shadow-lg rounded-xl">
+                <div className="overflow-x-auto border-b-2">
+                    <div className="flex justify-center p-2 mb-3 border-b-2">
+                        <h2 className="text-lg font-semibold">Selected Products for payment:</h2>
+                    </div>
+                    
                     <table className="table">
                         <thead className="heading">
                             <tr>
@@ -205,11 +208,14 @@ export default function MyOrder() {
                 {
                     count === 0 && userInfo.length === 0 ?
                         <div className='my-12 lg:w-96' >
-                            <button onClick={() => alert('Please fill up the customer information form at first.')} className='mt-4 btn btn-sm btn-primary'>Pay</button>
+                            <button onClick={() => alert('Please fill up the customer information form at first.')} className='w-40 mt-4 btn btn-sm btn-primary'>Pay</button>
                         </div>
                         :
 
                         <div className='p-3 my-12 border rounded-lg lg:w-full bg-slate-100' >
+                            <div className="flex justify-center p-3 mb-3 text-2xl font-bold text-blue-700 border-b-2">
+                                <h1 className="animate-pulse">Please enter the card details</h1>
+                            </div>
                             <Elements stripe={stripePromise}>
                                 <CheckoutForm
                                     data={combinedObject} />
