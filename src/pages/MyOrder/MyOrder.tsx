@@ -76,12 +76,12 @@ export default function MyOrder() {
     console.log(combinedObject)
     return (
         <div className="p-3 lg:p-5 lg:flex justify-evenly">
-            <div className="mt-5 border rounded-lg shadow-2xl lg:mt-0 lg:p-2">
+            <div className="mt-5 rounded-lg shadow-2xl lg:mt-0 lg:p-2">
                 <div className="flex justify-center pt-3 lg:pt-0">
                      <p className="text-2xl font-bold">Customer Information</p>
                 </div>
                
-                <div className='w-full bg-transparent border rounded-2xl lg:w-96 p-7'>
+                <div className='w-full bg-transparent rounded-2xl lg:w-96 p-7'>
                     <form onSubmit={handleSubmit(handleCheckout)} className="">
                         <div className="flex gap-2 mb-4 ">
 
@@ -204,12 +204,12 @@ export default function MyOrder() {
 
                 {
                     count === 0 && userInfo.length === 0 ?
-                        <div className='my-12 w-96' >
+                        <div className='my-12 lg:w-96' >
                             <button onClick={() => alert('Please fill up the customer information form at first.')} className='mt-4 btn btn-sm btn-primary'>Pay</button>
                         </div>
                         :
 
-                        <div className='my-12 w-96' >
+                        <div className='p-3 my-12 border rounded-lg lg:w-full bg-slate-100' >
                             <Elements stripe={stripePromise}>
                                 <CheckoutForm
                                     data={combinedObject} />
