@@ -75,19 +75,22 @@ export default function MyOrder() {
     console.log(count)
     console.log(combinedObject)
     return (
-        <div className="flex gap-2">
-            <div className="">
-                <p className="text-2xl font-bold">Customer Information</p>
-                <div className='bg-transparent rounded-2xl w-96 p-7'>
-                    <form onSubmit={handleSubmit(handleCheckout)}>
-                        <div className="flex gap-2 mb-4">
+        <div className="p-3 lg:p-5 lg:flex justify-evenly">
+            <div className="mt-5 border rounded-lg shadow-2xl lg:mt-0 lg:p-2">
+                <div className="flex justify-center pt-3 lg:pt-0">
+                     <p className="text-2xl font-bold">Customer Information</p>
+                </div>
+               
+                <div className='w-full bg-transparent border rounded-2xl lg:w-96 p-7'>
+                    <form onSubmit={handleSubmit(handleCheckout)} className="">
+                        <div className="flex gap-2 mb-4 ">
 
                             {/*User First Name */}
                             <div className="w-full max-w-xs form-control ">
                                 <label htmlFor="">First Name</label>
                                 <input defaultValue={user?.name?.firstName} type="text" {...register("firstName", {
                                     required: "First Name is Required !"
-                                })} className="w-full max-w-xs bg-transparent input input-bordered" placeholder="First name..." />
+                                })} className="w-full max-w-xs bg-transparent input input-bordered input-info rounded-3xl" placeholder="First name..." />
                                 {errors.firstName && <small className='mt-1 ml-2 text-red-500'>{errors.firstName?.message}</small>}
                             </div>
 
@@ -96,7 +99,7 @@ export default function MyOrder() {
                                 <label htmlFor="">Last Name</label>
                                 <input defaultValue={user?.name?.lastName} type="text" {...register("lastName", {
                                     required: "Last Name is Required !"
-                                })} className="w-full max-w-xs bg-transparent  input input-bordered" placeholder="Last name..." />
+                                })} className="w-full max-w-xs bg-transparent input input-bordered input-info rounded-3xl" placeholder="Last name..." />
                                 {errors.lastName && <small className='mt-1 ml-2 text-red-500'>{errors.lastName?.message}</small>}
                             </div>
                         </div>
@@ -106,7 +109,7 @@ export default function MyOrder() {
                             <label htmlFor="">Email</label>
                             <input defaultValue={user?.email} type="email" {...register("email", {
                                 required: "Email is Required !"
-                            })} className="w-full max-w-xs bg-transparent input input-bordered" placeholder="✉ Email..." />
+                            })} className="w-full max-w-xs bg-transparent input input-bordered input-info rounded-3xl" placeholder="✉ Email..." />
                             {errors.email && <small className='mt-1 ml-2 text-red-500'>{errors.email.message}</small>}
                         </div>
 
@@ -115,26 +118,26 @@ export default function MyOrder() {
                             <label htmlFor="">Phone Number</label>
                             <input defaultValue={user?.phoneNumber} type="text" {...register("phoneNumber", {
                                 required: "Phone Number is Required !",
-                            })} className="w-full max-w-xs bg-transparent input input-bordered" placeholder="☏ Phone number..." />
+                            })} className="w-full max-w-xs bg-transparent input input-bordered input-info rounded-3xl" placeholder="☏ Phone number..." />
                             {errors.phoneNumber && <small className='mt-1 ml-2 text-red-500'>{errors.phoneNumber.message}</small>}
                         </div>
 
                         {/* Address */}
                         <div className="w-full max-w-xs form-control">
                             <label htmlFor="">Address</label>
-                            <input type="text" {...register("address", {
-                                required: "Password is Required !",
-                            })} className="w-full max-w-xs bg-transparent input input-bordered" placeholder="House no, Road No/Name..." />
+                            <input defaultValue={user?.present_address} type="text" {...register("address", {
+                                required: "Address is Required !",
+                            })} className="w-full max-w-xs bg-transparent input input-bordered input-info rounded-3xl" placeholder="House no, Road No/Name..." />
                             {errors.address && <small className='mt-1 ml-2 text-red-500'>{errors.address.message}</small>}
                         </div>
 
                         {/* City */}
-                        <div className="flex gap-2 mb-4 mt-5">
+                        <div className="flex gap-2 mt-5 mb-4">
                             <div className="w-full max-w-xs form-control ">
                                 <label htmlFor="">City</label>
                                 <input type="text" {...register("city", {
                                     required: "City is Required !"
-                                })} className="w-full max-w-xs bg-transparent input input-bordered" placeholder="City..." />
+                                })} className="w-full max-w-xs bg-transparent input input-bordered input-info rounded-3xl" placeholder="City..." />
                                 {errors.firstName && <small className='mt-1 ml-2 text-red-500'>{errors.firstName?.message}</small>}
                             </div>
 
@@ -144,7 +147,7 @@ export default function MyOrder() {
                                 <label htmlFor="">District</label>
                                 <input type="text" {...register("district", {
                                     required: "District is Required !"
-                                })} className="w-full max-w-xs bg-transparent  input input-bordered" placeholder="District..." />
+                                })} className="w-full max-w-xs bg-transparent input input-bordered input-info rounded-3xl" placeholder="District..." />
                                 {errors.lastName && <small className='mt-1 ml-2 text-red-500'>{errors.lastName?.message}</small>}
                             </div>
                         </div>
@@ -156,22 +159,20 @@ export default function MyOrder() {
                                 {...register("comments", {
 
                                 })}
-                                className="w-full max-w-xs input input-bordered " />
+                                className="w-full max-w-xs pt-3 h-28 input input-bordered input-info rounded-3xl" />
                             {errors.comments && <p className='text-red-600'>{errors.comments?.message}</p>}
                         </div>
                         <input className='w-full p-2 mt-4 mb-4 text-black bg-blue-400 btn rounded-3xl' value="Submit" type="submit" />
                     </form>
                 </div>
             </div>
-            <div>
-                <div>
+            <div className="p-5 border rounded-xl">
+                <div className="overflow-x-auto">
                     <h2 className="text-lg font-semibold">Selected Products for payment:</h2>
                     <table className="table">
-                        {/* head */}
                         <thead className="heading">
                             <tr>
                                 <th></th>
-
                                 <th>Product Name</th>
                                 <th>Model</th>
                                 <th>Quantity</th>
@@ -197,18 +198,18 @@ export default function MyOrder() {
                             }
                         </tbody>
                     </table>
-                    <p className="text-lg font-bold mb-4">Total: {calculateTotalPrice()}৳</p>
+                    <p className="mb-4 text-lg font-bold">Total: {calculateTotalPrice()}৳</p>
                 </div>
 
 
                 {
                     count === 0 && userInfo.length === 0 ?
-                        <div className='w-96 my-12' >
-                            <button onClick={() => alert('Please fill up the customer information form at first.')} className='btn btn-sm mt-4 btn-primary'>Pay</button>
+                        <div className='my-12 w-96' >
+                            <button onClick={() => alert('Please fill up the customer information form at first.')} className='mt-4 btn btn-sm btn-primary'>Pay</button>
                         </div>
                         :
 
-                        <div className='w-96 my-12' >
+                        <div className='my-12 w-96' >
                             <Elements stripe={stripePromise}>
                                 <CheckoutForm
                                     data={combinedObject} />

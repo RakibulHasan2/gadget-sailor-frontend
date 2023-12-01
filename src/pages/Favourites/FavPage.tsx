@@ -31,7 +31,6 @@ const FavPage = () => {
                     <div className="mt-5 overflow-x-auto">
                        { data.length !== 0 ? 
                         <table className="table">
-                            {/* head */}
                             <thead className="heading">
                                 <tr>
                                     <th></th>
