@@ -278,7 +278,7 @@ export default function SingleProductPage() {
             </div>
             {/* key features */}
             <div className="lg:mt-10">
-              <p className="text-xl font-bold lg:mb-7">Key Features</p>
+              <p className="text-xl font-bold lg:mb-7 mb-5">Key Features</p>
               <p>Model: {model}</p>
               <p>Warranty: {warranty}</p>
             </div>
@@ -345,7 +345,7 @@ export default function SingleProductPage() {
                   {Object.keys(otherProperties).map((key) => (
                     <div key={key} className="flex items-center justify-between py-3 border-b border-gray-700">
                       <p className="text-gray-600">{key}</p>
-                      <p className="w-2/3">{otherProperties[key]}</p>
+                      <p className="lg:w-2/3 w-5/12">{otherProperties[key]}</p>
                     </div>
                   ))}
                 </div>
