@@ -24,7 +24,6 @@ export default function MyCart() {
         }
       })
   }
-
   return (
     <div className="flex justify-center mt-10 mb-10">
       <div className="lg:w-9/12 lg:p-10 shadow-2xl">
