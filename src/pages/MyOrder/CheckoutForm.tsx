@@ -1,4 +1,5 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import { Console } from "console";
 //import { StripeError } from "@stripe/stripe-js";
 import { useEffect, useState } from "react";
 
@@ -7,13 +8,15 @@ const CheckoutForm = ({ data }: any) => {
     const { total_price, firstName, lastName, email, phoneNumber } = data;
     console.log(data)
     const [clientSecret, setClientSecret] = useState("");
-    const [cardError, setCardError] = useState<string | null>(null)
+    const [cardError, setCardError] = useState<string | null>('')
+    const [success, setSuccess] = useState("");
+    const [transactionId, setTransactionId] = useState("");
     const stripe = useStripe();
     const elements = useElements();
 
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
-        fetch("http://localhost:5000/api/v1/create-payment-intent", {
+        fetch("http://localhost:5000/api/v1/payment/create-payment-intent", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -24,7 +27,10 @@ const CheckoutForm = ({ data }: any) => {
             }),
         })
             .then((res) => res.json())
-            .then((data) => setClientSecret(data.clientSecret));
+            .then((data) => {
+                setClientSecret(data.clientSecret)
+                console.log(data.clientSecret)
+            });
     }, [total_price]);
 
 
@@ -52,31 +58,35 @@ const CheckoutForm = ({ data }: any) => {
         } else {
             console.log('[PaymentMethod]', paymentMethod);
         }
+        console.log(clientSecret)
 
-        if (data) {
-            const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(
-                clientSecret,
-                {
-                    payment_method: {
-                        card: card,
-                        billing_details: {
-                            name: firstName + " " + lastName,
-                            email: email,
-                            phone: phoneNumber
+        const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(
+            clientSecret,
+            {
+                payment_method: {
+                    card: card,
+                    billing_details: {
+                        name: firstName + " " + lastName,
+                        email: email,
+                        phone: phoneNumber
 
-                        },
                     },
                 },
-            );
+            },
+        );
 
-            if (confirmError) {
-                setCardError(confirmError?.message ?? '');
-                console.log('cardError:', cardError);
-                return;
-            }
-            console.log('paymentIntent', paymentIntent);
-
+        if (confirmError) {
+            setCardError(confirmError?.message ?? '');
+            console.log('cardError:', cardError);
+            return;
         }
+        if (paymentIntent.status === "succeeded") {
+            setSuccess('Congrats! Your payment is done')
+            setTransactionId(paymentIntent.id)
+        }
+        console.log('paymentIntent', paymentIntent);
+
+
 
 
 
