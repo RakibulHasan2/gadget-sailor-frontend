@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const CheckoutForm = ({ data }: any) => {
-
+    const { total_price } = data;
     console.log(data)
     const [clientSecret, setClientSecret] = useState("");
     // const [cardError, setCardError] = useState<string | null>(null)
@@ -15,12 +15,17 @@ const CheckoutForm = ({ data }: any) => {
         // Create PaymentIntent as soon as the page loads
         fetch("http://localhost:5000/api/v1/create-payment-intent", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ items: [{ id: "xl-tshirt" }] }),
+            headers: {
+                "Content-Type": "application/json",
+                authorization: `bearer ${sessionStorage.getItem('accessToken')}`
+            },
+            body: JSON.stringify({
+                total_price
+            }),
         })
             .then((res) => res.json())
             .then((data) => setClientSecret(data.clientSecret));
-    }, []);
+    }, [total_price]);
 
 
     const handleSubmit = async (event: { preventDefault: () => void; }) => {

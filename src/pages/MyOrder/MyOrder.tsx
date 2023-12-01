@@ -39,7 +39,8 @@ export default function MyOrder() {
         {
             [item.product_name]: item.product_name,
             [`${item.product_name}_price`]: item.unit_price,
-            total_price: item.total_price,
+            total_price: calculateTotalPrice(),
+
         }
     ));
 
