@@ -68,7 +68,7 @@ export default function ShoppingCartSideBar() {
                                                 <div>
                                                     <img className="w-12" src={data.image as string} alt="" />
                                                 </div>
-                                                <div>
+                                                <div className="w-3/5 text-center">
                                                     <p>{data.product_name}</p>
                                                     <div className="flex justify-center font-bold">
                                                         <p>{data.unit_price}৳  x {data.quantity} = {data.total_price}৳</p>
@@ -88,8 +88,8 @@ export default function ShoppingCartSideBar() {
                         }
                     </div>
                     <div className="">
-                        <p className="mb-4 text-lg font-bold text-right lg:mr-10 lg:mt-4">Total: {calculateTotalPrice()}৳</p>
-                        <Link to={`/payment/${user?.email}`}>
+                        <p className="mb-4 text-lg font-bold text-right lg:mr-10 mr-5 lg:mt-4">Total: {calculateTotalPrice()}৳</p>
+                        <Link to={`/payment/myOrder/${user?.id}`}>
                             <div className="flex justify-center">
                                 <button className="flex items-center justify-center p-3 text-white bg-blue-900 rounded-lg w-52 hover:bg-sky-700 gap-x-2"><FaShoppingBag></FaShoppingBag> Confirm Order</button>
                             </div>

@@ -134,8 +134,13 @@ export default function Navbar() {
                   </div>}
                 </div></button></label>
               <ul tabIndex={0} className="dropdown-content z-[10] menu p-2 shadow bg-base-100 rounded-lg w-52 border text-black">
-                <Link to='/my-profile'><li><a className=" hover:bg-blue-800 hover:text-white">My Profile</a></li></Link>
-                <Link to='/addProduct'><li><a className=" hover:bg-blue-800 hover:text-white">Add Product</a></li></Link>
+
+                {
+                  user?.email === 'gadgetsailoradmin@gmail.com' ?
+                    <Link to='/addProduct'><li><a className=" hover:bg-blue-800 hover:text-white">Add Product</a></li></Link>
+                    :
+                    <Link to='/my-profile'><li><a className=" hover:bg-blue-800 hover:text-white">My Profile</a></li></Link>
+                }
                 <li onClick={() => handleLogout()}><a className=" hover:bg-red-600 hover:text-white">Log-out</a></li>
               </ul>
             </div> : <Link to='/login'><button className="flex w-16 p-2 mr-3 font-bold border rounded-lg lg-w-0">Login<BiLogIn className='text-2xl'></BiLogIn></button></Link>
