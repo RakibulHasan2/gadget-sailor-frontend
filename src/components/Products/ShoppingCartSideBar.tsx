@@ -89,7 +89,7 @@ export default function ShoppingCartSideBar() {
                     </div>
                     <div className="">
                         <p className="mb-4 text-lg font-bold text-right lg:mr-10 mr-5 lg:mt-4">Total: {calculateTotalPrice()}৳</p>
-                        <Link to={`/payment/${user?.email}`}>
+                        <Link to={`/payment/myOrder/${user?.id}`}>
                             <div className="flex justify-center">
                                 <button className="flex items-center justify-center p-3 text-white bg-blue-900 rounded-lg w-52 hover:bg-sky-700 gap-x-2"><FaShoppingBag></FaShoppingBag> Confirm Order</button>
                             </div>
