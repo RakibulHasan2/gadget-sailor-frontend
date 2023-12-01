@@ -28,8 +28,7 @@ export default function Review() {
                 {
                     firstFourReviews?.map(review =>
                         <SwiperSlide key={review.review}>
-                            <div className='duration-300 h-72 bg-lightDark rounded-lg p-3 md:py-5 md:px-8 border border-slate-500 shadow-lg max-w-4xl mx-auto'>
-
+                            <div className='duration-300 h-72 bg-lightDark rounded-lg p-5 md:py-5 md:px-8 border border-slate-500 shadow-lg max-w-4xl mx-auto'>
                                 <div className='flex items-center gap-5 my-5'>
                                     <img className='w-16 md:w-20 h-16 md:h-20 object-cover rounded-full mb-3' src={review.image} alt="" />
                                     <div>
@@ -37,7 +36,7 @@ export default function Review() {
                                         <p className='text-slate-500'>{review.email}</p>
                                     </div>
                                 </div>
-                                <p className='mb-5 italic text-base lg:text-xl'>"{review.review}"</p>
+                                <p className='mb-5 italic text-base lg:text-xl'>"{review.review.slice(0,190)}"</p>
                             </div>
                         </SwiperSlide>
                     )

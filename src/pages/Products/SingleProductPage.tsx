@@ -245,7 +245,11 @@ export default function SingleProductPage() {
           {/* image slider */}
           <div className="pb-2 border-b-2 lg:border-b-0">
             <ImageSlider images={image} />
-            <button onClick={openEditImage} className='flex items-center p-2 ml-2 hover:bg-blue-800 bg-slate-100 rounded-2xl hover hover:text-white'><AiFillEdit />Edit Image</button>
+            {
+              user?.email === 'gadgetsailoradmin@gmail.com' &&
+              <button onClick={openEditImage} className='flex items-center p-2 ml-2 hover:bg-blue-800 bg-slate-100 rounded-2xl hover hover:text-white'><AiFillEdit />Edit Image
+              </button>
+            }
             {/* modal for edit image */}
             <dialog id="editImage" className="modal">
               <div className="modal-box rounded-3xl">
@@ -274,7 +278,7 @@ export default function SingleProductPage() {
             </div>
             {/* key features */}
             <div className="lg:mt-10">
-              <p className="text-xl font-bold lg:mb-7">Key Features</p>
+              <p className="text-xl font-bold lg:mb-7 mb-5">Key Features</p>
               <p>Model: {model}</p>
               <p>Warranty: {warranty}</p>
             </div>
@@ -307,7 +311,11 @@ export default function SingleProductPage() {
             <div className={specificationHide}>
               <div className='flex items-end justify-between'>
                 <p className="text-3xl font-bold">Specification</p>
-                <button onClick={openEditModal} className='flex items-center p-2 hover:bg-blue-800 bg-slate-100 rounded-2xl hover hover:text-white'><AiFillEdit />Edit</button>
+                {
+                  user?.email === 'gadgetsailoradmin@gmail.com' &&
+                  <button onClick={openEditModal} className='flex items-center p-2 hover:bg-blue-800 bg-slate-100 rounded-2xl hover hover:text-white'><AiFillEdit />Edit
+                  </button>
+                }
                 {/* edit modal */}
                 <dialog id="editModal" className="modal">
                   <div className="w-11/12 max-w-5xl modal-box rounded-3xl">
@@ -337,14 +345,17 @@ export default function SingleProductPage() {
                   {Object.keys(otherProperties).map((key) => (
                     <div key={key} className="flex items-center justify-between py-3 border-b border-gray-700">
                       <p className="text-gray-600">{key}</p>
-                      <p className="w-2/3">{otherProperties[key]}</p>
+                      <p className="lg:w-2/3 w-5/12">{otherProperties[key]}</p>
                     </div>
                   ))}
                 </div>
                 {/* warranty information */}
                 <div className="mb-6">
                   <h2 className="p-2 mt-5 text-lg font-bold text-blue-900 bg-green-100">Warranty Information</h2>
-                  <p className="py-3 mt-3 border-b border-gray-700">Warranty <span className="lg:ml-44">{warranty} Limited Warranty</span></p>
+                  <div className="flex items-center justify-between py-3 border-b border-gray-700">
+                    <p className="text-gray-600">Warranty</p>
+                    <p className="w-2/3">{warranty} Limited Warranty</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -387,62 +398,65 @@ export default function SingleProductPage() {
               {
                 data.length === 0 ?
 
-                <div className='flex justify-center mt-10 mb-10'>
+                  <div className='flex justify-center mt-10 mb-10'>
                     <span className="no-found-review">No reviews Found ☹</span>
-                </div>
-                :
+                  </div>
+                  :
 
-                <div className='mt-10 rounded-2xl'>
-                {
-                  data
-                    ?.sort((a, b) => new Date(b.createdAt as any).getTime() - new Date(a.createdAt as any).getTime())
-                    .map((review) =>
-                      <div className='mb-10 border min-h-40 rounded-2xl'>
-                        <div className='justify-between bg-blue-800 border-b-2 lg:flex rounded-tl-2xl rounded-tr-2xl '>
-                          <div className='flex items-center p-2 gap-x-2'>
-                            <div className="avatar">
-                              <div className="w-10 rounded-full ">
-                                <img src={review.image} />
+                  <div className='mt-10 rounded-2xl'>
+                    {
+                      data
+                        ?.sort((a, b) => new Date(b.createdAt as any).getTime() - new Date(a.createdAt as any).getTime())
+                        .map((review) =>
+                          <div className='mb-10 border min-h-40 rounded-2xl'>
+                            <div className='justify-between bg-blue-800 border-b-2 lg:flex rounded-tl-2xl rounded-tr-2xl '>
+                              <div className='flex items-center p-2 gap-x-2'>
+                                <div className="avatar">
+                                  <div className="w-10 rounded-full ">
+                                    <img src={review.image} />
+                                  </div>
+                                </div>
+                                <small className='text-white'>{review.customer_name}</small>
+                              </div>
+                              <div className='flex items-center gap-3 pr-3 mb-2 ml-5 text-sm text-white lg:mb-0 lg:ml-0 lg:text-md'>
+                                <span className=' animate-bounce'><SlCalender /></span> {typeof review?.createdAt === 'string' && review?.createdAt.slice(0, 10)}
                               </div>
                             </div>
-                            <small className='text-white'>{review.customer_name}</small>
-                          </div>
-                          <div className='flex items-center gap-3 pr-3 mb-2 ml-5 text-sm text-white lg:mb-0 lg:ml-0 lg:text-md'>
-                            <span className=' animate-bounce'><SlCalender /></span> {typeof review?.createdAt === 'string' && review?.createdAt.slice(0, 10)}
-                          </div>
-                        </div>
-                        <div className='p-2 border-b-2'>
-                          <p className='text-2xl text-blue-700'><MdOutlineRateReview /></p>
-                          <h1 className='pl-2 mb-3'><span className='font-bold'>❝</span> {review.review} <span className='font-bold'>❞</span></h1>
-                        </div>
-                        <div className='items-center justify-between lg:flex'>
-                          <div className='flex p-4 mb-2 border-b-2 gap-x-1 lg:border-b-0 lg:mb-0'>
-                            <p className='flex items-center font-bold gap-x-1'><TbDeviceIpadHorizontalStar />Rating:</p>
-                            <div>
-                              {Array.from({ length: review.rating }, (_, index) => (
-                                <span key={index} className="text-yellow-500 animate-pulse">
-                                  ★
-                                </span>
-                              ))}
-                              {Array.from({ length: 5 - review.rating }, (_, index) => (
-                                <span key={index} className="text-gray-300">
-                                  ★
-                                </span>
-                              ))}
+                            <div className='p-2 border-b-2'>
+                              <p className='text-2xl text-blue-700'><MdOutlineRateReview /></p>
+                              <h1 className='pl-2 mb-3'><span className='font-bold'>❝</span> {review.review} <span className='font-bold'>❞</span></h1>
                             </div>
-                            <div>
-                              <h1>'{review.rating}.0' out of '5.0'</h1>
+                            <div className='items-center justify-between lg:flex'>
+                              <div className='flex p-4 mb-2 border-b-2 gap-x-1 lg:border-b-0 lg:mb-0'>
+                                <p className='flex items-center font-bold gap-x-1'><TbDeviceIpadHorizontalStar />Rating:</p>
+                                <div>
+                                  {Array.from({ length: review.rating }, (_, index) => (
+                                    <span key={index} className="text-yellow-500 animate-pulse">
+                                      ★
+                                    </span>
+                                  ))}
+                                  {Array.from({ length: 5 - review.rating }, (_, index) => (
+                                    <span key={index} className="text-gray-300">
+                                      ★
+                                    </span>
+                                  ))}
+                                </div>
+                                <div>
+                                  <h1>'{review.rating}.0' out of '5.0'</h1>
+                                </div>
+                              </div>
+                              <div>
+                                {
+                                  user?.email === 'gadgetsailoradmin@gmail.com' &&
+                                  <div className="mb-2 mr-2 text-center lg:text-end lg:mb-0" title='Delete Review'>
+                                    <button onClick={() => handleDelete(review._id as string)} className='p-3 text-lg text-blue-700 bg-slate-100 rounded-2xl hover:text-red-700'><MdDeleteForever /></button>
+                                  </div>
+                                }
+                              </div>
                             </div>
-                          </div>
-                          <div>
-                            <div className="mb-2 mr-2 text-center lg:text-end lg:mb-0" title='Delete Review'>
-                              <button onClick={() => handleDelete(review._id as string)} className='p-3 text-lg text-blue-700 bg-slate-100 rounded-2xl hover:text-red-700'><MdDeleteForever /></button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>)
-                }
-              </div>              
+                          </div>)
+                    }
+                  </div>
               }
             </div>
           </div>
