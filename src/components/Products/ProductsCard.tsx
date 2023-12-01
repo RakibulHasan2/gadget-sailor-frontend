@@ -84,9 +84,13 @@ export default function ProductsCard({ product }: IProduct) {
 
     return (
         <div className=''>
-            <div className='flex justify-end'>
-                <p onClick={() => handleDelete(_id, product_name)} className='text-lg mt-2 mr-4 mb-2'><RiDeleteBin5Line /></p>
-            </div>
+            {
+                user?.email === 'gadgetsailoradmin@gmail.com' &&
+                <div className='flex justify-end'>
+                    <p onClick={() => handleDelete(_id, product_name)} className='text-lg mt-2 mr-4 mb-2'><RiDeleteBin5Line /></p>
+                </div>
+
+            }
             <div className="relative w-full overflow-hidden transition-all duration-300 border border-transparent shadow-md card bg-base-100 hover:border-blue-400 hover:shadow-customBlue card-height rounded-xl">
                 <figure className="h-full px-10 pt-10 transition-transform transform hover:scale-110">
                     <img src={image[0]} alt="" className="rounded-xl" />
