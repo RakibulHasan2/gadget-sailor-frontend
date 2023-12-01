@@ -352,7 +352,10 @@ export default function SingleProductPage() {
                 {/* warranty information */}
                 <div className="mb-6">
                   <h2 className="p-2 mt-5 text-lg font-bold text-blue-900 bg-green-100">Warranty Information</h2>
-                  <p className="py-3 mt-3 border-b border-gray-700">Warranty <span className="lg:ml-44">{warranty} Limited Warranty</span></p>
+                  <div className="flex items-center justify-between py-3 border-b border-gray-700">
+                    <p className="text-gray-600">Warranty</p>
+                    <p className="w-2/3">{warranty} Limited Warranty</p>
+                  </div>
                 </div>
               </div>
             </div>
