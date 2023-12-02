@@ -29,7 +29,8 @@ export default function MyOrder() {
             const price = Number(item.total_price);
             totalPrice += price;
         });
-        return totalPrice.toFixed(2);
+        return totalPrice;
+        //return totalPrice.toFixed(2);
     };
 
 
@@ -198,6 +199,35 @@ export default function MyOrder() {
 
                         </div>
 
+                        {/* Delivery Method */}
+                        <div className="w-full max-w-xs form-control pt-3">
+                            <p>Payment Method:</p>
+
+                            <label htmlFor="field-rain ">
+                                <input
+                                    {...register('deliveryMethod', { required: 'Please select a weather option' })}
+                                    type="radio"
+                                    name="deliveryMethod"
+                                    value="Home Delivery"
+                                    id="field-rain"
+                                />
+                                Home Delivery
+                            </label>
+
+                            <label htmlFor="field-wind">
+                                <input
+                                    {...register('deliveryMethod', { required: 'Please select a weather option' })}
+                                    type="radio"
+                                    name="deliveryMethod"
+                                    value="Store PickUp"
+                                    id="field-wind"
+                                />
+                                Store PickUp
+                            </label>
+
+                            {errors.deliveryMethod && <p>{errors.deliveryMethod.message}</p>}
+
+                        </div>
 
                         {/* Submit Button */}
 
@@ -221,6 +251,9 @@ export default function MyOrder() {
                                 <th>Unit Price</th>
                                 <th>Total</th>
                             </tr>
+
+
+
                         </thead>
                         <tbody className="row-info">
                             {
@@ -236,11 +269,27 @@ export default function MyOrder() {
                                         <td>{item.unit_price}৳</td>
                                         <td>{item.total_price}৳	</td>
                                     </tr>
+
                                 )
+                            }
+                            {
+                                combinedObject?.deliveryMethod
+                                === "Home Delivery" &&
+                                <tr>
+                                    Delivery Cost: 60 ৳
+                                </tr>
                             }
                         </tbody>
                     </table>
-                    <p className="mb-4 text-lg font-bold">Total: {calculateTotalPrice()}৳</p>
+
+                    {
+                        combinedObject?.deliveryMethod
+                            === "Home Delivery" ?
+                            <p className="mb-4 text-lg font-bold">Total: {(Number(calculateTotalPrice()) + 60).toFixed(2)}৳</p>
+                            :
+                            <p className="mb-4 text-lg font-bold">Total: {Number(calculateTotalPrice()).toFixed(2)}৳</p>
+                    }
+
                 </div>
 
 
