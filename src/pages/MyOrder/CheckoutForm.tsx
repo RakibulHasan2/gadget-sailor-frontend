@@ -3,6 +3,7 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 //import { StripeError } from "@stripe/stripe-js";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const CheckoutForm = ({ data }: any) => {
@@ -15,8 +16,14 @@ const CheckoutForm = ({ data }: any) => {
     const [processing, setProcessing] = useState(false);
     const stripe = useStripe();
     const elements = useElements();
+    const navigate = useNavigate();
     console.log(total_price)
 
+    const ids = Object.keys(data)
+        .filter(key => key.endsWith("_id"))
+        .map(key => data[key]);
+
+    console.log(ids);
 
 
     useEffect(() => {
@@ -109,12 +116,33 @@ const CheckoutForm = ({ data }: any) => {
             });
             const donePayment = await response.json();
             console.log(donePayment)
-            if (donePayment.statusCode === 200) {
+            if (donePayment.statusCode === 200 && ids.length > 0) {
                 setSuccess('Congrats! Your payment is done')
                 toast.success(donePayment.message);
                 setTransactionId(paymentIntent.id)
 
-                //navigate('/home')
+
+
+                ids.forEach(async (id) => {
+
+                    fetch(`http://localhost:5000/api/v1/getCart/${id}`, {
+                        method: 'DELETE'
+                    })
+                        .then(anotherResponse => {
+                            if (anotherResponse.ok) {
+
+                                // setTimeout(() => {
+                                //     toast.success("Successfully deleted");
+                                // }, 1000);
+                                navigate('/home')
+                            }
+                        })
+                })
+
+
+
+
+
             } else {
                 toast.error("Payment isn't completed")
             }

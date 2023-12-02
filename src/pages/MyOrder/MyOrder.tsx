@@ -21,7 +21,8 @@ export default function MyOrder() {
     const user = userData()
     const CartDetails = data.data;
     const { register, handleSubmit, formState: { errors } } = useForm<CheckoutFormValues>();
-    console.log(CartDetails);
+    //console.log(CartDetails);
+    // console.log(data);
 
     const calculateTotalPrice = () => {
         let totalPrice: number = 0;
@@ -44,8 +45,10 @@ export default function MyOrder() {
 
     const checkoutInfo = CartDetails.map(item => (
         {
-            [item.product_name]: item.product_name,
+            [`${item.product_name}_product`]: item.product_name,
             [`${item.product_name}_price`]: item.unit_price,
+            [`${item.product_name}_quantity`]: item.quantity,
+            [`${item.product_name}_id`]: item._id,
             total_price: calculateTotalPrice(),
 
         }
