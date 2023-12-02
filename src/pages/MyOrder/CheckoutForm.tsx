@@ -121,8 +121,8 @@ const CheckoutForm = ({ data }: any) => {
                     className="p-2 border"
                 />
                 <div className="flex justify-center">
-                    <button className='mt-5 btn-flip speed' type="submit" data-front="Confirm Click" data-back="PAY" disabled={!stripe}>
-                        Pay
+                    <button className='mt-5 btn-flip speed' type="submit" data-front="Confirm Click" data-back="PAY" disabled={!stripe || !clientSecret}>
+
                     </button>
                 </div>
 

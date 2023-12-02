@@ -59,7 +59,7 @@ export default function MyOrder() {
 
     const handleCheckout = async (data: CheckoutFormValues) => {
 
-        //console.log(data)
+        console.log(data)
         // console.log(checkoutInfoArray)
         setUserInfo([data])
         handleCount();
@@ -79,9 +79,9 @@ export default function MyOrder() {
         <div className="p-3 lg:p-5 lg:flex justify-evenly">
             <div className="mt-5 rounded-lg shadow-2xl lg:mt-0 lg:p-2">
                 <div className="flex justify-center pt-3 lg:pt-0">
-                     <p className="text-2xl font-bold">Customer Information</p>
+                    <p className="text-2xl font-bold">Customer Information</p>
                 </div>
-               
+
                 <div className='w-full bg-transparent rounded-2xl lg:w-96 p-7'>
                     <form onSubmit={handleSubmit(handleCheckout)} className="">
                         <div className="flex gap-2 mb-4 ">
@@ -151,7 +151,10 @@ export default function MyOrder() {
                                 })} className="w-full max-w-xs bg-transparent input input-bordered input-info rounded-3xl" placeholder="District..." />
                                 {errors.lastName && <small className='mt-1 ml-2 text-red-500'>{errors.lastName?.message}</small>}
                             </div>
+
                         </div>
+
+
 
                         {/* Comments */}
                         <div className="w-full max-w-xs form-control">
@@ -163,6 +166,41 @@ export default function MyOrder() {
                                 className="w-full max-w-xs pt-3 h-28 input input-bordered input-info rounded-3xl" />
                             {errors.comments && <p className='text-red-600'>{errors.comments?.message}</p>}
                         </div>
+
+
+                        {/* Payment Method */}
+                        <div className="w-full max-w-xs form-control pt-3">
+                            <p>Payment Method:</p>
+
+                            <label htmlFor="field-rain ">
+                                <input
+                                    {...register('paymentMethod', { required: 'Please select a weather option' })}
+                                    type="radio"
+                                    name="paymentMethod"
+                                    value="Cash On Delivery"
+                                    id="field-rain"
+                                />
+                                Cash On Delivery
+                            </label>
+
+                            <label htmlFor="field-wind">
+                                <input
+                                    {...register('paymentMethod', { required: 'Please select a weather option' })}
+                                    type="radio"
+                                    name="paymentMethod"
+                                    value="Card Payment"
+                                    id="field-wind"
+                                />
+                                Card Payment
+                            </label>
+
+                            {errors.paymentMethod && <p>{errors.paymentMethod.message}</p>}
+
+                        </div>
+
+
+                        {/* Submit Button */}
+
                         <input className='w-full p-2 mt-4 mb-4 text-black bg-blue-400 btn rounded-3xl' value="Submit" type="submit" />
                     </form>
                 </div>
@@ -172,7 +210,7 @@ export default function MyOrder() {
                     <div className="flex justify-center p-2 mb-3 border-b-2">
                         <h2 className="text-lg font-semibold">Selected Products for payment:</h2>
                     </div>
-                    
+
                     <table className="table">
                         <thead className="heading">
                             <tr>
