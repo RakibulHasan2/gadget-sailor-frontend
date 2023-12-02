@@ -35,7 +35,7 @@ const CheckoutForm = ({ data }: any) => {
             .then((data) => {
                 const Data = data.data;
                 setClientSecret(Data.clientSecret)
-                console.log(data.data.clientSecret)
+
             });
     }, [total_price]);
 
@@ -89,17 +89,39 @@ const CheckoutForm = ({ data }: any) => {
             return;
         }
         if (paymentIntent.status === "succeeded") {
-            setSuccess('Congrats! Your payment is done')
-            toast.success(success);
-            setTransactionId(paymentIntent.id)
+            console.log("card", card)
+
+            const paymentData = {
+                ...data,
+                transactionId: paymentIntent.id
+            }
+
+            console.log(paymentData)
+
+            const response = await fetch(`http://localhost:5000/api/v1/addPayment`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    authorization: `bearer ${sessionStorage.getItem('accessToken')}`
+                },
+                body: JSON.stringify(paymentData)
+
+            });
+            const donePayment = await response.json();
+            console.log(donePayment)
+            if (donePayment.statusCode === 200) {
+                setSuccess('Congrats! Your payment is done')
+                toast.success(donePayment.message);
+                setTransactionId(paymentIntent.id)
+
+                //navigate('/home')
+            } else {
+                toast.error("Payment isn't completed")
+            }
 
         }
         setProcessing(false);
         console.log('paymentIntent', paymentIntent);
-
-
-
-
 
     }
 

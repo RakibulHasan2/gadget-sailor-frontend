@@ -27,7 +27,7 @@ export default function MyOrder() {
         let totalPrice: number = 0;
         let withDeliveryPrice: number = 0;
 
-        const hasCashOnDelivery = userInfo.some(item => item.paymentMethod === "Cash On Delivery" && item.deliveryMethod === "Home Delivery");
+        const hasCashOnDelivery = userInfo.some(item => item.deliveryMethod === "Home Delivery");
 
         CartDetails.forEach((item) => {
             const price = Number(item.total_price);
@@ -279,7 +279,7 @@ export default function MyOrder() {
                                 )
                             }
                             {
-                                combinedObject?.paymentMethod === "Cash On Delivery" && combinedObject?.deliveryMethod === "Home Delivery" &&
+                                combinedObject?.deliveryMethod === "Home Delivery" &&
                                 <tr>
                                     Delivery Cost: 60 ৳
                                 </tr>
@@ -288,7 +288,7 @@ export default function MyOrder() {
                     </table>
 
                     {
-                        combinedObject?.paymentMethod === "Cash On Delivery" && combinedObject?.deliveryMethod === "Home Delivery" ?
+                        combinedObject?.deliveryMethod === "Home Delivery" ?
                             <p className="mb-4 text-lg font-bold">Total: {calculateTotalPrice()}৳</p>
                             :
                             <p className="mb-4 text-lg font-bold">Total: {calculateTotalPrice()}৳</p>
