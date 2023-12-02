@@ -2,6 +2,7 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 
 //import { StripeError } from "@stripe/stripe-js";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const CheckoutForm = ({ data }: any) => {
@@ -11,6 +12,7 @@ const CheckoutForm = ({ data }: any) => {
     const [cardError, setCardError] = useState<string | null>('')
     const [success, setSuccess] = useState("");
     const [transactionId, setTransactionId] = useState("");
+    const [processing, setProcessing] = useState(false);
     const stripe = useStripe();
     const elements = useElements();
     console.log(total_price)
@@ -61,9 +63,11 @@ const CheckoutForm = ({ data }: any) => {
             console.log('cardError:', cardError);
         } else {
             console.log('[PaymentMethod]', paymentMethod);
+            setCardError('')
         }
-        console.log(clientSecret)
 
+        setSuccess('');
+        setProcessing(true);
         const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(
             clientSecret,
             {
@@ -86,8 +90,11 @@ const CheckoutForm = ({ data }: any) => {
         }
         if (paymentIntent.status === "succeeded") {
             setSuccess('Congrats! Your payment is done')
+            toast.success(success);
             setTransactionId(paymentIntent.id)
+
         }
+        setProcessing(false);
         console.log('paymentIntent', paymentIntent);
 
 
@@ -121,13 +128,20 @@ const CheckoutForm = ({ data }: any) => {
                     className="p-2 border"
                 />
                 <div className="flex justify-center">
-                    <button className='mt-5 btn-flip speed' type="submit" data-front="Confirm Click" data-back="PAY" disabled={!stripe || !clientSecret}>
+                    <button className='mt-5 btn-flip speed' type="submit" data-front="Confirm Click" data-back="PAY" disabled={!stripe || !clientSecret || processing}>
 
                     </button>
                 </div>
 
             </form>
             <p className="text-red-500">{cardError}</p>
+            {
+                success &&
+                <div>
+                    <p className="text-green-500">{success}</p>
+                    <p>Your TransactionId: <span className="font-bold">{transactionId}</span></p>
+                </div>
+            }
         </>
     );
 };
