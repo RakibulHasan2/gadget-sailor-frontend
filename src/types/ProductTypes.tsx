@@ -15,6 +15,7 @@ export type AddProductValues = {
 }
 
 export type UpdateProductValues = {
+    _id?: string;
     category_name?: string;
     sub_category_name?: string;
     brand_name?: string;
@@ -23,9 +24,17 @@ export type UpdateProductValues = {
     model?: string;
     description?: string;
     price?: number;
-    product_code?: number
+    product_code?: number,
+    quantity?: number;
     status?: string;
     reviews?: string[];
     warranty?: string;
     others_info?: object;
+}
+
+export interface UpdateProductValuesResponse {
+    statusCode: number;
+    success: boolean;
+    message: string;
+    data: UpdateProductValues[];
 }

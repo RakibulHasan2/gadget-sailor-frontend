@@ -15,6 +15,7 @@ export interface ICartDetails {
     model: string;
     email: string;
     _id: string;
+    I_id: string;
 }
 
 export interface ICartResponse {

@@ -4,6 +4,7 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { UpdateProductValues, UpdateProductValuesResponse } from "../../types/ProductTypes";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const CheckoutForm = ({ data }: any) => {
@@ -14,16 +15,30 @@ const CheckoutForm = ({ data }: any) => {
     const [success, setSuccess] = useState("");
     const [transactionId, setTransactionId] = useState("");
     const [processing, setProcessing] = useState(false);
+    const [iData, setIData] = useState<UpdateProductValues[]>([]);
+
+
     const stripe = useStripe();
     const elements = useElements();
     const navigate = useNavigate();
+
     console.log(total_price)
 
     const ids = Object.keys(data)
         .filter(key => key.endsWith("_id"))
         .map(key => data[key]);
 
+    const I_ids = Object.keys(data)
+        .filter(key => key.endsWith("_I-id"))
+        .map(key => data[key]);
+
+    const Qunatities = Object.keys(data)
+        .filter(key => key.endsWith("_quantity"))
+        .map(key => data[key]);
+
     console.log(ids);
+    console.log(I_ids);
+    console.log(Qunatities);
 
 
     useEffect(() => {
@@ -45,6 +60,35 @@ const CheckoutForm = ({ data }: any) => {
 
             });
     }, [total_price]);
+
+
+    useEffect(() => {
+        fetch('http://localhost:5000/api/v1/allProducts')
+            .then(res => res.json())
+            .then((data: UpdateProductValuesResponse) => {
+                //console.log(data.data)
+                const Data = data.data;
+                setIData(Data);
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    }, []);
+
+    const filteredDataArray: UpdateProductValues[] = [];
+    iData.map(d => {
+        I_ids.forEach(i => {
+            if (d._id === i) {
+                filteredDataArray.push(d)
+            }
+        })
+    })
+    console.log(filteredDataArray)
+
+
+
+
+
 
 
     const handleSubmit = async (event: { preventDefault: () => void; }) => {
@@ -102,8 +146,14 @@ const CheckoutForm = ({ data }: any) => {
                 ...data,
                 transactionId: paymentIntent.id
             }
+            // const productData: UpdateProductValues = {
 
-            console.log(paymentData)
+            //     quantity:
+
+
+            // }
+            // console.log(paymentData)
+            //console.log(productData)
 
             const response = await fetch(`http://localhost:5000/api/v1/addPayment`, {
                 method: 'POST',
@@ -121,7 +171,7 @@ const CheckoutForm = ({ data }: any) => {
                 toast.success(donePayment.message);
                 setTransactionId(paymentIntent.id)
 
-
+                // deleting from the cart
 
                 ids.forEach(async (id) => {
 
@@ -139,6 +189,38 @@ const CheckoutForm = ({ data }: any) => {
                         })
                 })
 
+
+
+                // update data
+
+                filteredDataArray.map(async d => {
+                    console.log(d)
+                    if (d.product_name === data[`${d.product_name}_product`]) {
+                        const d_quantity = d.quantity as number;
+                        const Quantity = d_quantity - data[`${d.product_name}_quantity`]
+                        //console.log(Quantity)
+                        const productData: UpdateProductValues = {
+                            quantity: Quantity
+                        }
+                        //console.log(productData)
+
+                        const response = fetch(`http://localhost:5000/api/v1/allProducts/${d._id}`, {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(productData)
+                        });
+                        const product = await (await response).json();
+
+                        if (product.statusCode === 200) {
+                            //toast.success(product.message)
+                            navigate('/home')
+                        } else {
+                            toast.error(product.message)
+                        }
+                    }
+                })
 
 
 

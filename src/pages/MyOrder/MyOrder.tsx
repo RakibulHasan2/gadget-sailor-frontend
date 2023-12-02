@@ -49,6 +49,7 @@ export default function MyOrder() {
             [`${item.product_name}_price`]: item.unit_price,
             [`${item.product_name}_quantity`]: item.quantity,
             [`${item.product_name}_id`]: item._id,
+            [`${item.product_name}_I-id`]: item.I_id,
             total_price: calculateTotalPrice(),
 
         }
