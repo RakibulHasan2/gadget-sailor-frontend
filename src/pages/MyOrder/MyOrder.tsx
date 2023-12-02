@@ -11,7 +11,7 @@ import { useState } from "react";
 
 
 const stripePromise = loadStripe('pk_test_51M8NuoDiyv5tmMKuNdL0GTfndh3lFLwZKkkSn2ITrLo3HjeSIyf7tjD0vTCQqf6x6dGXKjgqm0XCTJdmFJEmgCge00LyoHRros');
-console.log(stripePromise)
+//console.log(stripePromise)
 
 export default function MyOrder() {
 
@@ -25,12 +25,18 @@ export default function MyOrder() {
 
     const calculateTotalPrice = () => {
         let totalPrice: number = 0;
+        let withDeliveryPrice: number = 0;
+
+        const hasCashOnDelivery = userInfo.some(item => item.paymentMethod === "Cash On Delivery");
+
         CartDetails.forEach((item) => {
             const price = Number(item.total_price);
+            // const withDeliveryPrice = price + 60;
             totalPrice += price;
+            withDeliveryPrice = totalPrice + 60;
         });
-        return totalPrice;
-        //return totalPrice.toFixed(2);
+
+        return hasCashOnDelivery ? withDeliveryPrice.toFixed(2) : totalPrice.toFixed(2);
     };
 
 
@@ -173,24 +179,24 @@ export default function MyOrder() {
                         <div className="w-full max-w-xs form-control pt-3">
                             <p>Payment Method:</p>
 
-                            <label htmlFor="field-rain ">
+                            <label htmlFor="field-CashOnDelivery ">
                                 <input
-                                    {...register('paymentMethod', { required: 'Please select a weather option' })}
+                                    {...register('paymentMethod', { required: 'Please select a payment method' })}
                                     type="radio"
                                     name="paymentMethod"
                                     value="Cash On Delivery"
-                                    id="field-rain"
+                                    id="field-CashOnDelivery"
                                 />
                                 Cash On Delivery
                             </label>
 
-                            <label htmlFor="field-wind">
+                            <label htmlFor="field-CardPayment">
                                 <input
-                                    {...register('paymentMethod', { required: 'Please select a weather option' })}
+                                    {...register('paymentMethod', { required: 'Please select a payment method' })}
                                     type="radio"
                                     name="paymentMethod"
                                     value="Card Payment"
-                                    id="field-wind"
+                                    id="field-CardPayment"
                                 />
                                 Card Payment
                             </label>
@@ -201,26 +207,26 @@ export default function MyOrder() {
 
                         {/* Delivery Method */}
                         <div className="w-full max-w-xs form-control pt-3">
-                            <p>Payment Method:</p>
+                            <p>Delivery Method:</p>
 
-                            <label htmlFor="field-rain ">
+                            <label htmlFor="field-HomeDelivery ">
                                 <input
-                                    {...register('deliveryMethod', { required: 'Please select a weather option' })}
+                                    {...register('deliveryMethod', { required: 'Please select delivery method' })}
                                     type="radio"
                                     name="deliveryMethod"
                                     value="Home Delivery"
-                                    id="field-rain"
+                                    id="field-HomeDelivery"
                                 />
                                 Home Delivery
                             </label>
 
-                            <label htmlFor="field-wind">
+                            <label htmlFor="field-StorePickUp">
                                 <input
-                                    {...register('deliveryMethod', { required: 'Please select a weather option' })}
+                                    {...register('deliveryMethod', { required: 'Please select delivery method' })}
                                     type="radio"
                                     name="deliveryMethod"
                                     value="Store PickUp"
-                                    id="field-wind"
+                                    id="field-StorePickUp"
                                 />
                                 Store PickUp
                             </label>
@@ -273,8 +279,7 @@ export default function MyOrder() {
                                 )
                             }
                             {
-                                combinedObject?.deliveryMethod
-                                === "Home Delivery" &&
+                                combinedObject?.paymentMethod === "Cash On Delivery" &&
                                 <tr>
                                     Delivery Cost: 60 ৳
                                 </tr>
@@ -283,32 +288,38 @@ export default function MyOrder() {
                     </table>
 
                     {
-                        combinedObject?.deliveryMethod
-                            === "Home Delivery" ?
-                            <p className="mb-4 text-lg font-bold">Total: {(Number(calculateTotalPrice()) + 60).toFixed(2)}৳</p>
+                        combinedObject?.paymentMethod === "Cash On Delivery" ?
+                            <p className="mb-4 text-lg font-bold">Total: {calculateTotalPrice()}৳</p>
                             :
-                            <p className="mb-4 text-lg font-bold">Total: {Number(calculateTotalPrice()).toFixed(2)}৳</p>
+                            <p className="mb-4 text-lg font-bold">Total: {calculateTotalPrice()}৳</p>
                     }
 
                 </div>
 
 
                 {
-                    count === 0 && userInfo.length === 0 ?
+                    userInfo.length === 0 ?
                         <div className='my-12 lg:w-96' >
                             <button onClick={() => alert('Please fill up the customer information form at first.')} className='w-40 mt-4 btn btn-sm btn-primary'>Pay</button>
                         </div>
                         :
+                        <>
+                            {
+                                combinedObject?.paymentMethod === "Card Payment" &&
+                                <div className='p-3 my-12 border rounded-lg lg:w-full bg-slate-100' >
+                                    <div className="flex justify-center p-3 mb-3 text-2xl font-bold text-blue-700 border-b-2">
+                                        <h1 className="animate-pulse">Please enter the card details</h1>
+                                    </div>
+                                    <Elements stripe={stripePromise}>
+                                        <CheckoutForm
+                                            data={combinedObject} />
+                                    </Elements>
 
-                        <div className='p-3 my-12 border rounded-lg lg:w-full bg-slate-100' >
-                            <div className="flex justify-center p-3 mb-3 text-2xl font-bold text-blue-700 border-b-2">
-                                <h1 className="animate-pulse">Please enter the card details</h1>
-                            </div>
-                            <Elements stripe={stripePromise}>
-                                <CheckoutForm
-                                    data={combinedObject} />
-                            </Elements>
-                        </div>
+                                </div>
+                            }
+
+                        </>
+
 
                 }
             </div>
