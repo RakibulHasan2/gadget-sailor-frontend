@@ -8,7 +8,7 @@ import '../../styles/Loader.css'
 const UpdateModal = ({ singleData, closeModal }: IProduct,) => {
     const { register, handleSubmit, formState: { errors } } = useForm<UpdateProductValues>();
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { __v, _id, category_name, sub_category_name, product_name, price, status, product_code, description, reviews, brand_name, image, model, warranty, ...otherProperties } = singleData;
+    const { __v, _id, category_name, sub_category_name, product_name, price, status, product_code, description, reviews, brand_name, image, model, warranty, quantity, ...otherProperties } = singleData;
     const { data, isLoading } = useProductData("http://localhost:5000/api/v1/allProducts")
     if (isLoading) {
         return <div className="flex justify-center p-10"><span className="loader"></span></div>;
@@ -43,6 +43,7 @@ const UpdateModal = ({ singleData, closeModal }: IProduct,) => {
             price: data.price,
             product_code: data.product_code,
             status: data.status,
+            quantity: data.quantity,
             warranty: data.warranty,
             ...Object.fromEntries(
                 Object.keys(otherProperties).map((key) => [key, data.others_info[key]])
@@ -84,7 +85,8 @@ const UpdateModal = ({ singleData, closeModal }: IProduct,) => {
                                     <label className="font-bold label"> <span className="label-text">Product category</span></label>
                                     <select className="w-full max-w-xs select select-bordered rounded-3xl" {...register("category_name", {
                                         required: 'Required'
-                                    })} >
+                                    })}
+                                    >
                                         {
                                             getOneCategory.map(d => (
                                                 <option key={d} value={d}>{d}</option>
@@ -167,6 +169,18 @@ const UpdateModal = ({ singleData, closeModal }: IProduct,) => {
                                         })}
                                         className="w-full max-w-xs input input-bordered rounded-3xl" />
                                     {errors.price && <p className='text-red-600'>{errors.price?.message}</p>}
+                                </div>
+
+                                {/* Quantity */}
+                                <div className="w-full max-w-xs mt-2 form-control">
+                                    <label className="font-bold label"> <span className="label-text">Quantity</span></label>
+
+                                    <input defaultValue={singleData?.quantity} type="text"
+                                        {...register("quantity", {
+
+                                        })}
+                                        className="w-full max-w-xs input input-bordered rounded-3xl" />
+                                    {errors.price && <p className='text-red-600'>{errors.quantity?.message}</p>}
                                 </div>
 
 

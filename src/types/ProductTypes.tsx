@@ -27,5 +27,6 @@ export type UpdateProductValues = {
     status?: string;
     reviews?: string[];
     warranty?: string;
+    quantity?: number;
     others_info?: object;
 }

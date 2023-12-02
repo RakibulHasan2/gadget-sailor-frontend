@@ -1,5 +1,4 @@
 import { useLoaderData } from "react-router-dom"
-
 import { useForm } from 'react-hook-form';
 import { CheckoutFormValues } from "../../types/FormType";
 import { userData } from "../../hooks/getUserData";
@@ -298,7 +297,7 @@ export default function MyOrder() {
 
 
                 {
-                    userInfo.length !== 0 ?
+                    userInfo.length === 0 ?
                         <div className='my-12 lg:w-96' >
                             <button onClick={() => alert('Please fill up the customer information form at first.')} className='w-40 mt-4 btn btn-sm btn-primary'>Pay</button>
                         </div>
