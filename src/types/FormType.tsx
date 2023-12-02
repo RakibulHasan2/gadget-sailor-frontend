@@ -15,5 +15,7 @@ export type CheckoutFormValues = {
     address: string,
     city: string,
     district: string,
-    comments: string
+    comments: string,
+    paymentMethod: string,
+    deliveryMethod: string
 }
