@@ -1,5 +1,5 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { Console } from "console";
+
 //import { StripeError } from "@stripe/stripe-js";
 import { useEffect, useState } from "react";
 
@@ -13,6 +13,9 @@ const CheckoutForm = ({ data }: any) => {
     const [transactionId, setTransactionId] = useState("");
     const stripe = useStripe();
     const elements = useElements();
+    console.log(total_price)
+
+
 
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
@@ -28,8 +31,9 @@ const CheckoutForm = ({ data }: any) => {
         })
             .then((res) => res.json())
             .then((data) => {
-                setClientSecret(data.clientSecret)
-                console.log(data.clientSecret)
+                const Data = data.data;
+                setClientSecret(Data.clientSecret)
+                console.log(data.data.clientSecret)
             });
     }, [total_price]);
 
