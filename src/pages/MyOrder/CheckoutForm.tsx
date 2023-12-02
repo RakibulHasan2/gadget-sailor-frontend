@@ -95,7 +95,7 @@ const CheckoutForm = ({ data }: any) => {
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="">
                 <CardElement
                     options={{
                         style: {
@@ -104,17 +104,24 @@ const CheckoutForm = ({ data }: any) => {
                                 color: '#424770',
                                 '::placeholder': {
                                     color: '#aab7c4',
+
                                 },
+
                             },
                             invalid: {
                                 color: '#9e2146',
                             },
+
                         },
                     }}
+                    className="p-2 border"
                 />
-                <button className='btn btn-sm mt-4 btn-primary' type="submit" disabled={!stripe}>
-                    Pay
-                </button>
+                <div className="flex justify-center">
+                    <button className='mt-5 btn-flip speed' type="submit" data-front="Confirm Click" data-back="PAY" disabled={!stripe}>
+                        Pay
+                    </button>
+                </div>
+
             </form>
             <p className="text-red-500">{cardError}</p>
         </>
