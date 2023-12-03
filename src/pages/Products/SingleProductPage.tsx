@@ -34,6 +34,7 @@ export default function SingleProductPage() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { __v, quantity, _id, category_name, sub_category_name, product_name, price, status, product_code, brand_name, image, model, warranty, ...otherProperties } = singleProductData;
 
+
   const increment = () => {
     setCount(count + 1);
   }
@@ -53,6 +54,7 @@ export default function SingleProductPage() {
   };
 
   const totalPrice = count * price;
+
   const CartDetails = async () => {
     const cartData = {
       product_name: product_name,
@@ -66,21 +68,27 @@ export default function SingleProductPage() {
       I_id: _id
     }
 
-    const response = await fetch('http://localhost:5000/api/v1/addCart', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(cartData),
-    })
-    if (response.ok) {
-      // Call refetch to update cart data after adding the item
-      refetch();
+    if (count <= quantity) {
+      const response = await fetch('http://localhost:5000/api/v1/addCart', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(cartData),
+      })
+      if (response.ok) {
+        // Call refetch to update cart data after adding the item
+        refetch();
+      }
+    } else {
+      toast.error("Please check quantity")
     }
 
   }
   const handleClick = () => {
-    openImageModal();
+    if (quantity >= count) {
+      openImageModal();
+    }
     CartDetails();
   };
 
@@ -260,7 +268,7 @@ export default function SingleProductPage() {
                   </button>
                 </form>
                 <UpdateImage
-                  singleData={singleProductData} _id={''} category_name={''} sub_category_name={''} brand_name={''} product_name={''} image={[]} model={''} description={''} price={0} product_code={0} status={''} reviews={[]} warranty={''} __v={''} others_info={[]}></UpdateImage>
+                  singleData={singleProductData} _id={''} category_name={''} sub_category_name={''} brand_name={''} product_name={''} image={[]} model={''} description={''} price={0} product_code={0} status={''} reviews={[]} warranty={''} __v={''} others_info={[]} ></UpdateImage>
               </div>
             </dialog>
           </div>
@@ -269,7 +277,12 @@ export default function SingleProductPage() {
             <h1 className="text-2xl font-bold text-blue-900 lg:mt-10">{product_name}</h1>
             <div className="flex flex-col mt-5 mb-5 lg:flex-row lg:justify-evenly">
               <p className="p-2 text-gray-600 rounded bg-slate-100">Price: <span className="font-bold text-black">{price}৳</span></p>
-              <p className="p-2 text-gray-600 rounded bg-slate-100">Status: <span className="font-bold text-black">{status}</span></p>
+              {
+                quantity > 0 ?
+                  <p className="p-2 text-gray-600 rounded bg-slate-100">Status: <span className="font-bold text-black">{status}({quantity})</span></p>
+                  :
+                  <p className="p-2 text-gray-600 rounded bg-slate-100">Status: <span className="font-bold text-black">Out of Stock</span></p>
+              }
               <p className="p-2 text-gray-600 rounded bg-slate-100">Product Code: <span className="font-bold text-black">{product_code}</span></p>
               {/* <p className="p-2 text-gray-600 rounded bg-slate-100">Quantity: <span className="font-bold text-black">{quantity}</span></p> */}
               {
@@ -290,7 +303,12 @@ export default function SingleProductPage() {
                 <p className="px-6 py-3 text-xl border">{count}</p>
                 <button className="px-6 text-4xl border" onClick={increment}>+</button>
               </div>
-              <button onClick={handleClick} className="text-white bg-blue-900 btn lg:px-14 hover:text-black rounded-xl">Buy Now</button>
+              {
+                quantity > 0 ?
+                  <button onClick={handleClick} className="text-white bg-blue-900 btn lg:px-14 hover:text-black rounded-xl">Buy Now</button>
+                  :
+                  <button disabled className="bg-blue-900 btn lg:px-14 hover:text-black rounded-xl">Buy Now</button>
+              }
               {/* cart modal */}
               <CartModal
                 closeCartModal={closeCartModal}

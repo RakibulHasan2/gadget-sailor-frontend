@@ -89,8 +89,6 @@ const routes = createBrowserRouter([
         loader: async ({ params }) => {
           const response = await fetch(`${baseUrl}/getCart/${params?.u_id}`)
           const data = await response.json();
-          console.log(params);
-          console.log(data);
           return data;
         }
       },

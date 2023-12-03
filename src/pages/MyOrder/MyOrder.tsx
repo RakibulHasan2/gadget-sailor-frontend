@@ -1,5 +1,4 @@
 import { useLoaderData } from "react-router-dom"
-
 import { useForm } from 'react-hook-form';
 import { CheckoutFormValues } from "../../types/FormType";
 import { userData } from "../../hooks/getUserData";
@@ -53,7 +52,6 @@ export default function MyOrder() {
             [`${item.product_name}_image`]: item.image,
 
             total_price: calculateTotalPrice(),
-
         }
     ));
 

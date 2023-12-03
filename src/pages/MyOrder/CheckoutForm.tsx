@@ -9,7 +9,7 @@ import { UpdateProductValues, UpdateProductValuesResponse } from "../../types/Pr
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const CheckoutForm = ({ data }: any) => {
     const { total_price, firstName, lastName, email, phoneNumber } = data;
-    console.log(data)
+    console.log("Dattaaaa",data)
     const [clientSecret, setClientSecret] = useState("");
     const [cardError, setCardError] = useState<string | null>('')
     const [success, setSuccess] = useState("");
