@@ -84,7 +84,7 @@ const UpdateModal = ({ singleData, closeModal }: IProduct) => {
                                     <h1>Basic Info</h1>
                                 </div>
                                 <div className="w-full max-w-xs mt-3 form-control">
-                                    <label className="font-bold label"> <span className="label-text">Product category</span></label>
+                                    <label className="font-bold label"> <span className="label-text">Product category: {singleData?.category_name}</span></label>
                                     <select className="w-full max-w-xs select select-bordered rounded-3xl" {...register("category_name", {
                                         required: 'Required'
                                     })}
@@ -100,7 +100,7 @@ const UpdateModal = ({ singleData, closeModal }: IProduct) => {
                                 </div>
                                 {/* Sub-Category */}
                                 <div className="w-full max-w-xs mt-2 form-control">
-                                    <label className="font-bold label"> <span className="label-text">Subcategory name</span></label>
+                                    <label className="font-bold label"> <span className="label-text">Subcategory name: {singleData?.sub_category_name}</span></label>
                                     <select className="w-full max-w-xs select select-bordered rounded-3xl" {...register("sub_category_name", {
                                         required: 'Required'
                                     })}
@@ -115,7 +115,7 @@ const UpdateModal = ({ singleData, closeModal }: IProduct) => {
                                 </div>
                                 {/* Brand Name */}
                                 <div className="w-full max-w-xs mt-2 form-control">
-                                    <label className="font-bold label"> <span className="label-text">Brand Name</span></label>
+                                    <label className="font-bold label"> <span className="label-text">Brand Name : {singleData?.brand_name}</span></label>
 
                                     <select defaultValue={singleData?.brand_name} className="w-full max-w-xs select select-bordered rounded-3xl" {...register("brand_name", {
                                         required: 'Required'
