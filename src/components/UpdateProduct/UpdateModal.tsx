@@ -140,6 +140,16 @@ const UpdateModal = ({ singleData, closeModal }: IProduct) => {
                                         className="w-full max-w-xs input input-bordered rounded-3xl" />
 
                                 </div>
+                                <div className="w-full max-w-xs mt-2 form-control">
+                                    <label className="font-bold label"> <span className="label-text">Quantity</span></label>
+
+                                    <input defaultValue={singleData?.quantity} type="text"
+                                        {...register("quantity", {
+
+                                        })}
+                                        className="w-full max-w-xs input input-bordered rounded-3xl" />
+                                    {errors.price && <p className='text-red-600'>{errors.quantity?.message}</p>}
+                                </div>
                                 {/* Model */}
                                 <div className="w-full max-w-xs mt-2 form-control">
                                     <label className="font-bold label"> <span className="label-text">Model</span></label>
@@ -175,7 +185,7 @@ const UpdateModal = ({ singleData, closeModal }: IProduct) => {
                                 </div>
 
                                 {/* Quantity */}
-                                <div className="w-full max-w-xs mt-2 form-control">
+                                {/* <div className="w-full max-w-xs mt-2 form-control">
                                     <label className="font-bold label"> <span className="label-text">Quantity</span></label>
 
                                     <input defaultValue={singleData?.quantity} type="text"
@@ -184,7 +194,7 @@ const UpdateModal = ({ singleData, closeModal }: IProduct) => {
                                         })}
                                         className="w-full max-w-xs input input-bordered rounded-3xl" />
                                     {errors.price && <p className='text-red-600'>{errors.quantity?.message}</p>}
-                                </div>
+                                </div> */}
 
 
                                 {/* Wrranty */}
