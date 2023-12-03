@@ -50,6 +50,8 @@ export default function MyOrder() {
             [`${item.product_name}_quantity`]: item.quantity,
             [`${item.product_name}_id`]: item._id,
             [`${item.product_name}_I-id`]: item.I_id,
+            [`${item.product_name}_image`]: item.image,
+
             total_price: calculateTotalPrice(),
 
         }
