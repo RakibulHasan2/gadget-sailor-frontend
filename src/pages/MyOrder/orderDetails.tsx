@@ -1,6 +1,6 @@
 
 
-const orderDetails = () => {
+const OrderDetails = () => {
     return (
         <div>
 
@@ -8,4 +8,4 @@ const orderDetails = () => {
     );
 };
 
-export default orderDetails;
+export default OrderDetails;
