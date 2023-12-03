@@ -62,7 +62,8 @@ export default function SingleProductPage() {
       quantity: count,
       model: model,
       email: user.email,
-      u_id: user.id
+      u_id: user.id,
+      I_id: _id
     }
 
     const response = await fetch('http://localhost:5000/api/v1/addCart', {
