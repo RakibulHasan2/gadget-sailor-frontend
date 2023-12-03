@@ -10,15 +10,19 @@ export default function OrderDetails() {
         )
         .map(key => others[key]);
     console.log(product)
+
     const image = Object.keys(others)
         .filter(key => key.endsWith("_image")
         )
         .map(key => others[key]);
     console.log(image);
+
     const quantity = Object.keys(others)
         .filter(key => key.endsWith("_image")
-        )
+        ) 
         .map(key => others[key]);
+        
+    console.log(quantity)
     console.log(image);
     const delivary = 60
     return (
