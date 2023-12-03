@@ -16,6 +16,9 @@ import FavPage from "../pages/Favourites/FavPage";
 import PaymentLayout from "../layouts/PaymentLayout";
 import MyCart from "../pages/MyCart/MyCart";
 import MyOrder from "../pages/MyOrder/MyOrder";
+import OrderHistory from "../pages/MyOrder/OrderHistory";
+import OrderDetails from "../pages/MyOrder/OrderDetails";
+
 
 
 
@@ -92,6 +95,14 @@ const routes = createBrowserRouter([
           return data;
         }
       },
+      {
+        path:'/payment/orderHistory',
+        element:<OrderHistory/>
+      },
+      {
+        path:'/payment/orderDetails',
+        element:<OrderDetails/>
+      }
 
     ]
   },
