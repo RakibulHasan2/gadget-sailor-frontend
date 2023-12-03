@@ -5,7 +5,7 @@ import useProductData from "../../hooks/useProductData";
 import toast from "react-hot-toast";
 import '../../styles/Loader.css'
 
-const UpdateModal = ({ singleData, closeModal }: IProduct,) => {
+const UpdateModal = ({ singleData, closeModal }: IProduct) => {
     const { register, handleSubmit, formState: { errors } } = useForm<UpdateProductValues>();
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { __v, _id, category_name, sub_category_name, product_name, price, status, product_code, description, reviews, brand_name, image, model, warranty, quantity, ...otherProperties } = singleData;
@@ -70,6 +70,8 @@ const UpdateModal = ({ singleData, closeModal }: IProduct,) => {
             toast.error(product.message)
         }
     }
+
+   
     return (
         <div>
             <div>
@@ -101,7 +103,8 @@ const UpdateModal = ({ singleData, closeModal }: IProduct,) => {
                                     <label className="font-bold label"> <span className="label-text">Subcategory name</span></label>
                                     <select className="w-full max-w-xs select select-bordered rounded-3xl" {...register("sub_category_name", {
                                         required: 'Required'
-                                    })}>
+                                    })}
+                                    >
                                         {
                                             getOneSubCategory.map(d => (
                                                 <option key={d} value={d}>{d}</option>
