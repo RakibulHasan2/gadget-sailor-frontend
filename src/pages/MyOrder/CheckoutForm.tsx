@@ -184,7 +184,7 @@ const CheckoutForm = ({ data }: any) => {
                                 // setTimeout(() => {
                                 //     toast.success("Successfully deleted");
                                 // }, 1000);
-                                navigate('/home')
+                                navigate('/payment/orderHistory')
                             }
                         })
                 })
@@ -215,7 +215,7 @@ const CheckoutForm = ({ data }: any) => {
 
                         if (product.statusCode === 200) {
                             //toast.success(product.message)
-                            navigate('/home')
+                            navigate('/payment/orderHistory')
                         } else {
                             toast.error(product.message)
                         }
