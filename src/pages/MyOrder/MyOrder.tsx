@@ -84,7 +84,10 @@ export default function MyOrder() {
     // }
 
     console.log(userInfo)
-    console.log(count)
+    console.log(checkoutInfo)
+    console.log(checkoutInfoArray)
+    console.log(checkoutInfoArray.length)
+    console.log(Object.keys(checkoutInfoArray).length);
     console.log(combinedObject)
     return (
         <div className="p-3 lg:p-5 lg:flex justify-evenly">
@@ -302,8 +305,8 @@ export default function MyOrder() {
 
 
                 {
-                    userInfo.length !== 0 ?
-                        <div>
+                    userInfo.length !== 0 && Object.keys(checkoutInfoArray).length !== 0 ?
+                        (<div>
                             {
                                 combinedObject?.paymentMethod === "Card Payment" ?
                                     <div className='p-3 my-12 border rounded-lg lg:w-full bg-slate-100' >
@@ -323,11 +326,24 @@ export default function MyOrder() {
                                     </div>
                             }
 
-                        </div>
+                        </div>)
                         :
-                        <div className='my-12 lg:w-96' >
-                            <button onClick={() => alert('Please fill up the customer information form at first.')} className='w-40 mt-4 btn btn-sm btn-primary'>Confirm Order</button>
-                        </div>
+
+
+                        (
+                            userInfo.length !== 0 && Object.keys(checkoutInfoArray).length === 0
+                                ? (
+                                    <div className='my-12 lg:w-96'>
+                                        <button onClick={() => alert("You haven't chosen any product.")} className='w-40 mt-4 btn btn-sm btn-primary'>Confirm Order</button>
+                                    </div>
+                                )
+                                : (
+                                    <div className='my-12 lg:w-96'>
+                                        <button onClick={() => alert('Please fill up the customer information form first.')} className='w-40 mt-4 btn btn-sm btn-primary'>Confirm Order</button>
+                                    </div>
+                                )
+                        )
+
 
 
                 }
