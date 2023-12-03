@@ -328,8 +328,6 @@ export default function MyOrder() {
                         <div className='my-12 lg:w-96' >
                             <button onClick={() => alert('Please fill up the customer information form at first.')} className='w-40 mt-4 btn btn-sm btn-primary'>Confirm Order</button>
                         </div>
-
-
                 }
             </div>
 
