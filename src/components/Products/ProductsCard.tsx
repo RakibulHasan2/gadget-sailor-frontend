@@ -24,6 +24,7 @@ export default function ProductsCard({ product }: IProduct) {
             model: model,
             email: user?.email,
             u_id: user.id,
+            I_id: _id,
 
         }
         fetch('http://localhost:5000/api/v1/addCart', {

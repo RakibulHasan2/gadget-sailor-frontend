@@ -1,5 +1,4 @@
 import { useLoaderData } from "react-router-dom"
-
 import { useForm } from 'react-hook-form';
 import { CheckoutFormValues } from "../../types/FormType";
 import { userData } from "../../hooks/getUserData";
@@ -21,7 +20,8 @@ export default function MyOrder() {
     const user = userData()
     const CartDetails = data.data;
     const { register, handleSubmit, formState: { errors } } = useForm<CheckoutFormValues>();
-    console.log(CartDetails);
+    //console.log(CartDetails);
+    // console.log(data);
 
     const calculateTotalPrice = () => {
         let totalPrice: number = 0;
@@ -44,10 +44,14 @@ export default function MyOrder() {
 
     const checkoutInfo = CartDetails.map(item => (
         {
-            [item.product_name]: item.product_name,
+            [`${item.product_name}_product`]: item.product_name,
             [`${item.product_name}_price`]: item.unit_price,
-            total_price: calculateTotalPrice(),
+            [`${item.product_name}_quantity`]: item.quantity,
+            [`${item.product_name}_id`]: item._id,
+            [`${item.product_name}_I-id`]: item.I_id,
+            [`${item.product_name}_image`]: item.image,
 
+            total_price: calculateTotalPrice(),
         }
     ));
 
@@ -171,7 +175,7 @@ export default function MyOrder() {
 
                                 })}
                                 className="w-full max-w-xs pt-3 h-28 input input-bordered input-info rounded-3xl" />
-                            {errors.comments && <p className='text-red-600'>{errors.comments?.message}</p>}
+
                         </div>
 
 
@@ -298,27 +302,32 @@ export default function MyOrder() {
 
 
                 {
-                    userInfo.length === 0 ?
-                        <div className='my-12 lg:w-96' >
-                            <button onClick={() => alert('Please fill up the customer information form at first.')} className='w-40 mt-4 btn btn-sm btn-primary'>Pay</button>
-                        </div>
-                        :
-                        <>
+                    userInfo.length !== 0 ?
+                        <div>
                             {
-                                combinedObject?.paymentMethod === "Card Payment" &&
-                                <div className='p-3 my-12 border rounded-lg lg:w-full bg-slate-100' >
-                                    <div className="flex justify-center p-3 mb-3 text-2xl font-bold text-blue-700 border-b-2">
-                                        <h1 className="animate-pulse">Please enter the card details</h1>
-                                    </div>
-                                    <Elements stripe={stripePromise}>
-                                        <CheckoutForm
-                                            data={combinedObject} />
-                                    </Elements>
+                                combinedObject?.paymentMethod === "Card Payment" ?
+                                    <div className='p-3 my-12 border rounded-lg lg:w-full bg-slate-100' >
+                                        <div className="flex justify-center p-3 mb-3 text-2xl font-bold text-blue-700 border-b-2">
+                                            <h1 className="animate-pulse">Please enter the card details</h1>
+                                        </div>
+                                        <Elements stripe={stripePromise}>
+                                            <CheckoutForm
+                                                data={combinedObject} />
+                                        </Elements>
 
-                                </div>
+
+                                    </div>
+                                    :
+                                    <div className='my-12 lg:w-96' >
+                                        <button className='w-40 mt-4 btn btn-sm btn-primary'>Confirm Order</button>
+                                    </div>
                             }
 
-                        </>
+                        </div>
+                        :
+                        <div className='my-12 lg:w-96' >
+                            <button onClick={() => alert('Please fill up the customer information form at first.')} className='w-40 mt-4 btn btn-sm btn-primary'>Confirm Order</button>
+                        </div>
 
 
                 }

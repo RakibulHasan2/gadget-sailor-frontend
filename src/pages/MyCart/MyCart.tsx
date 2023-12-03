@@ -6,6 +6,8 @@ import useCartData from "../../hooks/useCartData";
 export default function MyCart() {
   const user = userData()
   const { data, refetch } = useCartData(`http://localhost:5000/api/v1/getCart/${user?.id}`);
+
+  console.log(data)
   const calculateTotalPrice = () => {
     let totalPrice: number = 0;
     data.forEach((item) => {
@@ -24,7 +26,6 @@ export default function MyCart() {
         }
       })
   }
-
   return (
     <div className="flex justify-center mt-10 mb-10">
       <div className="shadow-2xl lg:w-9/12 lg:p-10">
