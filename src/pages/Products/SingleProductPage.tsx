@@ -64,7 +64,8 @@ export default function SingleProductPage() {
       quantity: count,
       model: model,
       email: user.email,
-      u_id: user.id
+      u_id: user.id,
+      I_id: _id
     }
 
     if (count <= quantity) {
