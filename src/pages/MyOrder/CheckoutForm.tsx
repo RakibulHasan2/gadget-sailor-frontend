@@ -146,6 +146,7 @@ const CheckoutForm = ({ data }: any) => {
                 ...data,
                 transactionId: paymentIntent.id
             }
+            console.log("payment dataaaa",paymentData)
             // const productData: UpdateProductValues = {
 
             //     quantity:
