@@ -134,12 +134,10 @@ export default function Navbar() {
                   </div>}
                 </div></button></label>
               <ul tabIndex={0} className="dropdown-content z-[10] menu p-2 shadow bg-base-100 rounded-lg w-52 border text-black">
-
+                <Link to='/my-profile'><li><a className=" hover:bg-blue-800 hover:text-white">My Profile</a></li></Link>
                 {
-                  user?.email === 'gadgetsailoradmin@gmail.com' ?
-                    <Link to='/addProduct'><li><a className=" hover:bg-blue-800 hover:text-white">Add Product</a></li></Link>
-                    :
-                    <Link to='/my-profile'><li><a className=" hover:bg-blue-800 hover:text-white">My Profile</a></li></Link>
+                  user?.email === 'gadgetsailoradmin@gmail.com' &&
+                  <Link to='/addProduct'><li><a className=" hover:bg-blue-800 hover:text-white">Add Product</a></li></Link>
                 }
                 <li onClick={() => handleLogout()}><a className=" hover:bg-red-600 hover:text-white">Log-out</a></li>
               </ul>
