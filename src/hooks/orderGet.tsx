@@ -17,7 +17,6 @@ const usePaymentInfo = (userEmail: string) => {
 
         const result = await response.json();
         const info = result.data;
-        console.log(info)
         setOrder(info);
       } catch (error) {
         throw new Error("Network response failed: " + JSON.stringify(error));
@@ -27,7 +26,7 @@ const usePaymentInfo = (userEmail: string) => {
     fetchData();
 
   }, [userEmail]);
-  console.log(order);
+
   return order;
 };
 
