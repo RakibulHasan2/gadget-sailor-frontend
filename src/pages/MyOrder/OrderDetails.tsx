@@ -1,3 +1,4 @@
+
 import { userData } from "../../hooks/getUserData";
 import usePaymentInfo from "../../hooks/orderGet";
 import { FaShippingFast } from "react-icons/fa";
@@ -15,8 +16,6 @@ export default function OrderDetails() {
     const userEmail = user?.email;
     const order = usePaymentInfo(userEmail);
     const { email, payment_code, firstName, lastName, phoneNumber, district, comments, paymentMethod, deliveryMethod, transactionId, total_price, address, city, __v, _id, ...others } = order;
-
-    console.log(order)
 
     const product = Object.keys(others)
         .filter(key => key.endsWith("_product")
