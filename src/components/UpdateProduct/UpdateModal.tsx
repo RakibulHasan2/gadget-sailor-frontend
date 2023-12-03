@@ -98,36 +98,49 @@ const UpdateModal = ({ singleData, closeModal }: IProduct) => {
                                     </select>
                                     {errors.category_name && <p className='text-red-600'>{errors.category_name?.message}</p>}
                                 </div>
-                                {/* Sub-Category */}
-                                <div className="w-full max-w-xs mt-2 form-control">
-                                    <label className="font-bold label"> <span className="label-text">Subcategory name: {singleData?.sub_category_name}</span></label>
-                                    <select className="w-full max-w-xs select select-bordered rounded-3xl" {...register("sub_category_name", {
-                                        required: 'Required'
-                                    })}
-                                    >
-                                        {
-                                            getOneSubCategory.map(d => (
-                                                <option key={d} value={d}>{d}</option>
-                                            ))
-                                        }
-                                    </select>
-                                    {errors.sub_category_name && <p className='text-red-600'>{errors.sub_category_name?.message}</p>}
-                                </div>
-                                {/* Brand Name */}
-                                <div className="w-full max-w-xs mt-2 form-control">
-                                    <label className="font-bold label"> <span className="label-text">Brand Name : {singleData?.brand_name}</span></label>
 
-                                    <select defaultValue={singleData?.brand_name} className="w-full max-w-xs select select-bordered rounded-3xl" {...register("brand_name", {
-                                        required: 'Required'
-                                    })}>
-                                        {
-                                            getOneBrand.map(d => (
-                                                <option key={d} value={d}>{d}</option>
-                                            ))
-                                        }
-                                    </select>
-                                    {errors.brand_name && <p className='text-red-600'>{errors.brand_name?.message}</p>}
-                                </div>
+
+                                {/* Sub-Category */}
+                                {
+                                    singleData?.sub_category_name &&
+
+                                    <div className="w-full max-w-xs mt-2 form-control">
+                                        <label className="font-bold label"> <span className="label-text">Subcategory name: {singleData?.sub_category_name}</span></label>
+                                        <select className="w-full max-w-xs select select-bordered rounded-3xl" {...register("sub_category_name", {
+                                            required: 'Required'
+                                        })}>
+                                            {
+                                                getOneSubCategory.map(d => (
+                                                    <option key={d} value={d}>{d}</option>
+                                                ))
+                                            }
+                                        </select>
+                                        {errors.sub_category_name && <p className='text-red-600'>{errors.sub_category_name?.message}</p>}
+                                    </div>
+                                }
+
+
+                                {/* Brand Name */}
+                                {
+                                    singleData?.brand_name &&
+
+                                    <div className="w-full max-w-xs mt-2 form-control">
+                                        <label className="font-bold label"> <span className="label-text">Brand Name : {singleData?.brand_name}</span></label>
+
+                                        <select defaultValue={singleData?.brand_name} className="w-full max-w-xs select select-bordered rounded-3xl" {...register("brand_name", {
+                                            required: 'Required'
+                                        })}>
+                                            {
+                                                getOneBrand.map(d => (
+                                                    <option key={d} value={d}>{d}</option>
+                                                ))
+                                            }
+                                        </select>
+                                        {errors.brand_name && <p className='text-red-600'>{errors.brand_name?.message}</p>}
+                                    </div>
+                                }
+
+
                                 {/* Product Name */}
                                 <div className="w-full max-w-xs mt-2 form-control">
                                     <label className="font-bold label"> <span className="label-text">Product Name</span></label>
