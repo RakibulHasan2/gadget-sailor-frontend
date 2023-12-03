@@ -4,8 +4,9 @@ import { IPayment } from "../../types/PaymentType";
 
 const OrderHistoryCard = ({ data }: IPayment) => {
     console.log(data)
+    console.log(data?._id)
 
-    const { email, payment_code, firstName, lastName, phoneNumber, district, comments, paymentMethod, deliveryMethod, transactionId, total_price, address, city, __v, _id, ...others } = data;
+    const { email, payment_code, firstName, lastName, phoneNumber, district, comments, paymentMethod, deliveryMethod, transactionId, totalPrice, address, city, __v, _id, ...others } = data;
 
     const product = (Object.keys(data) as (keyof typeof data)[])
         .filter(key => (key as string).endsWith("_product"))
@@ -43,11 +44,11 @@ const OrderHistoryCard = ({ data }: IPayment) => {
                         </div>
 
                         <div>
-                            <p>Total Cost: {total_price}৳</p>
+                            <p>Total Cost: {totalPrice}৳</p>
                         </div>
 
                         <div>
-                            <Link to='/payment/orderDetails'> <button className="p-2 text-white bg-blue-700 border rounded-xl">View Details</button></Link>
+                            <Link to={`/payment/orderDetails/${_id}`}> <button className="p-2 text-white bg-blue-700 border rounded-xl">View Details</button></Link>
                         </div>
                     </div>
 
