@@ -46,6 +46,11 @@ export default function MyProfile() {
                     <Link to='/my-cart'>
                         <button className="flex items-center justify-center w-full h-10 mb-5 font-bold btn-one gap-x-2"><FaCartArrowDown /> My Cart</button>
                     </Link>
+
+                    <Link to='/payment/orderHistory'><button className="flex items-center justify-center w-full h-10 mb-5 font-bold btn-one gap-x-2"><FaHome />
+                        Order History</button></Link>
+
+
                     <Link to="/fav-item">
                         <button className="flex items-center justify-center w-full h-10 mb-5 font-bold btn-one gap-x-2"><AiOutlineHeart />Wishlist</button>
 
@@ -56,6 +61,9 @@ export default function MyProfile() {
 
                     <button className="flex items-center justify-center w-full h-10 mb-5 font-bold btn-one gap-x-2" onClick={openPasswordModal}><FaUserLock />
                         Change password</button>
+
+
+
 
                     <Link to='/home'><button className="flex items-center justify-center w-full h-10 mb-5 font-bold btn-one gap-x-2"><FaHome />
                         Back Home</button></Link>
@@ -68,7 +76,7 @@ export default function MyProfile() {
                         <img src="https://codedesign.org/storage/app/media/uploaded-files/how-to-choose-the-right-e-commerce-agency.jpeg" alt="" className="object-cover w-full rounded-lg h-52" />
                     </div>
                     {user.image !== undefined ?
-                       <div className='h-40 p-3 mt-3 rounded-lg lg:ml-0 lg:p-0 lg:h-0 lg:mt-0'>
+                        <div className='h-40 p-3 mt-3 rounded-lg lg:ml-0 lg:p-0 lg:h-0 lg:mt-0'>
                             <div className="absolute lg:mb-10 lg:absolute lg:ml-10 lg:top-40 avatar online lefts">
                                 <div className="w-40 border rounded-full lg:w-24 ring ring-info ring-offset-base-100 ring-offset-2">
                                     <img src={user.image} />

@@ -8,7 +8,7 @@ import { UpdateProductValues, UpdateProductValuesResponse } from "../../types/Pr
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const CheckoutForm = ({ data }: any) => {
-    const { total_price, firstName, lastName, email, phoneNumber } = data;
+    const { totalPrice, firstName, lastName, email, phoneNumber } = data;
     console.log("Dattaaaa", data)
     const [clientSecret, setClientSecret] = useState("");
     const [cardError, setCardError] = useState<string | null>('')
@@ -22,7 +22,7 @@ const CheckoutForm = ({ data }: any) => {
     const elements = useElements();
     const navigate = useNavigate();
 
-    console.log(total_price)
+    console.log(totalPrice)
 
     const ids = Object.keys(data)
         .filter(key => key.endsWith("_id"))
@@ -50,7 +50,7 @@ const CheckoutForm = ({ data }: any) => {
                 authorization: `bearer ${sessionStorage.getItem('accessToken')}`
             },
             body: JSON.stringify({
-                total_price
+                totalPrice
             }),
         })
             .then((res) => res.json())
@@ -59,7 +59,7 @@ const CheckoutForm = ({ data }: any) => {
                 setClientSecret(Data.clientSecret)
 
             });
-    }, [total_price]);
+    }, [totalPrice]);
 
 
     useEffect(() => {
@@ -146,6 +146,7 @@ const CheckoutForm = ({ data }: any) => {
                 ...data,
                 transactionId: paymentIntent.id
             }
+            console.log("payment dataaaa",paymentData)
             // const productData: UpdateProductValues = {
 
             //     quantity:
@@ -184,7 +185,7 @@ const CheckoutForm = ({ data }: any) => {
                                 // setTimeout(() => {
                                 //     toast.success("Successfully deleted");
                                 // }, 1000);
-                                navigate('/home')
+                                navigate('/payment/orderHistory')
                             }
                         })
                 })
@@ -215,7 +216,7 @@ const CheckoutForm = ({ data }: any) => {
 
                         if (product.statusCode === 200) {
                             //toast.success(product.message)
-                            navigate('/home')
+                            navigate('/payment/orderHistory')
                         } else {
                             toast.error(product.message)
                         }
