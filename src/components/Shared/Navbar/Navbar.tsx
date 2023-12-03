@@ -139,6 +139,14 @@ export default function Navbar() {
                   user?.email === 'gadgetsailoradmin@gmail.com' &&
                   <Link to='/addProduct'><li><a className=" hover:bg-blue-800 hover:text-white">Add Product</a></li></Link>
                 }
+                <Link to='/payment/orderHistory'>
+                  <li>
+                    <a className=" hover:bg-blue-800 hover:text-white">
+                      Order History</a>
+                  </li>
+
+                </Link>
+
                 <li onClick={() => handleLogout()}><a className=" hover:bg-red-600 hover:text-white">Log-out</a></li>
               </ul>
             </div> : <Link to='/login'><button className="flex w-16 p-2 mr-3 font-bold border rounded-lg lg-w-0">Login<BiLogIn className='text-2xl'></BiLogIn></button></Link>

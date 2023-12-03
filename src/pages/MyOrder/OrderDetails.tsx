@@ -1,6 +1,6 @@
 
-import { userData } from "../../hooks/getUserData";
-import usePaymentInfo from "../../hooks/orderGet";
+//import { userData } from "../../hooks/getUserData";
+//import usePaymentInfo from "../../hooks/orderGet";
 import { FaShippingFast } from "react-icons/fa";
 import { MdPayment } from "react-icons/md";
 import { MdPerson } from "react-icons/md";
@@ -10,34 +10,41 @@ import { FaPhoneVolume } from "react-icons/fa6";
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
 import { MdDeliveryDining } from "react-icons/md";
 import { SiVirustotal } from "react-icons/si";
+import { useLoaderDataType } from "../../types/useLoaderDataType";
+import { useLoaderData } from "react-router-dom";
+import { IPayment } from "../../types/PaymentType";
 
 export default function OrderDetails() {
-    const user = userData()
-    const userEmail = user?.email;
-    const order = usePaymentInfo(userEmail);
-    const { email, payment_code, firstName, lastName, phoneNumber, district, comments, paymentMethod, deliveryMethod, transactionId, total_price, address, city, __v, _id, ...others } = order;
+    // const user = userData()
+    //const userEmail = user?.email;
+    const orders = useLoaderData() as useLoaderDataType;
+    const order = orders.data as IPayment;
+    const { email, payment_code, firstName, lastName, phoneNumber, district, comments, paymentMethod, deliveryMethod, transactionId, totalPrice, address, city, __v, _id, ...others } = order;
+    console.log(order)
 
-    const product = Object.keys(others)
-        .filter(key => key.endsWith("_product")
-        )
-        .map(key => others[key]);
-    console.log(product)
+    const product = (Object.keys(order) as (keyof typeof order)[])
+        .filter(key => (key as string).endsWith("_product"))
+        .map(key => order[key]);
 
-    const image = Object.keys(others)
-        .filter(key => key.endsWith("_image")
+    const image = (Object.keys(order) as (keyof typeof order)[])
+        .filter(key => (key as string).endsWith("_image")
         )
-        .map(key => others[key]);
+        .map(key => order[key]);
     console.log(image);
 
-    const quantity = Object.keys(others)
-        .filter(key => key.endsWith("_quantity")
+    const quantity = (Object.keys(order) as (keyof typeof order)[])
+        .filter(key => (key as string).endsWith("_quantity")
         )
-        .map(key => others[key]);
-    const price = Object.keys(others)
-        .filter(key => key.endsWith("_price")
-        )
-        .map(key => others[key]);
+        .map(key => order[key]);
 
+
+    const price = (Object.keys(order) as (keyof typeof order)[])
+        .filter(key => (key as string).endsWith("_price")
+        )
+        .map(key => order[key]);
+
+    console.log(product)
+    console.log(price)
     console.log(quantity)
     console.log(image);
     const delivary = 60
@@ -80,7 +87,7 @@ export default function OrderDetails() {
                             </div>
                             <div className="flex ">
                                 <h1 className="flex items-center w-40 gap-1 p-3"><FaBangladeshiTakaSign className='text-lg text-blue-600' />Cost</h1>
-                                <h1 className="w-40 p-2 ">: {total_price - 60}৳  </h1>
+                                <h1 className="w-40 p-2 ">: {totalPrice - 60}৳  </h1>
                             </div>
                             <div className="flex">
                                 <h1 className="flex items-center w-40 gap-1 p-2"><MdDeliveryDining className='text-2xl text-blue-600' />Home Delivary</h1>
@@ -88,7 +95,7 @@ export default function OrderDetails() {
                             </div>
                             <div className="flex font-bold border-t-2">
                                 <h1 className="flex items-center w-40 gap-2 p-2"><SiVirustotal className='text-lg text-blue-600' />Sub Total</h1>
-                                <h1 className="w-40 p-2">: {total_price}৳</h1>
+                                <h1 className="w-40 p-2">: {totalPrice}৳</h1>
                             </div>
                         </div>
 
@@ -164,5 +171,6 @@ export default function OrderDetails() {
             </div>
 
         </div>
+
     )
 }

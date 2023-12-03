@@ -7,14 +7,14 @@ export type IPayment = {
 export type IPayments = {
     email: string
     payment_code: number
-    firstName:string
-    lastName:string
-    phoneNumber:number
-    district:string
-    comments?:string
-    paymentMethod:string
-    deliveryMethod:string
-    transactionId:string
-    address:string
-    other?:string
+    firstName: string
+    lastName: string
+    phoneNumber: number
+    district: string
+    comments?: string
+    paymentMethod: string
+    deliveryMethod: string
+    transactionId: string
+    address: string
+    other?: string
 }

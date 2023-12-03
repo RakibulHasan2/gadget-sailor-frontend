@@ -96,12 +96,19 @@ const routes = createBrowserRouter([
         }
       },
       {
-        path:'/payment/orderHistory',
-        element:<OrderHistory/>
+        path: '/payment/orderHistory',
+        element: <OrderHistory />
       },
       {
-        path:'/payment/orderDetails',
-        element:<OrderDetails/>
+        path: '/payment/orderDetails/:_id',
+        element: <OrderDetails />,
+        loader: async ({ params }) => {
+          const response = await fetch(`${baseUrl}/getPayment/${params?._id}`)
+          const data = await response.json();
+          console.log(data)
+          console.log(params?._id)
+          return data;
+        }
       }
 
     ]
