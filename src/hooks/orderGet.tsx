@@ -12,10 +12,11 @@ const usePaymentInfo = (userEmail: string) => {
         const response = await fetch(`http://localhost:5000/api/v1/getPayment/${userEmail}`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
+
         }
 
         const result = await response.json();
-        const info = result.data[0];
+        const info = result.data;
         setOrder(info);
       } catch (error) {
         throw new Error("Network response failed: " + JSON.stringify(error));

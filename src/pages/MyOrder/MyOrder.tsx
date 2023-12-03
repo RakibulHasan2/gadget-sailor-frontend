@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom"
+import { Link, useLoaderData } from "react-router-dom"
 import { useForm } from 'react-hook-form';
 import { CheckoutFormValues } from "../../types/FormType";
 import { userData } from "../../hooks/getUserData";
@@ -6,7 +6,9 @@ import { ICartResponse } from "../../types/CartModalType";
 import { loadStripe } from "@stripe/stripe-js";
 import CheckoutForm from "./CheckoutForm";
 import { Elements } from "@stripe/react-stripe-js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { UpdateProductValues, UpdateProductValuesResponse } from "../../types/ProductTypes";
 
 
 const stripePromise = loadStripe('pk_test_51M8NuoDiyv5tmMKuNdL0GTfndh3lFLwZKkkSn2ITrLo3HjeSIyf7tjD0vTCQqf6x6dGXKjgqm0XCTJdmFJEmgCge00LyoHRros');
@@ -18,6 +20,7 @@ export default function MyOrder() {
     const [userInfo, setUserInfo] = useState<CheckoutFormValues[]>([]);
     const [count, setCount] = useState(0);
     const user = userData()
+    const [iData, setIData] = useState<UpdateProductValues[]>([]);
     const CartDetails = data.data;
     const { register, handleSubmit, formState: { errors } } = useForm<CheckoutFormValues>();
     //console.log(CartDetails);
@@ -76,15 +79,116 @@ export default function MyOrder() {
         handleCount();
     }
 
+    const ids = Object.keys(combinedObject)
+        .filter(key => key.endsWith("_id"))
+        .map(key => combinedObject[key]);
+
+    const I_ids = Object.keys(combinedObject)
+        .filter(key => key.endsWith("_I-id"))
+        .map(key => combinedObject[key]);
+
+    useEffect(() => {
+        fetch('http://localhost:5000/api/v1/allProducts')
+            .then(res => res.json())
+            .then((data: UpdateProductValuesResponse) => {
+                //console.log(data.data)
+                const Data = data.data;
+                setIData(Data);
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    }, []);
+
+    const filteredDataArray: UpdateProductValues[] = [];
+    iData.map(d => {
+        I_ids.forEach(i => {
+            if (d._id === i) {
+                filteredDataArray.push(d)
+            }
+        })
+    })
+    console.log(filteredDataArray)
 
 
-    // const handleFunctions = () => {
-    //     handleCount();
-    //     handleCheckout(info);
-    // }
+    const handleAddPayment = async () => {
+        const response = await fetch(`http://localhost:5000/api/v1/addPayment`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                authorization: `bearer ${sessionStorage.getItem('accessToken')}`
+            },
+            body: JSON.stringify(combinedObject)
+
+        });
+        const donePayment = await response.json();
+        console.log(donePayment)
+        if (donePayment.statusCode === 200 && ids.length > 0) {
+
+            toast.success(donePayment.message);
+
+
+            // deleting from the cart
+
+            ids.forEach(async (id) => {
+
+                fetch(`http://localhost:5000/api/v1/getCart/${id}`, {
+                    method: 'DELETE'
+                })
+                    .then(anotherResponse => {
+                        if (anotherResponse.ok) {
+
+                            // setTimeout(() => {
+                            //     toast.success("Successfully deleted");
+                            // }, 1000);
+                            //navigate('/home')
+                        }
+                    })
+            })
+
+
+
+            // update data
+
+            filteredDataArray.map(async d => {
+                console.log(d)
+                if (d.product_name === combinedObject[`${d.product_name}_product`]) {
+                    const d_quantity = d.quantity as number;
+                    const Quantity = d_quantity - combinedObject[`${d.product_name}_quantity`]
+                    //console.log(Quantity)
+                    const productData: UpdateProductValues = {
+                        quantity: Quantity
+                    }
+                    //console.log(productData)
+
+                    const response = fetch(`http://localhost:5000/api/v1/allProducts/${d._id}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(productData)
+                    });
+                    const product = await (await response).json();
+
+                    if (product.statusCode === 200) {
+                        //toast.success(product.message)
+                        // navigate('/home')
+                    } else {
+                        toast.error(product.message)
+                    }
+                }
+            })
+
+        } else {
+            toast.error("Payment isn't completed")
+        }
+    }
 
     console.log(userInfo)
-    console.log(count)
+    console.log(checkoutInfo)
+    console.log(checkoutInfoArray)
+    console.log(checkoutInfoArray.length)
+    console.log(Object.keys(checkoutInfoArray).length);
     console.log(combinedObject)
     return (
         <div className="p-3 lg:p-5 lg:flex justify-evenly">
@@ -302,8 +406,8 @@ export default function MyOrder() {
 
 
                 {
-                    userInfo.length !== 0 ?
-                        <div>
+                    userInfo.length !== 0 && Object.keys(checkoutInfoArray).length !== 0 ?
+                        (<div>
                             {
                                 combinedObject?.paymentMethod === "Card Payment" ?
                                     <div className='p-3 my-12 border rounded-lg lg:w-full bg-slate-100' >
@@ -319,15 +423,30 @@ export default function MyOrder() {
                                     </div>
                                     :
                                     <div className='my-12 lg:w-96' >
-                                        <button className='w-40 mt-4 btn btn-sm btn-primary'>Confirm Order</button>
+                                        <Link to='/payment/orderHistory'>
+                                            <button onClick={handleAddPayment} className='w-40 mt-4 btn btn-sm btn-primary'>Confirm Order</button>
+                                        </Link>
                                     </div>
                             }
 
-                        </div>
+                        </div>)
                         :
-                        <div className='my-12 lg:w-96' >
-                            <button onClick={() => alert('Please fill up the customer information form at first.')} className='w-40 mt-4 btn btn-sm btn-primary'>Confirm Order</button>
-                        </div>
+
+
+                        (
+                            userInfo.length !== 0 && Object.keys(checkoutInfoArray).length === 0
+                                ? (
+                                    <div className='my-12 lg:w-96'>
+                                        <button onClick={() => alert("You haven't chosen any product.")} className='w-40 mt-4 btn btn-sm btn-primary'>Confirm Order</button>
+                                    </div>
+                                )
+                                : (
+                                    <div className='my-12 lg:w-96'>
+                                        <button onClick={() => alert('Please fill up the customer information form first.')} className='w-40 mt-4 btn btn-sm btn-primary'>Confirm Order</button>
+                                    </div>
+                                )
+                        )
+
 
 
                 }
