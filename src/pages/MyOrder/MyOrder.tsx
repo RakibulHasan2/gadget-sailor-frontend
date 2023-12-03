@@ -45,8 +45,8 @@ export default function MyOrder() {
         {
             [item.product_name]: item.product_name,
             [`${item.product_name}_price`]: item.unit_price,
+            [`${item.product_name}_quantity`]: item.quantity,
             total_price: calculateTotalPrice(),
-
         }
     ));
 
