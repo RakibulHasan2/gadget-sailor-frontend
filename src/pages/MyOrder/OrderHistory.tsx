@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import { userData } from "../../hooks/getUserData"
 import { IPayment } from "../../types/PaymentType";
-import { Link } from "react-router-dom";
 // import { IPayment } from "../../types/PaymentType";
 
 
@@ -69,7 +68,7 @@ console.log(order)
           </div>
 
           <div>
-            <Link to='/payment/orderHistory-details'><button className="btn">View Details</button></Link>
+            <button className="btn">View Details</button>
           </div>
 
         </div>
