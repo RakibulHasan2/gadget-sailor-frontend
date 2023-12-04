@@ -16,13 +16,13 @@ const AddProduct = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<AddProductValues>();
     const imageHosKey = '1a6c0e11cdde66ffb8f933ec4079f59e';
     const navigate = useNavigate();
-    const { data, isLoading } = useProductData("http://localhost:5000/api/v1/allProducts")
+    const { data, isLoading } = useProductData("https://gadget-sailor-backend.onrender.com/api/v1/allProducts")
 
     // get categories---------------------------------
     const [categoryData, setCategoryData] = React.useState<ICategory[]>([]);
 
     React.useEffect(() => {
-        fetch('http://localhost:5000/api/v1/get-AllCategories')
+        fetch('https://gadget-sailor-backend.onrender.com/api/v1/get-AllCategories')
             .then(res => res.json())
             .then((data: ICategoryResponse) => {
                 setCategoryData(data.data);
@@ -35,7 +35,7 @@ const AddProduct = () => {
     //get sub category-----------------------------
     const [subCategoryData, setSubCategoryData] = React.useState<ICategory[]>([]);
     React.useEffect(() => {
-        fetch('http://localhost:5000/api/v1/get-subCategories')
+        fetch('https://gadget-sailor-backend.onrender.com/api/v1/get-subCategories')
             .then(res => res.json())
             .then((data: ICategoryResponse) => {
                 setSubCategoryData(data.data);
@@ -111,7 +111,7 @@ const AddProduct = () => {
             others_info: data.others_info,
         }
         //Create a new product
-        const response = await fetch('http://localhost:5000/api/v1/add-products', {
+        const response = await fetch('https://gadget-sailor-backend.onrender.com/api/v1/add-products', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

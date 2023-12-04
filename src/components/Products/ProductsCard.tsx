@@ -14,7 +14,7 @@ export default function ProductsCard({ product }: IProduct) {
     const { product_name, price, _id, image, model } = product;
     console.log(product.quantity)
     const user = userData()
-    const { data } = useFavData(`http://localhost:5000/api/v1/getFav/${user?.email}`);
+    const { data } = useFavData(`https://gadget-sailor-backend.onrender.com/api/v1/getFav/${user?.email}`);
     const CartDetails = async () => {
         const cartData = {
             product_name: product_name,
@@ -28,7 +28,7 @@ export default function ProductsCard({ product }: IProduct) {
             I_id: _id,
 
         }
-        fetch('http://localhost:5000/api/v1/addCart', {
+        fetch('https://gadget-sailor-backend.onrender.com/api/v1/addCart', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -58,12 +58,12 @@ export default function ProductsCard({ product }: IProduct) {
 
     const handleDelete = async (id: string, product_name: string) => {
         const filteredFav = data?.filter(f => f?.product_name === product_name);
-        fetch(`http://localhost:5000/api/v1/allProducts/${id}`, {
+        fetch(`https://gadget-sailor-backend.onrender.com/api/v1/allProducts/${id}`, {
             method: 'DELETE'
         })
             .then(response => {
                 if (response.ok && filteredFav.length > 0) {
-                    fetch(`http://localhost:5000/api/v1/getFav/${filteredFav[0]._id}`, {
+                    fetch(`https://gadget-sailor-backend.onrender.com/api/v1/getFav/${filteredFav[0]._id}`, {
                         method: 'DELETE'
                     })
                         .then(anotherResponse => {

@@ -6,9 +6,9 @@ import { Link } from "react-router-dom";
 import '../../styles/Loader.css'
 const FavPage = () => {
     const user = userData();
-    const { data, refetch, isLoading } = useFavData(`http://localhost:5000/api/v1/getFav/${user.email}`);
+    const { data, refetch, isLoading } = useFavData(`https://gadget-sailor-backend.onrender.com/api/v1/getFav/${user.email}`);
     const handleDeleteFav = (id: string | undefined) => {
-        fetch(`http://localhost:5000/api/v1/getFav/${id}`, {
+        fetch(`https://gadget-sailor-backend.onrender.com/api/v1/getFav/${id}`, {
             method: 'DELETE',
         })
             .then(response => {
