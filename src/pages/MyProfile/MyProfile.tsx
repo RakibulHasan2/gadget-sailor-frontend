@@ -84,8 +84,8 @@ export default function MyProfile() {
                             </div>
                         </div>
                         :
-                        <div className="ml-10 lg:absolute top-40 avatar online">
-                            <div className='bg-white rounded-full text-8xl ring ring-info'>
+                        <div className="mt-6 lg:mt-0 lg:ml-10 lg:absolute lg:top-40 avatar online dummyUser">
+                            <div className='bg-white rounded-full lg:text-8xl ring ring-info'>
                                 <FaUserCircle></FaUserCircle>
                             </div>
                         </div>

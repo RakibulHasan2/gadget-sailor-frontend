@@ -61,5 +61,10 @@
 }
 
 .name-left{
-    margin-left:23%;
+    margin-left:24%;
+}
+
+.dummyUser{
+  font-size: 160px;
+  margin-left:27%;
 }
