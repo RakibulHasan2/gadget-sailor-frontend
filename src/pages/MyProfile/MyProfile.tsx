@@ -9,6 +9,8 @@ import { Link } from 'react-router-dom';
 import UploadImage from '../../components/EditProfile/UploadImage';
 import ChangePassword from '../../components/EditProfile/ChangePassword';
 import { userData } from '../../hooks/getUserData';
+import { RiListOrdered } from "react-icons/ri";
+
 export default function MyProfile() {
     const user = userData()
     // ------------------for editprodile-----------------
@@ -47,7 +49,7 @@ export default function MyProfile() {
                         <button className="flex items-center justify-center w-full h-10 mb-5 font-bold btn-one gap-x-2"><FaCartArrowDown /> My Cart</button>
                     </Link>
 
-                    <Link to='/payment/orderHistory'><button className="flex items-center justify-center w-full h-10 mb-5 font-bold btn-one gap-x-2"><FaHome />
+                    <Link to='/payment/orderHistory'><button className="flex items-center justify-center w-full h-10 mb-5 font-bold btn-one gap-x-2"><RiListOrdered />
                         Order History</button></Link>
 
 
