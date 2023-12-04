@@ -316,6 +316,8 @@ export default function SingleProductPage() {
                 product_name={product_name}
                 count={count}
                 total={totalPrice}
+                _id={user.id}
+
               ></CartModal>
             </div>
           </div>
