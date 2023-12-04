@@ -3,7 +3,7 @@ export const useToken = (email: string) => {
       const [token, setToken] = useState('')
     useEffect(() => {
         if (email) {
-            fetch(`http://localhost:5000/api/v1/jwt?email=${email}`)
+            fetch(`https://gadget-sailor-backend.onrender.com/api/v1/jwt?email=${email}`)
                 .then(res => res.json())
                 .then(data => {
                     console.log(data)

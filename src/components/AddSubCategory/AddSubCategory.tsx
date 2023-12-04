@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 
 const AddSubCategory = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<ICategory>();
-    const { data, isLoading } = useProductData("http://localhost:5000/api/v1/get-AllCategories")
+    const { data, isLoading } = useProductData("https://gadget-sailor-backend.onrender.com/api/v1/get-AllCategories")
     if (isLoading) {
         return <p>Loading...</p>;
     }
@@ -15,7 +15,7 @@ const AddSubCategory = () => {
             sub_category_name: data.sub_category_name
 
         }
-        const response = await fetch('http://localhost:5000/api/v1/add_subCategory', {
+        const response = await fetch('https://gadget-sailor-backend.onrender.com/api/v1/add_subCategory', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

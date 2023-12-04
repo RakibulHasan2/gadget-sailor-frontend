@@ -88,7 +88,7 @@ export default function MyOrder() {
         .map(key => combinedObject[key]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/api/v1/allProducts')
+        fetch('https://gadget-sailor-backend.onrender.com/api/v1/allProducts')
             .then(res => res.json())
             .then((data: UpdateProductValuesResponse) => {
                 //console.log(data.data)
@@ -112,7 +112,7 @@ export default function MyOrder() {
 
 
     const handleAddPayment = async () => {
-        const response = await fetch(`http://localhost:5000/api/v1/addPayment`, {
+        const response = await fetch(`https://gadget-sailor-backend.onrender.com/api/v1/addPayment`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -132,7 +132,7 @@ export default function MyOrder() {
 
             ids.forEach(async (id) => {
 
-                fetch(`http://localhost:5000/api/v1/getCart/${id}`, {
+                fetch(`https://gadget-sailor-backend.onrender.com/api/v1/getCart/${id}`, {
                     method: 'DELETE'
                 })
                     .then(anotherResponse => {
@@ -161,7 +161,7 @@ export default function MyOrder() {
                     }
                     //console.log(productData)
 
-                    const response = fetch(`http://localhost:5000/api/v1/allProducts/${d._id}`, {
+                    const response = fetch(`https://gadget-sailor-backend.onrender.com/api/v1/allProducts/${d._id}`, {
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json'
