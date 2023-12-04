@@ -51,7 +51,7 @@ export default function Navbar() {
       setSearchResults(filteredData);
       console.log(filteredData);
 
-      navigate(`/${searchResults[0].category_name}/${searchResults[0].sub_category_name}/${searchResults[0].brand_name}`)
+      // navigate(`/my-cart`)
 
       // if (searchResults[0].product_name) {
 
@@ -59,15 +59,29 @@ export default function Navbar() {
       // }
       // else
 
+      searchResults.map(s => {
+        if (input.value.toLowerCase() === s.brand_name.toLowerCase()
+        ) {
+          navigate(`/${s.category_name}/${s.sub_category_name}/${s.brand_name}`)
+        }
+        else if (input.value.toLowerCase() === s.category_name.toLowerCase()) {
+          navigate(`/${s.category_name}`)
+        }
+        else if (input.value.toLowerCase() === s.sub_category_name.toLowerCase()) {
+          navigate(`/${s.category_name}/${s.sub_category_name}`)
+        }
+        else {
+          console.log("sorry")
+        }
+      })
 
-
-      // if (input === searchResults[0].brand_name) {
+      // if (input.value.toLowerCase() === searchResults[0].brand_name.toLowerCase()) {
       //   navigate(`/${searchResults[0].category_name}/${searchResults[0].sub_category_name}/${searchResults[0].brand_name}`)
       // }
       // else if (input.value.toLowerCase() === searchResults[0].category_name.toLowerCase()) {
       //   navigate(`/${searchResults[0].category_name}`)
       // }
-      // else if (input === searchResults[0].sub_category_name) {
+      // else if (input.value.toLowerCase() === searchResults[0].sub_category_name.toLowerCase()) {
       //   navigate(`/${searchResults[0].category_name}/${searchResults[0].sub_category_name}`)
       // }
       // else {
