@@ -17,4 +17,7 @@ export type IPayments = {
     transactionId: string
     address: string
     other?: string
+    totalPrice: number
+    _id?: string
+    city: string
 }
