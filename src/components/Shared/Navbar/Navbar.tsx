@@ -51,6 +51,7 @@ export default function Navbar() {
       setSearchResults(filteredData);
       console.log(filteredData);
 
+      navigate(`/${searchResults[0].category_name}/${searchResults[0].sub_category_name}/${searchResults[0].brand_name}`)
 
       // if (searchResults[0].product_name) {
 
@@ -116,13 +117,13 @@ export default function Navbar() {
 
                 />
 
-                {searchResults.length > 0 && (
-                  <Link to={`/${searchResults[0].category_name}/${searchResults[0].sub_category_name}/${searchResults[0].product_name}/${searchResults[0].brand_name}`}>
-                    <button className="text-black btn btn-ghost btn-circle" >
-                      <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-                    </button>
-                  </Link>
-                )}
+                {/* {searchResults.length > 0 && (
+                  <Link to={`/${searchResults[0].category_name}/${searchResults[0].sub_category_name}/${searchResults[0].product_name}/${searchResults[0].brand_name}`}> */}
+                <button className="text-black btn btn-ghost btn-circle" >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                </button>
+                {/* </Link>
+                )} */}
               </div>
 
 
