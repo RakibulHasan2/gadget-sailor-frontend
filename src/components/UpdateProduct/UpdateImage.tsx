@@ -42,7 +42,7 @@ const UpdateImage = ({ singleData }: IProduct) => {
         const imageData: UpdateProductValues = {
             image: uploadedImageUrls,
         }
-        const response = await fetch(`http://localhost:5000/api/v1/allProducts/${_id}`, {
+        const response = await fetch(`https://gadget-sailor-backend.onrender.com/api/v1/allProducts/${_id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'

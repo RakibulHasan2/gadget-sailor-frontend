@@ -30,7 +30,7 @@ export default function SingleProductPage() {
   const singleProductData = singleProduct.data as IProduct;
   const user = userData();
   const navigate = useNavigate()
-  const { refetch } = useProductData("http://localhost:5000/api/v1/getCart");
+  const { refetch } = useProductData("https://gadget-sailor-backend.onrender.com/api/v1/getCart");
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { __v, quantity, _id, category_name, sub_category_name, product_name, price, status, product_code, brand_name, image, model, warranty, ...otherProperties } = singleProductData;
 
@@ -69,7 +69,7 @@ export default function SingleProductPage() {
     }
 
     if (count <= quantity) {
-      const response = await fetch('http://localhost:5000/api/v1/addCart', {
+      const response = await fetch('https://gadget-sailor-backend.onrender.com/api/v1/addCart', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -117,7 +117,7 @@ export default function SingleProductPage() {
 
   useEffect(() => {
     if (category_name === 'UPS' || category_name === 'Monitor') {
-      fetch(`http://localhost:5000/api/v1/allProducts/${category_name}`)
+      fetch(`https://gadget-sailor-backend.onrender.com/api/v1/allProducts/${category_name}`)
         .then(res => res.json())
         .then(data => {
           //console.log(data.data)
@@ -126,7 +126,7 @@ export default function SingleProductPage() {
     }
 
     else {
-      fetch(`http://localhost:5000/api/v1/allProducts/${sub_category_name}`)
+      fetch(`https://gadget-sailor-backend.onrender.com/api/v1/allProducts/${sub_category_name}`)
         .then(res => res.json())
         .then(data => {
           //console.log(data.data)
@@ -142,7 +142,7 @@ export default function SingleProductPage() {
 
   const [rating, setRating] = useState<number>(0);
   const [error, setError] = useState<string>('');
-  const { data, refetchReview } = useReviewData(`http://localhost:5000/api/v1/get-AllReviews/${_id}`);
+  const { data, refetchReview } = useReviewData(`https://gadget-sailor-backend.onrender.com/api/v1/get-AllReviews/${_id}`);
 
   const handleRatingClick = (value: number) => {
     setRating(value === rating ? 0 : value);
@@ -187,7 +187,7 @@ export default function SingleProductPage() {
         rating: rating,
         product_name: product_name
       }
-      const response = await fetch('http://localhost:5000/api/v1/create-review', {
+      const response = await fetch('https://gadget-sailor-backend.onrender.com/api/v1/create-review', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -211,7 +211,7 @@ export default function SingleProductPage() {
   }
 
   const handleDelete = async (id: string) => {
-    await fetch(`http://localhost:5000/api/v1/get-AllReviews/${id}`, {
+    await fetch(`https://gadget-sailor-backend.onrender.com/api/v1/get-AllReviews/${id}`, {
       method: 'DELETE'
     })
       .then(response => {

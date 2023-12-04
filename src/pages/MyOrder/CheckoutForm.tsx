@@ -9,7 +9,7 @@ import { UpdateProductValues, UpdateProductValuesResponse } from "../../types/Pr
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const CheckoutForm = ({ data }: any) => {
     const { totalPrice, firstName, lastName, email, phoneNumber } = data;
-    console.log("Dattaaaa", data)
+    console.log("Dattaaaa", data)   
     const [clientSecret, setClientSecret] = useState("");
     const [cardError, setCardError] = useState<string | null>('')
     const [success, setSuccess] = useState("");
@@ -43,7 +43,7 @@ const CheckoutForm = ({ data }: any) => {
 
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
-        fetch("http://localhost:5000/api/v1/payment/create-payment-intent", {
+        fetch("https://gadget-sailor-backend.onrender.com/api/v1/payment/create-payment-intent", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -63,7 +63,7 @@ const CheckoutForm = ({ data }: any) => {
 
 
     useEffect(() => {
-        fetch('http://localhost:5000/api/v1/allProducts')
+        fetch('https://gadget-sailor-backend.onrender.com/api/v1/allProducts')
             .then(res => res.json())
             .then((data: UpdateProductValuesResponse) => {
                 //console.log(data.data)
@@ -156,7 +156,7 @@ const CheckoutForm = ({ data }: any) => {
             // console.log(paymentData)
             //console.log(productData)
 
-            const response = await fetch(`http://localhost:5000/api/v1/addPayment`, {
+            const response = await fetch(`https://gadget-sailor-backend.onrender.com/api/v1/addPayment`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -176,7 +176,7 @@ const CheckoutForm = ({ data }: any) => {
 
                 ids.forEach(async (id) => {
 
-                    fetch(`http://localhost:5000/api/v1/getCart/${id}`, {
+                    fetch(`https://gadget-sailor-backend.onrender.com/api/v1/getCart/${id}`, {
                         method: 'DELETE'
                     })
                         .then(anotherResponse => {
@@ -205,7 +205,7 @@ const CheckoutForm = ({ data }: any) => {
                         }
                         //console.log(productData)
 
-                        const response = fetch(`http://localhost:5000/api/v1/allProducts/${d._id}`, {
+                        const response = fetch(`https://gadget-sailor-backend.onrender.com/api/v1/allProducts/${d._id}`, {
                             method: 'PUT',
                             headers: {
                                 'Content-Type': 'application/json'

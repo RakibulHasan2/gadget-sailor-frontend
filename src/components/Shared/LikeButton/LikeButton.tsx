@@ -9,7 +9,7 @@ const LikeButton = ({ info }: IProduct) => {
     const [liked, setLiked] = useState(false);
     const [count, setCount] = useState(0)
     const user = userData();
-    const { data, refetch } = useFavData(`http://localhost:5000/api/v1/getFav/${user.email}`);
+    const { data, refetch } = useFavData(`https://gadget-sailor-backend.onrender.com/api/v1/getFav/${user.email}`);
     const likedData: FavDataType | undefined = data.find((item) => item.product_name === info.product_name)
 
     const handleLike = () => {
@@ -39,7 +39,7 @@ const LikeButton = ({ info }: IProduct) => {
         }
         if (liked && count === 1 || likedData?.count === 0) {
 
-            fetch(`http://localhost:5000/api/v1/getFav/${likedData?._id}`, {
+            fetch(`https://gadget-sailor-backend.onrender.com/api/v1/getFav/${likedData?._id}`, {
                 method: 'DELETE',
             })
                 .then(response => {
@@ -51,7 +51,7 @@ const LikeButton = ({ info }: IProduct) => {
 
         }
         else {
-            const response = await fetch('http://localhost:5000/api/v1/addFav', {
+            const response = await fetch('https://gadget-sailor-backend.onrender.com/api/v1/addFav', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

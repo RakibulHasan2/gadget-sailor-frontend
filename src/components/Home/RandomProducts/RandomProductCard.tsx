@@ -19,7 +19,7 @@ const RandomProductCard = ({ data }: IProduct) => {
             model: model,
             email: user.email
         }
-        fetch('http://localhost:5000/api/v1/addCart', {
+        fetch('https://gadget-sailor-backend.onrender.com/api/v1/addCart', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

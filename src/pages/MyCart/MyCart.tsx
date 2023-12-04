@@ -5,7 +5,7 @@ import useCartData from "../../hooks/useCartData";
 
 export default function MyCart() {
   const user = userData()
-  const { data, refetch } = useCartData(`http://localhost:5000/api/v1/getCart/${user?.id}`);
+  const { data, refetch } = useCartData(`https://gadget-sailor-backend.onrender.com/api/v1/getCart/${user?.id}`);
 
   console.log(data)
   const calculateTotalPrice = () => {
@@ -17,7 +17,7 @@ export default function MyCart() {
     return totalPrice.toFixed(2);
   };
   const handleDeleteCart = (id: string) => {
-    fetch(`http://localhost:5000/api/v1/getCart/${id}`, {
+    fetch(`https://gadget-sailor-backend.onrender.com/api/v1/getCart/${id}`, {
       method: 'DELETE',
     })
       .then(response => {
