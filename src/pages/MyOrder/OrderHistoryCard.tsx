@@ -13,7 +13,7 @@ const OrderHistoryCard = ({ data }: IPayment) => {
         .filter(key => (key as string).endsWith("_image")
         )
         .map(key => data[key]);
-    console.log(image);
+    //console.log(image);
 
 
 
