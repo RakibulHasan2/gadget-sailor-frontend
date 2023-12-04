@@ -45,11 +45,11 @@ export default function OrderDetails() {
     return (
         <div className="flex justify-center p-5 mt-3">
 
-            <div className="w-2/3 p-10 rounded-md shadow-xl">
+            <div className="w-full rounded-md shadow-xl lg:p-10 lg:w-2/3">
                 <div className="flex justify-center p-2 text-3xl text-white bg-blue-800 border-b-2 rounded-tr-2xl rounded-tl-2xl">
                     <h1>Order Details #{payment_code}</h1>
                 </div>
-                <div className="flex justify-between">
+                <div className="justify-between lg:flex">
                     <div className="flex justify-center p-5 mt-5 shadow-2xl w-96 rounded-xl">
                         <div className="">
                             <div className="flex justify-center p-2 mb-2 font-bold text-white bg-blue-500 rounded-tr-2xl rounded-tl-2xl gap-x-1">
@@ -110,7 +110,7 @@ export default function OrderDetails() {
                                 <div className="">
                                     {
                                         image.map(images =>
-                                            <img src={images as string} className="w-24 h-20 p-2 border-b-2" alt="" />
+                                            <img src={images as string} className="h-20 p-2 border-b-2 lg:w-24" alt="" />
                                         )
                                     }
                                 </div>
@@ -124,7 +124,7 @@ export default function OrderDetails() {
                                 <div className="">
                                     {
                                         product.map(products =>
-                                            <p className="h-20 p-2 pt-6 border-b-2">{products}</p>
+                                            <p className="h-20 p-2 pt-6 text-sm border-b-2 lg:text-lg">{products}</p>
                                         )
                                     }
                                 </div>
