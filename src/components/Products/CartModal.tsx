@@ -5,7 +5,7 @@ import { FaShoppingBag, FaShoppingCart } from "react-icons/fa";
 import { ICartModal } from "../../types/CartModalType";
 import { Link } from "react-router-dom";
 
-export default function CartModal({ isCartModalOpen, closeCartModal, product_name, count, total }: ICartModal) {
+export default function CartModal({ isCartModalOpen, closeCartModal, product_name, count, total, _id }: ICartModal) {
     return (
         <dialog id="my_modal_2" className="modal" open={isCartModalOpen} onClose={closeCartModal}>
             <div className="lg:w-1/2 modal-box rounded-2xl" >
@@ -28,7 +28,11 @@ export default function CartModal({ isCartModalOpen, closeCartModal, product_nam
                             <Link to='/my-cart'>
                                 <button className='flex items-center justify-center p-2 text-lg text-blue-700 bg-gray-100 rounded-md gap-x-3 w-44 hover:bg-blue-700 hover:text-white'><FaShoppingCart></FaShoppingCart>View Cart</button>
                             </Link>
-                            <button className='flex items-center justify-center p-2 mt-2 text-lg text-blue-700 bg-gray-100 rounded-md lg:mt-0 gap-x-3 w-44 hover:bg-blue-700 hover:text-white'><FaShoppingBag />Confirm Order</button>
+
+                            <Link to={`/payment/myOrder/${_id}`}>
+                                <button className='flex items-center justify-center p-2 mt-2 text-lg text-blue-700 bg-gray-100 rounded-md lg:mt-0 gap-x-3 w-44 hover:bg-blue-700 hover:text-white'><FaShoppingBag />Confirm Order</button>
+                            </Link>
+
                         </div>
                     </div>
                 </div>
