@@ -4,6 +4,7 @@ export interface ICartModal {
     product_name: string;
     count: number;
     total: number;
+    _id?: number;
 }
 
 export interface ICartDetails {

@@ -3,6 +3,7 @@ import { IUpdateUsers } from '../../types/MyProfileType';
 import { FieldValues, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { userData } from '../../hooks/getUserData';
+import '../../styles/MyProfile.css'
 const UploadImage = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<IUpdateUsers>();
   const user = userData()
@@ -44,7 +45,6 @@ const UploadImage = () => {
       console.error('Error uploading image:', error);
     }
   };
-
   return (
     <div>
       <div>
