@@ -63,6 +63,11 @@ const routes = createBrowserRouter([
         loader: async ({ params }) => await fetch(`${baseUrl}/allProducts/${params.id}`)
       },
       {
+        path: "/:category/:subcategory/:product/:brand",
+        element: <MyCart />,
+
+      },
+      {
         path: "/my-cart",
         element: <PrivateRoute><MyCart /></PrivateRoute>,
       },

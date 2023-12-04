@@ -11,27 +11,16 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from '../../../assets/logo/Screenshot_2023-11-15_122159-trsfansformed-remdfosfafvebg-preview_waifu2x_art_noise1_scale.png';
 import { userData } from "../../../hooks/getUserData";
 import useProductData from "../../../hooks/useProductData";
+import { IProduct } from "../../../types/ProductsType";
+
 
 export default function Navbar() {
   const user = userData();
   const [expanded, setExpanded] = useState(true);
+  const [searchResults, setSearchResults] = useState<IProduct[]>([]);
   const { data } = useProductData('http://localhost:5000/api/v1/allProducts');
-  //const [searchQuery, setSearchQuery] = useState('desktop');
+
   const navigate = useNavigate()
-
-
-  // const handleFocus = () => {
-  //   setExpanded(false);
-  // };
-
-  // const handleBlur = () => {
-  //   if (!searchQuery) {
-  //     setExpanded(true);
-  //   }
-  // };
-
-
-
 
 
   useEffect(() => {
@@ -53,11 +42,39 @@ export default function Navbar() {
         const productNameMatch = item.product_name?.toLowerCase().includes(input.value.toLowerCase());
         const brandNameMatch = item.brand_name?.toLowerCase().includes(input.value.toLowerCase());
         const categoryNameMatch = item.category_name?.toLowerCase().includes(input.value.toLowerCase());
+        const subCategoryNameMatch = item.sub_category_name?.toLowerCase().includes(input.value.toLowerCase());
 
-        return productNameMatch || brandNameMatch || categoryNameMatch;
+
+        return productNameMatch || brandNameMatch || categoryNameMatch || subCategoryNameMatch;
       }
       );
+      setSearchResults(filteredData);
       console.log(filteredData);
+
+
+      // if (searchResults[0].product_name) {
+
+      //   navigate(`/${searchResults[0].product_name}`)
+      // }
+      // else
+
+
+
+      // if (input === searchResults[0].brand_name) {
+      //   navigate(`/${searchResults[0].category_name}/${searchResults[0].sub_category_name}/${searchResults[0].brand_name}`)
+      // }
+      // else if (input.value.toLowerCase() === searchResults[0].category_name.toLowerCase()) {
+      //   navigate(`/${searchResults[0].category_name}`)
+      // }
+      // else if (input === searchResults[0].sub_category_name) {
+      //   navigate(`/${searchResults[0].category_name}/${searchResults[0].sub_category_name}`)
+      // }
+      // else {
+      //   toast.error("not found")
+      // }
+
+
+      // navigate(`/${searchResults[0].category_name}/${searchResults[0].sub_category_name}/${searchResults[0].product_name}/${searchResults[0].brand_name}`);
 
     };
 
@@ -68,11 +85,13 @@ export default function Navbar() {
       input.removeEventListener("focus", handleFocus);
       input.removeEventListener("blur", handleBlur);
     };
-  }, []);
+  }, [data]);
 
   const [users, setUsers] = useState(
     sessionStorage.getItem('userData')
   )
+
+  console.log(searchResults[0]);
 
   const handleLogout = () => {
     sessionStorage.removeItem('userData')
@@ -96,10 +115,17 @@ export default function Navbar() {
 
 
                 />
-                <button className="text-black btn btn-ghost btn-circle" >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-                </button>
+
+                {searchResults.length > 0 && (
+                  <Link to={`/${searchResults[0].category_name}/${searchResults[0].sub_category_name}/${searchResults[0].product_name}/${searchResults[0].brand_name}`}>
+                    <button className="text-black btn btn-ghost btn-circle" >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                    </button>
+                  </Link>
+                )}
               </div>
+
+
               <div className="pb-5 border-b-2">
                 <Link to='/hot-offer'>
                   <div className="p-2 mb-2 text-black bg-blue-50 rounded-xl hover:text-white hover:bg-blue-700">
