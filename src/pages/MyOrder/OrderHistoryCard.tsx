@@ -1,19 +1,13 @@
 import { Link } from "react-router-dom";
-import { IPayment } from "../../types/PaymentType";
-
+import { IPayment, IPayments } from "../../types/PaymentType";
 
 const OrderHistoryCard = ({ data }: IPayment) => {
-    console.log(data)
-    console.log(data?._id)
 
-    const { email, payment_code, firstName, lastName, phoneNumber, district, comments, paymentMethod, deliveryMethod, transactionId, totalPrice, address, city, __v, _id, ...others } = data;
+    const { payment_code, totalPrice, _id } = data as IPayments;
 
     const product = (Object.keys(data) as (keyof typeof data)[])
         .filter(key => (key as string).endsWith("_product"))
         .map(key => data[key]);
-
-
-
 
     const image = (Object.keys(data) as (keyof typeof data)[])
         .filter(key => (key as string).endsWith("_image")

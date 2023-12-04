@@ -1,6 +1,3 @@
-
-//import { userData } from "../../hooks/getUserData";
-//import usePaymentInfo from "../../hooks/orderGet";
 import { FaShippingFast } from "react-icons/fa";
 import { MdPayment } from "react-icons/md";
 import { MdPerson } from "react-icons/md";
@@ -12,15 +9,12 @@ import { MdDeliveryDining } from "react-icons/md";
 import { SiVirustotal } from "react-icons/si";
 import { useLoaderDataType } from "../../types/useLoaderDataType";
 import { useLoaderData } from "react-router-dom";
-import { IPayment } from "../../types/PaymentType";
+import { IPayments } from "../../types/PaymentType";
 
 export default function OrderDetails() {
-    // const user = userData()
-    //const userEmail = user?.email;
     const orders = useLoaderData() as useLoaderDataType;
-    const order = orders.data as IPayment;
-    const { email, payment_code, firstName, lastName, phoneNumber, district, comments, paymentMethod, deliveryMethod, transactionId, totalPrice, address, city, __v, _id, ...others } = order;
-    console.log(order)
+    const order = orders.data as unknown as IPayments;
+    const { payment_code, firstName, lastName, phoneNumber, district, totalPrice, city } = order;
 
     const product = (Object.keys(order) as (keyof typeof order)[])
         .filter(key => (key as string).endsWith("_product"))
@@ -66,7 +60,7 @@ export default function OrderDetails() {
                                 <h1 className="w-40 p-2 ">: {firstName}{lastName}</h1>
                             </div>
                             <div className="flex border-b-2">
-                                <h1 className="flex items-center gap-1 p-2 w-28"><FaCity className='text-lg text-blue-600' />Distrcit</h1>
+                                <h1 className="flex items-center gap-1 p-2 w-28"><FaCity className='text-lg text-blue-600' />District</h1>
                                 <h1 className="w-40 p-2 ">: {district}</h1>
                             </div>
                             <div className="flex border-b-2">
@@ -116,7 +110,7 @@ export default function OrderDetails() {
                                 <div className="">
                                     {
                                         image.map(images =>
-                                            <img src={images} className="w-24 h-20 p-2 border-b-2" alt="" />
+                                            <img src={images as string} className="w-24 h-20 p-2 border-b-2" alt="" />
                                         )
                                     }
                                 </div>
