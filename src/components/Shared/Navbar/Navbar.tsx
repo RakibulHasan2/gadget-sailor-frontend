@@ -19,20 +19,19 @@ import { useSelectedProducts } from "../../../context/SelectedProductsProvider";
 export default function Navbar() {
   const user = userData();
   const [expanded, setExpanded] = useState(true);
-  const { data } = useProductData('http://localhost:5000/api/v1/allProducts');
+  const { data } = useProductData('https://gadget-sailor-backend.onrender.com/api/v1/allProducts');
   const { searchProduct } = useSelectedProducts();
   const navigate = useNavigate()
-
 
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const input: any = document.getElementById("myInput");
-
     const handleFocus = () => {
       setExpanded(false);
     };
 
     const handleBlur = () => {
+
       if (!input.value) {
         setExpanded(true);
       }
@@ -111,10 +110,7 @@ export default function Navbar() {
                 <button className="text-black btn btn-ghost btn-circle" >
                   <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                 </button>
-
               </div>
-
-
               <div className="pb-5 border-b-2">
                 <Link to='/hot-offer'>
                   <div className="p-2 mb-2 text-black bg-blue-50 rounded-xl hover:text-white hover:bg-blue-700">

@@ -3,14 +3,15 @@ import { IProduct } from './../types/ProductsType';
 
 interface ISelectedProductsContext {
     selectedProducts: IProduct[];
+    searchProducts: IProduct[];
     addProduct: (product: IProduct) => void;
     deleteProduct: (productId: string) => void;
     searchProduct: (product: IProduct[]) => void;
-
 }
 
 const initialSelectedProductsContext: ISelectedProductsContext = {
     selectedProducts: [],
+    searchProducts: [],
     addProduct: () => { },
     deleteProduct: () => { },
     searchProduct: () => { },
@@ -23,10 +24,11 @@ const SelectedProductsContext = createContext<ISelectedProductsContext>(
 export const SelectedProductsProvider = ({ children }: { children: ReactNode }) => {
 
     const [selectedProducts, setSelectedProducts] = useState<IProduct[]>([]);
+    const [searchProducts, setSearchProducts] = useState<IProduct[]>([]);
 
 
     const searchProduct = (product: IProduct[]) => {
-        setSelectedProducts(product);
+        setSearchProducts(product);
     };
 
     const addProduct = (product: IProduct) => {
@@ -42,7 +44,8 @@ export const SelectedProductsProvider = ({ children }: { children: ReactNode }) 
         selectedProducts,
         addProduct,
         deleteProduct,
-        searchProduct
+        searchProduct,
+        searchProducts
     };
 
     return (
