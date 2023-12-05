@@ -13,7 +13,7 @@ const OrderHistoryCard = ({ data }: IPayment) => {
         .filter(key => (key as string).endsWith("_image")
         )
         .map(key => data[key]);
-    console.log(image);
+    //console.log(image);
 
 
 
@@ -31,7 +31,10 @@ const OrderHistoryCard = ({ data }: IPayment) => {
                             <div >
                                 <p className="font-bold">{product[0]}</p>
                                 <div>
-                                    <small>{`...+${product.length - 1} more`} items</small>
+                                    {
+                                        product.length > 1 &&
+                                        <small>{`...+${product.length - 1} more`} items</small>
+                                    }
                                 </div>
 
                             </div>
