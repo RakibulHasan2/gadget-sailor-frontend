@@ -12,7 +12,7 @@ import useFavData from '../../hooks/getFavData';
 
 export default function ProductsCard({ product }: IProduct) {
     const { product_name, price, _id, image, model } = product;
-    console.log(product.quantity)
+    //console.log(product.quantity)
     const user = userData()
     const { data } = useFavData(`https://gadget-sailor-backend.onrender.com/api/v1/getFav/${user?.email}`);
     const CartDetails = async () => {
