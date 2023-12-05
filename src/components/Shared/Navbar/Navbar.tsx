@@ -91,9 +91,14 @@ export default function Navbar() {
             </ul>
           </div>
           {/* for desktop view---------------------------------------------- */}
-          <Link to='/'>
-            <img className="w-24 ml-20 lg:ml-0 lg:w-40" src={logo} alt="" />
-          </Link>
+          <div className="absolute flex justify-center w-full lg:justify-start lg:relative logo">
+            <Link to='/'>
+              <img className="w-24 lg:ml-0 lg:w-40" src={logo} alt="" />
+            </Link>
+          </div>
+
+
+
         </div>
         <div className="hidden navbar-center lg:flex">
           <input
@@ -124,7 +129,7 @@ export default function Navbar() {
             </Link>
           </div>
           {
-            users ? <div className="dropdown dropdown-end">
+            users ? <div className=" dropdown dropdown-end">
               <label tabIndex={0} className="m-1"><button className="mt-2 mr-1 text-2xl font-bold text-center lg:mt-2 lg:mr-5 hover:text-gray-400">
                 <div className="avatar online">
                   {user?.image !== undefined ? <div className="w-10 rounded-full hover:ring hover:ring-info">
