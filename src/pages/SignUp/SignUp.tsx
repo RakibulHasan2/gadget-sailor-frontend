@@ -8,6 +8,7 @@ import '../../styles/Signup.css'
 import { useState } from 'react';
 import { useToken } from "../../hooks/useToken";
 import { FiUserPlus } from "react-icons/fi";
+import { FaEye } from "react-icons/fa";
 export default function SignUp() {
     const { register, handleSubmit, formState: { errors } } = useForm<FormValues>();
     const [createUserEmail, setCreateUserEmail] = useState('');
@@ -49,6 +50,22 @@ export default function SignUp() {
             })
 
     }
+
+    const [types, setTypes] = useState(true)
+
+    const seePass = (type: string) => {
+        switch (type) {
+            case "current":
+                setTypes(!types);
+                break;
+        }
+    };
+    const passwordFieldType = (type: string) => {
+        switch (type) {
+            case "current":
+                return types ? "password" : "text";
+        }
+    };
     return (
         <div className='items-center justify-center p-2 lg:flex background-image'>
             <div className="justify-between shadow-2xl lg:flex sign-up-container rounded-2xl">
@@ -56,7 +73,7 @@ export default function SignUp() {
                     <Link to="/home"><button className="flex items-center pt-2 mt-2 ml-2 lg:pt-0 hover:text-gray-400">Go back <FiArrowRight></FiArrowRight></button></Link>
                     <div className="flex items-center justify-center h-80">
                         <div className="text-center">
-                        <span className="flex justify-center ml-3 text-6xl"><FiUserPlus /></span>
+                            <span className="flex justify-center ml-3 text-6xl"><FiUserPlus /></span>
                             <h1 className="mb-2 text-4xl font-extrabold">Sign Up</h1>
                             <small className="hidden">for land shsine ksjdh kdhbi sdfhsfi <br /> jjsfhi jshf kiafha jjhafha of ioaf9 oashf fha oafh</small>
                         </div>
@@ -94,11 +111,14 @@ export default function SignUp() {
                                         {errors.phoneNumber && <small className='mt-1 ml-2 text-red-500'>{errors.phoneNumber.message}</small>}
                                     </div>
                                     <div className="max-w-xs w-80 form-control">
-                                        <input type="password" {...register("password", {
+                                        <input type={passwordFieldType("current")} {...register("password", {
                                             required: "Password is Required !",
                                             minLength: { value: 6, message: "Password must be 6 characters long" },
                                             pattern: { value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/, message: 'Password must have uppercase, number and special characters' }
                                         })} className="w-full max-w-xs bg-transparent rounded-3xl input input-bordered" placeholder="🗝 Password..." />
+                                        <div className="flex justify-end">
+                                            <a className='relative flex justify-end ml-2 text-2xl text-blue-800 cursor-pointer w-7 bottom-9 right-2' title="See password" onClick={() => seePass("current")}><FaEye /></a>
+                                        </div>
                                         {errors.password && <small className='mt-1 ml-2 text-red-500'>{errors.password.message}</small>}
                                     </div>
                                     <input className='p-2 mt-4 mb-4 text-black bg-blue-400 w-80 btn rounded-3xl' value="Sign Up" type="submit" />

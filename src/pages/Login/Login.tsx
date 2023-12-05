@@ -7,6 +7,7 @@ import '../../styles/Signup.css'
 import { useState } from 'react';
 import { useToken } from './../../hooks/useToken';
 import { FiUserCheck } from "react-icons/fi";
+import { FaEye } from "react-icons/fa";
 export default function Login() {
   const { register, handleSubmit, formState: { errors } } = useForm<FormValues>();
   const [loginUserEmail, setLoginUserEmail] = useState('');
@@ -37,6 +38,21 @@ export default function Login() {
       })
   }
 
+  const [types, setTypes] = useState(true)
+  
+  const seePass = (type: string) => {
+    switch (type) {
+        case "current":
+            setTypes(!types);
+            break;
+    }
+};
+const passwordFieldType = (type: string) => {
+  switch (type) {
+      case "current":
+          return types ? "password" : "text";
+  }
+};
   return (
     <div className='items-center justify-center p-2 pt-10 lg:pt-0 lg:p-0 lg:flex background-image'>
       <div className="justify-between shadow-2xl lg:flex sign-up-container rounded-2xl">
@@ -60,15 +76,19 @@ export default function Login() {
                 {errors.email && <small className='mt-1 ml-2 text-red-500'>{errors.email.message}</small>}
               </div>
               <div className="max-w-xs mb-3 w-80 form-control">
-                <input type="password" {...register("password", {
+                <input type={passwordFieldType("current")} {...register("password", {
                   required: "Password is Required !",
                   minLength: { value: 6, message: "Password must be 6 characters long" },
                   pattern: { value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/, message: 'Password must have uppercase, number and special characters' }
                 })} className="w-full max-w-xs bg-transparent rounded-3xl input input-bordered" placeholder="🗝 Password..." />
+               <div className="flex justify-end">
+                <a className='relative flex justify-end ml-2 text-2xl text-blue-800 cursor-pointer w-7 bottom-9 right-2' title="See password" onClick={() => seePass("current")}><FaEye /></a>
+               </div>
+                
+                
                 {errors.password && <small className='mt-1 ml-2 text-red-500'>{errors.password.message}</small>}
               </div>
-
-              <input className='p-2 mt-4 mb-4 text-black bg-blue-400 w-80 btn rounded-3xl' value="Login" type="submit" />
+              <input className='p-2 mt-4 mb-4 text-black bg-blue-400  bottom-5 w-80 btn rounded-3xl' value="Login" type="submit" />
             </form>
             <small className="ml-10 font-black">New in Gadget-Sailor? <Link className='font-bold text-indigo-600' to="/signup">Please Sign-up</Link></small>
           </div>

@@ -47,15 +47,10 @@ const UploadImage = () => {
       console.error('Error uploading image:', error);
     }
   };
-
-  const [hide, setHide] = useState("hidden loading loading-spinner loading-lg")
-
+  const [hide, setHide] = useState("hidden text-blue-800 loading loading-spinner loading-md")
   const loaderButton = () =>{
-
-    setHide("block loading loading-spinner loading-lg");
-
+    setHide("block loading loading-spinner text-blue-800 loading-md");
   }
-
   return (
     <div>
       <div>
@@ -75,7 +70,7 @@ const UploadImage = () => {
             })} className="w-full max-w-xs input input-bordered rounded-3xl" />
             {errors.image && <p className='text-red-500'>please select image file</p>}
           </div>
-          <div className="flex justify-center mt-3 border lg:flex-none lg:mt-9 rounded-3xl">
+          <div className="flex justify-center mt-3 lg:flex-none lg:mt-9 rounded-3xl">
             <div className='flex'>
                <input
               className="text-white bg-blue-600 hover:text-black btn rounded-3xl"
