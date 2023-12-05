@@ -4,6 +4,7 @@ import useFavData from "../../hooks/getFavData";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import '../../styles/Loader.css'
+import '../../styles/Text-shadow.css'
 const FavPage = () => {
     const user = userData();
     const { data, refetch, isLoading } = useFavData(`https://gadget-sailor-backend.onrender.com/api/v1/getFav/${user.email}`);
@@ -25,8 +26,10 @@ const FavPage = () => {
 
     return (
         <div className="flex justify-center mt-10 mb-10">
-            <div className="w-9/12 shadow-2xl lg:p-10">
-                <p className="p-2 text-3xl font-bold border-b-2">My favourites</p>
+            <div className="w-11/12 shadow-2xl lg:w-9/12 lg:p-10 rounded-2xl">
+                <div className="flex justify-center mb-3 border-b-2">
+                      <p className="p-2 text-3xl font-bold text-shadow-blue">My favourites</p>
+                </div>      
                 {!isLoading ?
                     <div className="mt-5 overflow-x-auto">
                        { data.length !== 0 ? 
@@ -69,8 +72,8 @@ const FavPage = () => {
                             </tbody>
 
                         </table>: 
-                                <div className="flex justify-center p-4">
-                                    <h1>You do not add any favourites Products</h1>
+                                <div className="flex justify-center p-4 text-2xl">
+                                    <h1>(You do not add any favourites Products)</h1>
                                 </div>}
                     </div>
                     :

@@ -76,7 +76,7 @@ export default function OrderDetails() {
                     </div>
                     <div className="flex justify-center p-5 mt-5 shadow-2xl lg:w-96 rounded-xl">
                         <div className="">
-                            <div className="flex justify-center p-2 mb-2 font-bold text-white bg-blue-500 rounded-tr-2xl rounded-tl-2xl gap-x-2">
+                            <div className="flex justify-center p-2 mb-2 font-bold text-white bg-blue-500 rounded-tr-2xl rounded-tl-2xl gap-x-1">
                                 <span><MdPayment className='text-2xl animate-bounce' /></span> <h1>Order Summary</h1>
                             </div>
                             <div className="flex ">
@@ -103,54 +103,54 @@ export default function OrderDetails() {
                     <div>
                         <div className="flex justify-between p-4">
                             <div className="">
-                                <div className="flex justify-center p-1 mb-2 font-bold bg-blue-100 rounded-md">
+                                <div className="flex justify-center p-1 mb-2 text-sm font-bold bg-blue-100 rounded-md lg:text-lg">
                                     <h1>Image</h1>
                                 </div>
 
                                 <div className="">
                                     {
                                         image.map(images =>
-                                            <img src={images as string} className="h-20 p-2 border-b-2 lg:w-24" alt="" />
+                                            <img src={images as string} className="h-24 p-2 border-b-2 lg:h-20 lg:w-20" alt="" />
                                         )
                                     }
                                 </div>
                             </div>
 
                             <div>
-                                <div className="flex justify-center p-1 mb-2 font-bold bg-blue-100 rounded-md">
+                                <div className="flex justify-center p-1 mb-2 text-sm font-bold bg-blue-100 rounded-md lg:text-lg">
                                     <h1 className="">Product Name</h1>
                                 </div>
 
                                 <div className="">
                                     {
                                         product.map(products =>
-                                            <p className="h-20 p-2 pt-6 text-sm border-b-2 lg:text-lg">{products}</p>
+                                            <p className="h-24 p-2 pt-6 text-sm border-b-2 lg:h-20 lg:text-lg">{products}</p>
                                         )
                                     }
                                 </div>
                             </div>
                             <div>
-                                <div className="flex justify-center p-1 mb-2 font-bold bg-blue-100 rounded-md">
+                                <div className="flex justify-center p-1 mb-2 text-sm font-bold bg-blue-100 rounded-md lg:text-lg">
                                     <h1>Quantity</h1>
                                 </div>
 
                                 <div>
                                     {
                                         quantity.map(q =>
-                                            <p className="h-20 p-2 pt-6 border-b-2 ">{q}</p>
+                                            <p className="h-24 p-2 pt-6 border-b-2 lg:h-20 ">{q}</p>
                                         )
                                     }
                                 </div>
                             </div>
                             <div>
-                                <div className="flex justify-center p-1 mb-2 font-bold bg-blue-100 rounded-md">
+                                <div className="flex justify-center p-1 mb-2 text-sm font-bold bg-blue-100 rounded-md lg:text-lg">
                                     <h1>Cost</h1>
                                 </div>
 
                                 <div>
                                     {
                                         price.map(cost =>
-                                            <p className="h-20 p-2 pt-6 border-b-2">{cost}৳</p>
+                                            <p className="h-24 p-2 pt-6 border-b-2 lg:h-20">{cost}৳</p>
                                         )
                                     }
                                 </div>

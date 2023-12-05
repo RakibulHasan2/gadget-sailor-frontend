@@ -4,8 +4,10 @@ import { FieldValues, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { userData } from '../../hooks/getUserData';
 import '../../styles/MyProfile.css'
+import { useState } from 'react';
 const UploadImage = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm<IUpdateUsers>();
+  const { register, handleSubmit, formState: { errors, isDirty } } = useForm<IUpdateUsers>();
+
   const user = userData()
   const imageHostKey = '29473dd4ab78ebc95009722bc0558d38';
 
@@ -45,6 +47,10 @@ const UploadImage = () => {
       console.error('Error uploading image:', error);
     }
   };
+  const [hide, setHide] = useState("hidden text-blue-800 loading loading-spinner loading-md")
+  const loaderButton = () =>{
+    setHide("block loading loading-spinner text-blue-800 loading-md");
+  }
   return (
     <div>
       <div>
@@ -64,8 +70,18 @@ const UploadImage = () => {
             })} className="w-full max-w-xs input input-bordered rounded-3xl" />
             {errors.image && <p className='text-red-500'>please select image file</p>}
           </div>
-          <div className="flex justify-center mt-3 lg:flex-none lg:mt-9">
-            <input className="text-white bg-blue-600 hover:text-black btn rounded-3xl" value="Upload" type="submit" />
+          <div className="flex justify-center mt-3 lg:flex-none lg:mt-9 rounded-3xl">
+            <div className='flex'>
+               <input
+              className="text-white bg-blue-600 hover:text-black btn rounded-3xl"
+              value="Upload"
+              type="submit"
+              disabled={!isDirty}
+              onClick={loaderButton}
+            />
+            <span className={hide}></span>
+            </div>
+           
           </div>
         </form>
       </div>

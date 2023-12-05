@@ -83,10 +83,10 @@ export default function Navbar() {
     <div>
       <div className="p-0 shadow-sm lg:p-5 navbar nav-bg">
         <div className="navbar-start">
-          <div className="dropdown">
-            <label tabIndex={0} className="btn btn-ghost lg:hidden">
+          <div className=" dropdown">
+            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
               <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
-            </label>
+            </div>
             {/* for mobile view---------------------------------------------------------- */}
             <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[10] p-2 shadow bg-base-100 w-60 rounded-lg">
               <div className="flex pb-2 mb-5 border-b-2">
@@ -122,9 +122,11 @@ export default function Navbar() {
             </ul>
           </div>
           {/* for desktop view---------------------------------------------- */}
-          <Link to='/'>
-            <img className="w-24 ml-20 lg:ml-0 lg:w-40" src={logo} alt="" />
-          </Link>
+          <div className="absolute flex justify-center w-full lg:justify-start lg:relative logo">
+            <Link to='/'>
+              <img className="w-24 lg:ml-0 lg:w-40" src={logo} alt="" />
+            </Link>
+          </div>
         </div>
         <div className="hidden navbar-center lg:flex">
           <input
@@ -155,7 +157,7 @@ export default function Navbar() {
             </Link>
           </div>
           {
-            users ? <div className="dropdown dropdown-end">
+            users ? <div className=" dropdown dropdown-end">
               <label tabIndex={0} className="m-1"><button className="mt-2 mr-1 text-2xl font-bold text-center lg:mt-2 lg:mr-5 hover:text-gray-400">
                 <div className="avatar online">
                   {user?.image !== undefined ? <div className="w-10 rounded-full hover:ring hover:ring-info">
