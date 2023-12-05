@@ -36,35 +36,51 @@ export default function Navbar() {
         setExpanded(true);
       }
 
-      const filteredProducts: IProduct[] = data.filter((product: IProduct) => {
-        const searchTermsLowerCase = input.value.toLowerCase().split(' ');
-        console.log(searchTermsLowerCase[0])
-        // console.log(product)
+      handleSearch();
+    };
 
-        return searchTermsLowerCase.every((term: string) => {
-          console.log(term)
-          const modelLowerCase = (product.model ?? '').toLowerCase();
-          const brandLowerCase = (product.brand_name ?? '').toLowerCase();
-          const categoryNameMatch = (product.category_name ?? '').toLowerCase();
-          const subCategoryNameMatch = (product.sub_category_name ?? '').toLowerCase();
-          const productNameMatch = (product.product_name ?? '').toLowerCase();
+    const handleKeyDown = (event: { key: string; }) => {
+      if (event.key === "Enter") {
+        handleSearch();
+      }
+    };
 
-          return modelLowerCase.includes(term) || brandLowerCase.includes(FiTerminal) || productNameMatch.includes(term) || categoryNameMatch.includes(term) || subCategoryNameMatch.includes(term);
-        });
+    const handleSearch = () => {
+      const searchTermsLowerCase = input.value.toLowerCase().split(" ");
+
+      const filteredProducts = data.filter((product: IProduct) => {
+        const modelLowerCase = (product.model ?? "").toLowerCase();
+        const brandLowerCase = (product.brand_name ?? "").toLowerCase();
+        const categoryNameMatch = (product.category_name ?? "").toLowerCase();
+        const subCategoryNameMatch = (product.sub_category_name ?? "").toLowerCase();
+        const productNameMatch = (product.product_name ?? "").toLowerCase();
+
+        return (
+          searchTermsLowerCase.every((term: string) =>
+            modelLowerCase.includes(term) ||
+            brandLowerCase.includes(FiTerminal) ||
+            productNameMatch.includes(term) ||
+            categoryNameMatch.includes(term) ||
+            subCategoryNameMatch.includes(term)
+          )
+        );
       });
 
       if (filteredProducts.length > 0) {
         searchProduct(filteredProducts);
       }
-      navigate('/products/search');
+
+      navigate("/products/search");
     };
 
     input.addEventListener("focus", handleFocus);
     input.addEventListener("blur", handleBlur);
+    document.addEventListener("keydown", handleKeyDown);
 
     return () => {
       input.removeEventListener("focus", handleFocus);
       input.removeEventListener("blur", handleBlur);
+      document.removeEventListener("keydown", handleKeyDown);
     };
   }, [data, navigate, searchProduct]);
 
@@ -90,8 +106,7 @@ export default function Navbar() {
             {/* for mobile view---------------------------------------------------------- */}
             <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[10] p-2 shadow bg-base-100 w-60 rounded-lg">
               <div className="flex pb-2 mb-5 border-b-2">
-                <input type="text" placeholder="Search Item" className="w-full max-w-xs input input-bordered"
-                />
+                <input type="text" placeholder="Search Item" className="w-full max-w-xs input input-bordered" />
                 <button className="text-black btn btn-ghost btn-circle" >
                   <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                 </button>

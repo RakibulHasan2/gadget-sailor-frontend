@@ -6,7 +6,7 @@ import gif from '../../assets/images/no-data.gif'
 const SearchedProducts = () => {
 
     const { searchProducts } = useSelectedProducts();
-    console.log(searchProducts)
+    // console.log(selectedProducts)
     return (
         <div>
             {
