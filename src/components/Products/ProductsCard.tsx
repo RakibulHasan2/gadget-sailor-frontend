@@ -126,7 +126,7 @@ export default function ProductsCard({ product }: IProduct) {
                         product_name={product_name}
                         count={1}
                         total={price}
-                        _id={user.id}
+                        _id={user?.id}
                     ></CartModal>
                 </div>
             </div>
