@@ -37,33 +37,51 @@ export default function Navbar() {
         setExpanded(true);
       }
 
-      const filteredProducts: IProduct[] = data.filter((product: IProduct) => {
-        const searchTermsLowerCase = input.value.toLowerCase().split(' ');
+      handleSearch();
+    };
 
-        return searchTermsLowerCase.every((term: string) => {
+    const handleKeyDown = (event: { key: string; }) => {
+      if (event.key === "Enter") {
+        handleSearch();
+      }
+    };
 
-          const modelLowerCase = (product.model ?? '').toLowerCase();
-          const brandLowerCase = (product.brand_name ?? '').toLowerCase();
-          const categoryNameMatch = (product.category_name ?? '').toLowerCase();
-          const subCategoryNameMatch = (product.sub_category_name ?? '').toLowerCase();
-          const productNameMatch = (product.product_name ?? '').toLowerCase();
+    const handleSearch = () => {
+      const searchTermsLowerCase = input.value.toLowerCase().split(" ");
 
-          return modelLowerCase.includes(term) || brandLowerCase.includes(FiTerminal) || productNameMatch.includes(term) || categoryNameMatch.includes(term) || subCategoryNameMatch.includes(term);
-        });
+      const filteredProducts = data.filter((product: IProduct) => {
+        const modelLowerCase = (product.model ?? "").toLowerCase();
+        const brandLowerCase = (product.brand_name ?? "").toLowerCase();
+        const categoryNameMatch = (product.category_name ?? "").toLowerCase();
+        const subCategoryNameMatch = (product.sub_category_name ?? "").toLowerCase();
+        const productNameMatch = (product.product_name ?? "").toLowerCase();
+
+        return (
+          searchTermsLowerCase.every((term: string) =>
+            modelLowerCase.includes(term) ||
+            brandLowerCase.includes(FiTerminal) ||
+            productNameMatch.includes(term) ||
+            categoryNameMatch.includes(term) ||
+            subCategoryNameMatch.includes(term)
+          )
+        );
       });
 
       if (filteredProducts.length > 0) {
         searchProduct(filteredProducts);
       }
-      navigate('/products/search');
+
+      navigate("/products/search");
     };
 
     input.addEventListener("focus", handleFocus);
     input.addEventListener("blur", handleBlur);
+    document.addEventListener("keydown", handleKeyDown);
 
     return () => {
       input.removeEventListener("focus", handleFocus);
       input.removeEventListener("blur", handleBlur);
+      document.removeEventListener("keydown", handleKeyDown);
     };
   }, [data, navigate, searchProduct]);
 
