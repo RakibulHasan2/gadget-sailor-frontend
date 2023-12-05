@@ -5,15 +5,15 @@ import gif from '../../assets/images/no-data.gif'
 
 const SearchedProducts = () => {
 
-    const { selectedProducts } = useSelectedProducts();
-    console.log(selectedProducts)
+    const { searchProducts } = useSelectedProducts();
+    console.log(searchProducts)
     return (
         <div>
             {
-                selectedProducts.length > 0 ?
+                searchProducts.length > 0 ?
                     <div className="grid gap-2 p-2 lg:grid-cols-4 md:grid-cols-3">
                         {
-                            selectedProducts.map(data => (
+                            searchProducts.map(data => (
                                 <ProductsCard
                                     key={data._id} _id={''} category_name={''} sub_category_name={''} brand_name={''} product_name={''} image={[]} model={''} description={''} price={0} product_code={0} status={''} reviews={[]} warranty={''} __v={''} others_info={[]}
                                     product={data} />
