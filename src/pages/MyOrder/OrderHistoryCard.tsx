@@ -22,8 +22,8 @@ const OrderHistoryCard = ({ data }: IPayment) => {
 
             <div className="flex justify-center p-3">
                 <div className="w-full mt-2 border lg:w-4/6 rounded-tr-2xl rounded-tl-2xl">
-                    <div className="p-5 text-white bg-blue-900 rounded-tr-2xl rounded-tl-2xl">
-                        <h1 className="text-lg font-bold">Order# {payment_code}</h1>
+                    <div className="p-2 text-white bg-blue-900 rounded-tr-2xl rounded-tl-2xl">
+                        <h1 className="font-bold ">Order# {payment_code}</h1>
                     </div>
                     <div className="items-center justify-between p-4 lg:flex">
                         <div className="flex items-center pb-2 border-b-2 lg:border-b-0 lg:pb-0">
@@ -42,7 +42,7 @@ const OrderHistoryCard = ({ data }: IPayment) => {
                         </div>
 
                         <div className="flex justify-center mt-4 lg:flex-none lg:mt-0">
-                            <Link to={`/payment/orderDetails/${_id}`}> <button className="p-2 text-white bg-blue-700 border rounded-xl">View Details</button></Link>
+                            <Link to={`/payment/orderDetails/${_id}`}> <button className="p-2 text-white bg-blue-700 border rounded-xl hover:bg-blue-900">View Details</button></Link>
                         </div>
                     </div>
 
