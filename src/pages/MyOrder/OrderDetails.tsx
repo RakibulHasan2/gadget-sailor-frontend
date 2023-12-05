@@ -50,7 +50,7 @@ export default function OrderDetails() {
                     <h1>Order Details #{payment_code}</h1>
                 </div>
                 <div className="justify-between lg:flex">
-                    <div className="flex justify-center p-5 mt-5 shadow-2xl w-96 rounded-xl">
+                    <div className="flex justify-center p-5 mt-5 shadow-2xl lg:w-96 rounded-xl">
                         <div className="">
                             <div className="flex justify-center p-2 mb-2 font-bold text-white bg-blue-500 rounded-tr-2xl rounded-tl-2xl gap-x-1">
                                 <span><FaShippingFast className='text-2xl animate-bounce' /></span> <h1>Shipping Address</h1>
@@ -74,7 +74,7 @@ export default function OrderDetails() {
                         </div>
 
                     </div>
-                    <div className="flex justify-center p-5 mt-5 shadow-2xl w-96 rounded-xl">
+                    <div className="flex justify-center p-5 mt-5 shadow-2xl lg:w-96 rounded-xl">
                         <div className="">
                             <div className="flex justify-center p-2 mb-2 font-bold text-white bg-blue-500 rounded-tr-2xl rounded-tl-2xl gap-x-2">
                                 <span><MdPayment className='text-2xl animate-bounce' /></span> <h1>Order Summary</h1>
