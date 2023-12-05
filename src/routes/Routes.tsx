@@ -18,6 +18,7 @@ import MyCart from "../pages/MyCart/MyCart";
 import MyOrder from "../pages/MyOrder/MyOrder";
 import OrderHistory from "../pages/MyOrder/OrderHistory";
 import OrderDetails from "../pages/MyOrder/OrderDetails";
+import SearchedProducts from "../pages/Products/SearchedProducts";
 
 
 
@@ -61,6 +62,12 @@ const routes = createBrowserRouter([
         path: "/product/:id",
         element: <SingleProductPage />,
         loader: async ({ params }) => await fetch(`${baseUrl}/allProducts/${params.id}`)
+      },
+
+      {
+        path: "/products/search",
+        element: <SearchedProducts />,
+
       },
       {
         path: "/my-cart",

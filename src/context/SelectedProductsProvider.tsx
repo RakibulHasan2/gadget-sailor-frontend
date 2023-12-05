@@ -5,12 +5,15 @@ interface ISelectedProductsContext {
     selectedProducts: IProduct[];
     addProduct: (product: IProduct) => void;
     deleteProduct: (productId: string) => void;
+    searchProduct: (product: IProduct[]) => void;
+
 }
 
 const initialSelectedProductsContext: ISelectedProductsContext = {
     selectedProducts: [],
-    addProduct: () => {},
-    deleteProduct: () => {},
+    addProduct: () => { },
+    deleteProduct: () => { },
+    searchProduct: () => { },
 };
 
 const SelectedProductsContext = createContext<ISelectedProductsContext>(
@@ -21,19 +24,25 @@ export const SelectedProductsProvider = ({ children }: { children: ReactNode }) 
 
     const [selectedProducts, setSelectedProducts] = useState<IProduct[]>([]);
 
+
+    const searchProduct = (product: IProduct[]) => {
+        setSelectedProducts(product);
+    };
+
     const addProduct = (product: IProduct) => {
         setSelectedProducts([...selectedProducts, product]);
     };
-    
+
     const deleteProduct = (productId: string) => {
         const updatedProducts = selectedProducts.filter(product => product._id !== productId);
         setSelectedProducts(updatedProducts);
     };
-    
+
     const contextValue: ISelectedProductsContext = {
         selectedProducts,
         addProduct,
         deleteProduct,
+        searchProduct
     };
 
     return (
