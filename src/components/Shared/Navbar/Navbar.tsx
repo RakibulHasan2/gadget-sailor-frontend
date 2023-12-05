@@ -12,6 +12,7 @@ import logo from '../../../assets/logo/Screenshot_2023-11-15_122159-trsfansforme
 import { userData } from "../../../hooks/getUserData";
 import useProductData from "../../../hooks/useProductData";
 import { IProduct } from "../../../types/ProductsType";
+import { FiTerminal } from "react-icons/fi";
 
 
 export default function Navbar() {
@@ -38,58 +39,60 @@ export default function Navbar() {
       console.log(`Searching for: ${input.value}`);
       console.log(data);
 
-      const filteredData = data.filter(item => {
-        const productNameMatch = item.product_name?.toLowerCase().includes(input.value.toLowerCase());
-        const brandNameMatch = item.brand_name?.toLowerCase().includes(input.value.toLowerCase());
-        const categoryNameMatch = item.category_name?.toLowerCase().includes(input.value.toLowerCase());
-        const subCategoryNameMatch = item.sub_category_name?.toLowerCase().includes(input.value.toLowerCase());
+      // const filteredData = data.filter(item => {
+      //   const productNameMatch = item.product_name?.toLowerCase().includes(input.value.toLowerCase());
+      //   const brandNameMatch = item.brand_name?.toLowerCase().includes(input.value.toLowerCase());
+      //   const categoryNameMatch = item.category_name?.toLowerCase().includes(input.value.toLowerCase());
+      //   const subCategoryNameMatch = item.sub_category_name?.toLowerCase().includes(input.value.toLowerCase());
 
 
-        return productNameMatch || brandNameMatch || categoryNameMatch || subCategoryNameMatch;
-      }
-      );
-      setSearchResults(filteredData);
-      console.log(filteredData);
-
-      // navigate(`/my-cart`)
-
-      // if (searchResults[0].product_name) {
-
-      //   navigate(`/${searchResults[0].product_name}`)
+      //   return productNameMatch || brandNameMatch || categoryNameMatch || subCategoryNameMatch;
       // }
-      // else
+      // );
+      // setSearchResults(filteredData);
 
-      searchResults.map(s => {
-        if (input.value.toLowerCase() === s.brand_name.toLowerCase()
-        ) {
-          navigate(`/${s.category_name}/${s.sub_category_name}/${s.brand_name}`)
-        }
-        else if (input.value.toLowerCase() === s.category_name.toLowerCase()) {
-          navigate(`/${s.category_name}`)
-        }
-        else if (input.value.toLowerCase() === s.sub_category_name.toLowerCase()) {
-          navigate(`/${s.category_name}/${s.sub_category_name}`)
-        }
-        else {
-          console.log("sorry")
-        }
-      })
 
-      // if (input.value.toLowerCase() === searchResults[0].brand_name.toLowerCase()) {
-      //   navigate(`/${searchResults[0].category_name}/${searchResults[0].sub_category_name}/${searchResults[0].brand_name}`)
-      // }
-      // else if (input.value.toLowerCase() === searchResults[0].category_name.toLowerCase()) {
-      //   navigate(`/${searchResults[0].category_name}`)
-      // }
-      // else if (input.value.toLowerCase() === searchResults[0].sub_category_name.toLowerCase()) {
-      //   navigate(`/${searchResults[0].category_name}/${searchResults[0].sub_category_name}`)
-      // }
-      // else {
-      //   toast.error("not found")
-      // }
+      // searchResults.map(s => {
+      //   if (input.value.toLowerCase() === s.brand_name.toLowerCase()
+      //   ) {
+      //     navigate(`/${s.category_name}/${s.sub_category_name}/${s.brand_name}`)
+      //   }
+      //   else if (input.value.toLowerCase() === s.category_name.toLowerCase()) {
+      //     navigate(`/${s.category_name}`)
+      //   }
+      //   else if (input.value.toLowerCase() === s.sub_category_name.toLowerCase()) {
+      //     navigate(`/${s.category_name}/${s.sub_category_name}`)
+      //   }
+      //   else {
+      //     console.log("sorry")
+      //   }
+      // })
+
+
 
 
       // navigate(`/${searchResults[0].category_name}/${searchResults[0].sub_category_name}/${searchResults[0].product_name}/${searchResults[0].brand_name}`);
+
+
+      const filteredProducts = data.filter((product: IProduct) => {
+        const searchTermsLowerCase = input.value.toLowerCase().split(' ');
+        console.log(searchTermsLowerCase[0])
+        console.log(product)
+
+        return searchTermsLowerCase.every((term: string) => {
+          console.log(term)
+          const modelLowerCase = (product.model ?? '').toLowerCase();
+          const brandLowerCase = (product.brand_name ?? '').toLowerCase();
+          const categoryNameMatch = (product.category_name ?? '').toLowerCase();
+          const subCategoryNameMatch = (product.sub_category_name ?? '').toLowerCase();
+          const productNameMatch = (product.product_name ?? '').toLowerCase();
+
+          return modelLowerCase.includes(term) || brandLowerCase.includes(FiTerminal) || productNameMatch.includes(term) || categoryNameMatch.includes(term) || subCategoryNameMatch.includes(term);
+        });
+      });
+      setSearchResults(filteredProducts)
+      console.log(filteredProducts)
+      console.log(searchResults)
 
     };
 
@@ -100,13 +103,13 @@ export default function Navbar() {
       input.removeEventListener("focus", handleFocus);
       input.removeEventListener("blur", handleBlur);
     };
-  }, [data]);
+  }, [data, searchResults]);
 
   const [users, setUsers] = useState(
     sessionStorage.getItem('userData')
   )
 
-  console.log(searchResults[0]);
+  //  console.log(searchResults[0]);
 
   const handleLogout = () => {
     sessionStorage.removeItem('userData')
@@ -132,7 +135,7 @@ export default function Navbar() {
                 />
 
                 {/* {searchResults.length > 0 && (
-                  <Link to={`/${searchResults[0].category_name}/${searchResults[0].sub_category_name}/${searchResults[0].product_name}/${searchResults[0].brand_name}`}> */}
+                  <Link to={{ pathname: '/products/search', state: { searchResults } } as unknown as LinkProps}> */}
                 <button className="text-black btn btn-ghost btn-circle" >
                   <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                 </button>

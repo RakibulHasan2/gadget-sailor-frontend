@@ -9,8 +9,8 @@ interface ISelectedProductsContext {
 
 const initialSelectedProductsContext: ISelectedProductsContext = {
     selectedProducts: [],
-    addProduct: () => {},
-    deleteProduct: () => {},
+    addProduct: () => { },
+    deleteProduct: () => { },
 };
 
 const SelectedProductsContext = createContext<ISelectedProductsContext>(
@@ -24,12 +24,12 @@ export const SelectedProductsProvider = ({ children }: { children: ReactNode }) 
     const addProduct = (product: IProduct) => {
         setSelectedProducts([...selectedProducts, product]);
     };
-    
+
     const deleteProduct = (productId: string) => {
         const updatedProducts = selectedProducts.filter(product => product._id !== productId);
         setSelectedProducts(updatedProducts);
     };
-    
+
     const contextValue: ISelectedProductsContext = {
         selectedProducts,
         addProduct,
