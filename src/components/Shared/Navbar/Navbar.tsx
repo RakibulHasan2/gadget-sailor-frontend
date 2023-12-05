@@ -13,6 +13,7 @@ import { userData } from "../../../hooks/getUserData";
 import useProductData from "../../../hooks/useProductData";
 import { IProduct } from "../../../types/ProductsType";
 import { FiTerminal } from "react-icons/fi";
+import { useSelectedProducts } from "../../../context/SelectedProductsProvider";
 
 
 export default function Navbar() {
@@ -20,7 +21,7 @@ export default function Navbar() {
   const [expanded, setExpanded] = useState(true);
   const [searchResults, setSearchResults] = useState<IProduct[]>([]);
   const { data } = useProductData('http://localhost:5000/api/v1/allProducts');
-
+  const { searchProduct } = useSelectedProducts();
   const navigate = useNavigate()
 
 
@@ -74,7 +75,7 @@ export default function Navbar() {
       // navigate(`/${searchResults[0].category_name}/${searchResults[0].sub_category_name}/${searchResults[0].product_name}/${searchResults[0].brand_name}`);
 
 
-      const filteredProducts = data.filter((product: IProduct) => {
+      const filteredProducts: IProduct[] = data.filter((product: IProduct) => {
         const searchTermsLowerCase = input.value.toLowerCase().split(' ');
         console.log(searchTermsLowerCase[0])
         console.log(product)
@@ -93,7 +94,10 @@ export default function Navbar() {
       setSearchResults(filteredProducts)
       console.log(filteredProducts)
       console.log(searchResults)
-
+      if (filteredProducts.length > 0) {
+        searchProduct(filteredProducts);
+      }
+      navigate('/products/search');
     };
 
     input.addEventListener("focus", handleFocus);
@@ -103,7 +107,7 @@ export default function Navbar() {
       input.removeEventListener("focus", handleFocus);
       input.removeEventListener("blur", handleBlur);
     };
-  }, [data, searchResults]);
+  }, [data, searchProduct, searchResults]);
 
   const [users, setUsers] = useState(
     sessionStorage.getItem('userData')
