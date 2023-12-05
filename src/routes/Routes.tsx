@@ -63,15 +63,10 @@ const routes = createBrowserRouter([
         element: <SingleProductPage />,
         loader: async ({ params }) => await fetch(`${baseUrl}/allProducts/${params.id}`)
       },
-      // {
-      //   path: "/:category/:subcategory/:product/:brand",
-      //   element: <MyCart />,
 
-      // },
       {
         path: "/products/search",
         element: <SearchedProducts />,
-        // loader: ({ params }) => fetch(`${baseUrl}/allProducts/${params.categoryName}`)
 
       },
       {
