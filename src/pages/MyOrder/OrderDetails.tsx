@@ -24,7 +24,7 @@ export default function OrderDetails() {
         .filter(key => (key as string).endsWith("_image")
         )
         .map(key => order[key]);
-    console.log(image);
+    //console.log(image);
 
     const quantity = (Object.keys(order) as (keyof typeof order)[])
         .filter(key => (key as string).endsWith("_quantity")
@@ -37,11 +37,28 @@ export default function OrderDetails() {
         )
         .map(key => order[key]);
 
-    console.log(product)
-    console.log(price)
-    console.log(quantity)
-    console.log(image);
+    // console.log(product)
+    // console.log(price)
+    // console.log(quantity)
+    // console.log(image);
     const delivary = 60
+
+
+
+
+    // cancellation modal
+    const openCancelModal = () => {
+        const modal = document.getElementById('cancelOrder') as HTMLDialogElement | null;
+        if (modal) {
+            modal.showModal();
+        }
+    };
+
+
+
+
+
+
     return (
         <div className="flex justify-center p-5 mt-3">
 
@@ -97,8 +114,8 @@ export default function OrderDetails() {
                                 </h1>
                                 {
                                     paymentMethod === "Card Payment" ?
-                                        <h1 className="w-40 p-2 text-green-700">: Paid</h1>
-                                        : <h1 className="w-40 p-2 text-red-500">: Pending</h1>
+                                        <h1 className="w-40 p-2 ">: <span className="text-green-700">Paid</span></h1>
+                                        : <h1 className="w-40 p-2 ">: <span className="text-red-500">Pending</span></h1>
                                 }
 
                             </div>
@@ -172,8 +189,89 @@ export default function OrderDetails() {
 
 
                 </div>
+                <span className="flex justify-center"><small>Want to cancel the order? <button onClick={openCancelModal} className="text-red-500">Cancel</button></small></span>
+            </div>
+
+
+
+            {/* for all modal dialog */}
+            <div>
+                {
+                    paymentMethod === "Card Payment" ?
+                        <dialog id="cancelOrder" className="modal">
+                            <div className="modal-box rounded-3xl">
+                                <form method="dialog">
+                                    <button className="absolute btn btn-sm btn-circle btn-ghost right-2 top-2">
+                                        ✕
+                                    </button>
+                                </form>
+                                <div className="flex justify-center p-5 mt-5 shadow-2xl lg:w-96 rounded-xl">
+                                    <div className="lg:w-96">
+                                        <div className="flex justify-center p-2 mb-2 font-bold text-white bg-blue-500 rounded-tr-2xl rounded-tl-2xl gap-x-1">
+                                            <h1>Cancel Order</h1>
+                                        </div>
+                                        <div className="bg-blue-100 font-semibold flex justify-center">Order Id #{payment_code}</div>
+                                        <div>
+                                            <p>As this payment was done by card gateway. If you Want to cancel the order and get return money, Please Contact with us by the  phone number or email that is given below.</p>
+                                        </div>
+                                        <div className="pt-1 flex">
+                                            <h1 className="flex items-center w-40 gap-2 font-semibold">
+                                                Phone Number
+                                            </h1>
+                                            <h1 className="w-40">: 01xxxxxxxxx</h1>
+                                        </div>
+
+
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </dialog>
+                        :
+                        <dialog id="cancelOrder" className="modal">
+                            <div className="modal-box rounded-3xl">
+                                <form method="dialog">
+                                    <button className="absolute btn btn-sm btn-circle btn-ghost right-2 top-2">
+                                        ✕
+                                    </button>
+                                </form>
+                                <div className="flex justify-center p-5 mt-5 shadow-2xl lg:w-96 rounded-xl">
+                                    <div className="">
+                                        <div className="flex justify-center p-2 mb-2 font-bold text-white bg-blue-500 rounded-tr-2xl rounded-tl-2xl gap-x-1">
+                                            <h1>Cancel Order</h1>
+                                        </div>
+                                        <div className="bg-blue-100 font-semibold">Order Id #{payment_code}</div>
+                                        <div className="flex ">
+                                            <h1 className="flex items-center w-40 gap-1 "><FaBangladeshiTakaSign className='text-lg text-blue-600' />Total Price</h1>
+                                            <h1 className="w-40  ">: {totalPrice}৳  </h1>
+                                        </div>
+                                        <div className="flex font-bold ">
+                                            <h1 className="flex items-center w-40 gap-2 ">
+                                                Payment Status
+                                            </h1>
+                                            <h1 className="w-40">: <span className="text-red-500">Pending</span></h1>
+                                        </div>
+                                        <div className="flex justify-center items-center w-40 gap-2 ml-12 pt-2">
+                                            <button className="bg-blue-400 p-1 rounded">Cancel</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </dialog>
+                }
+
+
+
+
 
             </div>
+
+
+
 
         </div>
 

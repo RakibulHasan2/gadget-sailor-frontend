@@ -20,4 +20,5 @@ export type IPayments = {
     totalPrice: number
     _id?: string
     city: string
+    cancelled?: string
 }
