@@ -99,7 +99,7 @@ export default function OrderDetails() {
                             </div>
                             <div className="flex ">
                                 <h1 className="flex items-center w-40 gap-1 p-3"><FaBangladeshiTakaSign className='text-lg text-blue-600' />Cost</h1>
-                                <h1 className="w-40 p-2 ">: {totalPrice - 60}৳  </h1>
+                                <h1 className="w-40 p-2 ">: {totalPrice !== undefined ? `${totalPrice - 60}৳` : 'N/A'}৳  </h1>
                             </div>
                             <div className="flex">
                                 <h1 className="flex items-center w-40 gap-1 p-2"><MdDeliveryDining className='text-2xl text-blue-600' />Home Delivary</h1>
