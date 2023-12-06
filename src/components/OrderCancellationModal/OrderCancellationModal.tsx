@@ -53,7 +53,7 @@ const OrderCancellationModal = ({ order }: IPayment) => {
         console.log(_id)
         console.log(paymentData)
 
-        const response = fetch(`http://localhost:5000/api/v1/getPayment/${_id}`, {
+        const response = fetch(`https://gadget-sailor-backend.onrender.com/api/v1/getPayment/${_id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
