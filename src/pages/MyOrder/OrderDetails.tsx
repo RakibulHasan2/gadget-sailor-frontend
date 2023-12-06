@@ -14,7 +14,7 @@ import { IPayments } from "../../types/PaymentType";
 export default function OrderDetails() {
     const orders = useLoaderData() as useLoaderDataType;
     const order = orders.data as unknown as IPayments;
-    const { payment_code, firstName, lastName, phoneNumber, district, totalPrice, city } = order;
+    const { payment_code, firstName, lastName, phoneNumber, district, totalPrice, city, paymentMethod } = order;
 
     const product = (Object.keys(order) as (keyof typeof order)[])
         .filter(key => (key as string).endsWith("_product"))
@@ -90,6 +90,17 @@ export default function OrderDetails() {
                             <div className="flex font-bold border-t-2">
                                 <h1 className="flex items-center w-40 gap-2 p-2"><SiVirustotal className='text-lg text-blue-600' />Sub Total</h1>
                                 <h1 className="w-40 p-2">: {totalPrice}৳</h1>
+                            </div>
+                            <div className="flex font-bold border-t-2">
+                                <h1 className="flex items-center w-40 gap-2 p-2">
+                                    Payment Status
+                                </h1>
+                                {
+                                    paymentMethod === "Card Payment" ?
+                                        <h1 className="w-40 p-2 text-green-700">: Paid</h1>
+                                        : <h1 className="w-40 p-2 text-red-500">: Pending</h1>
+                                }
+
                             </div>
                         </div>
 
