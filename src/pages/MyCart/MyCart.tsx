@@ -77,9 +77,19 @@ export default function MyCart() {
             <div className="flex justify-end border-t-2">
               <div>
                 <p className="mb-4 text-lg font-bold">Total: {calculateTotalPrice()}৳</p>
-                <Link to={`/payment/myOrder/${user?.id}`}>
-                  <button className="p-3 mb-3 text-white bg-blue-900 border rounded-lg hover:bg-sky-700">Confirm Order</button>
-                </Link>
+
+                {
+                  data.length !== 0 ?
+                    <Link to={`/payment/myOrder/${user?.id}`}>
+                      <button className="p-3 mb-3 text-white bg-blue-900 border rounded-lg hover:bg-sky-700">Confirm Order</button>
+                    </Link>
+                    :
+
+                    <button disabled className="p-3 mb-3 text-white bg-blue-900 border rounded-lg hover:bg-sky-700">Confirm Order</button>
+
+                }
+
+
               </div>
             </div>
           </div> :
