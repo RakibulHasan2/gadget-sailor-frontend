@@ -1,6 +1,6 @@
 export type IPayment = {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    [key: string]: string | number | boolean | any[] | IPayment;
+    [key: string]: string | number | boolean | any | any[] | IPayment;
 };
 
 

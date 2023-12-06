@@ -53,7 +53,7 @@ const OrderCancellationModal = ({ order }: IPayment) => {
         console.log(_id)
         console.log(paymentData)
 
-        const response = fetch(`https://gadget-sailor-backend.onrender.com/api/v1/getPayment/${_id}`, {
+        const response = fetch(`http://localhost:5000/api/v1/getPayment/${_id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -64,15 +64,12 @@ const OrderCancellationModal = ({ order }: IPayment) => {
 
         if (updatedPayment.statusCode === 200) {
 
-            //location.reload()
-
-
-            // update data
+            toast.success(`${payment_code} : order is cancelled`)
             filteredDataArray.map(async d => {
                 console.log(d)
                 if (d.product_name === order[`${d.product_name}_product`]) {
                     const d_quantity = d.quantity as number;
-                    const Quantity = d_quantity - order[`${d.product_name}_quantity`]
+                    const Quantity = d_quantity + order[`${d.product_name}_quantity`]
                     //console.log(Quantity)
                     const productData: UpdateProductValues = {
                         quantity: Quantity
