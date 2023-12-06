@@ -5,20 +5,20 @@ export type IPayment = {
 
 
 export type IPayments = {
-    email: string
-    payment_code: number
-    firstName: string
-    lastName: string
-    phoneNumber: number
-    district: string
+    email?: string
+    payment_code?: number
+    firstName?: string
+    lastName?: string
+    phoneNumber?: number
+    district?: string
     comments?: string
-    paymentMethod: string
-    deliveryMethod: string
-    transactionId: string
-    address: string
+    paymentMethod?: string
+    deliveryMethod?: string
+    transactionId?: string
+    address?: string
     other?: string
-    totalPrice: number
+    totalPrice?: number
     _id?: string
-    city: string
+    city?: string
     cancelled?: string
 }

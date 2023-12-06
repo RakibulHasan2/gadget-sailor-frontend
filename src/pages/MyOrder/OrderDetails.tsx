@@ -15,7 +15,7 @@ import OrderCancellationModal from "../../components/OrderCancellationModal/Orde
 export default function OrderDetails() {
     const orders = useLoaderData() as useLoaderDataType;
     const order = orders.data as unknown as IPayments;
-    const { payment_code, firstName, lastName, phoneNumber, district, totalPrice, city, paymentMethod } = order;
+    const { payment_code, firstName, lastName, phoneNumber, district, totalPrice, city, paymentMethod, _id } = order;
 
     const product = (Object.keys(order) as (keyof typeof order)[])
         .filter(key => (key as string).endsWith("_product"))
@@ -237,7 +237,7 @@ export default function OrderDetails() {
 
                                     <OrderCancellationModal
                                         payment_code={payment_code}
-                                        totalPrice={totalPrice} email={""} firstName={""} lastName={""} phoneNumber={0} district={""} paymentMethod={""} deliveryMethod={""} transactionId={""} address={""} city={""} />
+                                        totalPrice={totalPrice} email={""} firstName={""} lastName={""} phoneNumber={0} district={""} paymentMethod={""} deliveryMethod={""} transactionId={""} address={""} city={""} _id={_id} />
                                 </div>
                             </div>
                         </dialog>

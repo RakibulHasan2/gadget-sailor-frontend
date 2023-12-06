@@ -1,11 +1,37 @@
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
 import { IPayments } from "../../types/PaymentType";
 
-const OrderCancellationModal = ({ payment_code, totalPrice }: IPayments) => {
+const OrderCancellationModal = ({ payment_code, totalPrice, _id }: IPayments) => {
 
-    //console.log(data)
+    const handleAddPayment = async () => {
 
-    //const { payment_code, totalPrice } = data;
+        const paymentData: IPayments = {
+            cancelled: "cancelled",
+
+        }
+        console.log(_id)
+        console.log(paymentData)
+
+        const response = fetch(`https://gadget-sailor-backend.onrender.com/api/v1/getPayment/${_id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(paymentData)
+        });
+        const product = await (await response).json();
+
+        if (product.statusCode === 200) {
+
+            location.reload()
+        } else {
+            console.log(product.message)
+        }
+    }
+
+
+
+
     return (
         <div className="">
             <div className="flex justify-center p-2 mb-2 font-bold text-white bg-blue-500 rounded-tr-2xl rounded-tl-2xl gap-x-1">
@@ -23,7 +49,7 @@ const OrderCancellationModal = ({ payment_code, totalPrice }: IPayments) => {
                 <h1 className="w-40">: <span className="text-red-500">Pending</span></h1>
             </div>
             <div className="flex justify-center items-center w-40 gap-2 ml-12 pt-2">
-                <button className="bg-blue-400 p-1 rounded">Cancel</button>
+                <button onClick={handleAddPayment} className="bg-blue-400 p-1 rounded">Cancel</button>
             </div>
         </div>
     );
