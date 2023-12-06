@@ -22,8 +22,18 @@ const OrderHistoryCard = ({ data }: IPayment) => {
 
             <div className="flex justify-center p-3">
                 <div className="w-full mt-2 border lg:w-4/6 rounded-tr-2xl rounded-tl-2xl">
-                    <div className="p-2 text-white bg-blue-900 rounded-tr-2xl rounded-tl-2xl">
+                    <div className="p-2 text-white bg-blue-900 rounded-tr-2xl rounded-tl-2xl flex justify-between">
                         <h1 className="font-bold ">Order# {payment_code}</h1>
+
+                        {
+                            data?.cancelled ?
+                                <h1 className="text-red-600">
+                                    Cancelled
+                                </h1>
+                                :
+                                <></>
+                        }
+
                     </div>
                     <div className="items-center justify-between p-4 lg:flex">
                         <div className="flex items-center pb-2 border-b-2 lg:border-b-0 lg:pb-0">

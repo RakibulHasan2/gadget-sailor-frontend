@@ -116,7 +116,10 @@ export default function OrderDetails() {
                                 {
                                     paymentMethod === "Card Payment" ?
                                         <h1 className="w-40 p-2 ">: <span className="text-green-700">Paid</span></h1>
-                                        : <h1 className="w-40 p-2 ">: <span className="text-red-500">Pending</span></h1>
+                                        : order?.cancelled ?
+                                            <h1 className="w-40 p-2 ">: <span className="text-red-500">Order Cancelled</span></h1>
+                                            :
+                                            <h1 className="w-40 p-2 ">: <span className="text-red-500">Pending</span></h1>
                                 }
 
                             </div>
@@ -190,7 +193,12 @@ export default function OrderDetails() {
 
 
                 </div>
-                <span className="flex justify-center"><small>Want to cancel the order? <button onClick={openCancelModal} className="text-red-500">Cancel</button></small></span>
+                {
+                    order?.cancelled ?
+                        <></> :
+                        <span className="flex justify-center"><small>Want to cancel the order? <button onClick={openCancelModal} className="text-red-500">Cancel</button></small></span>
+                }
+
             </div>
 
 
