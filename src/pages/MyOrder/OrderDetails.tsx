@@ -196,57 +196,60 @@ export default function OrderDetails() {
                 {
                     order?.cancelled ?
                         <></> :
-                        <span className="flex justify-center"><small>Want to cancel the order? <button onClick={openCancelModal} className="text-red-500">Cancel</button></small></span>
+                        <span className="flex justify-center mt-2 font-bold"><small>Want to cancel the order? <button onClick={openCancelModal} className="text-red-500">Cancel</button></small></span>
                 }
 
             </div>
-
-
-
             {/* for all modal dialog */}
             <div>
                 {
                     paymentMethod === "Card Payment" ?
                         <dialog id="cancelOrder" className="modal">
-                            <div className="modal-box rounded-3xl">
-                                <form method="dialog">
-                                    <button className="absolute btn btn-sm btn-circle btn-ghost right-2 top-2">
-                                        ✕
-                                    </button>
-                                </form>
-                                <div className="flex justify-center p-5 mt-5 shadow-2xl lg:w-96 rounded-xl">
-                                    <div className="lg:w-96">
-                                        <div className="flex justify-center p-2 mb-2 font-bold text-white bg-blue-500 rounded-tr-2xl rounded-tl-2xl gap-x-1">
-                                            <h1>Cancel Order</h1>
-                                        </div>
-                                        <div className="bg-blue-100 font-semibold flex justify-center">Order Id #{payment_code}</div>
-                                        <div>
-                                            <p>As this payment was done by card gateway. If you Want to cancel the order and get return money, Please Contact with us by the  phone number or email that is given below.</p>
-                                        </div>
-                                        <div className="pt-1 flex">
-                                            <h1 className="flex items-center w-40 gap-2 font-semibold">
-                                                Phone Number
-                                            </h1>
-                                            <h1 className="w-40">: 01xxxxxxxxx</h1>
+                            <div className="flex justify-center border modal-box rounded-3xl">
+                                <div>
+                                    <form method="dialog">
+                                        <button className="absolute btn btn-sm btn-circle btn-ghost right-2 top-2">
+                                            ✕
+                                        </button>
+                                    </form>
+                                    <div className="flex justify-center p-5 mt-5 shadow-2xl lg:w-96 rounded-xl">
+                                        <div className="lg:w-96">
+                                            <div className="flex justify-center p-2 mb-2 font-bold text-white bg-blue-500 rounded-tr-2xl rounded-tl-2xl gap-x-1">
+                                                <h1>Cancel Order !!!</h1>
+                                            </div>
+                                            <div className="flex justify-center font-semibold bg-blue-100">Order Id #{payment_code}</div>
+                                            <div className="p-2 font-semibold border-b-2">
+                                                <p>"As this payment was done by card gateway. If you Want to cancel the order and get return money, Please Contact with us by the  phone number or email that is given below."</p>
+                                            </div>
+                                            <div className="flex pt-1 ml-2">
+                                                <h1 className="flex items-center w-40 gap-2 font-semibold">
+                                                    Phone Number
+                                                </h1>
+                                                <h1 className="w-40">: 01xxxxxxxxx</h1>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </dialog>
                         :
                         <dialog id="cancelOrder" className="modal">
-                            <div className="modal-box rounded-3xl">
-                                <form method="dialog">
-                                    <button className="absolute btn btn-sm btn-circle btn-ghost right-2 top-2">
-                                        ✕
-                                    </button>
-                                </form>
-                                <div className="flex justify-center p-5 mt-5 shadow-2xl lg:w-96 rounded-xl">
+                            <div className="flex justify-center modal-box rounded-3xl">
+                                <div>
+                                    <form method="dialog">
+                                        <button className="absolute btn btn-sm btn-circle btn-ghost right-2 top-2">
+                                            ✕
+                                        </button>
+                                    </form>
+                                    <div className="flex justify-center p-5 mt-5 shadow-2xl lg:w-96 rounded-xl">
 
-                                    <OrderCancellationModal
-                                        order={order}
-                                    />
+                                        <OrderCancellationModal
+                                            order={order}
+                                        />
+                                    </div>
                                 </div>
+
                             </div>
                         </dialog>
                 }

@@ -137,7 +137,7 @@ export default function Navbar() {
             </ul>
           </div>
           {/* for desktop view---------------------------------------------- */}
-          <div className="absolute flex justify-center w-full lg:justify-start lg:relative logo">
+          <div className="flex justify-center w-40 lg:justify-start lg:relative logo">
             <Link to='/'>
               <img className="w-24 lg:ml-0 lg:w-40" src={logo} alt="" />
             </Link>
