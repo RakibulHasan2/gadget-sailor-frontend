@@ -3,11 +3,12 @@ import { IPayment, IPayments } from "../../types/PaymentType";
 import { useEffect, useState } from "react";
 import { UpdateProductValues, UpdateProductValuesResponse } from "../../types/ProductTypes";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const OrderCancellationModal = ({ order }: IPayment) => {
     const { payment_code, totalPrice, _id } = order as IPayments;
     const [iData, setIData] = useState<UpdateProductValues[]>([]);
-    console.log(order)
+    const navigate = useNavigate();
 
     const I_ids = (Object.keys(order) as (keyof typeof order)[])
         .filter(key => (key as string).endsWith("_I-id"))
@@ -50,9 +51,6 @@ const OrderCancellationModal = ({ order }: IPayment) => {
             cancelled: "cancelled",
 
         }
-        console.log(_id)
-        console.log(paymentData)
-
         const response = fetch(`https://gadget-sailor-backend.onrender.com/api/v1/getPayment/${_id}`, {
             method: 'PUT',
             headers: {
@@ -64,18 +62,13 @@ const OrderCancellationModal = ({ order }: IPayment) => {
 
         if (updatedPayment.statusCode === 200) {
 
-            toast.success(`${payment_code} : order is cancelled`)
             filteredDataArray.map(async d => {
-                console.log(d)
                 if (d.product_name === order[`${d.product_name}_product`]) {
                     const d_quantity = d.quantity as number;
                     const Quantity = d_quantity + order[`${d.product_name}_quantity`]
-                    //console.log(Quantity)
                     const productData: UpdateProductValues = {
                         quantity: Quantity
                     }
-                    //console.log(productData)
-
                     const response = fetch(`https://gadget-sailor-backend.onrender.com/api/v1/allProducts/${d._id}`, {
                         method: 'PUT',
                         headers: {
@@ -86,8 +79,8 @@ const OrderCancellationModal = ({ order }: IPayment) => {
                     const product = await (await response).json();
 
                     if (product.statusCode === 200) {
-                        //toast.success(product.message)
-                        //navigate('/payment/orderHistory')
+                        toast.success(`${payment_code} : order is cancelled`)
+                        navigate('/payment/orderHistory')
                     } else {
                         toast.error(product.message)
                     }
