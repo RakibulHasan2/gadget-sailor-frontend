@@ -151,7 +151,7 @@ export default function MyOrder() {
             // update data
 
             filteredDataArray.map(async d => {
-                console.log(d)
+                //console.log(d)
                 if (d.product_name === combinedObject[`${d.product_name}_product`]) {
                     const d_quantity = d.quantity as number;
                     const Quantity = d_quantity - combinedObject[`${d.product_name}_quantity`]
@@ -184,12 +184,14 @@ export default function MyOrder() {
         }
     }
 
-    console.log(userInfo)
-    console.log(checkoutInfo)
-    console.log(checkoutInfoArray)
-    console.log(checkoutInfoArray.length)
-    console.log(Object.keys(checkoutInfoArray).length);
-    console.log(combinedObject)
+    // console.log(userInfo)
+    // console.log(checkoutInfo)
+    // console.log(checkoutInfoArray)
+    // console.log(checkoutInfoArray.length)
+    // console.log(Object.keys(checkoutInfoArray).length);
+    //console.log(combinedObject)
+
+
     return (
         <div className="p-3 lg:p-5 lg:flex justify-evenly">
             <div className="mt-5 rounded-lg shadow-2xl lg:mt-0 lg:p-2">
