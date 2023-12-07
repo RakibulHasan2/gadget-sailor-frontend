@@ -25,7 +25,6 @@ export default function OrderDetails() {
         .filter(key => (key as string).endsWith("_image")
         )
         .map(key => order[key]);
-    //console.log(image);
 
     const quantity = (Object.keys(order) as (keyof typeof order)[])
         .filter(key => (key as string).endsWith("_quantity")
@@ -37,15 +36,7 @@ export default function OrderDetails() {
         .filter(key => (key as string).endsWith("_price")
         )
         .map(key => order[key]);
-
-    // console.log(product)
-    // console.log(price)
-    // console.log(quantity)
-    // console.log(image);
-    const delivary = 60
-
-
-
+    const delivary = 60;
 
     // cancellation modal
     const openCancelModal = () => {
