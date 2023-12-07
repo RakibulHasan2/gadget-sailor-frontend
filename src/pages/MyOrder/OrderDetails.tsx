@@ -25,7 +25,6 @@ export default function OrderDetails() {
         .filter(key => (key as string).endsWith("_image")
         )
         .map(key => order[key]);
-    //console.log(image);
 
     const quantity = (Object.keys(order) as (keyof typeof order)[])
         .filter(key => (key as string).endsWith("_quantity")
@@ -37,15 +36,7 @@ export default function OrderDetails() {
         .filter(key => (key as string).endsWith("_price")
         )
         .map(key => order[key]);
-
-    // console.log(product)
-    // console.log(price)
-    // console.log(quantity)
-    // console.log(image);
-    const delivary = 60
-
-
-
+    const delivary = 60;
 
     // cancellation modal
     const openCancelModal = () => {
@@ -214,20 +205,27 @@ export default function OrderDetails() {
                                         ✕
                                     </button>
                                 </form>
-                                <div className="flex justify-center p-5 mt-5 shadow-2xl lg:w-96 rounded-xl">
+                                <div className="flex justify-center p-5 mt-5 shadow-2xl lg:min-w-max rounded-xl">
                                     <div className="lg:w-96">
                                         <div className="flex justify-center p-2 mb-2 font-bold text-white bg-blue-500 rounded-tr-2xl rounded-tl-2xl gap-x-1">
                                             <h1>Cancel Order</h1>
                                         </div>
                                         <div className="bg-blue-100 font-semibold flex justify-center">Order Id #{payment_code}</div>
                                         <div>
-                                            <p>As this payment was done by card gateway. If you Want to cancel the order and get return money, Please Contact with us by the  phone number or email that is given below.</p>
+                                            <p>As this payment was done by the card gateway. If you Want to cancel the order and get the return money, Please Contact with us by the  phone number or email that is given below.</p>
+                                            <p><span className="text-red-400">NB:</span> You have to contact with us within 2 days. </p>
                                         </div>
                                         <div className="pt-1 flex">
-                                            <h1 className="flex items-center w-40 gap-2 font-semibold">
+                                            <h1 className="flex items-center w-36 gap-2 font-semibold">
                                                 Phone Number
                                             </h1>
-                                            <h1 className="w-40">: 01xxxxxxxxx</h1>
+                                            <h1 className="">: 1580587952</h1>
+                                        </div>
+                                        <div className="pt-1 flex items-center">
+                                            <h1 className="flex content-center w-36 gap-2 font-semibold">
+                                                Email
+                                            </h1>
+                                            <h1 className="">: gadgetsailoradmin@gmail.com</h1>
                                         </div>
                                     </div>
                                 </div>
