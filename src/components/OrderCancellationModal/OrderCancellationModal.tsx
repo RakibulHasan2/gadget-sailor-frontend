@@ -102,19 +102,19 @@ const OrderCancellationModal = ({ order }: IPayment) => {
             <div className="flex justify-center p-2 mb-2 font-bold text-white bg-blue-500 rounded-tr-2xl rounded-tl-2xl gap-x-1">
                 <h1>Cancel Order</h1>
             </div>
-            <div className="bg-blue-100 font-semibold">Order Id #{payment_code}</div>
-            <div className="flex ">
+            <div className="flex justify-center p-2 font-semibold bg-blue-100">Order Id #{payment_code}</div>
+            <div className="flex p-2 border-b-2">
                 <h1 className="flex items-center w-40 gap-1 "><FaBangladeshiTakaSign className='text-lg text-blue-600' />Total Price</h1>
-                <h1 className="w-40  ">: {totalPrice}৳  </h1>
+                <h1 className="w-40 ">: {totalPrice}৳  </h1>
             </div>
-            <div className="flex font-bold ">
+            <div className="flex p-2 font-bold">
                 <h1 className="flex items-center w-40 gap-2 ">
                     Payment Status
                 </h1>
                 <h1 className="w-40">: <span className="text-red-500">Pending</span></h1>
             </div>
-            <div className="flex justify-center items-center w-40 gap-2 ml-12 pt-2">
-                <button onClick={handleAddPayment} className="bg-blue-400 p-1 rounded">Cancel</button>
+            <div className="flex items-center justify-center w-full gap-2 pt-2 ">
+                <button onClick={handleAddPayment} className="p-2 bg-blue-400 rounded hover:bg-red-700 hover:text-white">Cancel</button>
             </div>
         </div>
     );

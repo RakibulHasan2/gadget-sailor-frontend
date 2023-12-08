@@ -19,6 +19,7 @@ import MyOrder from "../pages/MyOrder/MyOrder";
 import OrderHistory from "../pages/MyOrder/OrderHistory";
 import OrderDetails from "../pages/MyOrder/OrderDetails";
 import SearchedProducts from "../pages/Products/SearchedProducts";
+import About from './../components/About/About';
 
 
 
@@ -76,6 +77,10 @@ const routes = createBrowserRouter([
       {
         path: "/fav-item",
         element: <PrivateRoute><FavPage /></PrivateRoute>,
+      },
+      {
+        path: "/about",
+        element: <About/>,
       },
       {
         path: "/build-pc",

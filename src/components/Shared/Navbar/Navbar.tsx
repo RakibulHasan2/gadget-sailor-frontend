@@ -14,6 +14,7 @@ import useProductData from "../../../hooks/useProductData";
 import { IProduct } from "../../../types/ProductsType";
 import { FiTerminal } from "react-icons/fi";
 import { useSelectedProducts } from "../../../context/SelectedProductsProvider";
+import { FcAbout } from "react-icons/fc";
 
 
 export default function Navbar() {
@@ -128,6 +129,12 @@ export default function Navbar() {
                       Favourite<AiOutlineHeart className="text-2xl"></AiOutlineHeart></button>
                   </div>
                 </Link>
+                <Link to="/about">
+                  <div className="p-2 mt-2 text-black bg-blue-50 rounded-xl hover:text-white hover:bg-blue-700">
+                    <button className="flex items-center mr-5 align-middle rounded-xl gap-x-2" title="wishlist">
+                      About us<FcAbout className="text-2xl"/></button>
+                  </div>
+                </Link>
               </div>
               <Link to='/build-pc'>
                 <div className="w-full mt-3">
@@ -137,7 +144,7 @@ export default function Navbar() {
             </ul>
           </div>
           {/* for desktop view---------------------------------------------- */}
-          <div className="absolute flex justify-center w-full lg:justify-start lg:relative logo">
+          <div className="flex justify-center w-40 lg:justify-start lg:relative logo">
             <Link to='/'>
               <img className="w-24 lg:ml-0 lg:w-40" src={logo} alt="" />
             </Link>
@@ -171,6 +178,11 @@ export default function Navbar() {
                 <AiOutlineHeart className=""></AiOutlineHeart></button>
             </Link>
           </div>
+          <div className="hidden lg:block">
+            <Link to='/about'>
+            <button className="mr-5 text-2xl align-middle"><FcAbout /></button>
+            </Link>
+          </div>
           {
             users ? <div className=" dropdown dropdown-end">
               <label tabIndex={0} className="m-1"><button className="mt-2 mr-1 text-2xl font-bold text-center lg:mt-2 lg:mr-5 hover:text-gray-400">
@@ -195,7 +207,7 @@ export default function Navbar() {
                 </Link>
                 <li onClick={() => handleLogout()}><a className=" hover:bg-red-600 hover:text-white">Log-out</a></li>
               </ul>
-            </div> : <Link to='/login'><button className="flex w-16 p-2 mr-3 font-bold border rounded-lg lg-w-0">Login<BiLogIn className='text-2xl'></BiLogIn></button></Link>
+            </div> : <Link to='/login'><button className="flex items-center p-2 mr-3 font-bold border rounded-lg lg-w-0">Login<BiLogIn className=''></BiLogIn></button></Link>
           }
           <div className="hidden lg:block">
             <Link to='/build-pc'> <a className="text-white btn rounded-2xl glow-on-hover"><MdBuild className='text-2xl'></MdBuild> Build PC </a></Link>
