@@ -58,6 +58,10 @@ export default function OrderDetails() {
                 <div className="flex justify-center p-2 text-3xl text-white bg-blue-800 border-b-2 rounded-tr-2xl rounded-tl-2xl">
                     <h1>Order Details #{payment_code}</h1>
                 </div>
+                <div className="">
+                    <h2 className="flex justify-center">Shop Address:</h2>
+                    <p>Shop : 211 & 213, 1st Floor, Aloka Nadi Bangla Complex, 4 Ram Babu Rd, Mymensingh 2200</p>
+                </div>
                 <div className="justify-between lg:flex">
                     <div className="flex justify-center p-5 mt-5 shadow-2xl lg:w-96 rounded-xl">
                         <div className="">
