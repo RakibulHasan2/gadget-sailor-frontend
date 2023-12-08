@@ -147,14 +147,7 @@ const CheckoutForm = ({ data }: any) => {
                 transactionId: paymentIntent.id
             }
             console.log("payment dataaaa", paymentData)
-            // const productData: UpdateProductValues = {
 
-            //     quantity:
-
-
-            // }
-            // console.log(paymentData)
-            //console.log(productData)
 
             const response = await fetch(`https://gadget-sailor-backend.onrender.com/api/v1/addPayment`, {
                 method: 'POST',
@@ -173,7 +166,6 @@ const CheckoutForm = ({ data }: any) => {
                 setTransactionId(paymentIntent.id)
 
                 // deleting from the cart
-
                 ids.forEach(async (id) => {
 
                     fetch(`https://gadget-sailor-backend.onrender.com/api/v1/getCart/${id}`, {
@@ -232,7 +224,10 @@ const CheckoutForm = ({ data }: any) => {
         console.log('paymentIntent', paymentIntent);
 
     }
-
+    const [hide, setHide] = useState("hidden loading loading-spinner loading-lg")
+    const loaderButton = () => {
+        setHide("block loading loading-spinner loading-lg");
+    }
 
     return (
         <>
@@ -257,13 +252,15 @@ const CheckoutForm = ({ data }: any) => {
                     }}
                     className="p-2 border"
                 />
+
                 <div className="flex justify-center">
-                    <button className='mt-5 btn-flip speed' type="submit" data-front="Confirm Click" data-back="PAY" disabled={!stripe || !clientSecret || processing}>
+                    <button onClick={loaderButton} className='mt-5 btn-flip speed' type="submit" data-front="Confirm Click" data-back="PAY" disabled={!stripe || !clientSecret || processing}>
 
                     </button>
                 </div>
 
             </form>
+            <span className={hide}></span>
             <p className="text-red-500">{cardError}</p>
             {
                 success &&
