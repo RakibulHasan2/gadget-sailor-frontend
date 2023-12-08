@@ -16,6 +16,7 @@ export default function OrderDetails() {
     const orders = useLoaderData() as useLoaderDataType;
     const order = orders.data as unknown as IPayments;
     const { payment_code, firstName, lastName, phoneNumber, district, totalPrice, city, paymentMethod } = order;
+    const subtotalPrice = (totalPrice as number - 60).toFixed(2)
 
     const product = (Object.keys(order) as (keyof typeof order)[])
         .filter(key => (key as string).endsWith("_product"))
@@ -58,9 +59,12 @@ export default function OrderDetails() {
                 <div className="flex justify-center p-2 text-3xl text-white bg-blue-800 border-b-2 rounded-tr-2xl rounded-tl-2xl">
                     <h1>Order Details #{payment_code}</h1>
                 </div>
-                <div className="">
-                    <h2 className="flex justify-center">Shop Address:</h2>
-                    <p>Shop : 211 & 213, 1st Floor, Aloka Nadi Bangla Complex, 4 Ram Babu Rd, Mymensingh 2200</p>
+                <div className="border flex justify-center mt-2 bg-blue-500 p-2 text-white rounded-md">
+                    <div>
+                        <h2 className="flex justify-center font-bold">Shop Address:</h2>
+                        <p>Shop : 211 & 213, 1st Floor, Aloka Nadi Bangla Complex, 4 Ram Babu Rd, Mymensingh 2200</p>
+                    </div>
+
                 </div>
                 <div className="justify-between lg:flex">
                     <div className="flex justify-center p-5 mt-5 shadow-2xl lg:w-96 rounded-xl">
@@ -94,7 +98,7 @@ export default function OrderDetails() {
                             </div>
                             <div className="flex ">
                                 <h1 className="flex items-center w-40 gap-1 p-3"><FaBangladeshiTakaSign className='text-lg text-blue-600' />Cost</h1>
-                                <h1 className="w-40 p-2 ">: {totalPrice !== undefined ? `${totalPrice - 60}৳` : 'N/A'}৳  </h1>
+                                <h1 className="w-40 p-2 ">: {totalPrice !== undefined ? `${subtotalPrice}৳` : 'N/A'}৳  </h1>
                             </div>
                             <div className="flex">
                                 <h1 className="flex items-center w-40 gap-1 p-2"><MdDeliveryDining className='text-2xl text-blue-600' />Home Delivary</h1>
@@ -216,18 +220,18 @@ export default function OrderDetails() {
                                             <div className="p-2 font-semibold border-b-2">
                                                 <p>"As this payment was done by the card gateway. If you Want to cancel the order and get the return money, Please Contact with us by the  phone number or email that is given below."</p>
                                                 <p><span className="text-red-400">NB:</span> You have to contact with us within 2 days. </p>
-                                        </div>
-                                            <div className="flex pt-1 ml-2">
+                                            </div>
+                                            <div className="flex pt-1">
                                                 <h1 className="flex items-center gap-2 font-semibold w-36">
                                                     Phone Number
                                                 </h1>
                                                 <h1 className="">: 1580587952</h1>
-                                        </div>
-                                        <div className="flex items-center pt-1">
-                                            <h1 className="flex content-center gap-2 font-semibold w-36">
-                                                Email
-                                            </h1>
-                                            <h1 className="">: gadgetsailoradmin@gmail.com</h1>
+                                            </div>
+                                            <div className="flex items-center pt-1">
+                                                <h1 className="flex content-center gap-2 font-semibold w-36">
+                                                    Email
+                                                </h1>
+                                                <h1 className="">: gadgetsailoradmin@gmail.com</h1>
                                             </div>
                                         </div>
                                     </div>
