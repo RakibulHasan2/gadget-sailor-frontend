@@ -16,6 +16,7 @@ export default function OrderDetails() {
     const orders = useLoaderData() as useLoaderDataType;
     const order = orders.data as unknown as IPayments;
     const { payment_code, firstName, lastName, phoneNumber, district, totalPrice, city, paymentMethod } = order;
+    const subtotalPrice = (totalPrice as number - 60).toFixed(2) // d
 
     const product = (Object.keys(order) as (keyof typeof order)[])
         .filter(key => (key as string).endsWith("_product"))
@@ -58,9 +59,12 @@ export default function OrderDetails() {
                 <div className="flex justify-center p-2 text-3xl text-white bg-blue-800 border-b-2 rounded-tr-2xl rounded-tl-2xl">
                     <h1>Order Details #{payment_code}</h1>
                 </div>
-                <div className="">
-                    <h2 className="flex justify-center">Shop Address:</h2>
-                    <p>Shop : 211 & 213, 1st Floor, Aloka Nadi Bangla Complex, 4 Ram Babu Rd, Mymensingh 2200</p>
+                <div className="border flex justify-center mt-2 bg-blue-500 p-2 text-white rounded-md">
+                    <div>
+                        <h2 className="flex justify-center font-bold">Shop Address:</h2>
+                        <p>Shop : 211 & 213, 1st Floor, Aloka Nadi Bangla Complex, 4 Ram Babu Rd, Mymensingh 2200</p>
+                    </div>
+
                 </div>
                 <div className="justify-between lg:flex">
                     <div className="flex justify-center p-5 mt-5 shadow-2xl lg:w-96 rounded-xl">
@@ -94,7 +98,7 @@ export default function OrderDetails() {
                             </div>
                             <div className="flex ">
                                 <h1 className="flex items-center w-40 gap-1 p-3"><FaBangladeshiTakaSign className='text-lg text-blue-600' />Cost</h1>
-                                <h1 className="w-40 p-2 ">: {totalPrice !== undefined ? `${totalPrice - 60}৳` : 'N/A'}৳  </h1>
+                                <h1 className="w-40 p-2 ">: {totalPrice !== undefined ? `${subtotalPrice}৳` : 'N/A'}৳  </h1>
                             </div>
                             <div className="flex">
                                 <h1 className="flex items-center w-40 gap-1 p-2"><MdDeliveryDining className='text-2xl text-blue-600' />Home Delivary</h1>
@@ -191,64 +195,67 @@ export default function OrderDetails() {
                 {
                     order?.cancelled ?
                         <></> :
-                        <span className="flex justify-center"><small>Want to cancel the order? <button onClick={openCancelModal} className="text-red-500">Cancel</button></small></span>
+                        <span className="flex justify-center mt-2 font-bold"><small>Want to cancel the order? <button onClick={openCancelModal} className="text-red-500">Cancel</button></small></span>
                 }
 
             </div>
-
-
-
             {/* for all modal dialog */}
             <div>
                 {
                     paymentMethod === "Card Payment" ?
                         <dialog id="cancelOrder" className="modal">
-                            <div className="modal-box rounded-3xl">
-                                <form method="dialog">
-                                    <button className="absolute btn btn-sm btn-circle btn-ghost right-2 top-2">
-                                        ✕
-                                    </button>
-                                </form>
-                                <div className="flex justify-center p-5 mt-5 shadow-2xl lg:min-w-max rounded-xl">
-                                    <div className="lg:w-96">
-                                        <div className="flex justify-center p-2 mb-2 font-bold text-white bg-blue-500 rounded-tr-2xl rounded-tl-2xl gap-x-1">
-                                            <h1>Cancel Order</h1>
-                                        </div>
-                                        <div className="bg-blue-100 font-semibold flex justify-center">Order Id #{payment_code}</div>
-                                        <div>
-                                            <p>As this payment was done by the card gateway. If you Want to cancel the order and get the return money, Please Contact with us by the  phone number or email that is given below.</p>
-                                            <p><span className="text-red-400">NB:</span> You have to contact with us within 2 days. </p>
-                                        </div>
-                                        <div className="pt-1 flex">
-                                            <h1 className="flex items-center w-36 gap-2 font-semibold">
-                                                Phone Number
-                                            </h1>
-                                            <h1 className="">: 1580587952</h1>
-                                        </div>
-                                        <div className="pt-1 flex items-center">
-                                            <h1 className="flex content-center w-36 gap-2 font-semibold">
-                                                Email
-                                            </h1>
-                                            <h1 className="">: gadgetsailoradmin@gmail.com</h1>
+                            <div className="flex justify-center border modal-box rounded-3xl">
+                                <div>
+                                    <form method="dialog">
+                                        <button className="absolute btn btn-sm btn-circle btn-ghost right-2 top-2">
+                                            ✕
+                                        </button>
+                                    </form>
+                                    <div className="flex justify-center p-5 mt-5 shadow-2xl lg:min-w-max rounded-xl">
+                                        <div className="lg:w-96">
+                                            <div className="flex justify-center p-2 mb-2 font-bold text-white bg-blue-500 rounded-tr-2xl rounded-tl-2xl gap-x-1">
+                                                <h1>Cancel Order !!!</h1>
+                                            </div>
+                                            <div className="flex justify-center font-semibold bg-blue-100">Order Id #{payment_code}</div>
+                                            <div className="p-2 font-semibold border-b-2">
+                                                <p>"As this payment was done by the card gateway. If you Want to cancel the order and get the return money, Please Contact with us by the  phone number or email that is given below."</p>
+                                                <p><span className="text-red-400">NB:</span> You have to contact with us within 2 days. </p>
+                                            </div>
+                                            <div className="flex pt-1">
+                                                <h1 className="flex items-center gap-2 font-semibold w-36">
+                                                    Phone Number
+                                                </h1>
+                                                <h1 className="">: 1580587952</h1>
+                                            </div>
+                                            <div className="flex items-center pt-1">
+                                                <h1 className="flex content-center gap-2 font-semibold w-36">
+                                                    Email
+                                                </h1>
+                                                <h1 className="">: gadgetsailoradmin@gmail.com</h1>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </dialog>
                         :
                         <dialog id="cancelOrder" className="modal">
-                            <div className="modal-box rounded-3xl">
-                                <form method="dialog">
-                                    <button className="absolute btn btn-sm btn-circle btn-ghost right-2 top-2">
-                                        ✕
-                                    </button>
-                                </form>
-                                <div className="flex justify-center p-5 mt-5 shadow-2xl lg:w-96 rounded-xl">
+                            <div className="flex justify-center modal-box rounded-3xl">
+                                <div>
+                                    <form method="dialog">
+                                        <button className="absolute btn btn-sm btn-circle btn-ghost right-2 top-2">
+                                            ✕
+                                        </button>
+                                    </form>
+                                    <div className="flex justify-center p-5 mt-5 shadow-2xl lg:w-96 rounded-xl">
 
-                                    <OrderCancellationModal
-                                        order={order}
-                                    />
+                                        <OrderCancellationModal
+                                            order={order}
+                                        />
+                                    </div>
                                 </div>
+
                             </div>
                         </dialog>
                 }
