@@ -16,7 +16,7 @@ export default function OrderDetails() {
     const orders = useLoaderData() as useLoaderDataType;
     const order = orders.data as unknown as IPayments;
     const { payment_code, firstName, lastName, phoneNumber, district, totalPrice, city, paymentMethod } = order;
-    const subtotalPrice = (totalPrice as number - 60).toFixed(2)
+    const subtotalPrice = (totalPrice as number - 60).toFixed(2) // d
 
     const product = (Object.keys(order) as (keyof typeof order)[])
         .filter(key => (key as string).endsWith("_product"))
