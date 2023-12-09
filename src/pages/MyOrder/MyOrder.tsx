@@ -72,9 +72,6 @@ export default function MyOrder() {
     }
 
     const handleCheckout = async (data: CheckoutFormValues) => {
-
-        console.log(data)
-        // console.log(checkoutInfoArray)
         setUserInfo([data])
         handleCount();
     }

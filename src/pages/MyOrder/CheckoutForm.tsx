@@ -125,9 +125,6 @@ const CheckoutForm = ({ data }: any) => {
                 ...data,
                 transactionId: paymentIntent.id
             }
-            console.log("payment dataaaa", paymentData)
-
-
             const response = await fetch(`https://gadget-sailor-backend.onrender.com/api/v1/addPayment`, {
                 method: 'POST',
                 headers: {
@@ -138,7 +135,6 @@ const CheckoutForm = ({ data }: any) => {
 
             });
             const donePayment = await response.json();
-            console.log(donePayment)
             if (donePayment.statusCode === 200 && ids.length > 0) {
                 setSuccess('Congrats! Your payment is done')
                 toast.success(donePayment.message);
