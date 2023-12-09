@@ -71,7 +71,6 @@ const CheckoutForm = ({ data }: any) => {
     })
 
     const handleSubmit = async (event: { preventDefault: () => void; }) => {
-        console.log(event);
         event.preventDefault();
         if (!stripe || !elements) {
 
@@ -235,7 +234,7 @@ const CheckoutForm = ({ data }: any) => {
                 </div>
 
             </form>
-            <span className={hide}></span>
+            <span className={hide}>Please wait</span>
             <p className="text-red-500">{cardError}</p>
             {
                 success &&
