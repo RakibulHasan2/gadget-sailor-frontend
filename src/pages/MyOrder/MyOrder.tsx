@@ -11,7 +11,7 @@ import toast from "react-hot-toast";
 import { UpdateProductValues, UpdateProductValuesResponse } from "../../types/ProductTypes";
 
 
-const stripePromise = loadStripe('pk_test_51M8NuoDiyv5tmMKuNdL0GTfndh3lFLwZKkkSn2ITrLo3HjeSIyf7tjD0vTCQqf6x6dGXKjgqm0XCTJdmFJEmgCge00LyoHRros');
+const stripePromise = loadStripe(import.meta.env.VITE_APP_STRIPE_PK);
 //console.log(stripePromise)
 
 export default function MyOrder() {
@@ -91,7 +91,6 @@ export default function MyOrder() {
         fetch('https://gadget-sailor-backend.onrender.com/api/v1/allProducts')
             .then(res => res.json())
             .then((data: UpdateProductValuesResponse) => {
-                //console.log(data.data)
                 const Data = data.data;
                 setIData(Data);
             })
@@ -108,8 +107,6 @@ export default function MyOrder() {
             }
         })
     })
-    console.log(filteredDataArray)
-
 
     const handleAddPayment = async () => {
         const response = await fetch(`https://gadget-sailor-backend.onrender.com/api/v1/addPayment`, {

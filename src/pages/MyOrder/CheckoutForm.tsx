@@ -1,6 +1,4 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-
-//import { StripeError } from "@stripe/stripe-js";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -9,7 +7,6 @@ import { UpdateProductValues, UpdateProductValuesResponse } from "../../types/Pr
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const CheckoutForm = ({ data }: any) => {
     const { totalPrice, firstName, lastName, email, phoneNumber } = data;
-    console.log("Dattaaaa", data)
     const [clientSecret, setClientSecret] = useState("");
     const [cardError, setCardError] = useState<string | null>('')
     const [success, setSuccess] = useState("");
@@ -22,8 +19,6 @@ const CheckoutForm = ({ data }: any) => {
     const elements = useElements();
     const navigate = useNavigate();
 
-    console.log(totalPrice)
-
     const ids = Object.keys(data)
         .filter(key => key.endsWith("_id"))
         .map(key => data[key]);
@@ -31,15 +26,6 @@ const CheckoutForm = ({ data }: any) => {
     const I_ids = Object.keys(data)
         .filter(key => key.endsWith("_I-id"))
         .map(key => data[key]);
-
-    const Qunatities = Object.keys(data)
-        .filter(key => key.endsWith("_quantity"))
-        .map(key => data[key]);
-
-    console.log(ids);
-    console.log(I_ids);
-    console.log(Qunatities);
-
 
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
@@ -83,13 +69,6 @@ const CheckoutForm = ({ data }: any) => {
             }
         })
     })
-    console.log(filteredDataArray)
-
-
-
-
-
-
 
     const handleSubmit = async (event: { preventDefault: () => void; }) => {
         console.log(event);

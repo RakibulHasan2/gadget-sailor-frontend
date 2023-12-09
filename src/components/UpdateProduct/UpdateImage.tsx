@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 
 const UpdateImage = ({ singleData }: IProduct) => {
     const { register, handleSubmit, formState: { errors } } = useForm<UpdateProductValues>();
-    const imageHosKey = '1a6c0e11cdde66ffb8f933ec4079f59e';
+    const imageHosKey = import.meta.env.VITE_APP_IMAGEHOSEY;
     const { _id } = singleData
     const handleUpdateImage = async (data: FieldValues) => {
         console.log(data);
