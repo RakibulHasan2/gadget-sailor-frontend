@@ -6,26 +6,22 @@ import toast from "react-hot-toast";
 
 const UpdateImage = ({ singleData }: IProduct) => {
     const { register, handleSubmit, formState: { errors } } = useForm<UpdateProductValues>();
-    const imageHosKey = '1a6c0e11cdde66ffb8f933ec4079f59e';
+    const imageHosKey = import.meta.env.VITE_APP_IMAGEHOSEY;
     const { _id } = singleData
     const handleUpdateImage = async (data: FieldValues) => {
-        console.log(data);
         const imageFiles: FileList = data.image;
         // POST image on imagebb for hosting
         const uploadPromises = Array.from(imageFiles).map(async (image) => {
             try {
                 const formData = new FormData();
-                console.log(formData)
                 formData.set('image', image);
-                console.log(formData)
-
                 const imageResponse = await fetch(`https://api.imgbb.com/1/upload?key=${imageHosKey}`, {
 
                     method: 'POST',
 
                     body: formData,
                 })
-                console.log(imageResponse)
+
                 if (imageResponse.ok) {
                     const result = await imageResponse.json();
                     return result.data.url;
