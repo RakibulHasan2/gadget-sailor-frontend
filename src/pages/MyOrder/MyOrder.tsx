@@ -12,7 +12,7 @@ import { UpdateProductValues, UpdateProductValuesResponse } from "../../types/Pr
 
 
 const stripePromise = loadStripe(import.meta.env.VITE_APP_STRIPE_PK);
-//console.log(stripePromise)
+console.log("sadada",stripePromise)
 
 export default function MyOrder() {
 
