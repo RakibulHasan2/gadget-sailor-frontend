@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react';
 import { IPayment } from '../types/PaymentType';
 
-
-
 const usePaymentInfo = (userEmail: string) => {
   const [order, setOrder] = useState<IPayment[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`https://gadget-sailor-backend.onrender.com/api/v1/getPayment/${userEmail}`);
+        const url = userEmail === 'gadgetsailoradmin@gmail.com' 
+        ? 'https://gadget-sailor-backend.onrender.com/api/v1/getPayment' 
+        : `https://gadget-sailor-backend.onrender.com/api/v1/getPayment/${userEmail}`;
+        const response = await fetch(url);
+        // const response = await fetch(`https://gadget-sailor-backend.onrender.com/api/v1/getPayment/${userEmail}`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
 
