@@ -42,12 +42,10 @@ The Sales Management System (SMS) is designed to streamline and automate the sal
 ```
 git clone https://github.com/RakibulHasan2/gadget-sailor-frontend.git
 cd gadget-sailor-frontend
-
 ```
 2. <b>Install dependencies:</b>
 ```
 yarn install
-
 ```
 3. <b>Configure environment variables:</b>
 * Create a <b>.env</b> file with the necessary database credentials and API keys.
@@ -56,7 +54,6 @@ yarn install
 
 ```
 yarn dev
-
 ```
 
 ## 3. Usage
@@ -77,7 +74,7 @@ yarn dev
 
 ## 4. System Design
 * <b>Use Case Diagram</b>
-    
+
 
 * <b>Entity-Relationship Diagram (ERD)</b></b>
 * <b>Entity-Relationship Diagram (ERD)</b>
