@@ -21,10 +21,8 @@ import OrderDetails from "../pages/MyOrder/OrderDetails";
 import SearchedProducts from "../pages/Products/SearchedProducts";
 import About from './../components/About/About';
 
-
-
-
-const baseUrl = "https://gadget-sailor-backend.onrender.com/api/v1";
+export const baseUrl = "https://gadget-sailor-backend.onrender.com/api/v1";
+// export const baseUrl = "http://localhost:5000/api/v1";
 
 const routes = createBrowserRouter([
   {
