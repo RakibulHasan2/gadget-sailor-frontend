@@ -11,7 +11,8 @@ import toast from "react-hot-toast";
 import { UpdateProductValues, UpdateProductValuesResponse } from "../../types/ProductTypes";
 
 
-const stripePromise = loadStripe(import.meta.env.VITE_APP_STRIPE_PK);
+const stripePromise = loadStripe('pk_test_51M7BC3GOPkp4JrroA1HrDARH4xlhrM4ecc4oMKGvJdgMTGMnv0PIVjyU3lttxWKEyBBjGRO44tR9DwhNwKKhFdQ700z2D8oJto');
+// console.log(import.meta.env.VITE_APP_STRIPE_PK)
 console.log("sadada",stripePromise)
 
 export default function MyOrder() {

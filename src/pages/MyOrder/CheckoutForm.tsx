@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { UpdateProductValues, UpdateProductValuesResponse } from "../../types/ProductTypes";
+import { baseUrl } from "../../routes/Routes";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const CheckoutForm = ({ data }: any) => {
@@ -29,7 +30,7 @@ const CheckoutForm = ({ data }: any) => {
 
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
-        fetch("https://gadget-sailor-backend.onrender.com/api/v1/payment/create-payment-intent", {
+        fetch(`${baseUrl}/payment/create-payment-intent`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -49,7 +50,7 @@ const CheckoutForm = ({ data }: any) => {
 
 
     useEffect(() => {
-        fetch('https://gadget-sailor-backend.onrender.com/api/v1/allProducts')
+        fetch(`${baseUrl}/allProducts`)
             .then(res => res.json())
             .then((data: UpdateProductValuesResponse) => {
                 //console.log(data.data)
@@ -111,6 +112,7 @@ const CheckoutForm = ({ data }: any) => {
                 },
             },
         );
+        console.log("paymentIntent",paymentIntent)
 
         if (confirmError) {
             setCardError(confirmError?.message ?? '');
@@ -124,7 +126,7 @@ const CheckoutForm = ({ data }: any) => {
                 ...data,
                 transactionId: paymentIntent.id
             }
-            const response = await fetch(`https://gadget-sailor-backend.onrender.com/api/v1/addPayment`, {
+            const response = await fetch(`${baseUrl}/addPayment`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -138,16 +140,13 @@ const CheckoutForm = ({ data }: any) => {
                 setSuccess('Congrats! Your payment is done')
                 toast.success(donePayment.message);
                 setTransactionId(paymentIntent.id)
-
                 // deleting from the cart
                 ids.forEach(async (id) => {
-
-                    fetch(`https://gadget-sailor-backend.onrender.com/api/v1/getCart/${id}`, {
+                    fetch(`${baseUrl}/getCart/${id}`, {
                         method: 'DELETE'
                     })
                         .then(anotherResponse => {
                             if (anotherResponse.ok) {
-
                                 // setTimeout(() => {
                                 //     toast.success("Successfully deleted");
                                 // }, 1000);
@@ -171,7 +170,7 @@ const CheckoutForm = ({ data }: any) => {
                         }
                         //console.log(productData)
 
-                        const response = fetch(`https://gadget-sailor-backend.onrender.com/api/v1/allProducts/${d._id}`, {
+                        const response = fetch(`${baseUrl}/allProducts/${d._id}`, {
                             method: 'PUT',
                             headers: {
                                 'Content-Type': 'application/json'
