@@ -3,6 +3,7 @@ import { useState } from "react";
 import { userData } from "../../hooks/getUserData";
 import usePaymentInfo from "../../hooks/orderGet";
 import { Link } from 'react-router-dom';
+import DownloadOrderListXLSX from "../../components/OrderList/DownloadOrderListXLSX";
 
 export default function OrderList() {
     const user = userData();
@@ -26,7 +27,12 @@ export default function OrderList() {
 
     return (
         <div className="p-6">
-            <h2 className="text-3xl font-semibold mb-10 text-center">Order List</h2>
+            <div className="flex justify-between p-4">
+                <h2 className="text-3xl font-semibold mb-10">Order List</h2>
+                <div>
+                    <DownloadOrderListXLSX />
+                </div>
+            </div>
             <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
                 <table className="table">
                     <thead>
@@ -74,9 +80,7 @@ export default function OrderList() {
                                     )}
                                 </td>
                                 <td>
-                                    <Link to={`/admin/orders/${order._id}`}>
-                                        <button className="btn btn-sm btn-primary">View</button>
-                                    </Link>
+                                    <Link to={`/payment/orderDetails/${order?._id}`}> <button className="px-4 py-2 text-white bg-blue-700 border rounded-xl hover:bg-blue-900">Details</button></Link>
                                 </td>
                             </tr>
                         ))}

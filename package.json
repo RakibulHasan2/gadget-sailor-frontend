@@ -16,6 +16,7 @@
     "dotenv": "^16.3.1",
     "hover-carousel": "^1.1.0",
     "html2canvas": "^1.4.1",
+    "jspdf": "^3.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-fast-marquee": "^1.6.2",
@@ -24,7 +25,8 @@
     "react-icons": "^4.11.0",
     "react-id-swiper": "^4.0.0",
     "react-router-dom": "^6.18.0",
-    "swiper": "^11.0.5"
+    "swiper": "^11.0.5",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@types/node": "^20.10.0",
