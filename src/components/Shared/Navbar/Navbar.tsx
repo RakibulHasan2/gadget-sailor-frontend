@@ -199,8 +199,11 @@ export default function Navbar() {
                   <Link to='/my-profile'><li><a className=" hover:bg-blue-800 hover:text-white">My Profile</a></li></Link>
                   {
                     user?.email === 'gadgetsailoradmin@gmail.com' &&
-                    <><Link to='/addProduct'><li><a className=" hover:bg-blue-800 hover:text-white">Add Product</a></li></Link>
-                      <Link to='/orderList'><li><a className=" hover:bg-blue-800 hover:text-white">Order List</a></li></Link></>
+                    <>
+                      <Link to='/addProduct'><li><a className=" hover:bg-blue-800 hover:text-white">Add Product</a></li></Link>
+                      <Link to='/productList'><li><a className=" hover:bg-blue-800 hover:text-white">Product List</a></li></Link>
+                      <Link to='/orderList'><li><a className=" hover:bg-blue-800 hover:text-white">Order List</a></li></Link>
+                    </>
                   }
                   {
                     user?.email != 'gadgetsailoradmin@gmail.com' &&

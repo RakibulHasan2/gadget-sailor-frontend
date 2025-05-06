@@ -10,6 +10,7 @@ const UpdateModal = ({ singleData, closeModal }: IProduct) => {
     const { register, handleSubmit, formState: { errors } } = useForm<UpdateProductValues>();
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { __v, _id, category_name, sub_category_name, product_name, price, status, product_code, description, reviews, brand_name, image, model, warranty, quantity, ...otherProperties } = singleData;
+    console.log(singleData)
     const { data, isLoading } = useProductData(`${baseUrl}/allProducts`)
     if (isLoading) {
         return <div className="flex justify-center p-10"><span className="loader"></span></div>;

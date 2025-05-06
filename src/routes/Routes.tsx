@@ -21,6 +21,7 @@ import OrderDetails from "../pages/MyOrder/OrderDetails";
 import SearchedProducts from "../pages/Products/SearchedProducts";
 import About from './../components/About/About';
 import OrderList from "../pages/OrderList/OrderList";
+import ProductList from "../pages/ProductList/ProductList";
 
 // export const baseUrl = "https://gadget-sailor-backend.onrender.com/api/v1";
 export const baseUrl = "http://localhost:5000/api/v1";
@@ -93,6 +94,10 @@ const routes = createBrowserRouter([
       {
         path: "/orderList",
         element: <PrivateRoute><OrderList /></PrivateRoute>,
+      },
+      {
+        path: "/productList",
+        element: <PrivateRoute><ProductList /></PrivateRoute>,
       },
     ]
   },
