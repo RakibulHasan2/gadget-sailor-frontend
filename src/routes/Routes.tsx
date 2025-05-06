@@ -22,6 +22,7 @@ import SearchedProducts from "../pages/Products/SearchedProducts";
 import About from './../components/About/About';
 import OrderList from "../pages/OrderList/OrderList";
 import ProductList from "../pages/ProductList/ProductList";
+import InvoiceDownload from "../pages/MyOrder/InvoiceDownload";
 
 // export const baseUrl = "https://gadget-sailor-backend.onrender.com/api/v1";
 export const baseUrl = "http://localhost:5000/api/v1";
@@ -129,8 +130,16 @@ const routes = createBrowserRouter([
           // console.log(params?._id)
           return data;
         }
+      },
+      {
+        path: '/payment/orderDetails/invoice/:_id',
+        element: <InvoiceDownload />,
+        loader: async ({ params }) => {
+          const response = await fetch(`${baseUrl}/getPayment/${params?._id}`)
+          const data = await response.json();
+          return data;
+        }
       }
-
     ]
   },
   {

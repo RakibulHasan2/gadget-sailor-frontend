@@ -8,9 +8,10 @@ import { FaBangladeshiTakaSign } from "react-icons/fa6";
 import { MdDeliveryDining } from "react-icons/md";
 import { SiVirustotal } from "react-icons/si";
 import { useLoaderDataType } from "../../types/useLoaderDataType";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { IPayments } from "../../types/PaymentType";
 import OrderCancellationModal from "../../components/OrderCancellationModal/OrderCancellationModal";
+
 
 export default function OrderDetails() {
     const orders = useLoaderData() as useLoaderDataType;
@@ -47,18 +48,15 @@ export default function OrderDetails() {
         }
     };
 
-
-
-
-
-
     return (
         <div className="flex justify-center p-5 mt-3">
 
             <div className="w-full rounded-md shadow-xl lg:p-10 lg:w-2/3">
-                <div className="flex justify-center p-2 text-3xl text-white bg-blue-800 border-b-2 rounded-tr-2xl rounded-tl-2xl">
-                    <h1>Order Details #{payment_code}</h1>
+                <div className="flex justify-between p-2 text-white bg-blue-800 border-b-2 rounded-tr-2xl rounded-tl-2xl">
+                    <h1 className="text-2xl">Order Details #{payment_code}</h1>
+                    <Link to={`/payment/orderDetails/invoice/${order?._id}`}> <button className="text-lg p-2 border rounded-xl hover:bg-white hover:text-black">Download Invoice</button></Link>
                 </div>
+
                 <div className="border flex justify-center mt-2 bg-blue-500 p-2 text-white rounded-md">
                     <div>
                         <h2 className="flex justify-center font-bold">Shop Address:</h2>
@@ -265,10 +263,6 @@ export default function OrderDetails() {
 
 
             </div>
-
-
-
-
         </div>
 
     )
