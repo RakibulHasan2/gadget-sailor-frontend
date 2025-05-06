@@ -8,7 +8,7 @@ export default function OrderHistory() {
   const userEmail = user?.email;
   console.log(userEmail)
   const order = usePaymentInfo(userEmail)
-  
+
   return (
     <div>
       <div className="flex justify-center mt-5 text-3xl font-bold text-shadow-blue">

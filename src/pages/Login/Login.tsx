@@ -28,7 +28,7 @@ export default function Login() {
       .then(res => res.json())
       .then(data => {
         if (data.email) {
-          console.log('save user', data)
+          // console.log('save user', data)
           setLoginUserEmail(data.email)
           toast.success('Successfully logged in');
           sessionStorage.setItem('userData', JSON.stringify(data));

@@ -185,30 +185,37 @@ export default function Navbar() {
             </Link>
           </div>
           {
-            users ? <div className=" dropdown dropdown-end">
-              <label tabIndex={0} className="m-1"><button className="mt-2 mr-1 text-2xl font-bold text-center lg:mt-2 lg:mr-5 hover:text-gray-400">
-                <div className="avatar online">
-                  {user?.image !== undefined ? <div className="w-10 rounded-full hover:ring hover:ring-info">
-                    <img src={user?.image} />
-                  </div> : <div className="text-4xl rounded-full hover:ring hover:ring-info">
-                    <FaUserCircle></FaUserCircle>
-                  </div>}
-                </div></button></label>
-              <ul tabIndex={0} className="dropdown-content z-[10] menu p-2 shadow bg-base-100 rounded-lg w-52 border text-black">
-                <Link to='/my-profile'><li><a className=" hover:bg-blue-800 hover:text-white">My Profile</a></li></Link>
-                {
-                  user?.email === 'gadgetsailoradmin@gmail.com' &&
-                  <Link to='/addProduct'><li><a className=" hover:bg-blue-800 hover:text-white">Add Product</a></li></Link>
-                }
-                <Link to='/payment/orderHistory'>
-                  <li>
-                    <a className=" hover:bg-blue-800 hover:text-white">
-                      Order History</a>
-                  </li>
-                </Link>
-                <li onClick={() => handleLogout()}><a className=" hover:bg-red-600 hover:text-white">Log-out</a></li>
-              </ul>
-            </div> : <Link to='/login'><button className="flex items-center p-2 mr-3 font-bold border rounded-lg lg-w-0">Login<BiLogIn className=''></BiLogIn></button></Link>
+            users ?
+              <div className=" dropdown dropdown-end">
+                <label tabIndex={0} className="m-1"><button className="mt-2 mr-1 text-2xl font-bold text-center lg:mt-2 lg:mr-5 hover:text-gray-400">
+                  <div className="avatar online">
+                    {user?.image !== undefined ? <div className="w-10 rounded-full hover:ring hover:ring-info">
+                      <img src={user?.image} />
+                    </div> : <div className="text-4xl rounded-full hover:ring hover:ring-info">
+                      <FaUserCircle></FaUserCircle>
+                    </div>}
+                  </div></button></label>
+                <ul tabIndex={0} className="dropdown-content z-[10] menu p-2 shadow bg-base-100 rounded-lg w-52 border text-black">
+                  <Link to='/my-profile'><li><a className=" hover:bg-blue-800 hover:text-white">My Profile</a></li></Link>
+                  {
+                    user?.email === 'gadgetsailoradmin@gmail.com' &&
+                    <><Link to='/addProduct'><li><a className=" hover:bg-blue-800 hover:text-white">Add Product</a></li></Link>
+                      <Link to='/orderList'><li><a className=" hover:bg-blue-800 hover:text-white">Order List</a></li></Link></>
+                  }
+                  {
+                    user?.email != 'gadgetsailoradmin@gmail.com' &&
+                    <Link to='/payment/orderHistory'>
+                      <li>
+                        <a className=" hover:bg-blue-800 hover:text-white">
+                          Order History</a>
+                      </li>
+                    </Link>
+                  }
+                  <li onClick={() => handleLogout()}><a className=" hover:bg-red-600 hover:text-white">Log-out</a></li>
+                </ul>
+              </div>
+              :
+              <Link to='/login'><button className="flex items-center p-2 mr-3 font-bold border rounded-lg lg-w-0">Login<BiLogIn className=''></BiLogIn></button></Link>
           }
           <div className="hidden lg:block">
             <Link to='/build-pc'> <a className="text-white btn rounded-2xl glow-on-hover"><MdBuild className='text-2xl'></MdBuild> Build PC </a></Link>

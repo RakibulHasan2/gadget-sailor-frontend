@@ -7,7 +7,7 @@ export const useToken = (email: string) => {
             fetch(`${baseUrl}/jwt?email=${email}`)
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data)
+                    // console.log(data)
                     if (data.accessToken) {
                         sessionStorage.setItem('accessToken', data.accessToken)
                         setToken(data.accessToken)

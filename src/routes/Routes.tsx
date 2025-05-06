@@ -20,9 +20,10 @@ import OrderHistory from "../pages/MyOrder/OrderHistory";
 import OrderDetails from "../pages/MyOrder/OrderDetails";
 import SearchedProducts from "../pages/Products/SearchedProducts";
 import About from './../components/About/About';
+import OrderList from "../pages/OrderList/OrderList";
 
-export const baseUrl = "https://gadget-sailor-backend.onrender.com/api/v1";
-// export const baseUrl = "http://localhost:5000/api/v1";
+// export const baseUrl = "https://gadget-sailor-backend.onrender.com/api/v1";
+export const baseUrl = "http://localhost:5000/api/v1";
 
 const routes = createBrowserRouter([
   {
@@ -88,7 +89,11 @@ const routes = createBrowserRouter([
         path: "/chose-components/:components",
         element: <BuildProductsChose />,
         loader: async ({ params }) => await fetch(`${baseUrl}/allProducts/Components/${params.components}`)
-      }
+      },
+      {
+        path: "/orderList",
+        element: <PrivateRoute><OrderList /></PrivateRoute>,
+      },
     ]
   },
   {
@@ -115,8 +120,8 @@ const routes = createBrowserRouter([
         loader: async ({ params }) => {
           const response = await fetch(`${baseUrl}/getPayment/${params?._id}`)
           const data = await response.json();
-          console.log(data)
-          console.log(params?._id)
+          // console.log(data)
+          // console.log(params?._id)
           return data;
         }
       }
@@ -135,7 +140,6 @@ const routes = createBrowserRouter([
     path: "/addProduct",
     element: <PrivateRoute><AddProduct /></PrivateRoute>,
   },
-
   {
     path: "/my-profile",
     element: <MyProfile />,

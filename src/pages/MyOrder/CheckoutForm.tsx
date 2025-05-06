@@ -112,7 +112,7 @@ const CheckoutForm = ({ data }: any) => {
                 },
             },
         );
-        console.log("paymentIntent",paymentIntent)
+        // console.log("paymentIntent", paymentIntent)
 
         if (confirmError) {
             setCardError(confirmError?.message ?? '');
@@ -160,7 +160,7 @@ const CheckoutForm = ({ data }: any) => {
                 // update data
 
                 filteredDataArray.map(async d => {
-                    console.log(d)
+                    // console.log(d)
                     if (d.product_name === data[`${d.product_name}_product`]) {
                         const d_quantity = d.quantity as number;
                         const Quantity = d_quantity - data[`${d.product_name}_quantity`]

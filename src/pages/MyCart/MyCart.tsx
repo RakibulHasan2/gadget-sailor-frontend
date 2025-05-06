@@ -8,7 +8,7 @@ export default function MyCart() {
   const user = userData()
   const { data, refetch, isLoading } = useCartData(`${baseUrl}/getCart/${user?.id}`);
 
-  console.log(data)
+  // console.log(data)
   const calculateTotalPrice = () => {
     let totalPrice: number = 0;
     data.forEach((item) => {

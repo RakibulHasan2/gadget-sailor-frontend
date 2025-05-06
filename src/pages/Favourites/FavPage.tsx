@@ -23,7 +23,7 @@ const FavPage = () => {
 
 
 
-    console.log(data)
+    // console.log(data)
 
     return (
         <div className="flex justify-center mt-10 mb-10">
