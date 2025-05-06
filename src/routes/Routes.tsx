@@ -78,7 +78,7 @@ const routes = createBrowserRouter([
       },
       {
         path: "/about",
-        element: <About/>,
+        element: <About />,
       },
       {
         path: "/build-pc",

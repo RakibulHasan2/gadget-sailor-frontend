@@ -18,17 +18,18 @@ import { AiFillPrinter } from "react-icons/ai";
 import { MdOutlineCamera } from "react-icons/md";
 import { MdShoppingBasket } from "react-icons/md";
 import html2canvas from 'html2canvas';
+import { baseUrl } from "../../routes/Routes";
 
 interface UniqueCategories {
-  [key: string]: boolean; 
+  [key: string]: boolean;
 }
 
 export default function BuildPC() {
-  const data = useProductData('https://gadget-sailor-backend.onrender.com/api/v1/allProducts/Components')
+  const data = useProductData(`${baseUrl}/allProducts/Components`)
   const { selectedProducts, deleteProduct } = useSelectedProducts();
   const [chosenItems, setChosenItems] = useState(new Set());
   const user = userData();
-  const uniqueCategories : UniqueCategories = {};
+  const uniqueCategories: UniqueCategories = {};
   const calculateTotalPrice = () => {
     let totalPrice: number = 0;
     selectedProducts.forEach((item) => {
@@ -53,7 +54,7 @@ export default function BuildPC() {
         };
 
         // Make the POST request to add this item to the cart
-        await fetch('https://gadget-sailor-backend.onrender.com/api/v1/addCart', {
+        await fetch(`${baseUrl}/addCart`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -109,8 +110,8 @@ export default function BuildPC() {
                 </div>
               </div>
               <div className="p-2 ml-3 text-white bg-blue-900 border rounded-xl">
-                  <h1 className="text-lg">{calculateTotalPrice()}৳</h1>
-                </div>
+                <h1 className="text-lg">{calculateTotalPrice()}৳</h1>
+              </div>
             </div>
           </div>
           {data.data.map((item) => {

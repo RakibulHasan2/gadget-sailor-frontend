@@ -11,18 +11,19 @@ import { FaBoxOpen, FaHome } from "react-icons/fa";
 import { MdCategory } from "react-icons/md";
 import { BiCategoryAlt } from "react-icons/bi";
 import '../../styles/Porduct-loader.css'
+import { baseUrl } from "../../routes/Routes";
 
 const AddProduct = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<AddProductValues>();
     const imageHosKey = import.meta.env.VITE_APP_IMAGEHOSEY;
     const navigate = useNavigate();
-    const { data, isLoading } = useProductData("https://gadget-sailor-backend.onrender.com/api/v1/allProducts")
+    const { data, isLoading } = useProductData(`${baseUrl}/allProducts`)
 
     // get categories---------------------------------
     const [categoryData, setCategoryData] = React.useState<ICategory[]>([]);
 
     React.useEffect(() => {
-        fetch('https://gadget-sailor-backend.onrender.com/api/v1/get-AllCategories')
+        fetch(`${baseUrl}/get-AllCategories`)
             .then(res => res.json())
             .then((data: ICategoryResponse) => {
                 setCategoryData(data.data);
@@ -35,7 +36,7 @@ const AddProduct = () => {
     //get sub category-----------------------------
     const [subCategoryData, setSubCategoryData] = React.useState<ICategory[]>([]);
     React.useEffect(() => {
-        fetch('https://gadget-sailor-backend.onrender.com/api/v1/get-subCategories')
+        fetch(`${baseUrl}/get-subCategories`)
             .then(res => res.json())
             .then((data: ICategoryResponse) => {
                 setSubCategoryData(data.data);
@@ -111,7 +112,7 @@ const AddProduct = () => {
             others_info: data.others_info,
         }
         //Create a new product
-        const response = await fetch('https://gadget-sailor-backend.onrender.com/api/v1/add-products', {
+        const response = await fetch(`${baseUrl}/add-products`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

@@ -7,12 +7,13 @@ import '../../../styles/Text-shadow.css'
 import { LiaShippingFastSolid } from "react-icons/lia";
 import { IoShieldCheckmarkOutline } from "react-icons/io5";
 import { MdOutlinePayment } from "react-icons/md";
+import { baseUrl } from "../../../routes/Routes";
 
 const RandomProducts = () => {
     const [page, setPage] = useState(1);
     const [count, setCount] = useState(0);
     const size = 6;
-    const { data, isLoading } = useProductData("https://gadget-sailor-backend.onrender.com/api/v1/allProducts");
+    const { data, isLoading } = useProductData(`${baseUrl}/allProducts`);
     if (isLoading) {
         return <div className="flex justify-center p-10"><span className="loader"></span></div>;
     }

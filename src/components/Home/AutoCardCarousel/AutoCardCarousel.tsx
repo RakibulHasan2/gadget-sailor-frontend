@@ -1,9 +1,10 @@
 import useFavData from "../../../hooks/getFavData";
+import { baseUrl } from "../../../routes/Routes";
 import SingleCards from "./SingleCards";
 import Marquee from "react-fast-marquee";
 
 const AutoCardCarousel = () => {
-    const { data } = useFavData(`https://gadget-sailor-backend.onrender.com/api/v1/getFav`);
+    const { data } = useFavData(`${baseUrl}/getFav`);
     return (
         <div className="py-8 w-4/5 mx-auto mt-10">
             <p className="text-3xl font-bold text-blue-900 text-center mb-10">Customer's Favorite</p>

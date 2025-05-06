@@ -9,6 +9,7 @@ import { useState } from 'react';
 import { useToken } from "../../hooks/useToken";
 import { FiUserPlus } from "react-icons/fi";
 import { FaEye } from "react-icons/fa";
+import { baseUrl } from "../../routes/Routes";
 export default function SignUp() {
     const { register, handleSubmit, formState: { errors } } = useForm<FormValues>();
     const [createUserEmail, setCreateUserEmail] = useState('');
@@ -30,7 +31,7 @@ export default function SignUp() {
         }
 
 
-        await fetch('https://gadget-sailor-backend.onrender.com/api/v1/auth/signup', {
+        await fetch(`${baseUrl}/auth/signup`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

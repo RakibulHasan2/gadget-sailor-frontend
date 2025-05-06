@@ -3,8 +3,9 @@ import useProductData from "../../../hooks/useProductData";
 import { Link } from 'react-router-dom';
 import { IProduct } from '../../../types/ProductsType'
 import '../../../styles/Loader.css'
+import { baseUrl } from '../../../routes/Routes';
 export default function NavbarItem() {
-    const { data, isLoading } = useProductData("https://gadget-sailor-backend.onrender.com/api/v1/allProducts")
+    const { data, isLoading } = useProductData(`${baseUrl}/allProducts`)
     const categories: string[] = [...new Set(data.map((item: IProduct) => item.category_name))];
     if (isLoading) {
         return <div className="flex justify-center mt-5"><span className="loader"></span></div>;

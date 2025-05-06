@@ -2,10 +2,11 @@ import { FieldValues, useForm } from "react-hook-form";
 import { ICategory } from "../../types/CategoryType";
 import useProductData from "../../hooks/useProductData";
 import toast from "react-hot-toast";
+import { baseUrl } from "../../routes/Routes";
 
 const AddSubCategory = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<ICategory>();
-    const { data, isLoading } = useProductData("https://gadget-sailor-backend.onrender.com/api/v1/get-AllCategories")
+    const { data, isLoading } = useProductData(`${baseUrl}/get-AllCategories`)
     if (isLoading) {
         return <p>Loading...</p>;
     }
@@ -15,7 +16,7 @@ const AddSubCategory = () => {
             sub_category_name: data.sub_category_name
 
         }
-        const response = await fetch('https://gadget-sailor-backend.onrender.com/api/v1/add_subCategory', {
+        const response = await fetch(`${baseUrl}/add_subCategory`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import { userData } from '../../hooks/getUserData';
 import useCartData from "../../hooks/useCartData";
 import '../../styles/Text-shadow.css'
+import { baseUrl } from '../../routes/Routes';
 export default function MyCart() {
   const user = userData()
-  const { data, refetch, isLoading } = useCartData(`https://gadget-sailor-backend.onrender.com/api/v1/getCart/${user?.id}`);
+  const { data, refetch, isLoading } = useCartData(`${baseUrl}/getCart/${user?.id}`);
 
   console.log(data)
   const calculateTotalPrice = () => {
@@ -17,7 +18,7 @@ export default function MyCart() {
     return totalPrice.toFixed(2);
   };
   const handleDeleteCart = (id: string) => {
-    fetch(`https://gadget-sailor-backend.onrender.com/api/v1/getCart/${id}`, {
+    fetch(`${baseUrl}/getCart/${id}`, {
       method: 'DELETE',
     })
       .then(response => {

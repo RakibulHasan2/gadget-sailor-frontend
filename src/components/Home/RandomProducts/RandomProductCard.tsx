@@ -5,6 +5,7 @@ import LikeButton from "../../Shared/LikeButton/LikeButton";
 import React from "react";
 import { userData } from "../../../hooks/getUserData";
 import CartModal from "../../Products/CartModal";
+import { baseUrl } from "../../../routes/Routes";
 
 const RandomProductCard = ({ data }: IProduct) => {
     const { product_name, price, image, model } = data;
@@ -19,7 +20,7 @@ const RandomProductCard = ({ data }: IProduct) => {
             model: model,
             email: user.email
         }
-        fetch('https://gadget-sailor-backend.onrender.com/api/v1/addCart', {
+        fetch(`${baseUrl}/addCart`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

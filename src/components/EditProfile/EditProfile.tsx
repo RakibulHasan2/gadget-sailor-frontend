@@ -3,6 +3,7 @@ import { FieldValues, useForm } from "react-hook-form";
 import { IUpdateUsers } from "../../types/MyProfileType";
 import toast from "react-hot-toast";
 import { userData } from "../../hooks/getUserData";
+import { baseUrl } from "../../routes/Routes";
 
 export default function EditProfile() {
   const { register, handleSubmit } = useForm<IUpdateUsers>();
@@ -24,7 +25,7 @@ export default function EditProfile() {
     };
 
     try {
-      const response = await fetch(`https://gadget-sailor-backend.onrender.com/api/v1/users/${user._id}`, {
+      const response = await fetch(`${baseUrl}/users/${user._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

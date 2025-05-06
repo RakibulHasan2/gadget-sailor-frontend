@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 import { userData } from '../../hooks/getUserData';
 import '../../styles/MyProfile.css'
 import { useState } from 'react';
+import { baseUrl } from '../../routes/Routes';
 const UploadImage = () => {
   const { register, handleSubmit, formState: { errors, isDirty } } = useForm<IUpdateUsers>();
 
@@ -26,7 +27,7 @@ const UploadImage = () => {
         const upload: IUpdateUsers = {
           image: imgData.data.url,
         };
-        const updateResponse = await fetch(`https://gadget-sailor-backend.onrender.com/api/v1/users/${user._id}`, {
+        const updateResponse = await fetch(`${baseUrl}/users/${user._id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -48,7 +49,7 @@ const UploadImage = () => {
     }
   };
   const [hide, setHide] = useState("hidden text-blue-800 loading loading-spinner loading-md")
-  const loaderButton = () =>{
+  const loaderButton = () => {
     setHide("block loading loading-spinner text-blue-800 loading-md");
   }
   return (
@@ -72,16 +73,16 @@ const UploadImage = () => {
           </div>
           <div className="flex justify-center mt-3 lg:flex-none lg:mt-9 rounded-3xl">
             <div className='flex'>
-               <input
-              className="text-white bg-blue-600 hover:text-black btn rounded-3xl"
-              value="Upload"
-              type="submit"
-              disabled={!isDirty}
-              onClick={loaderButton}
-            />
-            <span className={hide}></span>
+              <input
+                className="text-white bg-blue-600 hover:text-black btn rounded-3xl"
+                value="Upload"
+                type="submit"
+                disabled={!isDirty}
+                onClick={loaderButton}
+              />
+              <span className={hide}></span>
             </div>
-           
+
           </div>
         </form>
       </div>

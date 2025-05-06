@@ -15,12 +15,13 @@ import { IProduct } from "../../../types/ProductsType";
 import { FiTerminal } from "react-icons/fi";
 import { useSelectedProducts } from "../../../context/SelectedProductsProvider";
 import { FcAbout } from "react-icons/fc";
+import { baseUrl } from "../../../routes/Routes";
 
 
 export default function Navbar() {
   const user = userData();
   const [expanded, setExpanded] = useState(true);
-  const { data } = useProductData('https://gadget-sailor-backend.onrender.com/api/v1/allProducts');
+  const { data } = useProductData(`${baseUrl}/allProducts`);
   const { searchProduct } = useSelectedProducts();
   const navigate = useNavigate()
 
@@ -132,7 +133,7 @@ export default function Navbar() {
                 <Link to="/about">
                   <div className="p-2 mt-2 text-black bg-blue-50 rounded-xl hover:text-white hover:bg-blue-700">
                     <button className="flex items-center mr-5 align-middle rounded-xl gap-x-2" title="wishlist">
-                      About us<FcAbout className="text-2xl"/></button>
+                      About us<FcAbout className="text-2xl" /></button>
                   </div>
                 </Link>
               </div>
@@ -180,7 +181,7 @@ export default function Navbar() {
           </div>
           <div className="hidden lg:block">
             <Link to='/about'>
-            <button className="mr-5 text-2xl align-middle"><FcAbout /></button>
+              <button className="mr-5 text-2xl align-middle"><FcAbout /></button>
             </Link>
           </div>
           {

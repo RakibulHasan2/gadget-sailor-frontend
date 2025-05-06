@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { UpdateProductValues, UpdateProductValuesResponse } from "../../types/ProductTypes";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { baseUrl } from "../../routes/Routes";
 
 const OrderCancellationModal = ({ order }: IPayment) => {
     const { payment_code, totalPrice, _id } = order as IPayments;
@@ -20,7 +21,7 @@ const OrderCancellationModal = ({ order }: IPayment) => {
     console.log(Qunatities)
 
     useEffect(() => {
-        fetch('https://gadget-sailor-backend.onrender.com/api/v1/allProducts')
+        fetch(`${baseUrl}/allProducts`)
             .then(res => res.json())
             .then((data: UpdateProductValuesResponse) => {
                 //console.log(data.data)
@@ -51,7 +52,7 @@ const OrderCancellationModal = ({ order }: IPayment) => {
             cancelled: "cancelled",
 
         }
-        const response = fetch(`https://gadget-sailor-backend.onrender.com/api/v1/getPayment/${_id}`, {
+        const response = fetch(`${baseUrl}/getPayment/${_id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -69,7 +70,7 @@ const OrderCancellationModal = ({ order }: IPayment) => {
                     const productData: UpdateProductValues = {
                         quantity: Quantity
                     }
-                    const response = fetch(`https://gadget-sailor-backend.onrender.com/api/v1/allProducts/${d._id}`, {
+                    const response = fetch(`${baseUrl}/allProducts/${d._id}`, {
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json'

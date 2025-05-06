@@ -1,6 +1,7 @@
 import { FieldValues, useForm } from "react-hook-form";
 import { ICategory } from "../../types/CategoryType";
 import toast from "react-hot-toast";
+import { baseUrl } from './../../routes/Routes';
 
 const AddCategory = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<ICategory>();
@@ -9,7 +10,7 @@ const AddCategory = () => {
             category_name: data.category_name,
 
         }
-        const response = await fetch('https://gadget-sailor-backend.onrender.com/api/v1/create-category', {
+        const response = await fetch(`${baseUrl}/create-category`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

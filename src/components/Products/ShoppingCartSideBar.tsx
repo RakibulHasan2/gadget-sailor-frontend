@@ -5,9 +5,10 @@ import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { userData } from "../../hooks/getUserData";
 import useCartData from "../../hooks/useCartData";
+import { baseUrl } from "../../routes/Routes";
 export default function ShoppingCartSideBar() {
     const user = userData()
-    const { data, refetch } = useCartData(`https://gadget-sailor-backend.onrender.com/api/v1/getCart/${user?.id}`);
+    const { data, refetch } = useCartData(`${baseUrl}/getCart/${user?.id}`);
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const toggleCart: () => void = () => {
         refetch();
@@ -15,7 +16,7 @@ export default function ShoppingCartSideBar() {
     };
 
     const handleDeleteCart = (id: string) => {
-        fetch(`https://gadget-sailor-backend.onrender.com/api/v1/getCart/${id}`, {
+        fetch(`${baseUrl}/getCart/${id}`, {
             method: 'DELETE',
         })
             .then(response => {

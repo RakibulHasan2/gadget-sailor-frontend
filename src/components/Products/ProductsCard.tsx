@@ -9,12 +9,13 @@ import LikeButton from '../Shared/LikeButton/LikeButton';
 import { RiDeleteBin5Line } from "react-icons/ri";
 import toast from 'react-hot-toast';
 import useFavData from '../../hooks/getFavData';
+import { baseUrl } from '../../routes/Routes';
 
 export default function ProductsCard({ product }: IProduct) {
     const { product_name, price, _id, image, model } = product;
     //console.log(product.quantity)
     const user = userData()
-    const { data } = useFavData(`https://gadget-sailor-backend.onrender.com/api/v1/getFav/${user?.email}`);
+    const { data } = useFavData(`${baseUrl}/getFav/${user?.email}`);
     const CartDetails = async () => {
         const cartData = {
             product_name: product_name,
@@ -28,7 +29,7 @@ export default function ProductsCard({ product }: IProduct) {
             I_id: _id,
 
         }
-        fetch('https://gadget-sailor-backend.onrender.com/api/v1/addCart', {
+        fetch(`${baseUrl}/addCart`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -58,12 +59,12 @@ export default function ProductsCard({ product }: IProduct) {
 
     const handleDelete = async (id: string, product_name: string) => {
         const filteredFav = data?.filter(f => f?.product_name === product_name);
-        fetch(`https://gadget-sailor-backend.onrender.com/api/v1/allProducts/${id}`, {
+        fetch(`${baseUrl}/allProducts/${id}`, {
             method: 'DELETE'
         })
             .then(response => {
                 if (response.ok && filteredFav.length > 0) {
-                    fetch(`https://gadget-sailor-backend.onrender.com/api/v1/getFav/${filteredFav[0]._id}`, {
+                    fetch(`${baseUrl}/getFav/${filteredFav[0]._id}`, {
                         method: 'DELETE'
                     })
                         .then(anotherResponse => {

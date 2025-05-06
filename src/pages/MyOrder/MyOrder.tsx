@@ -9,11 +9,12 @@ import { Elements } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { UpdateProductValues, UpdateProductValuesResponse } from "../../types/ProductTypes";
+import { baseUrl } from "../../routes/Routes";
 
 
 const stripePromise = loadStripe('pk_test_51M7BC3GOPkp4JrroA1HrDARH4xlhrM4ecc4oMKGvJdgMTGMnv0PIVjyU3lttxWKEyBBjGRO44tR9DwhNwKKhFdQ700z2D8oJto');
 // console.log(import.meta.env.VITE_APP_STRIPE_PK)
-console.log("sadada",stripePromise)
+console.log("sadada", stripePromise)
 
 export default function MyOrder() {
 
@@ -86,7 +87,7 @@ export default function MyOrder() {
         .map(key => combinedObject[key]);
 
     useEffect(() => {
-        fetch('https://gadget-sailor-backend.onrender.com/api/v1/allProducts')
+        fetch(`${baseUrl}/allProducts`)
             .then(res => res.json())
             .then((data: UpdateProductValuesResponse) => {
                 const Data = data.data;
@@ -107,7 +108,7 @@ export default function MyOrder() {
     })
 
     const handleAddPayment = async () => {
-        const response = await fetch(`https://gadget-sailor-backend.onrender.com/api/v1/addPayment`, {
+        const response = await fetch(`${baseUrl}/addPayment`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -127,7 +128,7 @@ export default function MyOrder() {
 
             ids.forEach(async (id) => {
 
-                fetch(`https://gadget-sailor-backend.onrender.com/api/v1/getCart/${id}`, {
+                fetch(`${baseUrl}/getCart/${id}`, {
                     method: 'DELETE'
                 })
                     .then(anotherResponse => {
@@ -156,7 +157,7 @@ export default function MyOrder() {
                     }
                     //console.log(productData)
 
-                    const response = fetch(`https://gadget-sailor-backend.onrender.com/api/v1/allProducts/${d._id}`, {
+                    const response = fetch(`${baseUrl}/allProducts/${d._id}`, {
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json'

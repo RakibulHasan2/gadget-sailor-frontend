@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { IPayment } from '../types/PaymentType';
+import { baseUrl } from '../routes/Routes';
 
 const usePaymentInfo = (userEmail: string) => {
   const [order, setOrder] = useState<IPayment[]>([]);
@@ -7,11 +8,10 @@ const usePaymentInfo = (userEmail: string) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const url = userEmail === 'gadgetsailoradmin@gmail.com' 
-        ? 'https://gadget-sailor-backend.onrender.com/api/v1/getPayment' 
-        : `https://gadget-sailor-backend.onrender.com/api/v1/getPayment/${userEmail}`;
+        const url = userEmail === 'gadgetsailoradmin@gmail.com'
+          ? `${baseUrl}/getPayment`
+          : `${baseUrl}/getPayment/${userEmail}`;
         const response = await fetch(url);
-        // const response = await fetch(`https://gadget-sailor-backend.onrender.com/api/v1/getPayment/${userEmail}`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
 

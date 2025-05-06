@@ -4,9 +4,10 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import useReviewData from "../../../hooks/getReviewData"
+import { baseUrl } from '../../../routes/Routes';
 
 export default function Review() {
-    const { data } = useReviewData('https://gadget-sailor-backend.onrender.com/api/v1/get-AllReviews')
+    const { data } = useReviewData(`${baseUrl}/get-AllReviews`)
     const firstFourReviews = data.slice(0, 4);
 
     return (
@@ -36,7 +37,7 @@ export default function Review() {
                                         <p className='text-slate-500'>{review.email}</p>
                                     </div>
                                 </div>
-                                <p className='mb-5 italic text-base lg:text-xl'>"{review.review.slice(0,190)}"</p>
+                                <p className='mb-5 italic text-base lg:text-xl'>"{review.review.slice(0, 190)}"</p>
                             </div>
                         </SwiperSlide>
                     )

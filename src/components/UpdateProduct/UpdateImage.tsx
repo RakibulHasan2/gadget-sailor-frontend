@@ -3,6 +3,7 @@ import { UpdateProductValues } from "../../types/ProductTypes";
 import { FcEditImage } from "react-icons/fc";
 import { IProduct } from "../../types/ProductsType";
 import toast from "react-hot-toast";
+import { baseUrl } from "../../routes/Routes";
 
 const UpdateImage = ({ singleData }: IProduct) => {
     const { register, handleSubmit, formState: { errors } } = useForm<UpdateProductValues>();
@@ -38,7 +39,7 @@ const UpdateImage = ({ singleData }: IProduct) => {
         const imageData: UpdateProductValues = {
             image: uploadedImageUrls,
         }
-        const response = await fetch(`https://gadget-sailor-backend.onrender.com/api/v1/allProducts/${_id}`, {
+        const response = await fetch(`${baseUrl}/allProducts/${_id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'

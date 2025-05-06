@@ -4,6 +4,7 @@ import { IUpdateUsers } from "../../types/MyProfileType";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import { userData } from "../../hooks/getUserData";
+import { baseUrl } from "../../routes/Routes";
 
 const ChangePassword = () => {
     const { register, handleSubmit, getValues, formState: { errors } } = useForm<IUpdateUsers>();
@@ -55,7 +56,7 @@ const ChangePassword = () => {
         };
 
         try {
-            const response = await fetch(`https://gadget-sailor-backend.onrender.com/api/v1/users/${user._id}`, {
+            const response = await fetch(`${baseUrl}/users/${user._id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
