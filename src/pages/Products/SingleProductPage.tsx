@@ -41,7 +41,7 @@ export default function SingleProductPage() {
   }
 
   const decrement = () => {
-    if (count >= 1) {
+    if (count >= 2) {
       setCount(count - 1);
     }
   }
@@ -69,7 +69,7 @@ export default function SingleProductPage() {
       I_id: _id
     }
 
-    if (count <= quantity) {
+    if (count <= quantity || count == 0) {
       const response = await fetch(`${baseUrl}/addCart`, {
         method: 'POST',
         headers: {
