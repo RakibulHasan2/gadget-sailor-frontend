@@ -8,7 +8,7 @@ export default function MyCart() {
   const user = userData()
   const { data, refetch, isLoading } = useCartData(`${baseUrl}/getCart/${user?.id}`);
 
-  // console.log(data)
+  console.log(data)
   const calculateTotalPrice = () => {
     let totalPrice: number = 0;
     data.forEach((item) => {
@@ -27,6 +27,29 @@ export default function MyCart() {
         }
       })
   }
+
+  const handleUpdateQuantity = (id: string, quantity: number, unit_price: number) => {
+    const payload = {
+      quantity,
+      total_price: quantity * unit_price
+    }
+    if (quantity < 1) return;
+
+    fetch(`${baseUrl}/getCart/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    })
+      .then(response => {
+        if (response.ok) {
+          console.log(response)
+          refetch();
+        }
+      })
+  }
+
   return (
     <div className="flex justify-center mt-10 mb-10">
       <div className="w-11/12 shadow-2xl lg:w-9/12 lg:p-10 rounded-2xl">
@@ -62,7 +85,11 @@ export default function MyCart() {
                         )}</td>
                         <td>{item.product_name}</td>
                         <td>{item.model}</td>
-                        <td>{item.quantity}</td>
+                        <td>
+                          <button onClick={() => handleUpdateQuantity(item._id, item.quantity - 1, item?.unit_price)} className="px-2 py-1 bg-gray-200 rounded-lg mr-2">-</button>
+                          {item.quantity}
+                          <button onClick={() => handleUpdateQuantity(item._id, item.quantity + 1, item?.unit_price)} className="px-2 py-1 bg-gray-200 rounded-lg ml-2">+</button>
+                        </td>
                         <th><button onClick={() => handleDeleteCart(item._id)} className='text-2xl text-blue-900'>x</button></th>
                         <td>{item.unit_price}৳</td>
                         <td>{item.total_price}৳	</td>

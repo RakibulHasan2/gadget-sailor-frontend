@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FaShippingFast } from "react-icons/fa";
 import { MdPayment } from "react-icons/md";
 import { MdPerson } from "react-icons/md";
@@ -28,13 +29,13 @@ export default function OrderDetails() {
         )
         .map(key => order[key]);
 
-    const quantity = (Object.keys(order) as (keyof typeof order)[])
+    const quantity: any = (Object.keys(order) as (keyof typeof order)[])
         .filter(key => (key as string).endsWith("_quantity")
         )
         .map(key => order[key]);
 
 
-    const price = (Object.keys(order) as (keyof typeof order)[])
+    const price: any = (Object.keys(order) as (keyof typeof order)[])
         .filter(key => (key as string).endsWith("_price")
         )
         .map(key => order[key]);
@@ -165,7 +166,7 @@ export default function OrderDetails() {
 
                                 <div>
                                     {
-                                        quantity.map(q =>
+                                        quantity.map((q: any) =>
                                             <p className="h-24 p-2 pt-6 border-b-2 lg:h-20 ">{q}</p>
                                         )
                                     }
@@ -178,8 +179,8 @@ export default function OrderDetails() {
 
                                 <div>
                                     {
-                                        price.map(cost =>
-                                            <p className="h-24 p-2 pt-6 border-b-2 lg:h-20">{cost}৳</p>
+                                        price.map((cost: any, index: number) =>
+                                            <p className="h-24 p-2 pt-6 border-b-2 lg:h-20">{cost * quantity[index]}৳</p>
                                         )
                                     }
                                 </div>
