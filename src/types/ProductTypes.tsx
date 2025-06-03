@@ -3,6 +3,7 @@ export type AddProductValues = {
     sub_category_name: string;
     brand_name: string;
     product_name: string;
+    quantity: number;
     image: string[];
     model: string;
     description: string;

@@ -96,6 +96,7 @@ const AddProduct = () => {
 
         })
         const uploadedImageUrls = await Promise.all(uploadPromises);
+
         const productData: AddProductValues = {
             category_name: data.category_name,
             sub_category_name: data.sub_category_name,
@@ -104,13 +105,17 @@ const AddProduct = () => {
             image: uploadedImageUrls,
             model: data.model,
             description: data.description,
+            quantity: data.quantity,
             price: data.price,
             product_code: data.product_code,
             status: data.status,
             reviews: [],
             warranty: data.warranty,
-            others_info: data.others_info,
+            others_info: typeof data.others_info === 'string'
+                ? JSON.parse(data.others_info)
+                : data.others_info,
         }
+        console.log({ productData })
         //Create a new product
         const response = await fetch(`${baseUrl}/add-products`, {
             method: 'POST',
@@ -268,6 +273,16 @@ const AddProduct = () => {
                                         />
                                         {errors.description && <p className='text-red-600'>{errors.description?.message}</p>}
                                     </div>
+                                    {/* Quantity */}
+                                    <div className="w-full max-w-xs form-control">
+                                        <label className="label"> <span className="label-text">Quantity</span></label>
+                                        <input type="text"
+                                            {...register("quantity", {
+                                                required: 'Required'
+                                            })}
+                                            className="w-full max-w-xs input input-bordered rounded-3xl" placeholder="Quantity" />
+                                        {errors.quantity && <p className='text-red-600'>{errors.quantity?.message}</p>}
+                                    </div>
                                     {/* Price */}
                                     <div className="w-full max-w-xs form-control">
                                         <label className="label"> <span className="label-text">Price</span></label>
@@ -295,7 +310,13 @@ const AddProduct = () => {
                                             {...register("others_info", {
                                                 required: 'Required'
                                             })}
-                                            className="w-full max-w-xs pt-3 input input-bordered rounded-3xl" placeholder="please input Product json" />
+                                            className="w-full max-w-xs pt-3 input input-bordered rounded-3xl" placeholder={`Please input product JSON, e.g.:
+{
+  "max_load": "140 kg",
+  "Seat_Depth": "48 cm",
+  "height_adjustability": "Yes"
+}`}
+                                        />
                                         {errors.others_info && <p className='text-red-600'>{errors.others_info?.message}</p>}
                                     </div>
                                 </div>
