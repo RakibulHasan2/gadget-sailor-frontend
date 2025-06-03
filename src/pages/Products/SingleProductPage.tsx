@@ -188,7 +188,7 @@ export default function SingleProductPage() {
         rating: rating,
         product_name: product_name
       }
-      const response = await fetch(`${baseUrl}create-review`, {
+      const response = await fetch(`${baseUrl}/create-review`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
